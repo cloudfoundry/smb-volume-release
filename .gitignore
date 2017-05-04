@@ -1,24 +1,19 @@
-# Compiled Object files, Static and Dynamic libs (Shared Objects)
-*.o
-*.a
-*.so
+.blobs
+blobs
+.nvim
+.nvimrc
+scripts/config
+.dev_builds
+.DS_Store
+dev_releases/**/*
+.final_builds/jobs/**/*.tgz
+.final_builds/packages/**/*.tgz
+*.swp
+config/private.yml
+config/dev.yml
+releases/smb-volume/*.tgz
 
-# Folders
-_obj
-_test
+## goPath system specifics
+pkg
+bin/
 
-# Architecture specific extensions/prefixes
-*.[568vq]
-[568vq].out
-
-*.cgo1.go
-*.cgo2.c
-_cgo_defun.c
-_cgo_gotypes.go
-_cgo_export.*
-
-_testmain.go
-
-*.exe
-*.test
-*.prof
