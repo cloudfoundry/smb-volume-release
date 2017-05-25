@@ -1,0 +1,36 @@
+[submodule "src/github.com/AbelHu/smbdriver"]
+	path = src/github.com/AbelHu/smbdriver
+	url = https://github.com/AbelHu/smbdriver
+[submodule "src/github.com/AbelHu/azurefilebroker"]
+	path = src/github.com/AbelHu/azurefilebroker
+	url = https://github.com/AbelHu/azurefilebroker
+[submodule "src/code.cloudfoundry.org/voldriver"]
+	path = src/code.cloudfoundry.org/voldriver
+	url = https://github.com/cloudfoundry/voldriver
+[submodule "src/code.cloudfoundry.org/goshims"]
+	path = src/code.cloudfoundry.org/goshims
+	url = https://github.com/cloudfoundry/goshims
+[submodule "src/code.cloudfoundry.org/cfhttp"]
+	path = src/code.cloudfoundry.org/cfhttp
+	url = https://github.com/cloudfoundry/cfhttp
+[submodule "src/code.cloudfoundry.org/clock"]
+	path = src/code.cloudfoundry.org/clock
+	url = https://github.com/cloudfoundry/clock
+[submodule "src/code.cloudfoundry.org/lager"]
+	path = src/code.cloudfoundry.org/lager
+	url = https://github.com/julian-hj/lager
+[submodule "src/code.cloudfoundry.org/nfsdriver"]
+	path = src/code.cloudfoundry.org/nfsdriver
+	url = https://github.com/cloudfoundry-incubator/nfsdriver
+[submodule "src/code.cloudfoundry.org/debugserver"]
+	path = src/code.cloudfoundry.org/debugserver
+	url = https://github.com/cloudfoundry/debugserver
+[submodule "src/github.com/tedsuo/ifrit"]
+	path = src/github.com/tedsuo/ifrit
+	url = https://github.com/tedsuo/ifrit
+[submodule "src/github.com/tedsuo/rata"]
+	path = src/github.com/tedsuo/rata
+	url = https://github.com/tedsuo/rata
+[submodule "src/github.com/pivotal-cf/brokerapi"]
+	path = src/github.com/pivotal-cf/brokerapi
+	url = https://github.com/pivotal-cf/brokerapi

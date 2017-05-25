@@ -1,0 +1,8 @@
+<% if p("smbdriver.disable") %>
+<% else %>
+check process smbdriver
+  with pidfile /var/vcap/sys/run/smbdriver/smbdriver.pid
+  start program "/var/vcap/jobs/smbdriver/bin/smbdriver_ctl start"
+  stop program "/var/vcap/jobs/smbdriver/bin/smbdriver_ctl stop"
+  group vcap
+<% end %>

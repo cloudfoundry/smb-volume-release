@@ -1,0 +1,67 @@
+---
+name: azurefilebroker
+
+templates:
+  ctl.erb: bin/azurefilebroker_ctl
+
+packages:
+- golang-smbvolume
+- azurefilebroker
+
+properties:
+  azurefilebroker.username:
+    description: "Basic auth username to verify on incoming Service Broker requests"
+    default: "admin"
+  azurefilebroker.password:
+    description: "Basic auth password to verify on incoming Service Broker requests"
+  azurefilebroker.accessKey:
+    description: "AccessKey to the storage account"
+  azurefilebroker.listen_addr:
+    description: "(optional) address azurefilebroker listens on"
+    default: "0.0.0.0:9000"
+  azurefilebroker.service_name:
+    description: "(optional) name of the service to be registered with cf"
+    default: "azurefile"
+  azurefilebroker.service_id:
+    description: "(optional) Id of the service to be registered with cf"
+    default: "azurefile-service-guid"
+  azurefilebroker.data_dir:
+    description: "(optional) Directory on broker VM to persist instance and binding state"
+    default: "/var/vcap/store/azurefilebroker"
+  azurefilebroker.db_driver:
+    default: ""
+    description: "(optional) database driver name when using SQL to store broker state"
+  azurefilebroker.db_username:
+    default: ""
+    description: "(optional) database username when using SQL to store broker state"
+  azurefilebroker.db_password:
+    default: ""
+    description: "(optional) database password when using SQL to store broker state"
+  azurefilebroker.db_hostname:
+    default: ""
+    description: "(optional) database hostname when using SQL to store broker state"
+  azurefilebroker.db_port:
+    default: ""
+    description: "(optional) database port when using SQL to store broker state"
+  azurefilebroker.db_name:
+    default: ""
+    description: "(optional) database name when using SQL to store broker state"
+  azurefilebroker.db_ca_cert:
+    default: ""
+    description: "(optional) CA Cert to verify SSL connection, if not include, connection will be plain"
+  azurefilebroker.allowed-in-source:
+    description: "Comma separated list of white-listed options that may be configured as supported in the mount_config.source URL query params. If a non-white-listed option is received from a user as arbitrary params, then the broker will reject the user request."
+    example: "uid,gid"
+    default: "uid,gid"
+  azurefilebroker.default-in-source:
+    description: "Comma separated list of default values for options in the mount_config.source URL query params, formatted as 'option:default'. If an option is not specified in the provisioning arbitrary params, or an option is specified but not white-listed, then the specified default value will be applied."
+    example: "uid:1000,gid:1000"
+    default: ""
+  azurefilebroker.allowed-in-mount:
+    description: "Comma separated list of white-listed options that may be configured as supported in the mount_config options. If a non-white-listed option is received from a user as arbitrary params, then the broker will reject the user request."
+    example: "allow_root,allow_other,azurefile_uid,auto_cache,fsname"
+    default: "auto_cache"
+  azurefilebroker.default-in-mount:
+    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the binding arbitrary params, or an option is specified but is not white-listed, then the specified default value will be applied."
+    example: "allow_root:false,allow_other:false,azurefile_uid:2000,auto_cache:false"
+    default: "auto_cache:true"

@@ -1,0 +1,5 @@
+---
+name: golang-smbvolume
+
+files:
+  - go1.7.linux-amd64.tar.gz

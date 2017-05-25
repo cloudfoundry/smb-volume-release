@@ -1,0 +1,45 @@
+---
+name: smbdriver
+
+templates:
+  install.erb: bin/pre-start
+  ctl.erb: bin/smbdriver_ctl
+
+packages:
+- smbdriver
+
+properties:
+ smbdriver.listen_addr:
+    description: "address smbdriver listens on"
+    default: "127.0.0.1:7590"
+ smbdriver.debug_addr:
+   description: "address smbdriver will serve debug info"
+   default: "127.0.0.1:7690"
+ smbdriver.driver_path:
+   description: "path to place driver spec/json file for volman to discover"
+   default: "/var/vcap/data/voldrivers"
+ smbdriver.cell_mount_path:
+   description: "path to mount volumes into on the cell"
+   default: "/var/vcap/data/volumes/smb"
+ smbdriver.log_level:
+   description: "smbdriver log level"
+   default: "info"
+ smbdriver.disable:
+   description: "disable smbdriver"
+   default: false
+ smbdriver.allowed-in-source:
+   description: "Comma separated list of white-listed options that may be configured in supported in the mount_config.source URL query params"
+   example: "uid,gid,auto-traverse-mounts,dircache"
+   default: "uid,gid"
+ smbdriver.default-in-source:
+   description: "Comma separated list of default values for options in the source URL query params, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be applied."
+   example: "uid:1000,gid=1000,auto-traverse-mounts=1"
+   default: ""
+ smbdriver.allowed-in-mount:
+   description: "Comma separated list of white-listed options that may be accepted in the mount_config options. Note a specific 'sloppy_mount:true' volume option tells the driver to ignore non-white-listed options, while a 'sloppy_mount:false' tells the driver to fail fast instead when receiving a non-white-listed option."
+   example: "allow_root,allow_other,auto_cache,sloppy_mount,fsname"
+   default: "auto_cache"
+ smbdriver.default-in-mount:
+   description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
+   example: "allow_root:false,auto_cache:true,sloppy_mount:true"
+   default: "auto_cache:true"

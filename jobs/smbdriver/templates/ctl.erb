@@ -1,0 +1,68 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/smbdriver
+LOG_DIR=/var/vcap/sys/log/smbdriver
+PIDFILE=$RUN_DIR/smbdriver.pid
+
+case $1 in
+
+  start)
+    # make a new container cvcap user if it doesn't already exist
+    id -u cvcap &>/dev/null || useradd -u 2000 cvcap
+
+    mkdir -p $RUN_DIR
+    chown -R cvcap:cvcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R cvcap:cvcap $LOG_DIR
+
+    mkdir -p /var/vcap/data/voldrivers
+    chmod 777 /var/vcap/data/voldrivers
+
+    mkdir -p "<%= p("smbdriver.cell_mount_path") %>"
+    chown -R cvcap:cvcap "<%= p("smbdriver.cell_mount_path") %>"
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for GOLANG 1.5.3 DNS bug
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    # Allowed number of open file descriptors
+    ulimit -n 100000
+
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+    export PATH=/usr/local/bin:$PATH
+
+    exec chpst -u cvcap:cvcap /var/vcap/packages/smbdriver/bin/smbdriver \
+      --listenAddr="<%= p("smbdriver.listen_addr") %>" \
+      --transport="tcp" \
+      --debugAddr="<%= p("smbdriver.debug_addr") %>" \
+      --driversPath="<%= p("smbdriver.driver_path") %>" \
+      --mountDir="<%= p("smbdriver.cell_mount_path") %>" \
+      --logLevel="<%= p("smbdriver.log_level") %>" \
+      --allowed-in-source="<%= p("smbdriver.allowed-in-source") %>" \
+      --default-in-source="<%= p("smbdriver.default-in-source") %>" \
+      --allowed-in-mount="<%= p("smbdriver.allowed-in-mount") %>" \
+      --default-in-mount="<%= p("smbdriver.default-in-mount") %>" \
+      >> $LOG_DIR/smbdriver.stdout.log \
+      2>> $LOG_DIR/smbdriver.stderr.log
+
+    ;;
+
+  stop)
+    if [ -f $PIDFILE ]; then
+      kill -9 `cat $PIDFILE` || true
+      rm -f $PIDFILE
+    fi
+    ;;
+
+  *)
+    echo "Usage: smbdriver_ctl {start|stop}"
+
+    ;;
+
+esac

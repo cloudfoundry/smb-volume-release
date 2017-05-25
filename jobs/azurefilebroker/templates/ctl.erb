@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -e -x
+
+RUN_DIR=/var/vcap/sys/run/azurefilebroker
+LOG_DIR=/var/vcap/sys/log/azurefilebroker
+PIDFILE=$RUN_DIR/azurefilebroker.pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
+
+    mkdir -p $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    mkdir -p "<%= p("azurefilebroker.data_dir") %>"
+    chown -R vcap:vcap "<%= p("azurefilebroker.data_dir") %>"
+
+    export GOMAXPROCS=$(nproc)
+
+    # Work around for go DNS bug (fix slated for v1.7)
+    export GODEBUG=netdns=cgo
+
+    echo $$ > $PIDFILE
+
+    # pass credentials in through the environment for safety
+    export USERNAME="<%= p("azurefilebroker.username") %>"
+    export PASSWORD="<%= p("azurefilebroker.password") %>"
+    export ACCESSKEY="<%= p("azurefilebroker.accessKey") %>"
+    export DB_USERNAME="<%= p("azurefilebroker.db_username") %>"
+    export DB_PASSWORD="<%= p("azurefilebroker.db_password") %>"
+
+    exec chpst -u vcap:vcap /var/vcap/packages/azurefilebroker/bin/azurefilebroker \
+      --listenAddr="<%= p("azurefilebroker.listen_addr") %>" \
+      --serviceName="<%= p("azurefilebroker.service_name") %>" \
+      --serviceId="<%= p("azurefilebroker.service_id") %>" \
+      --dataDir="<%= p("azurefilebroker.data_dir") %>" \
+      --dbDriver="<%= p("azurefilebroker.db_driver") %>" \
+      --dbHostname="<%= p("azurefilebroker.db_hostname") %>" \
+      --dbPort="<%= p("azurefilebroker.db_port") %>" \
+      --dbName="<%= p("azurefilebroker.db_name") %>" \
+      --dbCACert="<%= p("azurefilebroker.db_ca_cert") %>" \
+      --allowed-in-source="<%= p("azurefilebroker.allowed-in-source") %>" \
+      --default-in-source="<%= p("azurefilebroker.default-in-source") %>" \
+      --allowed-in-mount="<%= p("azurefilebroker.allowed-in-mount") %>" \
+      --default-in-mount="<%= p("azurefilebroker.default-in-mount") %>" \
+      >> $LOG_DIR/azurefilebroker.stdout.log \
+      2>> $LOG_DIR/azurefilebroker.stderr.log
+
+    ;;
+
+  stop)
+    if [ -f $PIDFILE ]; then
+      kill -9 `cat $PIDFILE` || true
+      rm -f $PIDFILE
+    fi
+    ;;
+
+  *)
+    echo "Usage: azurefilebroker_ctl {start|stop}"
+
+    ;;
+
+esac
