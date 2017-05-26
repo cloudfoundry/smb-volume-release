@@ -1,36 +1,68 @@
 [submodule "src/github.com/AbelHu/smbdriver"]
-	path = src/github.com/AbelHu/smbdriver
-	url = https://github.com/AbelHu/smbdriver
+        path = src/github.com/AbelHu/smbdriver
+        url = https://github.com/AbelHu/smbdriver
+        branch = master
 [submodule "src/github.com/AbelHu/azurefilebroker"]
-	path = src/github.com/AbelHu/azurefilebroker
-	url = https://github.com/AbelHu/azurefilebroker
+        path = src/github.com/AbelHu/azurefilebroker
+        url = https://github.com/AbelHu/azurefilebroker
+        branch = master
 [submodule "src/code.cloudfoundry.org/voldriver"]
-	path = src/code.cloudfoundry.org/voldriver
-	url = https://github.com/cloudfoundry/voldriver
+        path = src/code.cloudfoundry.org/voldriver
+        url = https://github.com/cloudfoundry/voldriver
+        branch = master
 [submodule "src/code.cloudfoundry.org/goshims"]
-	path = src/code.cloudfoundry.org/goshims
-	url = https://github.com/cloudfoundry/goshims
+        path = src/code.cloudfoundry.org/goshims
+        url = https://github.com/cloudfoundry/goshims
+        branch = master
 [submodule "src/code.cloudfoundry.org/cfhttp"]
-	path = src/code.cloudfoundry.org/cfhttp
-	url = https://github.com/cloudfoundry/cfhttp
+        path = src/code.cloudfoundry.org/cfhttp
+        url = https://github.com/cloudfoundry/cfhttp
+        branch = master
 [submodule "src/code.cloudfoundry.org/clock"]
-	path = src/code.cloudfoundry.org/clock
-	url = https://github.com/cloudfoundry/clock
+        path = src/code.cloudfoundry.org/clock
+        url = https://github.com/cloudfoundry/clock
+        branch = master
 [submodule "src/code.cloudfoundry.org/lager"]
-	path = src/code.cloudfoundry.org/lager
-	url = https://github.com/julian-hj/lager
+        path = src/code.cloudfoundry.org/lager
+        url = https://github.com/cloudfoundry/lager
+        branch = master
 [submodule "src/code.cloudfoundry.org/nfsdriver"]
-	path = src/code.cloudfoundry.org/nfsdriver
-	url = https://github.com/cloudfoundry-incubator/nfsdriver
+        path = src/code.cloudfoundry.org/nfsdriver
+        url = https://github.com/cloudfoundry/nfsdriver
+        branch = master
 [submodule "src/code.cloudfoundry.org/debugserver"]
-	path = src/code.cloudfoundry.org/debugserver
-	url = https://github.com/cloudfoundry/debugserver
+        path = src/code.cloudfoundry.org/debugserver
+        url = https://github.com/cloudfoundry/debugserver
+        branch = master
 [submodule "src/github.com/tedsuo/ifrit"]
-	path = src/github.com/tedsuo/ifrit
-	url = https://github.com/tedsuo/ifrit
+        path = src/github.com/tedsuo/ifrit
+        url = https://github.com/tedsuo/ifrit
+        branch = master
 [submodule "src/github.com/tedsuo/rata"]
-	path = src/github.com/tedsuo/rata
-	url = https://github.com/tedsuo/rata
+        path = src/github.com/tedsuo/rata
+        url = https://github.com/tedsuo/rata
+        branch = master
 [submodule "src/github.com/pivotal-cf/brokerapi"]
-	path = src/github.com/pivotal-cf/brokerapi
-	url = https://github.com/pivotal-cf/brokerapi
+        path = src/github.com/pivotal-cf/brokerapi
+        url = https://github.com/pivotal-cf/brokerapi
+        branch = master
+[submodule "src/github.com/bmizerany/pat"]
+        path = src/github.com/bmizerany/pat
+        url = https://github.com/bmizerany/pat
+        branch = master
+[submodule "src/github.com/codegangsta/cli"]
+        path = src/github.com/codegangsta/cli
+        url = https://github.com/codegangsta/cli
+        branch = master
+[submodule "src/github.com/gorilla/mux"]
+        path = src/github.com/gorilla/mux
+        url = https://github.com/gorilla/mux
+        branch = master
+[submodule "src/github.com/go-sql-driver/mysql"]
+        path = src/github.com/go-sql-driver/mysql
+        url = https://github.com/go-sql-driver/mysql
+        branch = master
+[submodule "src/github.com/lib/pq"]
+        path = src/github.com/lib/pq
+        url = https://github.com/lib/pq
+        branch = master

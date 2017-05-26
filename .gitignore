@@ -17,3 +17,8 @@ releases/smb-volume/*.tgz
 pkg
 bin/
 
+# gosub and friends
+src/github.com/vito/gosub
+src/github.com/codegangsta/cli
+
+src/github.com/tools/godep

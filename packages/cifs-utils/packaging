@@ -46,7 +46,6 @@ tar jxf cifs-utils-6.7.tar.bz2
 pushd cifs-utils-6.7
   autoreconf -i
   ./configure --prefix=${BOSH_INSTALL_TARGET}
-  make CPPFLAGS='-I/var/vcap/packages/cifs-utils/include'
-  make install
+  make CPPFLAGS="-I${BOSH_INSTALL_TARGET}/include"
 popd
 cp -R cifs-utils-6.7 ${BOSH_INSTALL_TARGET}

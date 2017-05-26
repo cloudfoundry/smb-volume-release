@@ -1,1 +1,33 @@
---- {}
+---
+autoconf-2.69.tar.gz:
+  object_id: 9c40db22-4091-4fca-8876-f80b49298318
+  sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
+  size: 1927468
+go1.7.linux-amd64.tar.gz:
+  object_id: 11e02682-7a4d-49eb-8055-f69389dda66e
+  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
+  size: 81573766
+talloc-2.1.9.tar.gz:
+  object_id: cc35f06d-c207-4952-825f-97c624717a47
+  sha: e1e79fec4c0b6bd92be904a9c03b0a168478711a
+  size: 440335
+cf-cli_6.23.1_linux_x86-64.tgz:
+  object_id: b1bbe1f0-25a2-4cb5-ab6d-b39fb52938a2
+  sha: a195e99cae5ab17b453b0a0747508c8f3eee5cae
+  size: 6692717
+automake-1.15.tar.gz:
+  object_id: 0f0fab7d-c1cf-4bcf-a611-084c6e136d25
+  sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
+  size: 2244206
+cifs-utils-6.7.tar.bz2:
+  object_id: b456b098-6155-43c6-9ce6-046d2b4fff42
+  sha: 9ba5091d7c2418a90773c861f04a3f4a36854c14
+  size: 363647
+libtool-2.4.6.tar.gz:
+  object_id: 356d231d-db24-47a9-a6f2-cc5ac5cdc8b4
+  sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
+  size: 1806697
+pkg-config-0.29.2.tar.gz:
+  object_id: 820b5a5c-349e-4958-8f3d-4da98e470e3d
+  sha: 76e501663b29cb7580245720edfb6106164fad2b
+  size: 2016830
