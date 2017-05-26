@@ -14,7 +14,9 @@ for i in {1..60}; do
 done
 
 echo "Installing mount.cifs"
-cp /var/vcap/packages/cifs-utils/mount.cifs /sbin/
+pushd /var/vcap/packages/cifs-utils/
+  cp bin/mount.cifs /sbin/
+popd
 
 echo "Installed mount.cifs"
 exit 0

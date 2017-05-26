@@ -47,5 +47,5 @@ pushd cifs-utils-6.7
   autoreconf -i
   ./configure --prefix=${BOSH_INSTALL_TARGET}
   make CPPFLAGS="-I${BOSH_INSTALL_TARGET}/include"
+  cp mount.cifs ${BOSH_INSTALL_TARGET}/bin
 popd
-cp -R cifs-utils-6.7 ${BOSH_INSTALL_TARGET}
