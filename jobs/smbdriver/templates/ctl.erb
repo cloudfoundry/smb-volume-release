@@ -37,7 +37,8 @@ case $1 in
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
     export PATH=/usr/local/bin:$PATH
 
-    exec chpst -u cvcap:cvcap /var/vcap/packages/smbdriver/bin/smbdriver \
+    #exec chpst -u cvcap:cvcap /var/vcap/packages/smbdriver/bin/smbdriver
+    exec chpst -u root:root /var/vcap/packages/smbdriver/bin/smbdriver \
       --listenAddr="<%= p("smbdriver.listen_addr") %>" \
       --transport="tcp" \
       --debugAddr="<%= p("smbdriver.debug_addr") %>" \

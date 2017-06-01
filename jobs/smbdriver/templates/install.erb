@@ -2,17 +2,6 @@
 
 set -e -x
 
-# make sure there arent any existing cifs mounts
-pkill mount.cifs | true
-for i in {1..60}; do
-  if pgrep mount.cifs > /dev/null; then
-    echo "waiting for mount.cifs to expire"
-    sleep 1
-  else
-    break
-  fi
-done
-
 echo "Installing mount.cifs"
 pushd /var/vcap/packages/cifs-utils/
   cp mount.cifs /sbin/
