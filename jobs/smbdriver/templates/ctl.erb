@@ -39,7 +39,7 @@ case $1 in
 
     #exec chpst -u cvcap:cvcap /var/vcap/packages/smbdriver/bin/smbdriver
     exec chpst -u root:root /var/vcap/packages/smbdriver/bin/smbdriver \
-      --listenAddr="<%= p("smbdriver.listen_addr") %>" \
+      --listenPort=<%= p("smbdriver.listen_port") %> \
       --transport="tcp" \
       --debugAddr="<%= p("smbdriver.debug_addr") %>" \
       --driversPath="<%= p("smbdriver.driver_path") %>" \

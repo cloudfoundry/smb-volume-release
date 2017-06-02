@@ -10,9 +10,9 @@ packages:
 - smbdriver
 
 properties:
- smbdriver.listen_addr:
-    description: "address smbdriver listens on"
-    default: "127.0.0.1:7590"
+ smbdriver.listen_port:
+    description: "port smbdriver listens on"
+    default: 7590
  smbdriver.debug_addr:
    description: "address smbdriver will serve debug info"
    default: "127.0.0.1:7690"
