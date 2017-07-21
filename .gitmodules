@@ -66,3 +66,31 @@
         path = src/github.com/lib/pq
         url = https://github.com/lib/pq
         branch = master
+[submodule "src/github.com/Azure/azure-sdk-for-go"]
+	path = src/github.com/Azure/azure-sdk-for-go
+	url = https://github.com/Azure/azure-sdk-for-go
+	branch = master
+[submodule "src/github.com/Azure/go-autorest"]
+	path = src/github.com/Azure/go-autorest
+	url = https://github.com/Azure/go-autorest
+	branch = master
+[submodule "src/github.com/denisenkom/go-mssqldb"]
+	path = src/github.com/denisenkom/go-mssqldb
+	url = https://github.com/denisenkom/go-mssqldb
+	branch = master
+[submodule "src/github.com/dgrijalva/jwt-go"]
+	path = src/github.com/dgrijalva/jwt-go
+	url = https://github.com/dgrijalva/jwt-go
+	branch = master
+[submodule "src/github.com/satori/uuid"]
+	path = src/github.com/satori/uuid
+	url = https://github.com/satori/uuid
+	branch = master
+[submodule "src/golang.org/x/crypto"]
+	path = src/golang.org/x/crypto
+	url = https://go.googlesource.com/crypto
+	branch = master
+[submodule "src/golang.org/x/net"]
+	path = src/golang.org/x/net
+	url = https://go.googlesource.com/net
+	branch = master

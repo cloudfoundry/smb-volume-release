@@ -15,9 +15,6 @@ case $1 in
     mkdir -p $LOG_DIR
     chown -R vcap:vcap $LOG_DIR
 
-    mkdir -p "<%= p("azurefilebroker.data_dir") %>"
-    chown -R vcap:vcap "<%= p("azurefilebroker.data_dir") %>"
-
     export GOMAXPROCS=$(nproc)
 
     # Work around for go DNS bug (fix slated for v1.7)
@@ -28,7 +25,6 @@ case $1 in
     # pass credentials in through the environment for safety
     export USERNAME="<%= p("azurefilebroker.username") %>"
     export PASSWORD="<%= p("azurefilebroker.password") %>"
-    export ACCESSKEY="<%= p("azurefilebroker.accessKey") %>"
     export DB_USERNAME="<%= p("azurefilebroker.db_username") %>"
     export DB_PASSWORD="<%= p("azurefilebroker.db_password") %>"
 
@@ -36,16 +32,24 @@ case $1 in
       --listenAddr="<%= p("azurefilebroker.listen_addr") %>" \
       --serviceName="<%= p("azurefilebroker.service_name") %>" \
       --serviceId="<%= p("azurefilebroker.service_id") %>" \
-      --dataDir="<%= p("azurefilebroker.data_dir") %>" \
       --dbDriver="<%= p("azurefilebroker.db_driver") %>" \
       --dbHostname="<%= p("azurefilebroker.db_hostname") %>" \
       --dbPort="<%= p("azurefilebroker.db_port") %>" \
       --dbName="<%= p("azurefilebroker.db_name") %>" \
       --dbCACert="<%= p("azurefilebroker.db_ca_cert") %>" \
-      --allowed-in-source="<%= p("azurefilebroker.allowed-in-source") %>" \
-      --default-in-source="<%= p("azurefilebroker.default-in-source") %>" \
-      --allowed-in-mount="<%= p("azurefilebroker.allowed-in-mount") %>" \
-      --default-in-mount="<%= p("azurefilebroker.default-in-mount") %>" \
+      --allowedOptions="<%= p("azurefilebroker.allowed_options") %>" \
+      --defaultOptions="<%= p("azurefilebroker.default_options") %>" \
+      --environment="<%= p("azurefilebroker.environment") %>" \
+      --tenantID="<%= p("azurefilebroker.tenant_id") %>" \
+      --clientID="<%= p("azurefilebroker.client_id") %>" \
+      --clientSecret="<%= p("azurefilebroker.client_secret") %>" \
+      --defaultSubscriptionID="<%= p("azurefilebroker.default_subscription_id") %>" \
+      --defaultResourceGroupName="<%= p("azurefilebroker.default_resource_group_name") %>" \
+      --allowCreateStorageAccount="<%= p("azurefilebroker.allow_create_storage_account") %>" \
+      --allowCreateFileShare="<%= p("azurefilebroker.allow_create_file_share") %>" \
+      --allowDeleteStorageAccount="<%= p("azurefilebroker.allow_delete_storage_account") %>" \
+      --allowDeleteFileShare="<%= p("azurefilebroker.allow_delete_file_share") %>" \
+      --logLevel="<%= p("azurefilebroker.log_level") %>" \
       >> $LOG_DIR/azurefilebroker.stdout.log \
       2>> $LOG_DIR/azurefilebroker.stderr.log
 
@@ -64,3 +68,4 @@ case $1 in
     ;;
 
 esac
+

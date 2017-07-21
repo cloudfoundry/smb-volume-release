@@ -45,10 +45,8 @@ case $1 in
       --driversPath="<%= p("smbdriver.driver_path") %>" \
       --mountDir="<%= p("smbdriver.cell_mount_path") %>" \
       --logLevel="<%= p("smbdriver.log_level") %>" \
-      --allowed-in-source="<%= p("smbdriver.allowed-in-source") %>" \
-      --default-in-source="<%= p("smbdriver.default-in-source") %>" \
-      --allowed-in-mount="<%= p("smbdriver.allowed-in-mount") %>" \
-      --default-in-mount="<%= p("smbdriver.default-in-mount") %>" \
+      --mountFlagAllowed="<%= p("smbdriver.allowed-in-mount") %>" \
+      --mountFlagDefault="<%= p("smbdriver.default-in-mount") %>" \
       >> $LOG_DIR/smbdriver.stdout.log \
       2>> $LOG_DIR/smbdriver.stderr.log
 
@@ -67,3 +65,4 @@ case $1 in
     ;;
 
 esac
+

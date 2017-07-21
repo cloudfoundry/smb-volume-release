@@ -4,6 +4,7 @@ name: smbdriver
 templates:
   install.erb: bin/pre-start
   ctl.erb: bin/smbdriver_ctl
+  drain.erb: bin/drain
 
 packages:
 - cifs-utils
@@ -12,10 +13,13 @@ packages:
 properties:
  smbdriver.listen_port:
     description: "port smbdriver listens on"
-    default: 7590
+    default: 8589
  smbdriver.debug_addr:
    description: "address smbdriver will serve debug info"
-   default: "127.0.0.1:7690"
+   default: "127.0.0.1:8689"
+ smbdriver.adminPort:
+    description: "port smbdriver listens on for admin requests"
+    default: 8590
  smbdriver.driver_path:
    description: "path to place driver spec/json file for volman to discover"
    default: "/var/vcap/data/voldrivers"
@@ -28,19 +32,12 @@ properties:
  smbdriver.disable:
    description: "disable smbdriver"
    default: false
- smbdriver.allowed-in-source:
-   description: "Comma separated list of white-listed options that may be configured in supported in the mount_config.source URL query params"
-   example: "uid,gid,auto-traverse-mounts,dircache"
-   default: "uid,gid"
- smbdriver.default-in-source:
-   description: "Comma separated list of default values for options in the source URL query params, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be applied."
-   example: "uid:1000,gid=1000,auto-traverse-mounts=1"
-   default: ""
  smbdriver.allowed-in-mount:
-   description: "Comma separated list of white-listed options that may be accepted in the mount_config options. Note a specific 'sloppy_mount:true' volume option tells the driver to ignore non-white-listed options, while a 'sloppy_mount:false' tells the driver to fail fast instead when receiving a non-white-listed option."
-   example: "allow_root,allow_other,auto_cache,sloppy_mount,fsname"
-   default: "auto_cache"
+   description: "Comma separated list of white-listed options that may be accepted in the mount_config options."
+   example: "username,password,uid,gid,file_mode,dir_mode,readonly,domain"
+   default: "username,password,uid,gid,file_mode,dir_mode,readonly,domain"
  smbdriver.default-in-mount:
    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
-   example: "allow_root:false,auto_cache:true,sloppy_mount:true"
-   default: "auto_cache:true"
+   example: "uid:2000,gid:2000,vers:3.0"
+   default: "uid:2000,gid:2000"
+
