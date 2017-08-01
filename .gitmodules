@@ -2,10 +2,6 @@
         path = src/github.com/AbelHu/smbdriver
         url = https://github.com/AbelHu/smbdriver
         branch = master
-[submodule "src/github.com/AbelHu/azurefilebroker"]
-        path = src/github.com/AbelHu/azurefilebroker
-        url = https://github.com/AbelHu/azurefilebroker
-        branch = master
 [submodule "src/code.cloudfoundry.org/voldriver"]
         path = src/code.cloudfoundry.org/voldriver
         url = https://github.com/cloudfoundry/voldriver
@@ -62,10 +58,6 @@
         path = src/github.com/go-sql-driver/mysql
         url = https://github.com/go-sql-driver/mysql
         branch = master
-[submodule "src/github.com/lib/pq"]
-        path = src/github.com/lib/pq
-        url = https://github.com/lib/pq
-        branch = master
 [submodule "src/github.com/Azure/azure-sdk-for-go"]
 	path = src/github.com/Azure/azure-sdk-for-go
 	url = https://github.com/Azure/azure-sdk-for-go
@@ -93,4 +85,8 @@
 [submodule "src/golang.org/x/net"]
 	path = src/golang.org/x/net
 	url = https://go.googlesource.com/net
+	branch = master
+[submodule "src/github.com/AbelHu/azurefilebroker"]
+	path = src/github.com/AbelHu/azurefilebroker
+	url = https://github.com/AbelHu/azurefilebroker
 	branch = master

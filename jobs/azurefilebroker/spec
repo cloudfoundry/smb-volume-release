@@ -26,6 +26,18 @@ properties:
   azurefilebroker.db_driver:
     default: ""
     description: "[REQUIRED] - database driver name when using SQL to store broker state"
+  azurefilebroker.environment:
+    default: "AzureCloud"
+    description: "(optional) - The environment for Azure Management Service. AzureCloud, AzureChinaCloud, AzureUSGovernment, AzureGermanCloud or AzureStack"
+  azurefilebroker.tenant_id:
+    default: ""
+    description: "[REQUIRED] - The tenant id for your service principal"
+  azurefilebroker.client_id:
+    default: ""
+    description: "[REQUIRED] - The client id for your service principal"
+  azurefilebroker.client_secret:
+    default: ""
+    description: "[REQUIRED] - The client secret for your service principal"
   azurefilebroker.db_username:
     default: ""
     description: "[REQUIRED] - database username when using SQL to store broker state"
@@ -52,18 +64,6 @@ properties:
     description: "A comma separated list of defaults specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value that cannot be overridden"
     example: "vers:3.0"
     default: "vers:3.0"
-  azurefilebroker.environment:
-    default: "AzureCloud"
-    description: "(optional) - The environment for Azure Management Service. AzureCloud, AzureChinaCloud, AzureUSGovernment, AzureGermanCloud or AzureStack"
-  azurefilebroker.tenant_id:
-    default: ""
-    description: "[REQUIRED] - The tenant id for your service principal"
-  azurefilebroker.client_id:
-    default: ""
-    description: "[REQUIRED] - The client id for your service principal"
-  azurefilebroker.client_secret:
-    default: ""
-    description: "[REQUIRED] - The client secret for your service principal"
   azurefilebroker.default_subscription_id:
     default: ""
     description: "(optional) - The default Azure Subscription id to use when creating new storage accounts"
