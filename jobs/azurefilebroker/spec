@@ -66,12 +66,15 @@ properties:
     default: "vers:3.0"
   azurefilebroker.default_subscription_id:
     default: ""
-    description: "(optional) - The default Azure Subscription id to use when creating new storage accounts"
+    description: "(optional) - The default Azure Subscription id to use for storage accounts"
   azurefilebroker.default_resource_group_name:
     default: ""
-    description: "(optional) - The default resource group name to use when creating new storage accounts"
+    description: "(optional) - The default resource group name to use for storage accounts"
+  azurefilebroker.default_location:
+    default: ""
+    description: "(optional) - The default location to use for creating storage accounts"
   azurefilebroker.allow_create_storage_account:
-    default: false
+    default: true
     description: "(optional) - Allow Broker to create storage accounts"
   azurefilebroker.allow_create_file_share:
     default: true
