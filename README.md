@@ -95,19 +95,19 @@ If you are using Azure SQL service, you need to change the policy from "default"
 
 1. Run below command step by step to change the policy
 
-- Login
+    - Login
 
     ```dos
     armclient login
     ```
 
-- Check the current setting for the server. You need to fill the parameters in the URL with yours accordingly.
+    - Check the current setting for the server. You need to fill the parameters in the URL with yours accordingly.
 
     ```dos
     armclient get https://management.azure.com/subscriptions/<YOUR-SUBSCRIPTION-ID>/resourceGroups/<YOUR-RESOURCE-GROUP-NAME>/providers/Microsoft.Sql/servers/<YOUR-SQL-SERVER-NAME>/connectionPolicies/Default?api-version=2014-04-01
     ```
 
-- Save below content to a file and navigate to the folder containing this file in cmd window. Change the setting by command below. You need to fill the parameters in the URL with yours accordingly.
+    - Save below content to a file and navigate to the folder containing this file in cmd window. Change the setting by command below. You need to fill the parameters in the URL with yours accordingly.
 
     ```
     {
@@ -123,12 +123,28 @@ If you are using Azure SQL service, you need to change the policy from "default"
 
 Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
 
-- `cd src/github.com/AbelHu/azurefilebroker`
-- `GOOS=linux GOARCH=amd64 go build -o bin/azurefilebroker`
-- edit `manifest.yml` to set up broker username/password and sql db driver name and cf service name.  If you are using the [cf-mysql-release](http://bosh.io/releases/github.com/cloudfoundry/cf-mysql-release) from bosh.io, then the database parameters in manifest.yml will already be correct.
-- `cf push <broker app name> --no-start`
-- `cf bind-service <broker app name> <sql service instance name>`
-- `cf start <broker app name>`
+    - `cd src/github.com/AbelHu/azurefilebroker`
+    - `GOOS=linux GOARCH=amd64 go build -o bin/azurefilebroker`
+    - Run azurefilebroker as a Cloud Foundry application
+      Edit `manifest.yml` to set up all required parameters. `manifest.yml` and `Procfile` will work together to start the broker.
+
+      - With a database directly: `DB_USERNAME`, `DB_PASSWORD`, `DBHOST`, `DBPORT` and `DBNAME` in `manifest.yml` need to be set up.
+
+        ```bash
+        cf push azurefilebroker
+        ```
+
+      - With a Cloud Foundry database service instance: `DBSERVICENAME` needs to be set up.
+
+        ```bash
+        cf push azurefilebroker --no-start
+        cf bind-service azurefilebroker <sql service instance name>
+        cf start azurefilebroker
+        ```
+
+    **NOTE**:
+
+    - Please see more details about broker's configurations [here](https://github.com/AbelHu/azurefilebroker#configurations-of-azurefilebroker).
 
 # Testing or Using this Release
 
@@ -136,12 +152,12 @@ Once you have a database service instance available in the space where you will 
 * Register the broker and grant access to it's service with the following command:
 
     ```bash
-    $ cf create-service-broker azurefilebroker <BROKER_USERNAME> <BROKER_PASSWORD> http://azurefilebroker.YOUR.DOMAIN.com:9000
+    $ cf create-service-broker azurefilebroker <BROKER_USERNAME> <BROKER_PASSWORD> http://azurefilebroker.YOUR.DOMAIN.com
     $ cf enable-service-access azuresmbvolume
     ```
 
 ## Create an SMB volume service with an existing storage account
-* type the following:
+1. type the following:
 
     ```bash
     $ cf create-service azuresmbvolume AzureFileShare myVolume -c '{"storage_account_name":"<YOUR-AZURE-STORAGE-ACCOUNT>"}'
@@ -149,7 +165,7 @@ Once you have a database service instance available in the space where you will 
     ```
 
 ## Create an SMB volume service with a new storage account
-* type the following:
+1. type the following:
 
     ```bash
     $ cf create-service azuresmbvolume AzureFileShare myVolume -c '{"storage_account_name":"<YOUR-AZURE-STORAGE-ACCOUNT>, "location":"<YOUR-LOCATION>"}'
@@ -157,19 +173,12 @@ Once you have a database service instance available in the space where you will 
     ```
 
     **NOTE**:
-    - You must not set `allowCreateStorageAccount` to `false` when deploying azurefilebroker.
-    - The storage account created by Broker only can be deleted in deleteing the service when `allowDeleteStorageAccount` is set to `true`.
-    - You must specify location when creating a new storage account if you do not specify default location when deploying azurefilebroker.
+
+    - Please see more details about parameters [here](https://github.com/AbelHu/azurefilebroker#parameters-for-provision).
     - The Azure file share only can be binded to your application in Linux when they are in the same location.
-    - Other supported parameters: `subscription_id`, `resource_group_name`, `use_https`, `sku_name`, `enable_encryption`
-        - `subscription_id` must be specified if default subscription id is not specified when deploying azurefilebroker.
-        - `resource_group_name` must be specified if default resource group is not specified when deploying azurefilebroker.
-        - `use_https` must be set to `false` if your applicaiton is running in Linux. Reference more details [here](https://docs.microsoft.com/en-us/azure/storage/storage-security-guide). The default value is `false`.
-        - `sku_name` must be one of `Standard_GRS`, `Standard_LRS` or `Standard_RAGRS`. The default value is `Standard_RAGRS`.
-        - `enable_encryption` provides the encryption settings on the account. The default value is `true`.
 
 ## Deploy the pora test app, first by pushing the source code to CloudFoundry
-* type the following:
+1. type the following:
 
     ```bash
     $ git clone https://github.com/cloudfoundry/persi-acceptance-tests.git
@@ -177,32 +186,30 @@ Once you have a database service instance available in the space where you will 
     $ cf push pora --no-start
     ```
 
-* Bind the service to your app supplying the correct Azure file share. Broker will create it if it does not exist by default.
+1. Bind the service to your app supplying the correct Azure file share. Broker will create it if it does not exist by default.
 
     ```bash
     $ cf bind-service pora myVolume -c '{"share": "one"}'
     ```
 
     **NOTE**:
-        - You must not set `allowCreateFileShare` to `false` when deploying azurefilebroker.
-        - The file share created by Broker only can be deleted in unbinding the service when `allowDeleteFileShare` is set to `true`.
 
-> ####Bind Parameters####
-> * **uid & gid:** When binding the Azure file share to the application, the uid and gid specified are supplied to the mount.cifs.  The fmount.cifs masks the running user id and group id as the true owner shown on the Azure file share.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
-> * **mount:** By default, volumes are mounted into the application container in an arbitrarily named folder under /var/vcap/data.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
-> ``` cf bind-service pora myVolume -c '{"share", "one", "uid":"0","gid":"0","mount":"/var/path"}'```
-> > NOTE: As of this writing aufs used by Garden is not capable of creating new root level folders.  As a result, you must choose a path with a root level folder that already exists in the container.  (`/home`, `/usr` or `/var` are good choices.)  If you require a path that does not already exist in the container it is currently only possible if you upgrade your Diego deployment to use [GrootFS](https://github.com/cloudfoundry/grootfs-release) with Garden.  For details on how to generate a Diego manifest using GrootFS see [this note](https://github.com/cloudfoundry/diego-release/blob/develop/docs/manifest-generation.md#experimental--g-opt-into-using-grootfs-for-garden).  Eventually, GrootFS will become the standard file system for CF containers, and this limitation will go away.
-> * **readonly:** Set true if you want the mounted volume to be read only.
+    - Please see more details about parameters [here](https://github.com/AbelHu/azurefilebroker#prameters-for-bind).
+    - uid & gid: When binding the Azure file share to the application, the uid and gid specified are supplied to the mount.cifs.  The mount.cifs masks the running user id and group id as the true owner shown on the Azure file share.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
+    - mount: By default, volumes are mounted into the application container in an arbitrarily named folder under `/var/vcap/data`.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
+        ``` cf bind-service pora myVolume -c '{"share", "one", "uid":"0","gid":"0","mount":"/var/path"}' ```
+    NOTE: As of this writing aufs used by Garden is not capable of creating new root level folders.  As a result, you must choose a path with a root level folder that already exists in the container.  (`/home`, `/usr` or `/var` are good choices.)  If you require a path that does not already exist in the container it is currently only possible if you upgrade your Diego deployment to use [GrootFS](https://github.com/cloudfoundry/grootfs-release) with Garden.  For details on how to generate a Diego manifest using GrootFS see [this note](https://github.com/cloudfoundry/diego-release/blob/develop/docs/manifest-generation.md#experimental--g-opt-into-using-grootfs-for-garden). Eventually, GrootFS will become the standard file system for CF containers, and this limitation will go away.
 
-* Start the application
+1. Start the application
+
     ```bash
     $ cf start pora
     ```
 
 ## Test the app to make sure that it can access your SMB volume
 
-* to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
-* to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
+1. to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
+1. to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
 
 # Reference
 
