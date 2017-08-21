@@ -79,48 +79,6 @@ When the service broker is `cf push`ed, you can bind it to a MSSql or MySql data
 **NOTE**
 *For now, it is not supported to bind to Azure SQL with meta-azure-service-broker because the variable names do not match. A fix is in progress. You must specify variables in the manifest.*
 
-If you are using Azure SQL service, you need to change the policy from "default" to "proxy" after creating your SQL server.
-
-1. Install the Chocolatey by running the command below using CMD which is opening in administrator privilege.
-
-    ```dos
-    @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-    ```
-
-1. Run below command to install the armclient.
-
-    ```dos
-    choco install armclient
-    ```
-
-1. Run below command step by step to change the policy
-
-    - Login
-
-    ```dos
-    armclient login
-    ```
-
-    - Check the current setting for the server. You need to fill the parameters in the URL with yours accordingly.
-
-    ```dos
-    armclient get https://management.azure.com/subscriptions/<YOUR-SUBSCRIPTION-ID>/resourceGroups/<YOUR-RESOURCE-GROUP-NAME>/providers/Microsoft.Sql/servers/<YOUR-SQL-SERVER-NAME>/connectionPolicies/Default?api-version=2014-04-01
-    ```
-
-    - Save below content to a file and navigate to the folder containing this file in cmd window. Change the setting by command below. You need to fill the parameters in the URL with yours accordingly.
-
-    ```
-    {
-            "properties": {
-                    "connectionType": "Proxy"
-            }
-    }
-    ```
-
-    ```dos
-    armclient put https://management.azure.com/subscriptions/<YOUR-SUBSCRIPTION-ID>/resourceGroups/<YOUR-RESOURCE-GROUP-NAME>/providers/Microsoft.Sql/servers/<YOUR-SQL-SERVER-NAME>/connectionPolicies/Default?api-version=2014-04-01 @policy.json
-    ```
-
 Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
 
     - `cd src/github.com/AbelHu/azurefilebroker`
