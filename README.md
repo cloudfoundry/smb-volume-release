@@ -77,7 +77,7 @@ The azurefilebroker can be deployed in two ways; as a cf app or as a BOSH deploy
 When the service broker is `cf push`ed, you can bind it to a MSSql or MySql database service instance.
 
 **NOTE**
-*For now, it is not supported to bind to Azure SQL with meta-azure-service-broker because the variable names do not match. A fix is in progress. You must specify variables in the manifest.*
+*It is not supported to bind to Azure SQL with an old meta-azure-service-broker before `v1.5.0` because the variable names do not match. You must specify variables in the manifest.*
 
 Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
 
