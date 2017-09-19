@@ -12,6 +12,31 @@ This broker/driver pair allows you to provision existing Azure storage accounts 
 
 1. If you are starting from scratch, you can follow this [guidance](https://github.com/cloudfoundry-incubator/bosh-azure-cpi-release/tree/master/docs) to deploy a Cloud Foundry with Diego on Azure via Azure template.
 
+1. Install [GO](https://golang.org/dl/):
+
+    ```
+    mkdir ~/workspace ~/go
+    cd ~/workspace
+    wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
+    sudo tar -C /usr/local -xzf go1.9.linux-amd64.tar.gz
+    echo 'export GOPATH=$HOME/go' >> ~/.bashrc
+    echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' >> ~/.bashrc
+    exec $SHELL
+    ```
+
+1. Install [direnv](https://github.com/direnv/direnv#from-source):
+
+    ```
+    mkdir -p $GOPATH/src/github.com/direnv
+    git clone https://github.com/direnv/direnv.git $GOPATH/src/github.com/direnv/direnv
+    pushd $GOPATH/src/github.com/direnv/direnv
+        make
+        sudo make install
+    popd
+    echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+    exec $SHELL
+    ```
+
 ## Create and Upload this Release
 
 1. Clone smb-volume-release (master branch) from git:
@@ -25,20 +50,33 @@ This broker/driver pair allows you to provision existing Azure storage accounts 
     $ ./scripts/update
     ```
 
-    **NOTE**:
-    *You may need to install direnv by following this [guidance](https://github.com/direnv/direnv).*
-
-1. Bosh Create and Upload the release
+1. Bosh create the release
 
     ```bash
-    $ bosh -n create release --force && bosh -n upload release
+    $ bosh -n create release --force
+    ```
+
+1. Bosh upload the release
+
+    ```bash
+    # BOSH CLI v1
+    $ bosh -n upload release
+    ```
+
+    ```bash
+    # BOSH CLI v2
+    $ bosh -n -e <YOUR BOSH DEPLOYMENT NAME> upload-release
     ```
 
 ## Enable Volume Services in CF and Redeploy
 
-In your CF manifest, check the setting for `properties: cc: volume_services_enabled`.  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.)
+In your CF manifest, check the setting for `properties: cc: volume_services_enabled` (If multiple cc properties exist, please update cc properties under the job `api`).  If it is not already `true`, set it to `true` and redeploy CF.  (This will be quick, as it only requires BOSH to restart the cloud controller job with the new property.)
 
 ## Colocate the smbdriver job on the Diego Cell
+
+If you have a bosh director version < `259` you will need to use one of the OLD WAYS below. (check `bosh status` to determine your version).  Otherwise we recommend the NEW WAY :thumbsup::thumbsup::thumbsup:
+
+### OLD WAY Manual Editing
 
 1. Add `smb-volume` to the `releases:` key
 
@@ -68,11 +106,50 @@ In your CF manifest, check the setting for `properties: cc: volume_services_enab
 
 1. Redeploy Diego using your new manifest.
 
+### NEW WAY Use bosh add-ons with filtering
+
+This technique allows you to co-locate bosh jobs on cells without editing the Diego bosh manifest.
+
+1. Create a new `runtime-config.yml` with the following content:
+
+    ```yaml
+    ---
+    releases:
+    - name: smb-volume
+      version: <YOUR VERSION HERE>
+    addons:
+    - name: voldrivers
+      include:
+        deployments:
+        - <YOUR DIEGO DEPLOYMENT NAME>
+        jobs:
+        - name: rep
+          release: diego
+      jobs:
+      - name: smbdriver
+        release: smb-volume
+        properties: {}
+    ```
+
+1. Set the runtime config:
+
+    ```bash
+    # BOSH CLI v1
+    $ bosh update runtime-config runtime-config.yml
+    ```
+
+    ```bash
+    # BOSH CLI v2
+    $ bosh -e <YOUR BOSH DEPLOYMENT NAME> update-runtime-config runtime-config.yml
+    ```
+
+1. Redeploy Diego using your new manifest.
+
 ## Deploying azurefilebroker
 
 The azurefilebroker can be deployed in two ways; as a cf app or as a BOSH deployment.  The choice is yours!
 
-### Way `cf push` the broker
+### Way #1 `cf push` the broker
 
 When the service broker is `cf push`ed, you can bind it to a MSSql or MySql database service instance.
 
@@ -81,32 +158,33 @@ When the service broker is `cf push`ed, you can bind it to a MSSql or MySql data
 
 Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
 
-    - `cd src/github.com/AbelHu/azurefilebroker`
-    - `GOOS=linux GOARCH=amd64 go build -o bin/azurefilebroker`
-    - Run azurefilebroker as a Cloud Foundry application
-      Edit `manifest.yml` to set up all required parameters. `manifest.yml` and `Procfile` will work together to start the broker.
+- `./script/build-broker`
+- Edit `manifest.yml` to set up all required parameters. `manifest.yml` and `Procfile` will work together to start the broker.
+    - With a database directly: `DBCACERT`, `HOSTNAMEINCERTIFICATE`, `DB_USERNAME`, `DB_PASSWORD`, `DBHOST`, `DBPORT` and `DBNAME` in `manifest.yml` need to be set up.
 
-      - With a database directly: `DB_USERNAME`, `DB_PASSWORD`, `DBHOST`, `DBPORT` and `DBNAME` in `manifest.yml` need to be set up.
+    ```bash
+    cf push azurefilebroker
+    ```
 
-        ```bash
-        cf push azurefilebroker
-        ```
+    - With a Cloud Foundry database service instance: `DBSERVICENAME` needs to be set up.
 
-      - With a Cloud Foundry database service instance: `DBSERVICENAME` needs to be set up.
+    ```bash
+    cf push azurefilebroker --no-start
+    cf bind-service azurefilebroker <sql service instance name>
+    cf start azurefilebroker
+    ```
 
-        ```bash
-        cf push azurefilebroker --no-start
-        cf bind-service azurefilebroker <sql service instance name>
-        cf start azurefilebroker
-        ```
+**NOTE**:
+*Please see more details about broker's configurations [here](./docs/broker-development.md#configurations-of-azurefilebroker).*
 
-    **NOTE**:
+### Way #2 - `bosh deploy` the broker
 
-    - Please see more details about broker's configurations [here](https://github.com/AbelHu/azurefilebroker#configurations-of-azurefilebroker).
+You can reference [bosh deploy nfsbroker](https://github.com/cloudfoundry/nfs-volume-release/blob/master/README.md#way-2---bosh-deploy-the-broker).
 
 # Testing or Using this Release
 
 ## Register azurefilebroker
+
 * Register the broker and grant access to it's service with the following command:
 
     ```bash
@@ -115,6 +193,7 @@ Once you have a database service instance available in the space where you will 
     ```
 
 ## Create an SMB volume service with an existing storage account
+
 1. type the following:
 
     ```bash
@@ -123,6 +202,7 @@ Once you have a database service instance available in the space where you will 
     ```
 
 ## Create an SMB volume service with a new storage account
+
 1. type the following:
 
     ```bash
@@ -132,10 +212,11 @@ Once you have a database service instance available in the space where you will 
 
     **NOTE**:
 
-    - Please see more details about parameters [here](https://github.com/AbelHu/azurefilebroker#parameters-for-provision).
+    - Please see more details about parameters [here](./docs/broker-development.md#parameters-for-provision).
     - The Azure file share only can be binded to your application in Linux when they are in the same location.
 
 ## Deploy the pora test app, first by pushing the source code to CloudFoundry
+
 1. type the following:
 
     ```bash
@@ -152,7 +233,7 @@ Once you have a database service instance available in the space where you will 
 
     **NOTE**:
 
-    - Please see more details about parameters [here](https://github.com/AbelHu/azurefilebroker#prameters-for-bind).
+    - Please see more details about parameters [here](./docs/broker-development.md#prameters-for-bind).
     - uid & gid: When binding the Azure file share to the application, the uid and gid specified are supplied to the mount.cifs.  The mount.cifs masks the running user id and group id as the true owner shown on the Azure file share.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
     - mount: By default, volumes are mounted into the application container in an arbitrarily named folder under `/var/vcap/data`.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
         ``` cf bind-service pora myVolume -c '{"share", "one", "uid":"0","gid":"0","mount":"/var/path"}' ```

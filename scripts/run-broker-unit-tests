@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e -x
+
+pushd src/github.com/AbelHu/azurefilebroker > /dev/null
+  go get github.com/onsi/ginkgo/ginkgo
+  go get github.com/onsi/gomega
+  go get -t .
+  pushd azurefilebroker > /dev/null
+    go get -t .
+  popd > /dev/null
+  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+popd > /dev/null

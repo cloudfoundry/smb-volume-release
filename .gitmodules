@@ -90,3 +90,11 @@
 	path = src/github.com/AbelHu/azurefilebroker
 	url = https://github.com/AbelHu/azurefilebroker
 	branch = master
+[submodule "src/github.com/cloudfoundry/persi-acceptance-tests"]
+	path = src/github.com/cloudfoundry/persi-acceptance-tests
+	url = https://github.com/cloudfoundry/persi-acceptance-tests
+	branch = master
+[submodule "src/gopkg.in/resty.v0"]
+	path = src/gopkg.in/resty.v0
+	url = https://gopkg.in/resty.v0
+	branch = master
