@@ -14,7 +14,7 @@ This broker/driver pair allows you to provision existing Azure storage accounts 
 
 1. Install [GO](https://golang.org/dl/):
 
-    ```
+    ```bash
     mkdir ~/workspace ~/go
     cd ~/workspace
     wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
@@ -26,7 +26,7 @@ This broker/driver pair allows you to provision existing Azure storage accounts 
 
 1. Install [direnv](https://github.com/direnv/direnv#from-source):
 
-    ```
+    ```bash
     mkdir -p $GOPATH/src/github.com/direnv
     git clone https://github.com/direnv/direnv.git $GOPATH/src/github.com/direnv/direnv
     pushd $GOPATH/src/github.com/direnv/direnv
@@ -156,17 +156,35 @@ When the service broker is `cf push`ed, you can bind it to a MSSql or MySql data
 **NOTE**
 *It is not supported to bind to Azure SQL with an old meta-azure-service-broker before `v1.5.0` because the variable names do not match. You must specify variables in the manifest.*
 
+If you want to use an Azure SQL service to store data for the service broker,
+  - If you are using `meta-azure-service-broker` to [provision a new databse with a new server](https://github.com/Azure/meta-azure-service-broker/blob/master/docs/azure-sql-db.md#create-a-datbase-on-a-new-server), you can set `connectionPolicy` to `proxy` in configuration parameters.
+  - Otherwise you need to change the policy from "default" to "proxy" after creating your SQL server by following below steps:
+
+    1. Open PowerShell in administrator privilege and install AzureRM module.
+
+        ```powershell
+        Install-Module AzureRM
+        Import-Module AzureRM
+        ```
+
+    1. Download [reconfig-mssql-policy.ps1](./scripts/reconfig-mssql-policy.ps1) and run it to change the policy of your Azure SQL server.
+
+        ```powershell
+        Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+        ./reconfig-mssql-policy.ps1
+        ```
+
 Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
 
 - `./script/build-broker`
 - Edit `manifest.yml` to set up all required parameters. `manifest.yml` and `Procfile` will work together to start the broker.
-    - With a database directly: `DBCACERT`, `HOSTNAMEINCERTIFICATE`, `DB_USERNAME`, `DB_PASSWORD`, `DBHOST`, `DBPORT` and `DBNAME` in `manifest.yml` need to be set up.
+    - With a database directly: `DBCACERT`, `HOSTNAMEINCERTIFICATE`, `DBUSERNAME`, `DBPASSWORD`, `DBHOST`, `DBPORT` and `DBNAME` in `manifest.yml` need to be set up.
 
     ```bash
     cf push azurefilebroker
     ```
 
-    - With a Cloud Foundry database service instance: `DBSERVICENAME` needs to be set up.
+    - With a Cloud Foundry database service instance: `DBCACERT`, `HOSTNAMEINCERTIFICATE` and `DBSERVICENAME` needs to be set up.
 
     ```bash
     cf push azurefilebroker --no-start

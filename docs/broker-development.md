@@ -27,8 +27,8 @@ To start azurefilebroker, all configurations must start with `--`.
 - Environment variables for Broker
     - USERNAME: [REQUIRED] - Username for your broker.
     - PASSWORD: [REQUIRED] - Password for your broker.
-    - DB_USERNAME: Required when `cfServiceName` is not used. Username for the database which stores the state of your broker.
-    - DB_PASSWORD: Required when `cfServiceName` is not used. Password for the database which stores the state of your broker.
+    - DBUSERNAME: Required when `cfServiceName` is not used. Username for the database which stores the state of your broker.
+    - DBPASSWORD: Required when `cfServiceName` is not used. Password for the database which stores the state of your broker.
 
 - Configurations for Broker
     - listenAddr: host:port to serve service broker API. Default value is `0.0.0.0:9000`. You must use the environment variable `PORT` if you deploy broker as a Cloud Foundry application. Please reference [here](https://docs.run.pivotal.io/devguide/deploy-apps/environment-variable.html#PORT).
@@ -38,7 +38,7 @@ To start azurefilebroker, all configurations must start with `--`.
 - Configurations for database used by Broker
     - dbDriver: [REQUIRED] - Database driver name to use SQL to store broker state. Allowed values: `mssql` or `mysql`.
     - dbCACert: (optional) - Content of CA Cert to verify SSL connection.
-    - hostNameInCertificate: (optional) - For Azure SQL service or Azure MySQL service, you need to specify one of below values to enable TLS encryption. For your certificate, you need to specify the Comman Name (CN) in the server certificate.
+    - hostNameInCertificate: (optional) - For Azure SQL service or Azure MySQL service, you need to specify one of below values to enable TLS encryption. For your certificate, you need to specify the Common Name (CN) in the server certificate.
       - For AzureCloud: `*.database.windows.net`
       - For AzureUSGovernment: `*.database.usgovcloudapi.net`
       - For AzureChinaCloud: `*.database.chinacloudapi.cn`
