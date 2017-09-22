@@ -1,6 +1,6 @@
 # SMB volume release
 
-This is a bosh release that packages an [smbdriver](https://github.com/AbelHu/smbdriver) and [azurefilebroker](https://github.com/AbelHu/azurefilebroker) for consumption by a volume_services_enabled Cloud Foundry deployment.
+This is a bosh release that packages an [smbdriver](https://github.com/cloudfoundry/smbdriver) and [azurefilebroker](https://github.com/cloudfoundry/azurefilebroker) for consumption by a volume_services_enabled Cloud Foundry deployment.
 
 This broker/driver pair allows you to provision existing Azure storage accounts and bind file shares to your applications for shared file access.
 
@@ -43,7 +43,7 @@ This broker/driver pair allows you to provision existing Azure storage accounts 
 
     ```bash
     $ cd ~/workspace
-    $ git clone https://github.com/AbelHu/smb-volume-release.git
+    $ git clone https://github.com/cloudfoundry/smb-volume-release.git
     $ cd ~/workspace/smb-volume-release
     $ direnv allow .
     $ git checkout master

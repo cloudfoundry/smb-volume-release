@@ -182,7 +182,7 @@ function deprovision {
 echo "-----------------------------------------------------------------"
 echo "Catalog"
 echo "-----------------------------------------------------------------"
-# Response: {"services":[{"id":"azurefilebroker","name":"azuresmbvolume","description":"Azure File SMB volumes (see: https://github.com/AbelHu/smb-volume-release/)","bindable":true,"tags":["azurefile","smb"],"plan_updateable":false,"plans":[{"id":"06948cb0-cad7-4buh-leba-9ed8b5c345a4","name":"AzureFileShare","description":"Azure File Share"}],"requires":["volume_mount"]}]}
+# Response: {"services":[{"id":"azurefilebroker","name":"azuresmbvolume","description":"Azure File SMB volumes (see: https://github.com/cloudfoundry/smb-volume-release/)","bindable":true,"tags":["azurefile","smb"],"plan_updateable":false,"plans":[{"id":"06948cb0-cad7-4buh-leba-9ed8b5c345a4","name":"AzureFileShare","description":"Azure File Share"}],"requires":["volume_mount"]}]}
 result=$(curl -H "X-Broker-API-Version: 2.11" http://$USERNAME:$PASSWORD@$HOST:$PORT/v2/catalog 2>/dev/null)
 if [ "$(echo $result | jq -r ".services[0].id")" == "azurefilebroker" ]; then
   echo "Catalog success"

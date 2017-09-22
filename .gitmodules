@@ -1,7 +1,3 @@
-[submodule "src/github.com/AbelHu/smbdriver"]
-        path = src/github.com/AbelHu/smbdriver
-        url = https://github.com/AbelHu/smbdriver
-        branch = master
 [submodule "src/code.cloudfoundry.org/voldriver"]
         path = src/code.cloudfoundry.org/voldriver
         url = https://github.com/cloudfoundry/voldriver
@@ -86,10 +82,6 @@
 	path = src/golang.org/x/net
 	url = https://go.googlesource.com/net
 	branch = master
-[submodule "src/github.com/AbelHu/azurefilebroker"]
-	path = src/github.com/AbelHu/azurefilebroker
-	url = https://github.com/AbelHu/azurefilebroker
-	branch = master
 [submodule "src/github.com/cloudfoundry/persi-acceptance-tests"]
 	path = src/github.com/cloudfoundry/persi-acceptance-tests
 	url = https://github.com/cloudfoundry/persi-acceptance-tests
@@ -97,4 +89,12 @@
 [submodule "src/gopkg.in/resty.v0"]
 	path = src/gopkg.in/resty.v0
 	url = https://gopkg.in/resty.v0
+	branch = master
+[submodule "src/github.com/cloudfoundry/azurefilebroker"]
+	path = src/github.com/cloudfoundry/azurefilebroker
+	url = git@github.com:AbelHu/smb-volume-release.git
+	branch = master
+[submodule "src/github.com/cloudfoundry/smbdriver"]
+	path = src/github.com/cloudfoundry/smbdriver
+	url = git@github.com:AbelHu/smb-volume-release.git
 	branch = master

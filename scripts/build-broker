@@ -2,7 +2,7 @@
 
 set -e -x
 
-pushd src/github.com/AbelHu/azurefilebroker
+pushd src/github.com/cloudfoundry/azurefilebroker
   go get github.com/tools/godep
 
   godep get .

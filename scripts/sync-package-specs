@@ -35,8 +35,8 @@ function sync_package() {
   )
 }
 
-sync_package smbdriver         -app github.com/AbelHu/smbdriver/cmd/smbdriver
-sync_package azurefilebroker   -app github.com/AbelHu/azurefilebroker
+sync_package smbdriver         -app github.com/cloudfoundry/smbdriver/cmd/smbdriver
+sync_package azurefilebroker   -app github.com/cloudfoundry/azurefilebroker
 
 wait
 

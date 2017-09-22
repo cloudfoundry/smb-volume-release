@@ -23,11 +23,11 @@ files:
   - code.cloudfoundry.org/voldriver/backoff/*.go # gosub
   - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - code.cloudfoundry.org/voldriver/invoker/*.go # gosub
-  - github.com/AbelHu/smbdriver/*.go # gosub
-  - github.com/AbelHu/smbdriver/cmd/smbdriver/*.go # gosub
-  - github.com/AbelHu/smbdriver/driveradmin/*.go # gosub
-  - github.com/AbelHu/smbdriver/driveradmin/driveradminhttp/*.go # gosub
-  - github.com/AbelHu/smbdriver/driveradmin/driveradminlocal/*.go # gosub
+  - github.com/cloudfoundry/smbdriver/*.go # gosub
+  - github.com/cloudfoundry/smbdriver/cmd/smbdriver/*.go # gosub
+  - github.com/cloudfoundry/smbdriver/driveradmin/*.go # gosub
+  - github.com/cloudfoundry/smbdriver/driveradmin/driveradminhttp/*.go # gosub
+  - github.com/cloudfoundry/smbdriver/driveradmin/driveradminlocal/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
