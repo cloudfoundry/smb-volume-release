@@ -90,11 +90,9 @@
 	path = src/gopkg.in/resty.v0
 	url = https://gopkg.in/resty.v0
 	branch = master
-[submodule "src/github.com/cloudfoundry/azurefilebroker"]
-	path = src/github.com/cloudfoundry/azurefilebroker
-	url = git@github.com:AbelHu/smb-volume-release.git
-	branch = master
 [submodule "src/github.com/cloudfoundry/smbdriver"]
 	path = src/github.com/cloudfoundry/smbdriver
-	url = git@github.com:AbelHu/smb-volume-release.git
-	branch = master
+	url = https://github.com/cloudfoundry/smbdriver
+[submodule "src/github.com/cloudfoundry/azurefilebroker"]
+	path = src/github.com/cloudfoundry/azurefilebroker
+	url = https://github.com/cloudfoundry/azurefilebroker
