@@ -27,17 +27,17 @@ properties:
     default: ""
     description: "[REQUIRED] - database driver name when using SQL to store broker state"
   azurefilebroker.environment:
-    default: "AzureCloud"
-    description: "(optional) - The environment for Azure Management Service. AzureCloud, AzureChinaCloud, AzureUSGovernment, AzureGermanCloud or AzureStack"
+    default: "Preexisting"
+    description: "(optional) - `Preexisting` (Using preexisting shares) or the environment for Azure Management Service: `AzureCloud`, `AzureChinaCloud`, `AzureUSGovernment` or `AzureGermanCloud`"
   azurefilebroker.tenant_id:
     default: ""
-    description: "[REQUIRED] - The tenant id for your service principal"
+    description: "(optional) - Required for Azure Management Service. The tenant id for your service principal"
   azurefilebroker.client_id:
     default: ""
-    description: "[REQUIRED] - The client id for your service principal"
+    description: "(optional) - Required for Azure Management Service. The client id for your service principal"
   azurefilebroker.client_secret:
     default: ""
-    description: "[REQUIRED] - The client secret for your service principal"
+    description: "(optional) - Required for Azure Management Service. The client secret for your service principal"
   azurefilebroker.db_username:
     default: ""
     description: "[REQUIRED] - database username when using SQL to store broker state"
@@ -58,8 +58,8 @@ properties:
     description: "(optional) - CA Cert to verify SSL connection, if not include, connection will be plain"
   azurefilebroker.allowed_options:
     description: "A comma separated list of parameters allowed to be set in during bind operations"
-    example: "share,uid,gid,file_mode,dir_mode,readonly,vers,mount"
-    default: "share,uid,gid,file_mode,dir_mode,readonly,vers,mount"
+    example: "uid,gid,file_mode,dir_mode,readonly,vers,sec"
+    default: "uid,gid,file_mode,dir_mode,readonly,vers,sec"
   azurefilebroker.default_options:
     description: "A comma separated list of defaults specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value that cannot be overridden"
     example: "vers:3.0"

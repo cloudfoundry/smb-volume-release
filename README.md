@@ -2,7 +2,9 @@
 
 This is a bosh release that packages an [smbdriver](https://github.com/cloudfoundry/smbdriver) and [azurefilebroker](https://github.com/cloudfoundry/azurefilebroker) for consumption by a volume_services_enabled Cloud Foundry deployment.
 
-This broker/driver pair allows you to provision existing Azure storage accounts and bind file shares to your applications for shared file access.
+This broker/driver pair allows you:
+1. to provision Azure storage accounts and bind Azure file shares to your applications for shared file access.
+1. to provision preexisting shares and bind the shares to your applications for share file access.
 
 # Deploying to Azure
 
@@ -154,7 +156,7 @@ The azurefilebroker can be deployed in two ways; as a cf app or as a BOSH deploy
 When the service broker is `cf push`ed, you can bind it to a MSSql or MySql database service instance.
 
 **NOTE**
-*It is not supported to bind to Azure SQL with an old meta-azure-service-broker before `v1.5.0` because the variable names do not match. You must specify variables in the manifest.*
+*It is not supported to bind to Azure SQL with an old meta-azure-service-broker before `v1.5.1` because the variable names do not match. You must specify variables in the manifest.*
 
 If you want to use an Azure SQL service to store data for the service broker,
   - If you are using `meta-azure-service-broker` to [provision a new databse with a new server](https://github.com/Azure/meta-azure-service-broker/blob/master/docs/azure-sql-db.md#create-a-datbase-on-a-new-server), you can set `connectionPolicy` to `proxy` in configuration parameters.
@@ -192,8 +194,10 @@ Once you have a database service instance available in the space where you will 
     cf start azurefilebroker
     ```
 
-**NOTE**:
-*Please see more details about broker's configurations [here](./docs/broker-development.md#configurations-of-azurefilebroker).*
+    **NOTE**:
+
+    - When `environment` is `Preexisting`, only one plan `Existing` is supported; For others, both two plans `Existing` and `AzureFileShare` are supported.
+    - Please see more details about broker's configurations [here](./docs/broker-development.md#configurations-of-azurefilebroker).
 
 ### Way #2 - `bosh deploy` the broker
 
@@ -207,24 +211,24 @@ You can reference [bosh deploy nfsbroker](https://github.com/cloudfoundry/nfs-vo
 
     ```bash
     $ cf create-service-broker azurefilebroker <BROKER_USERNAME> <BROKER_PASSWORD> http://azurefilebroker.YOUR.DOMAIN.com
-    $ cf enable-service-access azuresmbvolume
+    $ cf enable-service-access smbvolume
     ```
 
-## Create an SMB volume service with an existing storage account
+## Create an SMB volume service with an existing storage account on Azure
 
 1. type the following:
 
     ```bash
-    $ cf create-service azuresmbvolume AzureFileShare myVolume -c '{"storage_account_name":"<YOUR-AZURE-STORAGE-ACCOUNT>"}'
+    $ cf create-service smbvolume AzureFileShare myVolume -c '{"storage_account_name":"<YOUR-AZURE-STORAGE-ACCOUNT>"}'
     $ cf services
     ```
 
-## Create an SMB volume service with a new storage account
+## Create an SMB volume service with a new storage account on Azure
 
 1. type the following:
 
     ```bash
-    $ cf create-service azuresmbvolume AzureFileShare myVolume -c '{"storage_account_name":"<YOUR-AZURE-STORAGE-ACCOUNT>, "location":"<YOUR-LOCATION>"}'
+    $ cf create-service smbvolume AzureFileShare myVolume -c '{"storage_account_name":"<YOUR-AZURE-STORAGE-ACCOUNT>, "location":"<YOUR-LOCATION>"}'
     $ cf services
     ```
 
@@ -232,6 +236,18 @@ You can reference [bosh deploy nfsbroker](https://github.com/cloudfoundry/nfs-vo
 
     - Please see more details about parameters [here](./docs/broker-development.md#parameters-for-provision).
     - The Azure file share only can be binded to your application in Linux when they are in the same location.
+
+## Create an SMB volume service with a preexisting share
+
+1. type the following:
+
+    ```bash
+    $ cf create-service smbvolume Existing myVolume -c '{"share":"<YOUR-PREEXISTING-SHARE-URL>"}'
+    $ cf services
+    ```
+
+    **NOTE**:
+    *The format of the share is `//server/folder` or `\\\\server\\folder`.*
 
 ## Deploy the pora test app, first by pushing the source code to CloudFoundry
 
@@ -249,13 +265,20 @@ You can reference [bosh deploy nfsbroker](https://github.com/cloudfoundry/nfs-vo
     $ cf bind-service pora myVolume -c '{"share": "one"}'
     ```
 
+1. Bind the service to your app supplying the correct credentials for preexisting shares.
+
+    ```bash
+    $ cf bind-service pora myVolume -c '{"username": "a", "password": "b"}'
+    ```
+
     **NOTE**:
 
-    - Please see more details about parameters [here](./docs/broker-development.md#prameters-for-bind).
+    - Please see more details about parameters [here](./docs/broker-development.md#parameters-for-bind).
     - uid & gid: When binding the Azure file share to the application, the uid and gid specified are supplied to the mount.cifs.  The mount.cifs masks the running user id and group id as the true owner shown on the Azure file share.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
     - mount: By default, volumes are mounted into the application container in an arbitrarily named folder under `/var/vcap/data`.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
         ``` cf bind-service pora myVolume -c '{"share", "one", "uid":"0","gid":"0","mount":"/var/path"}' ```
     NOTE: As of this writing aufs used by Garden is not capable of creating new root level folders.  As a result, you must choose a path with a root level folder that already exists in the container.  (`/home`, `/usr` or `/var` are good choices.)  If you require a path that does not already exist in the container it is currently only possible if you upgrade your Diego deployment to use [GrootFS](https://github.com/cloudfoundry/grootfs-release) with Garden.  For details on how to generate a Diego manifest using GrootFS see [this note](https://github.com/cloudfoundry/diego-release/blob/develop/docs/manifest-generation.md#experimental--g-opt-into-using-grootfs-for-garden). Eventually, GrootFS will become the standard file system for CF containers, and this limitation will go away.
+    - If you are using an Azure file share as the preexisting share, you need to specify `"vers": "3.0"` in the parameters.
 
 1. Start the application
 

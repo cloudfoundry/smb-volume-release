@@ -34,8 +34,8 @@ properties:
    default: false
  smbdriver.allowed-in-mount:
    description: "Comma separated list of white-listed options that may be accepted in the mount_config options."
-   example: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers"
-   default: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers"
+   example: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
+   default: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
  smbdriver.default-in-mount:
    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
    example: "uid:2000,gid:2000,vers:3.0"

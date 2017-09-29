@@ -14,7 +14,18 @@ export PORT="9000"
 export LOGLEVEL="debug"
 export USERNAME="admin"
 export PASSWORD="User123"
-export ENVIRONMENT="Preexisting"
+export ENVIRONMENT="AzureCloud"
+
+export TENANTID=""
+export CLIENTID=""
+export CLIENTSECRET=""
+export DEFAULTSUBSCRIPTIONID=""
+export DEFAULTRESOURCEGROUPNAME=""
+export DEFAULTLOCATION=""
+export ALLOWCREATESTORAGEACCOUNT=true
+export ALLOWCREATEFILESHARE=true
+export ALLOWDELETESTORAGEACCOUNT=true
+export ALLOWDELETEFILESHARE=true
 
 export DBDRIVERNAME="mssql" # Or mysql
 export DBCACERT=""
@@ -28,15 +39,13 @@ export DBNAME=""
 echo "-----------------------------------------------------------------"
 echo "Starting azurefilebroker"
 echo "-----------------------------------------------------------------"
-bin/azurefilebroker --logLevel="$LOGLEVEL" --listenAddr="0.0.0.0:$PORT" --serviceID="azurefilebroker" --environment="$ENVIRONMENT" --dbDriver="$DBDRIVERNAME" --dbCACert="$DBCACERT" --hostNameInCertificate="$HOSTNAMEINCERTIFICATE" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" &
+bin/azurefilebroker --logLevel="$LOGLEVEL" --listenAddr="0.0.0.0:$PORT" --serviceID="azurefilebroker" --environment="$ENVIRONMENT" --dbDriver="$DBDRIVERNAME" --dbCACert="$DBCACERT" --hostNameInCertificate="$HOSTNAMEINCERTIFICATE" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --tenantID="$TENANTID" --clientID="$CLIENTID" --clientSecret="$CLIENTSECRET" --defaultSubscriptionID="$DEFAULTSUBSCRIPTIONID" --defaultResourceGroupName="$DEFAULTRESOURCEGROUPNAME" --defaultLocation="$DEFAULTLOCATION" --allowCreateStorageAccount=$ALLOWCREATESTORAGEACCOUNT --allowCreateFileShare=$ALLOWCREATEFILESHARE --allowDeleteStorageAccount=$ALLOWDELETESTORAGEACCOUNT --allowDeleteFileShare=$ALLOWDELETEFILESHARE &
 echo "-----------------------------------------------------------------"
 echo "Started azurefilebroker"
 echo "-----------------------------------------------------------------"
 
-SHARE_1="//fake-server/fake-folder1"
-SHARE_USERNAME="fake-user"
-SHARE_PASSWORD="fake-password"
-SHARE_2="//fake-server2/fake-folder2"
+STORAGE_ACCOUNT_NAME=$(cat /dev/urandom | tr -dc "a-z0-9" | fold -w 24 | head -n 1)
+SHARE="broker"
 
 INSTANCE_ID_1="instance1"
 BINDING_ID_1="bind1"
@@ -73,10 +82,10 @@ done
 
 function provision {
   local instance_id=$1
-  local share=$2
+  local storage_account_name=$2
 
-  # Response: {}
-  # Use different space_guids for different instances. Otherwise it will fail with using same share. It is by design.
+  # Response: {} | {"operation":"https://management.azure.com/subscriptions/c4528d9e-c99a-48bb-b12d-fde2176a43b8/providers/Microsoft.Storage/operations/b604b5d9-5ef7-4ebc-ba0d-227f28ef14ef?monitor=true\u0026api-version=2016-12-01"}
+  # Use different space_guids for different instances. Otherwise it will fail with using same storage account name. It is by design.
   result=$(curl http://$USERNAME:$PASSWORD@$HOST:$PORT/v2/service_instances/$instance_id -X PUT -H "X-Broker-API-Version: 2.11" -H "Content-Type: application/json" 2>/dev/null -d @- <<EOF
 {
   "service_id": "service-guid-here",
@@ -84,27 +93,47 @@ function provision {
   "organization_guid": "org-guid-here",
   "space_guid": "space-guid-$instance_id",
   "parameters": {
-    "share": "$share"
+    "storage_account_name": "$storage_account_name"
   }
 }
 EOF
   )
 
+  url=$(echo $result | jq -r ".operation")
   if [ "$result" == "{}" ]; then
-    echo "Provision success"
+    echo "-----------------------------------------------------------------"
+    echo "The storage account $storage_account_name is ready so we skip to call LastOperation."
+  elif [ "$url" != "" ]; then
+    echo "-----------------------------------------------------------------"
+    echo "The storage account $storage_account_name is in creating"
+    operation="${url/\\u0026/&}"
+    echo "LastOperation $operation"
+    result="in progress"
+    while [ "$result" == "in progress" ]
+    do
+      echo "sleeping 15 seconds"
+      sleep 15
+      echo "Call LastOperation"
+      echo "-----------------------------------------------------------------"
+      # Response: {"state":"in progress"} | {"state":"succeeded"}
+      result=$(curl -X GET http://$USERNAME:$PASSWORD@$HOST:$PORT/v2/service_instances/$instance_id/last_operation?operation=$operation 2>/dev/null | jq -r ".state")
+    done
+
+    if [ "$result" != "succeeded" ]; then
+      exit_with_error_message $result "Failed in LastOperation"
+    fi
   else
-    exit_with_error_message $result "Failed in Provision for the share $share"
+    exit_with_error_message $result "Failed in Provision to create the storage account $storage_account_name"
   fi
 }
 
 function bind {
   local instance_id=$1
-  local binding_id=$2
-  local share=$3
-  local username=$4
-  local password=$5
+  local storage_account_name=$2
+  local binding_id=$3
+  local share=$4
 
-  # Response {"credentials":{},"volume_mounts":[{"driver":"smbdriver","container_dir":"/var/vcap/data/instance1","mode":"rw","device_type":"shared","device":{"volume_id":"instance1-eb04cbe3e96743ca3139c3f45ccfbf45","mount_config":{"gid":"2000","password":"xxxxxxx","source":"//xxx/xxx","uid":"2000","username":"xxx"}}}]}
+  # Response {"credentials":{},"volume_mounts":[{"driver":"smbdriver","container_dir":"/var/vcap/data/instance1","mode":"rw","device_type":"shared","device":{"volume_id":"instance1-eb04cbe3e96743ca3139c3f45ccfbf45","mount_config":{"gid":"2000","password":"xxxxxxx","source":"//xxx.file.core.windows.net/broker","uid":"2000","username":"xxx","vers":"3.0"}}}]}
   result=$(curl http://$USERNAME:$PASSWORD@$HOST:$PORT/v2/service_instances/$instance_id/service_bindings/$binding_id -X PUT 2>/dev/null -d @- <<EOF
 {
   "service_id": "service-guid-here",
@@ -114,8 +143,7 @@ function bind {
     "app_guid": "app-guid-here"
   },
   "parameters": {
-    "username": "$username",
-    "password": "$password",
+    "share": "$share",
     "uid": "2000",
     "gid": "2000"
   }
@@ -123,7 +151,7 @@ function bind {
 EOF
   )
   source=$(echo $result | jq -r ".volume_mounts[0].device.mount_config.source")
-  if [ "$source" == "$share" ]; then
+  if [ "$source" == "//$storage_account_name.file.core.windows.net/$share" ]; then
     echo "Bind success"
   else
     exit_with_error_message $result "Failed in Bind"
@@ -155,7 +183,7 @@ function deprovision {
 echo "-----------------------------------------------------------------"
 echo "Catalog"
 echo "-----------------------------------------------------------------"
-# Response: {"services":[{"id":"azurefilebroker","name":"smbvolume","description":"SMB volumes (see: https://github.com/cloudfoundry/smb-volume-release/)","bindable":true,"tags":["azurefile","smb"],"plan_updateable":false,"plans":[{"id":"06948cb0-cad7-4buh-leba-9ed8b5c345a1","name":"Existing","description":"A preexisting filesystem"}],"requires":["volume_mount"]}]}
+# Response: {"services":[{"id":"azurefilebroker","name":"smbvolume","description":"SMB volumes (see: https://github.com/cloudfoundry/smb-volume-release/)","bindable":true,"tags":["azurefile","smb"],"plan_updateable":false,"plans":[{"id":"06948cb0-cad7-4buh-leba-9ed8b5c345a1","name":"Existing","description":"A preexisting filesystem"}, {"id":"06948cb0-cad7-4buh-leba-9ed8b5c345a2","name":"AzureFileShare","description":"An Azure File Share filesystem"}],"requires":["volume_mount"]}]}
 result=$(curl -H "X-Broker-API-Version: 2.11" http://$USERNAME:$PASSWORD@$HOST:$PORT/v2/catalog 2>/dev/null)
 if [ "$(echo $result | jq -r ".services[0].id")" == "azurefilebroker" ]; then
   echo "Catalog success"
@@ -166,22 +194,22 @@ fi
 echo "-----------------------------------------------------------------"
 echo "Provision the instance 1 with creating a new storage account"
 echo "-----------------------------------------------------------------"
-provision $INSTANCE_ID_1 $SHARE_1
+provision $INSTANCE_ID_1 $STORAGE_ACCOUNT_NAME
 
 echo "-----------------------------------------------------------------"
 echo "Bind the instance 1 with creating a new share"
 echo "-----------------------------------------------------------------"
-bind $INSTANCE_ID_1 $BINDING_ID_1 $SHARE_1 $USERNAME $PASSWORD
+bind $INSTANCE_ID_1 $STORAGE_ACCOUNT_NAME $BINDING_ID_1 $SHARE
 
 echo "-----------------------------------------------------------------"
 echo "Provision the instance 2 with an existing storage account"
 echo "-----------------------------------------------------------------"
-provision $INSTANCE_ID_2 $SHARE_2
+provision $INSTANCE_ID_2 $STORAGE_ACCOUNT_NAME
 
 echo "-----------------------------------------------------------------"
 echo "Bind the instance 2 with an existing share"
 echo "-----------------------------------------------------------------"
-bind $INSTANCE_ID_2 $BINDING_ID_2 $SHARE_2 $USERNAME $PASSWORD
+bind $INSTANCE_ID_2 $STORAGE_ACCOUNT_NAME $BINDING_ID_2 $SHARE
 
 echo "-----------------------------------------------------------------"
 echo "Unbind the instance 2"
