@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -e -x
+
+echo "Installing smb server"
+apt-get update
+apt-get install -y samba
+
+if [ "$(pidof -s smbd)" != "" ]; then
+  service smbd stop
+fi
+
+useradd <%= p("smbtestserver.username") %> --group vcap
+smbpasswd -a <%= p("smbtestserver.username") %><<EOF
+<%= p("smbtestserver.password") %>
+<%= p("smbtestserver.password") %>
+EOF
+
+for i in `seq 1 3`;
+  do
+    mkdir -p <%= p("smbtestserver.export_root_path") %>/export/vol${i}
+    chmod 775 <%= p("smbtestserver.export_root_path") %>/export/vol${i}
+    chown root:vcap <%= p("smbtestserver.export_root_path") %>/export/vol${i}
+
+  cat << EOF >> /etc/samba/smb.conf
+[vol${i}]
+   path = <%= p("smbtestserver.export_root_path") %>/export/vol${i}
+   host allow = <%= p("smbtestserver.export_cidr") %>
+   valid users = @vcap
+   browseable = no
+   guest ok = no
+   read only = no
+   create mask = 0755
+EOF
+done
+
+echo "Installed smb server"
+exit 0

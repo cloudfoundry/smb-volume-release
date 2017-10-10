@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -e
+
+RUN_DIR=/var/vcap/sys/run/smbtestserver
+LOG_DIR=/var/vcap/sys/log/smbtestserver
+PIDFILE=$RUN_DIR/smbtestserver.pid
+
+SCRIPT=$(basename $0)
+mkdir -p /var/vcap/sys/log/monit
+
+exec 1>> /var/vcap/sys/log/monit/$SCRIPT.log
+exec 2>> /var/vcap/sys/log/monit/$SCRIPT.err.log
+
+echo "------------ `basename $0` $* at `date` --------------" | tee /dev/stderr
+
+case $1 in
+
+  start)
+    mkdir -p $LOG_DIR
+
+    service smbd start \
+      >> $LOG_DIR/smbtestserver.stdout.log \
+      2>> $LOG_DIR/smbtestserver.stderr.log
+
+    while [ "$(pidof -s smbd)" == "" ]; do
+      sleep 1
+    done
+
+    mkdir -p $RUN_DIR
+    pidof -s smbd > $PIDFILE
+    ;;
+
+  stop)
+    service smbd stop
+    ;;
+
+  *)
+    echo "Usage: smbtestserver_ctl {start|stop}"
+
+    ;;
+
+esac

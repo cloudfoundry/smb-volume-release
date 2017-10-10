@@ -1,0 +1,61 @@
+---
+name: smb-server
+director_uuid:  (( merge ))
+
+compilation:
+  workers: 1
+  network: smbvolume-subnet
+  reuse_compilation_vms: true
+  cloud_properties:
+    instance_type: Standard_A2
+    ephemeral_disk:
+      size: 10000 # in MB
+
+jobs:
+- name: smbtestserver
+  instances: 1
+  networks:
+  - name: smbvolume-subnet
+    default: [dns, gateway]
+    static_ips: (( smb-test-server.ips ))
+  resource_pool: medium
+  templates:
+  - release: smb-volume
+    name: smbtestserver
+  persistent_disk: 25000
+  properties:
+    smbtestserver:
+      username: (( smb-test-server.username ))
+      password: (( smb-test-server.password ))
+
+networks:
+- name: smbvolume-subnet
+  subnets: (( merge ))
+  type: manual
+
+properties:
+  smbtestserver: {}
+
+releases:
+  - name: smb-volume
+    version: latest
+
+resource_pools:
+  - name: large
+    network: smbvolume-subnet
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
+
+  - name: medium
+    network: smbvolume-subnet
+    stemcell: (( merge ))
+    cloud_properties: (( merge ))
+
+update:
+  canaries: 1
+  max_in_flight: 3
+  serial: false
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+
+smb-test-server: (( merge ))

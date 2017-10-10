@@ -1,0 +1,20 @@
+---
+name: smbtestserver
+
+templates:
+  install.erb: bin/pre-start
+  ctl.erb: bin/smbtestserver_ctl
+
+packages: []
+
+properties:
+ smbtestserver.export_cidr:
+    description: "cidr range to use for smb exports"
+    default: "10.0.0.0/8"
+ smbtestserver.export_root_path:
+    description: "SMB root path"
+    default: "/var/vcap/store/smbtestserver"
+ smbtestserver.username:
+    description: "SMB username"
+ smbtestserver.password:
+    description: "SMB password"

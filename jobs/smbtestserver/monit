@@ -1,0 +1,5 @@
+check process smbtestserver
+  with pidfile /var/vcap/sys/run/smbtestserver/smbtestserver.pid
+  start program "/var/vcap/jobs/smbtestserver/bin/smbtestserver_ctl start"
+  stop program "/var/vcap/jobs/smbtestserver/bin/smbtestserver_ctl stop"
+  group vcap

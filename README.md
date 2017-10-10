@@ -205,6 +205,118 @@ You can reference [bosh deploy nfsbroker](https://github.com/cloudfoundry/nfs-vo
 
 # Testing or Using this Release
 
+## Deploying the Test SMB Server (Optional)
+
+If you do not have an existing SMB Server then you can optionally deploy the test SMB server bundled in this release.
+
+**NOTE**: *This test SMB server only works with Ubuntu stemcells.*
+
+### Generate the Deployment Manifest
+
+#### Create Stub Files
+
+##### director.yml
+* determine your bosh director uuid by invoking
+
+    ```bash
+    # BOSH CLI v1
+    $ bosh status --uuid
+    ```
+
+    ```bash
+    # BOSH CLI v2
+    $ bosh -e <YOUR BOSH DEPLOYMENT NAME> env
+    ```
+
+* create a new director.yml file and place the following contents into it:
+
+    ```yaml
+    ---
+    director_uuid: <your uuid>
+    ```
+
+#### iaas.yml
+
+* Create a stub for your iaas settings from the following template:
+
+    ```yaml
+    ---
+    networks:
+    - name: smbvolume-subnet
+      subnets:
+      - cloud_properties:
+        virtual_network_name: <--- SUBNET YOU WANT YOUR AZUREFILEBROKER TO BE IN --->
+        subnet_name: <--- SUBNET YOU WANT YOUR AZUREFILEBROKER TO BE IN --->
+        security_group: <--- SECURITY GROUP YOU WANT YOUR AZUREFILEBROKER TO BE IN --->
+        dns:
+        - 10.10.0.2
+        gateway: 10.10.200.1
+        range: 10.10.200.0/24
+        reserved:
+        - 10.10.200.2 - 10.10.200.9
+        # ceph range 10.10.200.106-110
+        # local range 10.10.200.111-115
+        # efs range 10.10.200.116-120
+        # smb range 10.10.200.121-125
+        - 10.10.200.106 - 10.10.200.125
+        static:
+        - 10.10.200.10 - 10.10.200.105
+
+    resource_pools:
+    - name: medium
+      stemcell:
+        name: bosh-azure-hyperv-ubuntu-trusty-go_agent
+        version: latest
+      cloud_properties:
+        instance_type: Standard_A2
+    - name: large
+      stemcell:
+        name: bosh-azure-hyperv-ubuntu-trusty-go_agent
+        version: latest
+      cloud_properties:
+        instance_type: Standard_A3
+
+    smb-test-server:
+      ips: [<--- PRIVATE IP ADDRESS --->]
+      username: <--- Username for SMB shares --->
+      password: <--- Password for SMB shares --->
+    ```
+
+> NB: manually edit to fix hard-coded ip ranges, security group and subnets to match your deployment.
+
+* run the following script:
+
+    ```bash
+    $ ./scripts/generate_server_manifest.sh director-uuid.yml iaas.yml
+    ```
+
+to generate `smb-test-server-azure-manifest.yml` into the current directory.
+
+> NB: by default, the smb test server expects that your CF deployment is deployed to a 10.x.x.x subnet.  If you are deploying to a subnet that is not 10.x.x.x (e.g. 192.168.x.x) then you will need to override the `export_cidr` property.
+> Edit the generated manifest, and add something like this:
+
+  ```
+    smbtestserver:
+      username: xxx
+      password: xxx
+      export_cidr: 192.168.0.0/16
+  ```
+
+### Deploy the SMB Server
+* Deploy the SMB server using the generated manifest:
+
+    ```bash
+    # BOSH CLI v1
+    $ bosh -d smb-test-server-azure-manifest.yml deploy
+    ```
+
+    ```bash
+    # BOSH CLI v2
+    $ bosh -e <YOUR BOSH DEPLOYMENT NAME> -d smb-server deploy smb-test-server-azure-manifest.yml
+    ```
+
+* Note the default **gid** & **uid** which are 0 and 0 respectively (root).
+
 ## Register azurefilebroker
 
 * Register the broker and grant access to it's service with the following command:
@@ -242,7 +354,7 @@ You can reference [bosh deploy nfsbroker](https://github.com/cloudfoundry/nfs-vo
 1. type the following:
 
     ```bash
-    $ cf create-service smbvolume Existing myVolume -c '{"share":"<YOUR-PREEXISTING-SHARE-URL>"}'
+    $ cf create-service smbvolume Existing myVolume -c '{"share":"<PRIVATE_IP>/export/vol1"}'
     $ cf services
     ```
 
