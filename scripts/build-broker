@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e -x
-
 pushd src/github.com/cloudfoundry/azurefilebroker
   go get github.com/tools/godep
 

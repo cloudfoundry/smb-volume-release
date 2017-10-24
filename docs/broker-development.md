@@ -3,7 +3,7 @@
 # Build azurefilebroker
 
 ```bash
-./script/build-broker
+./scripts/build-broker
 ```
 
 # Run Unit Test
