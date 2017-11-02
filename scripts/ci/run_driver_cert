@@ -2,6 +2,8 @@
 
 set -x -e
 
+apt-get install cifs-utils
+
 source bosh-env/set-env.sh
 smbtestserver_ip=$(bosh -d smbtestserver instances|grep smbtestserver|awk '{print $4}')
 
