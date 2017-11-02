@@ -13,7 +13,7 @@ pushd smb-volume-release
 
     export GOPATH=$PWD
     export PATH=$PWD/bin:$PATH
-    export SOURCE=${smbtestserver_ip}/export/vol1
+    export SOURCE=//${smbtestserver_ip}/export/vol1
 
     go get github.com/onsi/ginkgo/ginkgo
     go get github.com/onsi/gomega
