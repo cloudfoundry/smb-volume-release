@@ -31,7 +31,7 @@ case $1 in
     exec chpst -u vcap:vcap /var/vcap/packages/azurefilebroker/bin/azurefilebroker \
       --listenAddr="<%= p("azurefilebroker.listen_addr") %>" \
       --serviceName="<%= p("azurefilebroker.service_name") %>" \
-      --serviceId="<%= p("azurefilebroker.service_id") %>" \
+      --serviceID="<%= p("azurefilebroker.service_id") %>" \
       --dbDriver="<%= p("azurefilebroker.db_driver") %>" \
       --dbHostname="<%= p("azurefilebroker.db_hostname") %>" \
       --dbPort="<%= p("azurefilebroker.db_port") %>" \
