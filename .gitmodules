@@ -82,8 +82,8 @@
 	path = src/golang.org/x/net
 	url = https://go.googlesource.com/net
 	branch = master
-[submodule "src/github.com/cloudfoundry/persi-acceptance-tests"]
-	path = src/github.com/cloudfoundry/persi-acceptance-tests
+[submodule "src/code.cloudfoundry.org/persi-acceptance-tests"]
+	path = src/code.cloudfoundry.org/persi-acceptance-tests
 	url = https://github.com/cloudfoundry/persi-acceptance-tests
 	branch = master
 [submodule "src/gopkg.in/resty.v0"]
