@@ -1,0 +1,29 @@
+---
+platform: linux
+
+rootfs_uri: docker:///cloudfoundry/diego-pipeline
+
+inputs:
+  - name: smb-volume-release
+  - name: vars-store         # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
+
+params:
+  CF_USERNAME: replace-me
+  CF_PASSWORD:
+  CF_API_ENDPOINT: replace-me
+  APPS_DOMAIN: replace-me
+  APPLICATION_PATH: replace-me
+  NAME_PREFIX: smbvolume
+  SERVICE_NAME: replace-me
+  PLAN_NAME: replace-me
+  CREATE_CONFIG: replace-me
+  BIND_CONFIG: replace-me
+  BROKER_URL:
+  BROKER_USER:
+  BROKER_PASSWORD:
+  BROKER_PASSWORD_KEY: smb-broker-password
+  TEST_MULTI_CELL:
+  TEST_MOUNT_OPTIONS:
+
+run:
+  path: smb-volume-release/scripts/ci/run_pats_withsetup
