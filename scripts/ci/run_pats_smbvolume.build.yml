@@ -21,7 +21,7 @@ params:
   BROKER_URL:
   BROKER_USER:
   BROKER_PASSWORD:
-  BROKER_PASSWORD_KEY: smb-broker-password
+  BROKER_PASSWORD_KEY: azurefile-broker-password
   TEST_MULTI_CELL:
   TEST_MOUNT_OPTIONS:
 
