@@ -12,6 +12,9 @@ dev_releases/**/*
 config/private.yml
 config/dev.yml
 releases/smb-volume/*.tgz
+pcf-tile/resources/*.zip
+pcf-tile/product/*
+pcf-tile/release/*
 
 ## goPath system specifics
 pkg
