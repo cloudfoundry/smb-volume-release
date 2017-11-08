@@ -111,6 +111,6 @@
 [submodule "src/golang.org/x/text"]
 	path = src/golang.org/x/text
 	url = https://go.googlesource.com/text
-[submodule "src/nu7hatch/gouuid"]
-	path = src/nu7hatch/gouuid
+[submodule "src/github.com/nu7hatch/gouuid"]
+	path = src/github.com/nu7hatch/gouuid
 	url = https://github.com/nu7hatch/gouuid
