@@ -10,7 +10,7 @@ if [ "$(pidof -s smbd)" != "" ]; then
   service smbd stop
 fi
 
-useradd <%= p("smbtestserver.username") %> --group vcap
+id -u <%= p("smbtestserver.username") %> &>/dev/null || useradd <%= p("smbtestserver.username") %> --group vcap
 smbpasswd -a <%= p("smbtestserver.username") %><<EOF
 <%= p("smbtestserver.password") %>
 <%= p("smbtestserver.password") %>
