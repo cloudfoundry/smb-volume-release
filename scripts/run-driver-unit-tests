@@ -2,7 +2,7 @@
 
 set -e -x
 
-pushd src/github.com/cloudfoundry/smbdriver > /dev/null
+pushd src/code.cloudfoundry.org/smbdriver > /dev/null
   go get github.com/onsi/ginkgo/ginkgo
   go get github.com/onsi/gomega
   go get -t .

@@ -19,16 +19,16 @@ files:
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/nfsdriver/*.go # gosub
+  - code.cloudfoundry.org/smbdriver/*.go # gosub
+  - code.cloudfoundry.org/smbdriver/cmd/smbdriver/*.go # gosub
+  - code.cloudfoundry.org/smbdriver/driveradmin/*.go # gosub
+  - code.cloudfoundry.org/smbdriver/driveradmin/driveradminhttp/*.go # gosub
+  - code.cloudfoundry.org/smbdriver/driveradmin/driveradminlocal/*.go # gosub
   - code.cloudfoundry.org/voldriver/*.go # gosub
   - code.cloudfoundry.org/voldriver/backoff/*.go # gosub
   - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - code.cloudfoundry.org/voldriver/invoker/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
-  - github.com/cloudfoundry/smbdriver/*.go # gosub
-  - github.com/cloudfoundry/smbdriver/cmd/smbdriver/*.go # gosub
-  - github.com/cloudfoundry/smbdriver/driveradmin/*.go # gosub
-  - github.com/cloudfoundry/smbdriver/driveradmin/driveradminhttp/*.go # gosub
-  - github.com/cloudfoundry/smbdriver/driveradmin/driveradminlocal/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
   - github.com/tedsuo/ifrit/http_server/*.go # gosub

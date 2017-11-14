@@ -27,7 +27,7 @@ echo "{
 export FIXTURE_FILENAME="$SMB_RELEASE_DIR/tmp/fixture.json"
 
 cd `dirname $0`
-cd ../src/github.com/cloudfoundry/smbdriver
+cd ../src/code.cloudfoundry.org/smbdriver
 
 go build -o "$SMB_RELEASE_DIR/tmp/smbdriver" "cmd/smbdriver/main.go"
 

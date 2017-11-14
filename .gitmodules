@@ -90,8 +90,8 @@
 	path = src/gopkg.in/resty.v0
 	url = https://gopkg.in/resty.v0
 	branch = master
-[submodule "src/github.com/cloudfoundry/smbdriver"]
-	path = src/github.com/cloudfoundry/smbdriver
+[submodule "src/code.cloudfoundry.org/smbdriver"]
+	path = src/code.cloudfoundry.org/smbdriver
 	url = https://github.com/cloudfoundry/smbdriver
 [submodule "src/code.cloudfoundry.org/azurefilebroker"]
 	path = src/code.cloudfoundry.org/azurefilebroker

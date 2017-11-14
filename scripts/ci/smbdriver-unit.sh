@@ -13,6 +13,6 @@ export PATH=$PWD/bin:$PATH
 go get github.com/onsi/ginkgo/ginkgo
 go get github.com/onsi/gomega
 
-pushd src/github.com/cloudfoundry/smbdriver
+pushd src/code.cloudfoundry.org/smbdriver
   ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress --race "$@"
 popd
