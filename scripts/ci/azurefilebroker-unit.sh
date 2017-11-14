@@ -14,6 +14,6 @@ go get github.com/onsi/ginkgo/ginkgo
 go get github.com/onsi/gomega
 go get gopkg.in/DATA-DOG/go-sqlmock.v1
 
-pushd src/github.com/cloudfoundry/azurefilebroker
+pushd src/code.cloudfoundry.org/azurefilebroker
   ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress --race "$@"
 popd

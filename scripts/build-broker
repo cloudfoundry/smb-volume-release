@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd src/github.com/cloudfoundry/azurefilebroker
+pushd src/code.cloudfoundry.org/azurefilebroker
   go get github.com/tools/godep
 
   godep get .

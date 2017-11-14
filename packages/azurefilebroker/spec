@@ -5,7 +5,10 @@ dependencies:
 - golang-smbvolume
 
 files:
-  - github.com/cloudfoundry/azurefilebroker/Procfile
+  - code.cloudfoundry.org/azurefilebroker/Procfile
+  - code.cloudfoundry.org/azurefilebroker/*.go # gosub
+  - code.cloudfoundry.org/azurefilebroker/azurefilebroker/*.go # gosub
+  - code.cloudfoundry.org/azurefilebroker/utils/*.go # gosub
   - code.cloudfoundry.org/clock/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
   - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
@@ -18,9 +21,6 @@ files:
   - github.com/Azure/go-autorest/autorest/azure/*.go # gosub
   - github.com/Azure/go-autorest/autorest/date/*.go # gosub
   - github.com/Azure/go-autorest/autorest/validation/*.go # gosub
-  - github.com/cloudfoundry/azurefilebroker/*.go # gosub
-  - github.com/cloudfoundry/azurefilebroker/azurefilebroker/*.go # gosub
-  - github.com/cloudfoundry/azurefilebroker/utils/*.go # gosub
   - github.com/denisenkom/go-mssqldb/*.go # gosub
   - github.com/dgrijalva/jwt-go/*.go # gosub
   - github.com/go-sql-driver/mysql/*.go # gosub

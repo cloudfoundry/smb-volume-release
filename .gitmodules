@@ -93,8 +93,8 @@
 [submodule "src/github.com/cloudfoundry/smbdriver"]
 	path = src/github.com/cloudfoundry/smbdriver
 	url = https://github.com/cloudfoundry/smbdriver
-[submodule "src/github.com/cloudfoundry/azurefilebroker"]
-	path = src/github.com/cloudfoundry/azurefilebroker
+[submodule "src/code.cloudfoundry.org/azurefilebroker"]
+	path = src/code.cloudfoundry.org/azurefilebroker
 	url = https://github.com/cloudfoundry/azurefilebroker
 [submodule "src/github.com/cloudfoundry-incubator/cf-test-helpers"]
 	path = src/github.com/cloudfoundry-incubator/cf-test-helpers

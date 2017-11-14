@@ -6,9 +6,9 @@ export GOPATH=$BOSH_INSTALL_TARGET
 
 export GOROOT=$(readlink -nf /var/vcap/packages/golang-smbvolume)
 export PATH=$GOROOT/bin:$PATH
-go install github.com/cloudfoundry/azurefilebroker
+go install code.cloudfoundry.org/azurefilebroker
 
-cp github.com/cloudfoundry/azurefilebroker/Procfile ${BOSH_INSTALL_TARGET}
+cp code.cloudfoundry.org/azurefilebroker/Procfile ${BOSH_INSTALL_TARGET}
 
 # clean up source artifacts
 rm -rf ${BOSH_INSTALL_TARGET}/src ${BOSH_INSTALL_TARGET}/pkg
