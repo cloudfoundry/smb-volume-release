@@ -5,7 +5,7 @@ set -x -e
 apt-get -y install cifs-utils
 
 source bosh-env/set-env.sh
-smbtestserver_ip=$(bosh -d smbtestserver instances|grep smbtestserver|awk '{print $4}')
+smbtestserver_ip=$(bosh -d cf instances|grep smbtestserver|awk '{print $4}')
 
 pushd smb-volume-release
     export GOROOT=/usr/local/go
