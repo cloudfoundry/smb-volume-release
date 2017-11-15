@@ -90,12 +90,6 @@
 	path = src/gopkg.in/resty.v0
 	url = https://gopkg.in/resty.v0
 	branch = master
-[submodule "src/code.cloudfoundry.org/smbdriver"]
-	path = src/code.cloudfoundry.org/smbdriver
-	url = https://github.com/cloudfoundry/smbdriver
-[submodule "src/code.cloudfoundry.org/azurefilebroker"]
-	path = src/code.cloudfoundry.org/azurefilebroker
-	url = https://github.com/cloudfoundry/azurefilebroker
 [submodule "src/github.com/cloudfoundry-incubator/cf-test-helpers"]
 	path = src/github.com/cloudfoundry-incubator/cf-test-helpers
 	url = https://github.com/cloudfoundry-incubator/cf-test-helpers
@@ -114,3 +108,9 @@
 [submodule "src/github.com/nu7hatch/gouuid"]
 	path = src/github.com/nu7hatch/gouuid
 	url = https://github.com/nu7hatch/gouuid
+[submodule "src/code.cloudfoundry.org/azurefilebroker"]
+	path = src/code.cloudfoundry.org/azurefilebroker
+	url = https://github.com/cloudfoundry/azurefilebroker.git
+[submodule "src/code.cloudfoundry.org/smbdriver"]
+	path = src/code.cloudfoundry.org/smbdriver
+	url = https://github.com/cloudfoundry/smbdriver.git
