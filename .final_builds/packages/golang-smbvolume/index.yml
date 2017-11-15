@@ -1,0 +1,7 @@
+---
+builds:
+  0cd52679e5855617897ccd431f40c655976d58c2:
+    version: 0cd52679e5855617897ccd431f40c655976d58c2
+    sha1: 4cf97c253dc6f02e0fa22a37a53becc955e23559
+    blobstore_id: 0d7ac2a4-0bbc-44a8-a91b-be0ba0dd712d
+format-version: '2'
