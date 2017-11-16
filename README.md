@@ -315,8 +315,6 @@ to generate `smb-test-server-azure-manifest.yml` into the current directory.
     $ bosh -e <YOUR BOSH DEPLOYMENT NAME> -d smb-server deploy smb-test-server-azure-manifest.yml
     ```
 
-* Note the default **gid** & **uid** which are 0 and 0 respectively (root).
-
 ## Register azurefilebroker
 
 * Register the broker and grant access to it's service with the following command:
@@ -386,9 +384,8 @@ to generate `smb-test-server-azure-manifest.yml` into the current directory.
     **NOTE**:
 
     - Please see more details about parameters [here](./docs/broker-development.md#parameters-for-bind).
-    - uid & gid: When binding the Azure file share to the application, the uid and gid specified are supplied to the mount.cifs.  The mount.cifs masks the running user id and group id as the true owner shown on the Azure file share.  Any operation on the mount will be executed as the owner, but locally the mount will be seen as being owned by the running user.
     - mount: By default, volumes are mounted into the application container in an arbitrarily named folder under `/var/vcap/data`.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
-        ``` cf bind-service pora myVolume -c '{"share", "one", "uid":"0","gid":"0","mount":"/var/path"}' ```
+        ``` cf bind-service pora myVolume -c '{"share", "one", "mount":"/var/path"}' ```
     NOTE: As of this writing aufs used by Garden is not capable of creating new root level folders.  As a result, you must choose a path with a root level folder that already exists in the container.  (`/home`, `/usr` or `/var` are good choices.)  If you require a path that does not already exist in the container it is currently only possible if you upgrade your Diego deployment to use [GrootFS](https://github.com/cloudfoundry/grootfs-release) with Garden.  For details on how to generate a Diego manifest using GrootFS see [this note](https://github.com/cloudfoundry/diego-release/blob/develop/docs/manifest-generation.md#experimental--g-opt-into-using-grootfs-for-garden). Eventually, GrootFS will become the standard file system for CF containers, and this limitation will go away.
     - If you are using an Azure file share as the preexisting share, you need to specify `"vers": "3.0"` in the parameters.
 
