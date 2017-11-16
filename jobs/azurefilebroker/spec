@@ -58,8 +58,8 @@ properties:
     description: "(optional) - CA Cert to verify SSL connection, if not include, connection will be plain"
   azurefilebroker.allowed_options:
     description: "A comma separated list of parameters allowed to be set in during bind operations"
-    example: "uid,gid,file_mode,dir_mode,readonly,vers,sec"
-    default: "uid,gid,file_mode,dir_mode,readonly,vers,sec"
+    example: "file_mode,dir_mode,readonly,vers,sec"
+    default: "file_mode,dir_mode,readonly,vers,sec"
   azurefilebroker.default_options:
     description: "A comma separated list of defaults specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value that cannot be overridden"
     example: "vers:3.0"
