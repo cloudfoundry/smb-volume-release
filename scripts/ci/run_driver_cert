@@ -2,9 +2,16 @@
 
 set -x -e
 
+function finish {
+  pkill ssh || true
+}
+trap finish EXIT
+
+source persi-ci/scripts/ci/bbl_get_bosh_env
+source bosh-env/set-env.sh
+
 apt-get -y install cifs-utils
 
-source bosh-env/set-env.sh
 smbtestserver_ip=$(bosh -d cf instances|grep smbtestserver|awk '{print $4}')
 
 pushd smb-volume-release

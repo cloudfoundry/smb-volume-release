@@ -5,11 +5,15 @@ rootfs_uri: docker:///cloudfoundry/inigo-ci
 
 inputs:
   - name: smb-volume-release
-  - name: bosh-env
+  - name: director-state
 
 params:
   username:
   password:
+  BBL_IAAS: aws
+  BBL_AWS_REGION:
+  BBL_AWS_ACCESS_KEY_ID:
+  BBL_AWS_SECRET_ACCESS_KEY:
 
 run:
   path: smb-volume-release/scripts/ci/run_driver_cert
