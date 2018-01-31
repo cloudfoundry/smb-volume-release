@@ -272,23 +272,18 @@ forms:
 #   max_in_flight: 1
 #   update_watch_time: 10000-100000
 
-releases:
-  - name: smb-volume
-    type: bosh-release
-    path: resources/smb-volume-0.1.4+dev.1.tgz
-    version: '0.1.4+dev.1'
-
 runtime_configs:
   - name: smb-driver-runtime-config
-    runtime_config: |
+    runtime_config:
       releases:
         - name: smb-volume
           version: '0.1.4+dev.1'
+          path: resources/smb-volume-0.1.4+dev.1.tgz
       addons:
         - name: voldrivers
           include:
             deployments:
-            - ((cf.deployment))
+            - (( ..cf.deployment_name ))
             jobs:
             - name: rep
               release: diego
@@ -296,5 +291,5 @@ runtime_configs:
           - name: smbdriver
             release: smb-volume
             properties:
-              allowed-in-mount: ((.properties.mountflagallowed))
-              default-in-mount: ((.properties.mountflagdefault))
+              allowed-in-mount: (( .properties.mountflagallowed.value ))
+              default-in-mount: (( .properties.mountflagdefault.value ))
