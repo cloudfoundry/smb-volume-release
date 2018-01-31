@@ -10,7 +10,7 @@ trap finish EXIT
 source persi-ci/scripts/ci/bbl_get_bosh_env
 source bosh-env/set-env.sh
 
-apt-get -y install cifs-utils
+apt-get -y install cifs-utils realpath
 
 smbtestserver_ip=$(bosh -d cf instances|grep smbtestserver|awk '{print $4}')
 
