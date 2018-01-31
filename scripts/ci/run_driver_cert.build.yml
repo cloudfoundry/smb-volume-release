@@ -6,6 +6,7 @@ rootfs_uri: docker:///cloudfoundry/inigo-ci
 inputs:
   - name: smb-volume-release
   - name: director-state
+  - name: persi-ci
 
 params:
   username:
