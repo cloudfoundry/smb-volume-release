@@ -24,6 +24,9 @@ allow_paid_service_plans: true
 # https://github.com/cf-platform-eng/tile-generator/blob/master/README.md
 #
 packages:
+- name: azurefilebrokerreleases
+  type: bosh-release
+  path: resources/smb-volume-0.1.4+dev.1.tgz
 - name: azurefilebroker
   type: app-broker
 #  label: My fabulous appplication      # Package name for use in human-readable labels in OpsManager
@@ -278,7 +281,6 @@ runtime_configs:
       releases:
         - name: smb-volume
           version: '0.1.4+dev.1'
-          path: resources/smb-volume-0.1.4+dev.1.tgz
       addons:
         - name: voldrivers
           include:
