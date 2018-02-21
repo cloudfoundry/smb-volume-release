@@ -79,7 +79,7 @@ The test server provides an easy test target with which you can try out volume m
     $ cd ~/workspace/cf-deployment
     ```
 
-2. Now redeploy your cf-deployment while including the nfs ops file:
+2. Now redeploy your cf-deployment while including the smb ops file:
     ```bash
     $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o ../smb-volume-release/operations/deploy-smb-broker-and-install-driver.yml
     ```
