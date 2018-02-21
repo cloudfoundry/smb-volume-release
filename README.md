@@ -7,8 +7,8 @@ This is a bosh release that packages:
 - BOSH back & restore jobs for the broker's database
 
 The broker and driver pair allows you:
-1. to provision Azure storage accounts and bind Azure file shares to your applications for shared file access.
-1. to provision preexisting shares and bind the shares to your applications for share file access.
+- to provision Azure storage accounts and bind Azure file shares to your applications for shared file access.
+- to provision preexisting shares and bind the shares to your applications for share file access.
 
 The test server provides an easy test target with which you can try out volume mounts of preexisting shares.
 
