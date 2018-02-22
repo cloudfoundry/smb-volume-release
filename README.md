@@ -194,6 +194,9 @@ $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml \
 1. to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
 1. to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
 
+# BBR Support
+If you are using [Bosh Backup and Restore](https://docs.cloudfoundry.org/bbr/) (BBR) to keep backups of your Cloud Foundry deployment, consider including the [enable-azurefile-broker-backup.yml](https://github.com/cloudfoundry/smb-volume-release/blob/master/operations/enable-azurefile-broker-backup.yml) operations file from this repository when you redeploy Cloud Foundry.  This file will install the requiste backup and restore scripts for service broker metadata on the backup/restore VM.
+
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
 
