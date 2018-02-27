@@ -98,7 +98,7 @@ forms:
       options:
         - name: Preexisting
           label: Preexisting SMB Shares
-        - name: Azure
+        - name: AzureCloud
           label: Azure Global Cloud
         - name: AzureChinaCloud
           label: Azure China Cloud
