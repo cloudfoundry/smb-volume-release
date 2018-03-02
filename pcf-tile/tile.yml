@@ -27,6 +27,7 @@ packages:
 - name: azurefilebrokerreleases
   type: bosh-release
   path: resources/smb-volume-0.1.4+dev.1.tgz
+  version: '0.1.4+dev.1'
 - name: azurefilebroker
   type: app-broker
 #  label: My fabulous appplication      # Package name for use in human-readable labels in OpsManager
@@ -38,6 +39,24 @@ packages:
     path: resources/azurefilebroker.zip
     buildpack: binary_buildpack
     instances: 1
+    env:
+      ENVIRONMENT: (( .properties.environment_selector.preexisting_option.environment.value || .properties.environment_selector.azure_option.environment.value || '' ))
+      TENANTID: (( .properties.environment_selector.azure_option.tenantid.value || '' ))
+      CLIENTID: (( .properties.environment_selector.azure_option.clientid.value || '' ))
+      CLIENTSECRET: (( .properties.environment_selector.azure_option.clientsecret.value || '' ))
+      DEFAULTSUBSCRIPTIONID: (( .properties.environment_selector.azure_option.defaultsubscriptionid.value || '' ))
+      DEFAULTRESOURCEGROUPNAME: (( .properties.environment_selector.azure_option.defaultresourcegroupname.value || '' ))
+      DEFAULTLOCATION: (( .properties.environment_selector.azure_option.defaultlocation.value || '' ))
+      ALLOWCREATESTORAGEACCOUNT: (( .properties.environment_selector.azure_option.allowcreatestorageaccount.value || 'false' ))
+      ALLOWCREATEFILESHARE: (( .properties.environment_selector.azure_option.allowcreatefileshare.value || 'false' ))
+      ALLOWDELETESTORAGEACCOUNT: (( .properties.environment_selector.azure_option.allowdeletestorageaccount.value || 'false' ))
+      ALLOWDELETEFILESHARE: (( .properties.environment_selector.azure_option.allowdeletefileshare.value || 'false' ))
+      DBSERVICENAME: (( .properties.database_selector.marketplace_option.dbservicename.value || '' ))
+      DBHOST: (( .properties.database_selector.database_option.dbhost.value || '' ))
+      DBPORT: (( .properties.database_selector.database_option.dbport.value || '' ))
+      DBNAME: (( .properties.database_selector.database_option.dbname.value || '' ))
+      DBUSERNAME: (( .properties.database_selector.database_option.dbusername.value || '' ))
+      DBPASSWORD: (( .properties.database_selector.database_option.dbpassword.value || '' ))
 
 # Uncomment this section if you want to display forms with configurable
 # properties in Ops Manager. These properties will be passed to your
@@ -48,7 +67,7 @@ packages:
 forms:
 - name: azurefilebroker_app
   label: Service Broker Application
-  description: Settings for service broker application. Broker can use either preexisting SMB shares or Azure File Share. Corresponding Tenant ID, Client ID, Client Secret and Subscription ID should be specified if you choose to use Azure File Share.
+  description: Settings for service broker application
   properties:
     - name: app_name
       type: string
@@ -89,87 +108,104 @@ forms:
           label: info
         - name: debug
           label: debug
-    - name: environment
-      label: Environment
-      description: Select the environment you would like to use
-      type: dropdown_select
+    - name: environment_selector
+      label: Share Environment
+      description: Select source of shares
+      type: selector
       configurable: true
-      default: Preexisting
       freeze_on_deploy: true
-      options:
-        - name: Preexisting
-          label: Preexisting SMB Shares
-        - name: AzureCloud
-          label: Azure Global Cloud
-        - name: AzureChinaCloud
-          label: Azure China Cloud
-        - name: AzureUSGovernment
-          label: Azure US Goverment Cloud
-        - name: AzureGermanCloud
-          label: Azure German Cloud
-    - name: tenantid
-      label: Tenant ID
-      description: The tenant id for your service principal. Required when 'Environment' is not 'Preexisting SMB Shares'
-      type: string
-      configurable: true
-      optional: true
-    - name: clientid
-      label: Client ID
-      description: The client id for your service principal. Required when 'Environment' is not 'Preexisting SMB Shares'
-      type: string
-      configurable: true
-      optional: true
-    - name: clientsecret
-      label: Client Secret
-      description: The client secret for your service principal. Required when 'Environment' is not 'Preexisting SMB Shares'
-      type: secret
-      configurable: true
-      optional: true
-    - name: defaultsubscriptionid
-      label: Default Subscription ID
-      description: The default Azure Subscription id to use for storage accounts. Required when 'Environment' is not 'Preexisting SMB Shares'
-      type: string
-      configurable: true
-      optional: true
-    - name: defaultresourcegroupname
-      label: Default Resource Group Name
-      description: The default resource group to use for storage accounts. Available when 'Environment' is not 'Preexisting SMB Shares'
-      type: string
-      configurable: true
-      optional: true
-    - name: defaultlocation
-      label: Default Location
-      description: The default location to use for creating storage accounts. Available when 'Environment' is not 'Preexisting SMB Shares'
-      type: string
-      configurable: true
-      optional: true
-    - name: allowcreatestorageaccount
-      label: Allow Create Storage Account
-      description: Allow Broker to create storage accounts. Available when 'Environment' is not 'Preexisting SMB Shares'
-      type: boolean
-      configurable: true
-      default: true
-    - name: allowcreatefileshare
-      label: Allow Create File Share
-      description: Allow Broker to create file shares. Available when 'Environment' is not 'Preexisting SMB Shares'
-      type: boolean
-      configurable: true
-      default: true
-    - name: allowdeletestorageaccount
-      label: Allow Delete Storage Account
-      description: Allow Broker to delete storage accounts created by Broker. Available when 'Environment' is not 'Preexisting SMB Shares'
-      type: boolean
-      configurable: true
-      default: true
-    - name: allowdeletefileshare
-      label: Allow Delete File Share
-      description: Allow Broker to delete file shares created by Broker. Available when 'Environment' is not 'Preexisting SMB Shares'
-      type: boolean
-      configurable: true
-      default: true
+      option_templates:
+      - name: preexisting_option
+        select_value: Preexisting SMB Share
+        description: Use preexisting SMB shares only
+        property_blueprints:
+          - name: environment
+            label: Environment
+            type: dropdown_select
+            configurable: false
+            freeze_on_deploy: true
+            options:
+              - name: Preexisting
+                label: Preexisting SMB share
+      - name: azure_option
+        select_value: Azure File Share
+        description: Use Azure File Share
+        property_blueprints:
+          - name: environment
+            label: Cloud Environment
+            description: Select the environment you would like to use
+            type: dropdown_select
+            configurable: true
+            default: AzureCloud
+            freeze_on_deploy: true
+            options:
+              - name: AzureCloud
+                label: Azure Global Cloud
+              - name: AzureChinaCloud
+                label: Azure China Cloud
+              - name: AzureUSGovernment
+                label: Azure US Goverment Cloud
+              - name: AzureGermanCloud
+                label: Azure German Cloud
+          - name: tenantid
+            label: Tenant ID
+            description: The tenant id for your service principal
+            type: string
+            configurable: true
+          - name: clientid
+            label: Client ID
+            description: The client id for your service principal
+            type: string
+            configurable: true
+          - name: clientsecret
+            label: Client Secret
+            description: The client secret for your service principal
+            type: secret
+            configurable: true
+          - name: defaultsubscriptionid
+            label: Default Subscription ID
+            description: The default Azure Subscription id to use for storage accounts
+            type: string
+            configurable: true
+          - name: defaultresourcegroupname
+            label: Default Resource Group Name
+            description: The default resource group to use for storage accounts
+            type: string
+            configurable: true
+            optional: true
+          - name: defaultlocation
+            label: Default Location
+            description: The default location to use for creating storage accounts
+            type: string
+            configurable: true
+            optional: true
+          - name: allowcreatestorageaccount
+            label: Allow Create Storage Account
+            description: Allow Broker to create storage accounts
+            type: boolean
+            configurable: true
+            default: true
+          - name: allowcreatefileshare
+            label: Allow Create File Share
+            description: Allow Broker to create file shares
+            type: boolean
+            configurable: true
+            default: true
+          - name: allowdeletestorageaccount
+            label: Allow Delete Storage Account
+            description: Allow Broker to delete storage accounts created by Broker
+            type: boolean
+            configurable: true
+            default: true
+          - name: allowdeletefileshare
+            label: Allow Delete File Share
+            description: Allow Broker to delete file shares created by Broker
+            type: boolean
+            configurable: true
+            default: true
 - name: db-config-form
   label: Service Broker Database Config
-  description: Settings for the database used by the service broker. You can either bind a database service created from cf marketplace to the broker application by specifying name for the service, or use an existing database by specifying its hostname, port, database name, username and password listed below.
+  description: Settings for the database used by the service broker
   properties:
     - name: dbdrivername
       label: Database Driver
@@ -194,42 +230,50 @@ forms:
       type: string
       configurable: true
       optional: true
-    - name: dbservicename
-      label: Cloud Foundry Service Name
-      description: Name for database service binded to the broker app in env VCAP_SERVICES where we should find database credentials. For example "azure-sqldb" or "azure-mysqldb"
-      type: string
+    - name: database_selector
+      label: Database Type
+      description: Configure database to be used by broker app
+      type: selector
       configurable: true
-      optional: true
-    - name: dbhost
-      label: Database Hostname
-      description: Database hostname when using SQL to store broker state. Required when 'Cloud Foundry Service Name' is empty
-      type: string
-      configurable: true
-      optional: true
-    - name: dbport
-      label: Database Port
-      description: Database port when using SQL to store broker state. Required when 'Cloud Foundry Service Name' is empty
-      type: string
-      configurable: true
-      optional: true
-    - name: dbname
-      label: Database Name
-      description: Database name when using SQL to store broker state. Required when 'Cloud Foundry Service Name' is empty
-      type: string
-      configurable: true
-      optional: true
-    - name: dbusername
-      label: Database Username
-      description: Database username when using SQL to store broker state. Required when 'Cloud Foundry Service Name' is empty
-      type: string
-      configurable: true
-      optional: true
-    - name: dbpassword
-      label: Database Password
-      description: Database password when using SQL to store broker state. Required when 'Cloud Foundry Service Name' is empty
-      type: secret
-      configurable: true
-      optional: true
+      freeze_on_deploy: true
+      option_templates:
+      - name: marketplace_option
+        select_value: Cloud Foundry Service
+        description: Use database created from CF Marketplace. Service needs to be binded to the broker app manually
+        property_blueprints:
+          - name: dbservicename
+            label: Cloud Foundry Service Name
+            description: Name for database service binded to the broker app in env VCAP_SERVICES where we should find database credentials. For example "azure-sqldb" or "azure-mysqldb"
+            type: string
+            configurable: true
+      - name: database_option
+        select_value: Existing External Database
+        property_blueprints:
+          - name: dbhost
+            label: Database Hostname
+            description: Database hostname when using SQL to store broker state
+            type: string
+            configurable: true
+          - name: dbport
+            label: Database Port
+            description: Database port when using SQL to store broker state
+            type: port
+            configurable: true
+          - name: dbname
+            label: Database Name
+            description: Database name when using SQL to store broker state
+            type: string
+            configurable: true
+          - name: dbusername
+            label: Database Username
+            description: Database username when using SQL to store broker state
+            type: string
+            configurable: true
+          - name: dbpassword
+            label: Database Password
+            description: Database password when using SQL to store broker state
+            type: secret
+            configurable: true
 - name: bind-config-form
   label: Service Broker Bind Config
   properties:
