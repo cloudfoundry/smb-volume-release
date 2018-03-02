@@ -48,16 +48,17 @@ packages:
 forms:
 - name: azurefilebroker_app
   label: Service Broker Application
+  description: Settings for service broker application. Broker can use either preexisting SMB shares or Azure File Share. Corresponding Tenant ID, Client ID, Client Secret and Subscription ID should be specified if you choose to use Azure File Share.
   properties:
     - name: app_name
       type: string
       label: Service Broker Application Name
-      description: Enter the name for the Service Broker App
+      description: Name for the Service Broker App
       configurable: false
       default: azurefilebroker
     - name: app_version
       label: Service Broker Application version
-      description: Enter the version of the Service Broker App (Final app name would include app version like ${appName}-${appversion}
+      description: Version of the Service Broker App (Final app name would include app version like ${appName}-${appversion}
       type: string
       configurable: false
       default: 1.0.0
@@ -69,13 +70,13 @@ forms:
       default: true
     - name: servicename
       label: Service Name
-      description: Enter the version of the Service Broker App (Final app name would include app version like ${appName}-${appversion}
+      description: Name for the file service displayed in CF marketplace
       type: string
       configurable: false
       default: smbvolume
     - name: loglevel
       label: LogLevel
-      description: The log level of the broker
+      description: Log level of the broker
       type: dropdown_select
       configurable: true
       default: info
@@ -132,7 +133,7 @@ forms:
       optional: true
     - name: defaultresourcegroupname
       label: Default Resource Group Name
-      description: The default resource group name to use for storage accounts. Available when 'Environment' is not 'Preexisting SMB Shares'
+      description: The default resource group to use for storage accounts. Available when 'Environment' is not 'Preexisting SMB Shares'
       type: string
       configurable: true
       optional: true
@@ -156,18 +157,19 @@ forms:
       default: true
     - name: allowdeletestorageaccount
       label: Allow Delete Storage Account
-      description: Allow Broker to delete storage accounts which are created by Broker. Available when 'Environment' is not 'Preexisting SMB Shares'
+      description: Allow Broker to delete storage accounts created by Broker. Available when 'Environment' is not 'Preexisting SMB Shares'
       type: boolean
       configurable: true
       default: true
     - name: allowdeletefileshare
       label: Allow Delete File Share
-      description: Allow Broker to delete file shares which are created by Broker. Available when 'Environment' is not 'Preexisting SMB Shares'
+      description: Allow Broker to delete file shares created by Broker. Available when 'Environment' is not 'Preexisting SMB Shares'
       type: boolean
       configurable: true
       default: true
 - name: db-config-form
   label: Service Broker Database Config
+  description: Settings for the database used by the service broker. You can either bind a database service created from cf marketplace to the broker application by specifying name for the service, or use an existing database by specifying its hostname, port, database name, username and password listed below.
   properties:
     - name: dbdrivername
       label: Database Driver
@@ -191,9 +193,10 @@ forms:
       description: For Azure SQL service or Azure MySQL service, you need to specify one of below values to enable TLS encryption. For your certificate, you need to specify the Common Name (CN) in the server certificate.AzureCloud:"*.database.windows.net", AzureUSGovernment:"*.database.usgovcloudapi.net", AzureChinaCloud:"*.database.chinacloudapi.cn", AzureGermanCloud:"*.database.cloudapi.de"
       type: string
       configurable: true
+      optional: true
     - name: dbservicename
       label: Cloud Foundry Service Name
-      description: For CF pushed apps, the service name in VCAP_SERVICES where we should find database credentials
+      description: Name for database service binded to the broker app in env VCAP_SERVICES where we should find database credentials. For example "azure-sqldb" or "azure-mysqldb"
       type: string
       configurable: true
       optional: true
@@ -232,13 +235,13 @@ forms:
   properties:
     - name: allowedoptions
       label: Allowed Options
-      description: A comma separated list of parameters allowed to be set in during bind operations
+      description: A comma separated list of parameters allowed to be set during bind operations
       type: string
       configurable: true
       default: share,uid,gid,file_mode,dir_mode,readonly,vers,mount,domain,username,password,sec
     - name: defaultoptions
       label: Default Options
-      description: A comma separated list of defaults specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value that cannot be overridden
+      description: A comma separated list of defaults options specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value and cannot be overridden
       type: string
       configurable: true
       default: vers:3.0
@@ -247,13 +250,13 @@ forms:
   properties:
     - name: mountflagallowed
       label: Mount Flag Allowed
-      description: A comma separted list of parameters allowed to be send in extra config. Each of this parameters can be specify by brokers
+      description: A comma separted list of parameters allowed to be set as extra config by brokers
       type: string
       configurable: true
       default: username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec
     - name: mountflagdefault
       label: Mount Flag Default
-      description: A comma separted list of like params:value. This list specifies default value of parameters.
+      description: A comma separted list of default mount flags represented by params:value.
       type: string
       configurable: true
       default: uid:2000,gid:2000
