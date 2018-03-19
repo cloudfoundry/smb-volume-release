@@ -41,8 +41,8 @@ case $1 in
       --driversPath="<%= p("smbdriver.driver_path") %>" \
       --mountDir="<%= p("smbdriver.cell_mount_path") %>" \
       --logLevel="<%= p("smbdriver.log_level") %>" \
-      --mountFlagAllowed="<%= p("smbdriver.allowed-in-mount") %>" \
-      --mountFlagDefault="<%= p("smbdriver.default-in-mount") %>" \
+      --mountFlagAllowed="<%= p("smbdriver.allowed_in_mount") %>" \
+      --mountFlagDefault="<%= p("smbdriver.default_in_mount") %>" \
       >> $LOG_DIR/smbdriver.stdout.log \
       2>> $LOG_DIR/smbdriver.stderr.log
 
