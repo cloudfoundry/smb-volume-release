@@ -28,18 +28,9 @@ mkdir voldriver_plugins
 $drivers_path="$PWD/voldriver_plugins"
 
 mkdir "$PWD/tmp"
-$SOURCE="//$host/vol1"
+$SOURCE="//$env:host/vol1"
 
-"{
-  \"volman_driver_path\": \"~/voldriver_plugins\",
-  \"driver_address\": \"$driver_address\",
-  \"driver_name\": \"smbdriver\",
-  \"create_config\": {
-    \"Name\": \"smb-volume-name\",
-    \"Opts\": {\"source\":\"$SOURCE\",\"uid\":\"2000\",\"gid\":\"2000\",\"username\":\"$username\",\"password\":\"$password\"}
-  }
-} " | Out-File $PWD/tmp/fixture.json
-
+"{ `"volman_driver_path`": `"$PWD/voldriver_plugins`", `"driver_address`": `"$driver_address`", `"driver_name`": `"smbdriver`", `"create_config`": { `"Name`": `"smb-volume-name`", `"Opts`": {`"source`":`"$SOURCE`",`"uid`":`"2000`",`"gid`":`"2000`",`"username`":`"$env:username`",`"password`":`"$env:password`"} } } " | Out-File $PWD/tmp/fixture.json 
 $env:FIXTURE_FILENAME="$PWD/tmp/fixture.json"
 
 go build -o "./tmp/smbdriver" "src/code.cloudfoundry.org/smbdriver/cmd/smbdriver/main.go"
