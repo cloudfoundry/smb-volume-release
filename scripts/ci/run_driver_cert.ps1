@@ -40,7 +40,7 @@ go get -t code.cloudfoundry.org/volume_driver_cert
 $mountDir="$PWD/tmp/mountdir"
 mkdir $mountDir
 
-Start-Process -NoNewWindow ./tmp/smbdriver "-listenPort=8589 -transport=tcp -driversPath=$drivers_path -mountDir=$mountDir --mountFlagAllowed=`"username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec`" --mountFlagDefault=`"uid:2000,gid:2000`""
+Start-Process -NoNewWindow ./tmp/smbdriver "-listenPort=8589 -transport=tcp -driversPath=$drivers_path -mountDir=$mountDir"
 
 ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert
 CheckLastExitCode
