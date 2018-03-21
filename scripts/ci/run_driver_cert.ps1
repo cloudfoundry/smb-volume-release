@@ -32,9 +32,7 @@ $drivers_path="$PWD/voldriver_plugins"
 mkdir "$PWD/tmp"
 $SOURCE="//$env:smbhost/vol1"
 
-"{ `"volman_driver_path`": `"$PWD/voldriver_plugins`", `"driver_address`": `"$driver_address`", `"driver_name`": `"smbdriver`", `"create_config`": { `"Name`": `"smb-volume-name`", `"Opts`": {`"source`":`"$SOURCE`",`"uid`":`"2000`",`"gid`":`"2000`",`"username`":`"$env:smbusername`",`"password`":`"$env:smbpassword`"} } } " | Out-File $PWD/tmp/fixture.json 
-
-cat $PWD/tmp/fixture.json 
+"{ `"volman_driver_path`": `"./voldriver_plugins`", `"driver_address`": `"$driver_address`", `"driver_name`": `"smbdriver`", `"create_config`": { `"Name`": `"smb-volume-name`", `"Opts`": {`"source`":`"$SOURCE`",`"uid`":`"2000`",`"gid`":`"2000`",`"username`":`"$env:smbusername`",`"password`":`"$env:smbpassword`"} } } " | Set-Content $PWD/tmp/fixture.json -Force 
 
 $env:FIXTURE_FILENAME="$PWD/tmp/fixture.json"
 
@@ -44,6 +42,7 @@ go get -t code.cloudfoundry.org/volume_driver_cert
 
 $mountDir="$PWD/tmp/mountdir"
 mkdir $mountDir
+
 
 Start-Process -NoNewWindow ./tmp/smbdriver "-listenPort=8589 -transport=tcp -driversPath=$drivers_path -mountDir=$mountDir --mountFlagAllowed=`"username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec`" --mountFlagDefault=`"uid:2000,gid:2000`""
 
