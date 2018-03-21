@@ -6,8 +6,8 @@ inputs:
   - name: persi-ci
 
 params:
-  username:
-  password:
+  smbusername:
+  smbpassword:
   smbhost:
 
 run:

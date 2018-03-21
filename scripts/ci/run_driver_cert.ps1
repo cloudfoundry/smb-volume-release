@@ -22,6 +22,8 @@ cd smb-volume-release
 $env:GOPATH=$PWD
 $env:PATH="$PWD/bin;$env:PATH"
 
+go install github.com/onsi/ginkgo/ginkgo
+
 $driver_address="http://0.0.0.0:8589"
 
 mkdir voldriver_plugins
@@ -30,7 +32,10 @@ $drivers_path="$PWD/voldriver_plugins"
 mkdir "$PWD/tmp"
 $SOURCE="//$env:smbhost/vol1"
 
-"{ `"volman_driver_path`": `"$PWD/voldriver_plugins`", `"driver_address`": `"$driver_address`", `"driver_name`": `"smbdriver`", `"create_config`": { `"Name`": `"smb-volume-name`", `"Opts`": {`"source`":`"$SOURCE`",`"uid`":`"2000`",`"gid`":`"2000`",`"username`":`"$env:username`",`"password`":`"$env:password`"} } } " | Out-File $PWD/tmp/fixture.json 
+"{ `"volman_driver_path`": `"$PWD/voldriver_plugins`", `"driver_address`": `"$driver_address`", `"driver_name`": `"smbdriver`", `"create_config`": { `"Name`": `"smb-volume-name`", `"Opts`": {`"source`":`"$SOURCE`",`"uid`":`"2000`",`"gid`":`"2000`",`"username`":`"$env:smbusername`",`"password`":`"$env:smbpassword`"} } } " | Out-File $PWD/tmp/fixture.json 
+
+cat $PWD/tmp/fixture.json 
+
 $env:FIXTURE_FILENAME="$PWD/tmp/fixture.json"
 
 go build -o "./tmp/smbdriver" "src/code.cloudfoundry.org/smbdriver/cmd/smbdriver/main.go"
@@ -40,7 +45,7 @@ go get -t code.cloudfoundry.org/volume_driver_cert
 $mountDir="$PWD/tmp/mountdir"
 mkdir $mountDir
 
-Start-Process -NoNewWindow ./tmp/smbdriver "-listenPort=8589 -transport=tcp -driversPath=$drivers_path -mountDir=$mountDir"
+Start-Process -NoNewWindow ./tmp/smbdriver "-listenPort=8589 -transport=tcp -driversPath=$drivers_path -mountDir=$mountDir --mountFlagAllowed=`"username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec`" --mountFlagDefault=`"uid:2000,gid:2000`""
 
 ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert
 CheckLastExitCode
