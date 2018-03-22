@@ -13,6 +13,7 @@ function CheckLastExitCode {
 EXE RETURNED EXIT CODE $LastExitCode
 CALLSTACK:$(Get-PSCallStack | Out-String)
 "@
+        Stop-Process -Name "smbdriver"
         throw $msg
     }
 }
