@@ -9,20 +9,17 @@ PIDFILE=$RUN_DIR/smbdriver.pid
 case $1 in
 
   start)
-    # make a new container cvcap user if it doesn't already exist
-    id -u cvcap &>/dev/null || useradd -u 2000 cvcap
-
     mkdir -p $RUN_DIR
-    chown -R cvcap:cvcap $RUN_DIR
+    chown -R vcap:vcap $RUN_DIR
 
     mkdir -p $LOG_DIR
-    chown -R cvcap:cvcap $LOG_DIR
+    chown -R vcap:vcap $LOG_DIR
 
     mkdir -p /var/vcap/data/voldrivers
     chmod 777 /var/vcap/data/voldrivers
 
     mkdir -p "<%= p("smbdriver.cell_mount_path") %>"
-    chown -R cvcap:cvcap "<%= p("smbdriver.cell_mount_path") %>"
+    chown -R vcap:vcap "<%= p("smbdriver.cell_mount_path") %>"
 
     export GOMAXPROCS=$(nproc)
 
@@ -44,8 +41,8 @@ case $1 in
       --driversPath="<%= p("smbdriver.driver_path") %>" \
       --mountDir="<%= p("smbdriver.cell_mount_path") %>" \
       --logLevel="<%= p("smbdriver.log_level") %>" \
-      --mountFlagAllowed="<%= p("smbdriver.allowed-in-mount") %>" \
-      --mountFlagDefault="<%= p("smbdriver.default-in-mount") %>" \
+      --mountFlagAllowed="<%= p("smbdriver.allowed_in_mount") %>" \
+      --mountFlagDefault="<%= p("smbdriver.default_in_mount") %>" \
       >> $LOG_DIR/smbdriver.stdout.log \
       2>> $LOG_DIR/smbdriver.stderr.log
 

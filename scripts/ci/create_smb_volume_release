@@ -7,6 +7,7 @@ pushd smb-volume-release
 
 rm -rf .final_builds
 
-bosh -n --parallel 10 create release --version $version --name smb-volume --force --with-tarball
+bosh -n create-release --tarball=dev_releases/smb-volume/smb-volume-$version.tgz --version $version --name smb-volume --force
+
 mv dev_releases/smb-volume/smb-volume-$version.tgz ../created-smb-volume-release/smbvolume-$version.tgz
 popd
