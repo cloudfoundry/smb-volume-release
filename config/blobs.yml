@@ -14,10 +14,10 @@ cifs-utils-6.7.tar.bz2:
   size: 363647
   object_id: f76fd32c-1c75-4c28-49fd-48ba34a43204
   sha: 9ba5091d7c2418a90773c861f04a3f4a36854c14
-go1.8.3.linux-amd64.tar.gz:
-  size: 90029041
-  object_id: f6492713-dd0a-47af-774b-a82a35fee0c0
-  sha: 838c415896ef5ecd395dfabde5e7e6f8ac943c8e
+go1.10.linux-amd64.tar.gz:
+  size: 119905205
+  object_id: bfe2759c-b39c-4a0b-4503-034fc3ac5f2e
+  sha: 693e2dfd99ef2d608b41c450efd9d277bf2a7f2f
 libtool-2.4.6.tar.gz:
   size: 1806697
   object_id: 4c24395e-816f-4d5d-7369-6d5d5fa5741d

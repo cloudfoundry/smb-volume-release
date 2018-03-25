@@ -1,0 +1,13 @@
+---
+platform: windows
+
+inputs:
+- name: smb-volume-release
+
+run:
+  path: powershell
+  args:
+    - "-ExecutionPolicy"
+    - "ByPass"
+    - "-File"
+    - "smb-volume-release/scripts/ci/smbdriver-unit.ps1"

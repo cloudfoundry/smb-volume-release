@@ -340,5 +340,5 @@ runtime_configs:
           - name: smbdriver
             release: smb-volume
             properties:
-              allowed-in-mount: (( .properties.mountflagallowed.value ))
-              default-in-mount: (( .properties.mountflagdefault.value ))
+              allowed_in_mount: (( .properties.mountflagallowed.value ))
+              default_in_mount: (( .properties.mountflagdefault.value ))
