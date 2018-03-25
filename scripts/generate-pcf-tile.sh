@@ -7,6 +7,12 @@ TARGET_SMB=$PWD/pcf-tile/resources/smb-volume-0.1.4+dev.1.tgz
 rm -f $TARGET_BROKER
 rm -f $TARGET_SMB
 
+rm -rf .dev_builds
+rm -rf dev_releases
+
+rm -f pcf-tile/tile-history.yml
+rm -rf src/code.cloudfoundry.org/azurefilebroker/bin
+
 echo "Building SMB volume release"
 bosh create-release --tarball=$TARGET_SMB
 
