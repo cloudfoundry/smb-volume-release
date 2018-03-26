@@ -3,11 +3,9 @@
 set -x -e
 
 version=`cat smb-volume-version/number`
+tarball_name=smb-volume-$version.tgz
+
 pushd smb-volume-release
-
-rm -rf .final_builds
-
-bosh -n create-release --tarball=dev_releases/smb-volume/smb-volume-$version.tgz --version $version --name smb-volume --force
-
-mv dev_releases/smb-volume/smb-volume-$version.tgz ../created-smb-volume-release/smbvolume-$version.tgz
+  bosh -n create-release --version=$version --force --tarball=$tarball_name
+  mv $tarball_name ../created-smb-volume-release
 popd
