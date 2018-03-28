@@ -5,6 +5,8 @@ templates:
   install.erb: bin/pre-start
   ctl.erb: bin/smbdriver_ctl
   drain.erb: bin/drain
+  mounter.ps1.erb: scripts/mounter.ps1
+  unmounter.ps1.erb: scripts/unmounter.ps1
 
 packages:
 - cifs-utils
