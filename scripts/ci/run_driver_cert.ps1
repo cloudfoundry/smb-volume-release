@@ -20,6 +20,9 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
 
 cd smb-volume-release
 
+cp ./jobs/smbdriver/templates/mounter.ps1.erb c:/var/vcap/jobs/smbdriver/scripts/mounter.ps1
+cp ./jobs/smbdriver/templates/unmounter.ps1.erb c:/var/vcap/jobs/smbdriver/scripts/unmounter.ps1
+
 $env:GOPATH=$PWD
 $env:PATH="$PWD/bin;$env:PATH"
 
