@@ -20,7 +20,7 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
 
 cd smb-volume-release
 
-mkdir c:/var/vcap/jobs/smbdriver/scripts/
+mkdir -Force c:/var/vcap/jobs/smbdriver/scripts/
 cp ./jobs/smbdriver/templates/mounter.ps1.erb c:/var/vcap/jobs/smbdriver/scripts/mounter.ps1
 cp ./jobs/smbdriver/templates/unmounter.ps1.erb c:/var/vcap/jobs/smbdriver/scripts/unmounter.ps1
 
