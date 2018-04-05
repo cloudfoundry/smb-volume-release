@@ -1,0 +1,54 @@
+name: smb-volume
+version: 0.1.5
+commit_hash: 808fd8f
+uncommitted_changes: false
+jobs:
+- name: azurefilebroker
+  version: f44b822dbe759d776e3e24499985e664e12238ae
+  fingerprint: f44b822dbe759d776e3e24499985e664e12238ae
+  sha1: 3ea56d2fb4fe524e8e52cfbad6b6e460e26cf93b
+- name: azurefilebroker-bbr
+  version: c45865320e54f03d25808e489cc9176c6f863b32
+  fingerprint: c45865320e54f03d25808e489cc9176c6f863b32
+  sha1: 8e34926103c7981256a55cba21ed0f29229ea7dd
+- name: smbdriver
+  version: edf318cddde38664ab8af388c68763b8659109cd
+  fingerprint: edf318cddde38664ab8af388c68763b8659109cd
+  sha1: 796aa2cf8e4362e9a7c55910ee1d2d053986c51d
+- name: smbtestserver
+  version: f0771dafab6e77c2c16267b5caf7ccb3f263e1e3
+  fingerprint: f0771dafab6e77c2c16267b5caf7ccb3f263e1e3
+  sha1: 67d915e8d922d4b4d4a1406f284dab7d158f6592
+packages:
+- name: azurefilebroker
+  version: 00721efe0d727519e650480eb78c1a1bbb756791
+  fingerprint: 00721efe0d727519e650480eb78c1a1bbb756791
+  sha1: 013ce4eb68147596f8ffa42998f223ff65548b3f
+  dependencies:
+  - golang-smbvolume
+- name: cf_cli
+  version: ca77bd914cd391eaec1244b5fccbbb420a02c3ee
+  fingerprint: ca77bd914cd391eaec1244b5fccbbb420a02c3ee
+  sha1: 290c1bc7626ef4f1a820255dfeabcddc47a02a86
+  dependencies: []
+- name: cifs-utils
+  version: 3d3eb4fc06efe1b5459716a94870204db78ffb45
+  fingerprint: 3d3eb4fc06efe1b5459716a94870204db78ffb45
+  sha1: f88442aff798e5fe646b59b2add30f408bcd0b42
+  dependencies: []
+- name: golang-smbvolume
+  version: ddb8956df0c67aecb6cd6366bbc0ee5b5bd73ede
+  fingerprint: ddb8956df0c67aecb6cd6366bbc0ee5b5bd73ede
+  sha1: c1a8f8d9f344ae6fde66bee88ccc87f71ccb91bb
+  dependencies: []
+- name: smbdriver
+  version: 25c76fd54dae32f030532b8ba4e8fd2a00eaa823
+  fingerprint: 25c76fd54dae32f030532b8ba4e8fd2a00eaa823
+  sha1: ecc2b56e553f81d8c399f885eb301e338a0e3e25
+  dependencies:
+  - golang-smbvolume
+  - cifs-utils
+license:
+  version: 8f62aa0fdf086c433f2392cda5a1072cc569a103
+  fingerprint: 8f62aa0fdf086c433f2392cda5a1072cc569a103
+  sha1: caadc306246d752784647c30a0b34c19d69d8ca4
