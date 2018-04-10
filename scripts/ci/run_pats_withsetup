@@ -19,7 +19,6 @@ absolute_path() {
 
 base_path=$(absolute_path `dirname $0`)
 
-
 source ${scripts_path}/ci/utils.sh
 check_param CF_USERNAME
 check_param CF_API_ENDPOINT
@@ -27,12 +26,16 @@ check_param APPS_DOMAIN
 check_param APPLICATION_PATH
 check_param SERVICE_NAME
 check_param PLAN_NAME
-check_param CREATE_CONFIG
-check_param BIND_CONFIG
+#check_param CREATE_CONFIG
+#check_param BIND_CONFIG
 check_param BROKER_URL
 check_param BROKER_USER
+check_param AZURE_REMOTE_PATH
+check_param AZURE_USERNAME
+check_param AZURE_PASSWORD
 check_param TEST_MULTI_CELL
 check_param TEST_MOUNT_OPTIONS
+check_param TEST_WINDOWS
 
 if [ -z "$APPLICATION_PATH" ]; then
     echo "APPLICATION_PATH cannot be blank"
@@ -55,6 +58,9 @@ fi
 go get github.com/onsi/ginkgo/ginkgo
 export TEST_WINDOWS_CELL=${TEST_WINDOWS_CELL}
 
+export CREATE_CONFIG='{\"share\":\"$AZURE_REMOTE_PATH\"}'
+export BIND_CONFIG='{\"username\":\"$AZURE_USERNAME\",\"password\":\"$AZURE_PASSWORD\"}'
+
 ${scripts_path}/run-pats \
 ${CF_USERNAME} \
 ${CF_PASSWORD} \
@@ -67,3 +73,4 @@ ${BROKER_USER} \
 ${BROKER_PASSWORD} \
 ${CREATE_CONFIG} \
 ${BIND_CONFIG} \
+
