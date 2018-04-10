@@ -53,6 +53,7 @@ if [ -z "$BROKER_PASSWORD" ]; then
 fi
 
 go get github.com/onsi/ginkgo/ginkgo
+export TEST_WINDOWS_CELL=${TEST_WINDOWS_CELL}
 
 ${scripts_path}/run-pats \
 ${CF_USERNAME} \
