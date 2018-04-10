@@ -58,8 +58,8 @@ fi
 go get github.com/onsi/ginkgo/ginkgo
 export TEST_WINDOWS_CELL=${TEST_WINDOWS_CELL}
 
-export CREATE_CONFIG='{\"share\":\"$AZURE_REMOTE_PATH\"}'
-export BIND_CONFIG='{\"username\":\"$AZURE_USERNAME\",\"password\":\"$AZURE_PASSWORD\"}'
+export CREATE_CONFIG="{\"share\":\"$AZURE_REMOTE_PATH\"}"
+export BIND_CONFIG="{\"username\":\"$AZURE_USERNAME\",\"password\":\"$AZURE_PASSWORD\"}"
 
 ${scripts_path}/run-pats \
 ${CF_USERNAME} \
