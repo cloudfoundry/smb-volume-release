@@ -1,0 +1,5 @@
+---
+name: golang-smbvolume-windows
+
+files:
+  - go1.10.windows-amd64.zip

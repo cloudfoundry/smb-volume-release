@@ -1,0 +1,18 @@
+<% if p("smbdriver_windows.disable") %>
+<% else %>
+{
+  "processes": [
+    {
+      "name": "smbdriver-windows",
+      "executable": "C:\\var\\vcap\\packages\\smbdriver-windows\\smbdriver.exe",
+      "args": [
+        "--listenPort", "<%= p("smbdriver_windows.listen_port") %>",
+        "--transport", "tcp",
+        "--adminPort", "<%= p("smbdriver_windows.admin_port") %>",
+        "--driversPath", "<%= p("smbdriver_windows.driver_path") %>",
+        "--mountDir", "<%= p("smbdriver_windows.cell_mount_path") %>",
+        "--logLevel", "<%= p("smbdriver_windows.log_level") %>"]
+    }
+  ]
+}
+<% end %>

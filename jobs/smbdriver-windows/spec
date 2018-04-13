@@ -1,0 +1,39 @@
+---
+name: smbdriver-windows
+
+templates:
+  install.ps1.erb: bin/pre-start.ps1
+  mounter.ps1.erb: scripts/mounter.ps1.erb
+  unmounter.ps1.erb: scripts/unmounter.ps1.erb
+
+packages:
+- smbdriver-windows
+
+properties:
+  smbdriver_windows.listen_port:
+    description: "port smbdriver listens on"
+    default: "8589"
+  smbdriver_windows.admin_port:
+    description: "port smbdriver_windows listens on for admin requests"
+    default: "8590"
+  smbdriver_windows.driver_path:
+    description: "path to place driver spec/json file for volman to discover"
+    default: "C:\\\\var\\\\vcap\\\\data\\\\voldrivers"
+  smbdriver_windows.cell_mount_path:
+    description: "path to mount volumes into on the cell"
+    default: "C:\\\\var\\\\vcap\\\\data\\\\volumes\\\\smb"
+  smbdriver_windows.log_level:
+    description: "smbdriver_windows log level"
+    default: "info"
+  smbdriver_windows.disable:
+    description: "disable smbdriver_windows"
+    default: false
+  smbdriver_windows.allowed_in_mount:
+    description: "Comma separated list of white-listed options that may be accepted in the mount_config options."
+    example: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
+    default: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
+  smbdriver_windows.default_in_mount:
+    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
+    example: "uid:2000,gid:2000,vers:3.0"
+    default: "uid:2000,gid:2000"
+
