@@ -3,8 +3,9 @@ name: smbdriver-windows
 
 templates:
   install.ps1.erb: bin/pre-start.ps1
-  mounter.ps1.erb: scripts/mounter.ps1.erb
-  unmounter.ps1.erb: scripts/unmounter.ps1.erb
+  check_mount.ps1.erb: scripts/check_mount.ps1
+  mounter.ps1.erb: scripts/mounter.ps1
+  unmounter.ps1.erb: scripts/unmounter.ps1
 
 packages:
 - smbdriver-windows

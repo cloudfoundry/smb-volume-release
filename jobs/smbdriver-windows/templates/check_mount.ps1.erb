@@ -1,0 +1,8 @@
+param([String]$remotePath)
+
+$ErrorActionPreference = "Stop";
+trap { $host.SetShouldExit(1) }
+
+net use | findstr.exe /L $remotePath
+
+Exit 0
