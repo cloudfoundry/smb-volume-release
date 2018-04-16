@@ -3,4 +3,6 @@
   value:
     name: smbdriver-windows
     release: smb-volume
-    properties: {}
+    properties:
+      smbdriver_windows:
+        log_level: debug
