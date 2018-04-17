@@ -11,7 +11,9 @@
         "--adminPort", "<%= p("smbdriver_windows.admin_port") %>",
         "--driversPath", "<%= p("smbdriver_windows.driver_path") %>",
         "--mountDir", "<%= p("smbdriver_windows.cell_mount_path") %>",
-        "--logLevel", "<%= p("smbdriver_windows.log_level") %>"]
+        "--logLevel", "<%= p("smbdriver_windows.log_level") %>",
+        "--mountFlagAllowed", "<%= p("smbdriver_windows.allowed_in_mount") %>",
+        "--mountFlagDefault", "<%= p("smbdriver_windows.default_in_mount") %>"]
     }
   ]
 }
