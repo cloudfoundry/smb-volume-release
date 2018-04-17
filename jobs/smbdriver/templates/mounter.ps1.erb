@@ -1,6 +1,0 @@
-param([String]$username, [String]$password, [String]$remotePath)
-
-$secpasswd = ConvertTo-SecureString $password -AsPlainText -Force
-$cred = New-Object System.Management.Automation.PSCredential ($username, $secpasswd)
-
-New-SmbGlobalMapping -RemotePath $remotePath -Credential $cred

@@ -20,9 +20,9 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
 
 cd smb-volume-release
 
-mkdir -Force c:/var/vcap/jobs/smbdriver/scripts/
-cp ./jobs/smbdriver/templates/mounter.ps1.erb c:/var/vcap/jobs/smbdriver/scripts/mounter.ps1
-cp ./jobs/smbdriver/templates/unmounter.ps1.erb c:/var/vcap/jobs/smbdriver/scripts/unmounter.ps1
+mkdir -Force c:/var/vcap/jobs/smbdriver-windows/scripts/
+cp ./jobs/smbdriver-windows/templates/mounter.ps1.erb c:/var/vcap/jobs/smbdriver-windows/scripts/mounter.ps1
+cp ./jobs/smbdriver-windows/templates/unmounter.ps1.erb c:/var/vcap/jobs/smbdriver-windows/scripts/unmounter.ps1
 
 $env:GOPATH=$PWD
 $env:PATH="$PWD/bin;$env:PATH"
