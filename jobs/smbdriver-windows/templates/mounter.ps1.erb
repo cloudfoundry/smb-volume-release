@@ -1,6 +1,10 @@
 param([String]$username, [String]$password, [String]$remotePath)
 
+$ErrorActionPreference = "Stop";
+trap { $host.SetShouldExit(1) }
+
 $secpasswd = ConvertTo-SecureString $password -AsPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential ($username, $secpasswd)
 
 New-SmbGlobalMapping -RemotePath $remotePath -Credential $cred
+Exit 0
