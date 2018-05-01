@@ -9,83 +9,83 @@ packages:
 - azurefilebroker
 
 properties:
-  azurefilebroker.username:
+  username:
     description: "[REQUIRED] - Basic auth username to verify on incoming Service Broker requests"
     default: "admin"
-  azurefilebroker.password:
+  password:
     description: "[REQUIRED] - Basic auth password to verify on incoming Service Broker requests"
-  azurefilebroker.listen_addr:
+  listen_addr:
     description: "(optional) - address azurefilebroker listens on"
     default: "0.0.0.0:9000"
-  azurefilebroker.service_name:
+  service_name:
     description: "(optional) - name of the service to be registered with cf"
     default: "azuresmbvolume"
-  azurefilebroker.service_id:
+  service_id:
     description: "(optional) - Id of the service to be registered with cf"
     default: "06948cb0-cad7-4buh-leba-9ed8b5c345a3"
-  azurefilebroker.db_driver:
+  db_driver:
     default: ""
     description: "[REQUIRED] - database driver name when using SQL to store broker state"
-  azurefilebroker.environment:
+  environment:
     default: "Preexisting"
     description: "(optional) - `Preexisting` (Using preexisting shares) or the environment for Azure Management Service: `AzureCloud`, `AzureChinaCloud`, `AzureUSGovernment` or `AzureGermanCloud`"
-  azurefilebroker.tenant_id:
+  tenant_id:
     default: ""
     description: "(optional) - Required for Azure Management Service. The tenant id for your service principal"
-  azurefilebroker.client_id:
+  client_id:
     default: ""
     description: "(optional) - Required for Azure Management Service. The client id for your service principal"
-  azurefilebroker.client_secret:
+  client_secret:
     default: ""
     description: "(optional) - Required for Azure Management Service. The client secret for your service principal"
-  azurefilebroker.db_username:
+  db_username:
     default: ""
     description: "[REQUIRED] - database username when using SQL to store broker state"
-  azurefilebroker.db_password:
+  db_password:
     default: ""
     description: "[REQUIRED] - database password when using SQL to store broker state"
-  azurefilebroker.db_hostname:
+  db_hostname:
     default: ""
     description: "[REQUIRED] - database hostname when using SQL to store broker state"
-  azurefilebroker.db_port:
+  db_port:
     default: ""
     description: "[REQUIRED] - database port when using SQL to store broker state"
-  azurefilebroker.db_name:
+  db_name:
     default: ""
     description: "[REQUIRED] - database name when using SQL to store broker state"
-  azurefilebroker.db_ca_cert:
+  db_ca_cert:
     default: ""
     description: "(optional) - CA Cert to verify SSL connection, if not include, connection will be plain"
-  azurefilebroker.allowed_options:
+  allowed_options:
     description: "A comma separated list of parameters allowed to be set in during bind operations"
     example: "file_mode,dir_mode,readonly,vers,sec"
     default: "file_mode,dir_mode,readonly,vers,sec"
-  azurefilebroker.default_options:
+  default_options:
     description: "A comma separated list of defaults specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value that cannot be overridden"
     example: "vers:3.0"
     default: "vers:3.0"
-  azurefilebroker.default_subscription_id:
+  default_subscription_id:
     default: ""
     description: "(optional) - The default Azure Subscription id to use for storage accounts"
-  azurefilebroker.default_resource_group_name:
+  default_resource_group_name:
     default: ""
     description: "(optional) - The default resource group name to use for storage accounts"
-  azurefilebroker.default_location:
+  default_location:
     default: ""
     description: "(optional) - The default location to use for creating storage accounts"
-  azurefilebroker.allow_create_storage_account:
+  allow_create_storage_account:
     default: true
     description: "(optional) - Allow Broker to create storage accounts"
-  azurefilebroker.allow_create_file_share:
+  allow_create_file_share:
     default: true
     description: "(optional) - Allow Broker to create file shares"
-  azurefilebroker.allow_delete_storage_account:
+  allow_delete_storage_account:
     default: false
     description: "(optional) - Allow Broker to delete storage accounts which are created by Broker"
-  azurefilebroker.allow_delete_file_share:
+  allow_delete_file_share:
     default: false
     description: "(optional) - Allow Broker to delete file shares which are created by Broker"
-  azurefilebroker.log_level:
+  log_level:
     description: "azurefilebroker log level"
     default: "info"
 

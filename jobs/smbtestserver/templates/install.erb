@@ -10,22 +10,22 @@ if [ "$(pidof -s smbd)" != "" ]; then
   service smbd stop
 fi
 
-id -u <%= p("smbtestserver.username") %> &>/dev/null || useradd <%= p("smbtestserver.username") %> --group vcap
-smbpasswd -a <%= p("smbtestserver.username") %><<EOF
-<%= p("smbtestserver.password") %>
-<%= p("smbtestserver.password") %>
+id -u <%= p("username") %> &>/dev/null || useradd <%= p("username") %> --group vcap
+smbpasswd -a <%= p("username") %><<EOF
+<%= p("password") %>
+<%= p("password") %>
 EOF
 
 for i in `seq 1 3`;
   do
-    mkdir -p <%= p("smbtestserver.export_root_path") %>/export/vol${i}
-    chmod 775 <%= p("smbtestserver.export_root_path") %>/export/vol${i}
-    chown root:vcap <%= p("smbtestserver.export_root_path") %>/export/vol${i}
+    mkdir -p <%= p("export_root_path") %>/export/vol${i}
+    chmod 775 <%= p("export_root_path") %>/export/vol${i}
+    chown root:vcap <%= p("export_root_path") %>/export/vol${i}
 
   cat << EOF >> /etc/samba/smb.conf
 [vol${i}]
-   path = <%= p("smbtestserver.export_root_path") %>/export/vol${i}
-   host allow = <%= p("smbtestserver.export_cidr") %>
+   path = <%= p("export_root_path") %>/export/vol${i}
+   host allow = <%= p("export_cidr") %>
    valid users = @vcap
    browseable = no
    guest ok = no

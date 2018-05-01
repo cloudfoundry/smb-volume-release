@@ -52,17 +52,16 @@
     - name: azurefilebroker
       release: smb-volume
       properties:
-        azurefilebroker:
-          username: admin
-          password: ((azurefile-broker-password))
-          service_id: azurefile-volume
-          service_name: azurefile-service
-          db_driver: mysql
-          db_username: azurefile-broker
-          db_password: ((azurefile-broker-database-password))
-          db_hostname: sql-db.service.cf.internal
-          db_port: 3306
-          db_name: azurefile-broker
+        username: admin
+        password: ((azurefile-broker-password))
+        service_id: azurefile-volume
+        service_name: azurefile-service
+        db_driver: mysql
+        db_username: azurefile-broker
+        db_password: ((azurefile-broker-database-password))
+        db_hostname: sql-db.service.cf.internal
+        db_port: 3306
+        db_name: azurefile-broker
 
     - name: route_registrar
       release: routing

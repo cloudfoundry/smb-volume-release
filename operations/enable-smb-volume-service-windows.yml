@@ -4,5 +4,4 @@
     name: smbdriver-windows
     release: smb-volume
     properties:
-      smbdriver_windows:
-        log_level: debug
+      log_level: debug

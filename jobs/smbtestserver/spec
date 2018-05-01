@@ -8,13 +8,13 @@ templates:
 packages: []
 
 properties:
- smbtestserver.export_cidr:
+ export_cidr:
     description: "cidr range to use for smb exports"
     default: "10.0.0.0/8"
- smbtestserver.export_root_path:
+ export_root_path:
     description: "SMB root path"
     default: "/var/vcap/store/smbtestserver"
- smbtestserver.username:
+ username:
     description: "SMB username"
- smbtestserver.password:
+ password:
     description: "SMB password"

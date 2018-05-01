@@ -11,33 +11,33 @@ packages:
 - smbdriver
 
 properties:
- smbdriver.listen_port:
+  listen_port:
     description: "port smbdriver listens on"
     default: 8589
- smbdriver.debug_addr:
-   description: "address smbdriver will serve debug info"
-   default: "127.0.0.1:8689"
- smbdriver.adminPort:
+  debug_addr:
+    description: "address smbdriver will serve debug info"
+    default: "127.0.0.1:8689"
+  adminPort:
     description: "port smbdriver listens on for admin requests"
     default: 8590
- smbdriver.driver_path:
-   description: "path to place driver spec/json file for volman to discover"
-   default: "/var/vcap/data/voldrivers"
- smbdriver.cell_mount_path:
-   description: "path to mount volumes into on the cell"
-   default: "/var/vcap/data/volumes/smb"
- smbdriver.log_level:
-   description: "smbdriver log level"
-   default: "info"
- smbdriver.disable:
-   description: "disable smbdriver"
-   default: false
- smbdriver.allowed_in_mount:
-   description: "Comma separated list of white-listed options that may be accepted in the mount_config options."
-   example: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
-   default: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
- smbdriver.default_in_mount:
-   description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
-   example: "uid:2000,gid:2000,vers:3.0"
-   default: "uid:2000,gid:2000"
+  driver_path:
+    description: "path to place driver spec/json file for volman to discover"
+    default: "/var/vcap/data/voldrivers"
+  cell_mount_path:
+    description: "path to mount volumes into on the cell"
+    default: "/var/vcap/data/volumes/smb"
+  log_level:
+    description: "smbdriver log level"
+    default: "info"
+  disable:
+    description: "disable smbdriver"
+    default: false
+  allowed_in_mount:
+    description: "Comma separated list of white-listed options that may be accepted in the mount_config options."
+    example: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
+    default: "username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec"
+  default_in_mount:
+    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
+    example: "uid:2000,gid:2000,vers:3.0"
+    default: "uid:2000,gid:2000"
 

@@ -9,6 +9,6 @@ SDK_PATH="/var/vcap/jobs/database-backup-restorer"
 BBR_ARTIFACT_FILE_PATH="${BBR_ARTIFACT_DIRECTORY}/azurefilebroker-db"
 CONFIG_PATH="${JOB_PATH}/config/config.json"
 
-<% if p('azurefilebroker.release_level_backup') %>
+<% if p('release_level_backup') %>
   "${SDK_PATH}/bin/restore" --config "${CONFIG_PATH}" --artifact-file "${BBR_ARTIFACT_FILE_PATH}"
 <% end %>
