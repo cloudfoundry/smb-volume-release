@@ -26,7 +26,6 @@ files:
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminhttp/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminlocal/*.go # gosub
   - code.cloudfoundry.org/voldriver/*.go # gosub
-  - code.cloudfoundry.org/voldriver/backoff/*.go # gosub
   - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - code.cloudfoundry.org/voldriver/invoker/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
