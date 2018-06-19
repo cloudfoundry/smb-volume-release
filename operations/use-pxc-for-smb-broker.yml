@@ -6,7 +6,7 @@
   path: /instance_groups/name=azurefilebroker/jobs/name=azurefilebroker/properties/db_ca_cert?
   value: ((pxc_server_ca.certificate))
 - type: replace
-  path: /instance_groups/name=database/jobs/name=mysql-clustered/properties/seeded_databases/-
+  path: /instance_groups/name=database/jobs/name=pxc-mysql/properties/seeded_databases/-
   value:
     name: azurefile-broker
     username: azurefile-broker
