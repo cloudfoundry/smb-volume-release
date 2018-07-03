@@ -13,6 +13,8 @@ builds:
     version: 0.1.7
   978d5c69-2cbb-4a77-a746-8ac52081796d:
     version: 0.1.3
+  d20dfcc0-3270-44af-60a6-ed2f2340436e:
+    version: 0.1.11
   db077b89-29f8-4008-b057-c2f6b69468b3:
     version: 0.1.4
 format-version: "2"
