@@ -1,0 +1,33 @@
+<%
+  database_host = nil
+  if_p('db_hostname') do |host|
+    database_host = host
+  end.else do
+    database_host = link('database').instances[0].address
+  end
+%>
+
+bin/azurefilebroker \
+  --logLevel="<%= p('log_level') %>" \
+  --listenAddr="0.0.0.0:9000" \
+  --serviceName="<%= p('service_name') %>" \
+  --serviceID="<%= p('service_id') %>" \
+  --environment="<%= p('environment') %>" \
+  --defaultOptions="<%= p('default_options') %>" \
+  --dbDriver="<%= p('db_driver') %>" \
+  --dbCACertPath="./db_ca.crt" \
+  --hostNameInCertificate="<%= database_host %>" \
+  --cfServiceName="<%= p('service_name') %>" \
+  --dbHostname="<%= database_host %>" \
+  --dbPort="<%= p('db_port') %>" \
+  --dbName="<%= p('db_name') %>" \
+  --tenantID="<%= p('tenant_id') %>" \
+  --clientID="<%= p('client_id') %>" \
+  --clientSecret="<%= p('client_secret') %>" \
+  --defaultSubscriptionID="<%= p('default_subscription_id') %>" \
+  --defaultResourceGroupName="<%= p('default_resource_group_name') %>" \
+  --defaultLocation="<%= p('default_location') %>" \
+  --allowCreateStorageAccount="<%= p('allow_create_storage_account') %>" \
+  --allowCreateFileShare="<%= p('allow_create_file_share') %>" \
+  --allowDeleteStorageAccount="<%= p('allow_delete_storage_account') %>" \
+  --allowDeleteFileShare="<%= p('allow_delete_file_share') %>"

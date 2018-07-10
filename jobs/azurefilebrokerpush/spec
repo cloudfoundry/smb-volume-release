@@ -1,0 +1,126 @@
+---
+name: azurefilebrokerpush
+
+templates:
+  deploy.sh.erb: bin/run
+  manifest.yml.erb: manifest.yml
+  Procfile.erb: Procfile
+  db_ca.crt.erb: db_ca.crt
+  sql.json.erb: sql.json
+  start.sh.erb: start.sh
+
+packages:
+  - azurefilebroker
+  - golang-smbvolume
+
+consumes:
+  - name: database
+    type: database
+    optional: true
+
+properties:
+  domain:
+    description: 'Cloud Foundry system domain'
+  app_domain:
+    description: 'domain used to host the broker app'
+  cf_admin_user:
+    description: 'username of the CF admin user'
+  cf_admin_password:
+    description: 'password of the CF admin user'
+  cf_dial_timeout:
+    description: 'CF CLI connection dial timeout'
+    default: 5
+  organization:
+    description: 'organization that hosts the app'
+  space:
+    description: 'space that hosts the app'
+  skip_cert_verify:
+    description: 'skip ssl validation when setting the cf api endpoint'
+    default: false
+  memory_in_mb:
+    description: 'amount of memory allocated to the broker app'
+    default: 256
+  username:
+    description: "[REQUIRED] - Basic auth username to verify on incoming Service Broker requests"
+    default: "admin"
+  password:
+    description: "[REQUIRED] - Basic auth password to verify on incoming Service Broker requests"
+  service_name:
+    description: "(optional) - name of the service to be registered with cf"
+    default: "azuresmbvolume"
+  service_id:
+    description: "(optional) - Id of the service to be registered with cf"
+    default: "38e48614-e5ee-4730-a7db-ea8e5416897a"
+  environment:
+    default: "Preexisting"
+    description: "(optional) - `Preexisting` (Using preexisting shares) or the environment for Azure Management Service: `AzureCloud`, `AzureChinaCloud`, `AzureUSGovernment` or `AzureGermanCloud`"
+  tenant_id:
+    default: ""
+    description: "(optional) - Required for Azure Management Service. The tenant id for your service principal"
+  client_id:
+    default: ""
+    description: "(optional) - Required for Azure Management Service. The client id for your service principal"
+  client_secret:
+    default: ""
+    description: "(optional) - Required for Azure Management Service. The client secret for your service principal"
+  db_driver:
+    default: ""
+    description: "[REQUIRED] - database driver name when using SQL to store broker state"
+  db_username:
+    default: ""
+    description: "[REQUIRED] - database username when using SQL to store broker state"
+  db_password:
+    default: ""
+    description: "[REQUIRED] - database password when using SQL to store broker state"
+  db_hostname:
+    default: ""
+    description: "[REQUIRED] - database hostname when using SQL to store broker state"
+  db_port:
+    default: "3306"
+    description: "[REQUIRED] - database port when using SQL to store broker state"
+  db_name:
+    description: "[REQUIRED] - database name when using SQL to store broker state"
+    default: "azurefilebroker"
+  db_ca_cert:
+    default: ""
+    description: "(optional) - CA Cert to verify SSL connection, if not include, connection will be plain"
+  allowed_options:
+    description: "A comma separated list of parameters allowed to be set in during bind operations"
+    example: "file_mode,dir_mode,readonly,vers,sec"
+    default: "file_mode,dir_mode,readonly,vers,sec"
+  default_options:
+    description: "A comma separated list of defaults specified as param:value. If a parameter has a default value and is not in the allowed list, this default value becomes a fixed value that cannot be overridden"
+    example: "vers:3.0"
+    default: "vers:3.0"
+  default_subscription_id:
+    default: ""
+    description: "(optional) - The default Azure Subscription id to use for storage accounts"
+  default_resource_group_name:
+    default: ""
+    description: "(optional) - The default resource group name to use for storage accounts"
+  default_location:
+    default: ""
+    description: "(optional) - The default location to use for creating storage accounts"
+  allow_create_storage_account:
+    default: true
+    description: "(optional) - Allow Broker to create storage accounts"
+  allow_create_file_share:
+    default: true
+    description: "(optional) - Allow Broker to create file shares"
+  allow_delete_storage_account:
+    default: false
+    description: "(optional) - Allow Broker to delete storage accounts which are created by Broker"
+  allow_delete_file_share:
+    default: false
+    description: "(optional) - Allow Broker to delete file shares which are created by Broker"
+  log_level:
+    description: "(optional) - azurefilebroker log level"
+    default: "info"
+  app_name:
+    description: '(optional) - application name to use when pushing the broker to cloud foundry and setting the route'
+    default: azurefilebroker
+  create_sql_security_group:
+    description: '(optional) - true if the errand should create a security group to allow traffic to any ip on ports 3306,5432'
+    default: true
+  syslog_url:
+    description: '(optional) - external log service URL'
