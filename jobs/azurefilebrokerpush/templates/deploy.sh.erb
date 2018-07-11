@@ -5,7 +5,7 @@ export CF_HOME=`pwd`/home/cf
 export CF_DIAL_TIMEOUT=<%= p('cf_dial_timeout') %>
 
 SCHEME=https
-DOMAIN=<%= p('cf_domain') %>
+DOMAIN=<%= p('domain') %>
 ADMIN_USER=<%= p('cf_admin_user') %>
 ADMIN_PASSWORD="<%= p('cf_admin_password') %>"
 API_ENDPOINT=$SCHEME://api.$DOMAIN
