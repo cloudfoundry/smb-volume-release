@@ -121,5 +121,8 @@ properties:
   create_sql_security_group:
     description: '(optional) - true if the errand should create a security group to allow traffic to any ip on ports 3306,5432'
     default: true
+  create_credhub_security_group:
+    description: 'unused'
+    default: false
   syslog_url:
     description: '(optional) - external log service URL'
