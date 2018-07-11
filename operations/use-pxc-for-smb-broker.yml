@@ -1,9 +1,9 @@
 ---
 - type: replace
-  path: /instance_groups/name=azurefilebroker/jobs/name=azurefilebroker/properties/db_hostname?
+  path: /instance_groups/name=azurefilebroker/jobs/name=azurefilebrokerpush/properties/db_hostname?
   value: sql-db.service.cf.internal
 - type: replace
-  path: /instance_groups/name=azurefilebroker/jobs/name=azurefilebroker/properties/db_ca_cert?
+  path: /instance_groups/name=azurefilebroker/jobs/name=azurefilebrokerpush/properties/db_ca_cert?
   value: ((pxc_server_ca.certificate))
 - type: replace
   path: /instance_groups/name=database/jobs/name=pxc-mysql/properties/seeded_databases/-
