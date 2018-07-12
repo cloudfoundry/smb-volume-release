@@ -54,6 +54,8 @@
         space: azurefilebroker-space
         syslog_url: ""
         skip_cert_verify: true
+    - name: cf-cli-6-linux
+      release: cf-cli
 
 - type: replace
   path: /instance_groups/name=diego-cell/jobs/-
@@ -89,7 +91,7 @@
 - type: replace
   path: /releases/name=cf-cli?
   value:
-    name: "cf-cli"
-    version: "1.5.0"
-    url: "https://bosh.io/d/github.com/bosh-packages/cf-cli-release?v=1.5.0"
-    sha1: "6749a07026e335f7744f013c9707911fb72170b5"
+    name: cf-cli
+    version: 1.5.0
+    url: https://bosh.io/d/github.com/bosh-packages/cf-cli-release?v=1.5.0
+    sha1: 6749a07026e335f7744f013c9707911fb72170b5
