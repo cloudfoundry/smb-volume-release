@@ -30,4 +30,7 @@ bin/azurefilebroker \
   --allowCreateStorageAccount="<%= p('allow_create_storage_account') %>" \
   --allowCreateFileShare="<%= p('allow_create_file_share') %>" \
   --allowDeleteStorageAccount="<%= p('allow_delete_storage_account') %>" \
-  --allowDeleteFileShare="<%= p('allow_delete_file_share') %>"
+  --allowDeleteFileShare="<%= p('allow_delete_file_share') %>" \
+  <% if_p('db_ca_cert') do |ca_cert| %> \
+  --dbCACertPath="./db_ca.crt"
+  <% end %>
