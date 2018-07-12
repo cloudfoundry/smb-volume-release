@@ -114,3 +114,6 @@
 [submodule "src/code.cloudfoundry.org/smbdriver"]
 	path = src/code.cloudfoundry.org/smbdriver
 	url = https://github.com/cloudfoundry/smbdriver.git
+[submodule "src/gopkg.in/DATA-DOG/go-sqlmock.v1"]
+	path = src/gopkg.in/DATA-DOG/go-sqlmock.v1
+	url = https://gopkg.in/DATA-DOG/go-sqlmock.v1
