@@ -9,7 +9,7 @@
 
 bin/azurefilebroker \
   --logLevel="<%= p('log_level') %>" \
-  --listenAddr="0.0.0.0:9000" \
+  --listenAddr="0.0.0.0:$PORT" \
   --serviceName="<%= p('service_name') %>" \
   --serviceID="<%= p('service_id') %>" \
   --environment="<%= p('environment') %>" \
