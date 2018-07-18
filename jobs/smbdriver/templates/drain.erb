@@ -6,7 +6,7 @@ RUN_DIR=/var/vcap/sys/run/smbdriver
 PIDFILE=$RUN_DIR/smbdriver.pid
 LOG_DIR=/var/vcap/sys/log/smbdriver
 LOGFILE=$LOG_DIR/drain.log
-ADMIN_PORT=<%=p("smbdriver.adminPort")%>
+ADMIN_PORT=<%=p("adminPort")%>
 
 mkdir -p $LOG_DIR
 

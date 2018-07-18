@@ -1,0 +1,7 @@
+param([String]$remotePath)
+
+$ErrorActionPreference = "Stop";
+trap { $host.SetShouldExit(1) }
+
+Remove-SmbGlobalMapping -RemotePath $remotePath -Force
+Exit 0

@@ -25,6 +25,6 @@ $env:PATH="$PWD/bin;$env:PATH"
 go install github.com/onsi/ginkgo/ginkgo
 
 cd src/code.cloudfoundry.org/smbdriver
-ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress --race
+ginkgo -v -r -keepGoing -p -trace -randomizeAllSpecs -progress --race
 
 CheckLastExitCode

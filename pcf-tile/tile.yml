@@ -12,7 +12,7 @@ description: A volume service gives apps access to Microsoft Azure File service 
 # Global defaults (all optional)
 #
 org: system                         # Name of org to create for your apps
-space: smb-voloume-service-space    # Name of space to create for your apps
+space: smb-volume-service-space     # Name of space to create for your apps
 apply_open_security_group: true     # Apply open security group, default: false
 allow_paid_service_plans: true
 
@@ -340,5 +340,5 @@ runtime_configs:
           - name: smbdriver
             release: smb-volume
             properties:
-              allowed-in-mount: (( .properties.mountflagallowed.value ))
-              default-in-mount: (( .properties.mountflagdefault.value ))
+              allowed_in_mount: (( .properties.mountflagallowed.value ))
+              default_in_mount: (( .properties.mountflagdefault.value ))

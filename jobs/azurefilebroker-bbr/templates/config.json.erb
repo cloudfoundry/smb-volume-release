@@ -1,16 +1,16 @@
 <%
   database_host = nil
-  if_p('azurefilebroker.db_hostname') do |host|
+  if_p('db_hostname') do |host|
     database_host = host
   end.else do
     database_host = link('database').instances[0].address
   end
 %>
 {
-  "username":"<%= p('azurefilebroker.db_username') %>",
-  "password":"<%= p('azurefilebroker.db_password') %>",
+  "username":"<%= p('db_username') %>",
+  "password":"<%= p('db_password') %>",
   "host":"<%= database_host %>",
-  "port":<%= p('azurefilebroker.db_port') %>,
-  "database":"<%= p('azurefilebroker.db_name') %>",
-  "adapter":"<%= p('azurefilebroker.db_driver') %>"
+  "port":<%= p('db_port') %>,
+  "database":"<%= p('db_name') %>",
+  "adapter":"<%= p('db_driver') %>"
 }

@@ -20,6 +20,10 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
 
 cd smb-volume-release
 
+mkdir -Force c:/var/vcap/jobs/smbdriver-windows/scripts/
+cp ./jobs/smbdriver-windows/templates/mounter.ps1.erb c:/var/vcap/jobs/smbdriver-windows/scripts/mounter.ps1
+cp ./jobs/smbdriver-windows/templates/unmounter.ps1.erb c:/var/vcap/jobs/smbdriver-windows/scripts/unmounter.ps1
+
 $env:GOPATH=$PWD
 $env:PATH="$PWD/bin;$env:PATH"
 
@@ -31,7 +35,7 @@ mkdir voldriver_plugins
 $drivers_path="$PWD/voldriver_plugins"
 
 mkdir "$PWD/tmp"
-$SOURCE="\\\\$env:smbhost\\vol1"
+$SOURCE="$env:smbremotepath"
 
 "{ `"volman_driver_path`": `"./voldriver_plugins`", `"driver_address`": `"$driver_address`", `"driver_name`": `"smbdriver`", `"create_config`": { `"Name`": `"smb-volume-name`", `"Opts`": {`"source`":`"$SOURCE`",`"uid`":`"2000`",`"gid`":`"2000`",`"username`":`"$env:smbusername`",`"password`":`"$env:smbpassword`"} } } " | Set-Content $PWD/tmp/fixture.json -Force 
 

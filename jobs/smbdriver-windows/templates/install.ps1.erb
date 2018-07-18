@@ -1,0 +1,8 @@
+$ErrorActionPreference = "Stop";
+trap { $host.SetShouldExit(1) }
+
+New-Item -ItemType "directory" -Force "<%= p("driver_path") %>"
+New-Item -ItemType "directory" -Force "<%= p("cell_mount_path") %>"
+
+echo "Installed smbdriver paths"
+Exit 0

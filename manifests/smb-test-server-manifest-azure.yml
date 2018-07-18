@@ -24,9 +24,8 @@ jobs:
     name: smbtestserver
   persistent_disk: 25000
   properties:
-    smbtestserver:
-      username: (( smb-test-server.username ))
-      password: (( smb-test-server.password ))
+    username: (( smb-test-server.username ))
+    password: (( smb-test-server.password ))
 
 networks:
 - name: smbvolume-subnet

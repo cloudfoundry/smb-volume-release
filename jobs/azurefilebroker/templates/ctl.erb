@@ -23,34 +23,34 @@ case $1 in
     echo $$ > $PIDFILE
 
     # pass credentials in through the environment for safety
-    export USERNAME="<%= p("azurefilebroker.username") %>"
-    export PASSWORD="<%= p("azurefilebroker.password") %>"
-    export DBUSERNAME="<%= p("azurefilebroker.db_username") %>"
-    export DBPASSWORD="<%= p("azurefilebroker.db_password") %>"
+    export USERNAME="<%= p("username") %>"
+    export PASSWORD="<%= p("password") %>"
+    export DBUSERNAME="<%= p("db_username") %>"
+    export DBPASSWORD="<%= p("db_password") %>"
 
     exec chpst -u vcap:vcap /var/vcap/packages/azurefilebroker/bin/azurefilebroker \
-      --listenAddr="<%= p("azurefilebroker.listen_addr") %>" \
-      --serviceName="<%= p("azurefilebroker.service_name") %>" \
-      --serviceID="<%= p("azurefilebroker.service_id") %>" \
-      --dbDriver="<%= p("azurefilebroker.db_driver") %>" \
-      --dbHostname="<%= p("azurefilebroker.db_hostname") %>" \
-      --dbPort="<%= p("azurefilebroker.db_port") %>" \
-      --dbName="<%= p("azurefilebroker.db_name") %>" \
-      --dbCACert="<%= p("azurefilebroker.db_ca_cert") %>" \
-      --allowedOptions="<%= p("azurefilebroker.allowed_options") %>" \
-      --defaultOptions="<%= p("azurefilebroker.default_options") %>" \
-      --environment="<%= p("azurefilebroker.environment") %>" \
-      --tenantID="<%= p("azurefilebroker.tenant_id") %>" \
-      --clientID="<%= p("azurefilebroker.client_id") %>" \
-      --clientSecret="<%= p("azurefilebroker.client_secret") %>" \
-      --defaultSubscriptionID="<%= p("azurefilebroker.default_subscription_id") %>" \
-      --defaultResourceGroupName="<%= p("azurefilebroker.default_resource_group_name") %>" \
-      --defaultLocation="<%= p("azurefilebroker.default_location") %>" \
-      --allowCreateStorageAccount="<%= p("azurefilebroker.allow_create_storage_account") %>" \
-      --allowCreateFileShare="<%= p("azurefilebroker.allow_create_file_share") %>" \
-      --allowDeleteStorageAccount="<%= p("azurefilebroker.allow_delete_storage_account") %>" \
-      --allowDeleteFileShare="<%= p("azurefilebroker.allow_delete_file_share") %>" \
-      --logLevel="<%= p("azurefilebroker.log_level") %>" \
+      --listenAddr="<%= p("listen_addr") %>" \
+      --serviceName="<%= p("service_name") %>" \
+      --serviceID="<%= p("service_id") %>" \
+      --dbDriver="<%= p("db_driver") %>" \
+      --dbHostname="<%= p("db_hostname") %>" \
+      --dbPort="<%= p("db_port") %>" \
+      --dbName="<%= p("db_name") %>" \
+      --dbCACert="<%= p("db_ca_cert") %>" \
+      --allowedOptions="<%= p("allowed_options") %>" \
+      --defaultOptions="<%= p("default_options") %>" \
+      --environment="<%= p("environment") %>" \
+      --tenantID="<%= p("tenant_id") %>" \
+      --clientID="<%= p("client_id") %>" \
+      --clientSecret="<%= p("client_secret") %>" \
+      --defaultSubscriptionID="<%= p("default_subscription_id") %>" \
+      --defaultResourceGroupName="<%= p("default_resource_group_name") %>" \
+      --defaultLocation="<%= p("default_location") %>" \
+      --allowCreateStorageAccount="<%= p("allow_create_storage_account") %>" \
+      --allowCreateFileShare="<%= p("allow_create_file_share") %>" \
+      --allowDeleteStorageAccount="<%= p("allow_delete_storage_account") %>" \
+      --allowDeleteFileShare="<%= p("allow_delete_file_share") %>" \
+      --logLevel="<%= p("log_level") %>" \
       >> $LOG_DIR/azurefilebroker.stdout.log \
       2>> $LOG_DIR/azurefilebroker.stderr.log
 
