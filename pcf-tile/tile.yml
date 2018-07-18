@@ -26,8 +26,7 @@ allow_paid_service_plans: true
 packages:
 - name: azurefilebrokerreleases
   type: bosh-release
-  path: resources/smb-volume-0.1.4+dev.1.tgz
-  version: '0.1.4+dev.1'
+  path: resources/smb-volume.dev.1.tgz
 - name: azurefilebroker
   type: app-broker
 #  label: My fabulous appplication      # Package name for use in human-readable labels in OpsManager
@@ -327,7 +326,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: smb-volume
-          version: '0.1.4+dev.1'
+          version: '0.1.11+dev.1'
       addons:
         - name: voldrivers
           include:
