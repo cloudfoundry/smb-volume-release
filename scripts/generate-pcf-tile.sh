@@ -2,7 +2,7 @@
 set +e +x
 
 TARGET_BROKER=$PWD/pcf-tile/resources/azurefilebroker.zip
-TARGET_SMB=$PWD/pcf-tile/resources/smb-volume-0.1.4+dev.1.tgz
+TARGET_SMB=$PWD/pcf-tile/resources/smb-volume.dev.1.tgz
 
 rm -f $TARGET_BROKER
 rm -f $TARGET_SMB
@@ -36,6 +36,6 @@ pushd pcf-tile
   elif [ "$1" = "-minor" ]; then
     tile build minor
   else
-    tile build
+    tile build $1
   fi
 popd
