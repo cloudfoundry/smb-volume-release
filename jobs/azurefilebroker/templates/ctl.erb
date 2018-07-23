@@ -36,7 +36,7 @@ case $1 in
       --dbHostname="<%= p("db_hostname") %>" \
       --dbPort="<%= p("db_port") %>" \
       --dbName="<%= p("db_name") %>" \
-      --dbCACert="<%= p("db_ca_cert") %>" \
+      --dbCACertPath=/var/vcap/jobs/azurefilebroker/db_ca.crt \
       --allowedOptions="<%= p("allowed_options") %>" \
       --defaultOptions="<%= p("default_options") %>" \
       --environment="<%= p("environment") %>" \
