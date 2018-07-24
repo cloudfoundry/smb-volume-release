@@ -25,8 +25,8 @@ case $1 in
     # pass credentials in through the environment for safety
     export USERNAME="<%= p("username") %>"
     export PASSWORD="<%= p("password") %>"
-    export DBUSERNAME="<%= p("db_username") %>"
-    export DBPASSWORD="<%= p("db_password") %>"
+    export DB_USERNAME="<%= p("db_username") %>"
+    export DB_PASSWORD="<%= p("db_password") %>"
 
     exec chpst -u vcap:vcap /var/vcap/packages/azurefilebroker/bin/azurefilebroker \
       --listenAddr="<%= p("listen_addr") %>" \
