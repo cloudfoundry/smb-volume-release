@@ -1,5 +1,11 @@
 ---
 - type: replace
-  path: /addons/name=bosh-dns/jobs/name=bosh-dns/properties/aliases/smbtestserver.service.cf.internal?
+  path: /addons/name=bosh-dns-aliases/jobs/name=bosh-dns/properties/aliases/domain=smbtestserver.service.cf.internal?
   value:
-    - "*.smbtestserver.default.cf.bosh"
+    domain: 'smbtestserver.service.cf.internal'
+    targets:
+    - query: '*'
+      instance_group: smbtestserver
+      deployment: cf
+      network: default
+      domain: bosh
