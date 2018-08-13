@@ -6,6 +6,7 @@ rootfs_uri: docker:///cloudfoundry/diego-pipeline
 inputs:
   - name: smb-volume-release
   - name: vars-store         # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
+  - name: persi-ci
 
 params:
   CF_USERNAME: replace-me
