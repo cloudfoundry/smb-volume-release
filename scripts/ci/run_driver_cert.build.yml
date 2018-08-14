@@ -7,6 +7,7 @@ image_resource:
     tag: v5.2.0
 
 inputs:
+  - name: smb-volume-release-concourse-tasks
   - name: smb-volume-release
   - name: director-state
   - name: persi-ci
@@ -20,4 +21,4 @@ params:
   BBL_AWS_SECRET_ACCESS_KEY:
 
 run:
-  path: smb-volume-release/scripts/ci/run_driver_cert
+  path: smb-volume-release-concourse-tasks/scripts/ci/run_driver_cert

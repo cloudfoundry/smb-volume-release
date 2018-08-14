@@ -2,6 +2,7 @@
 platform: windows
 
 inputs:
+- name: smb-volume-release-concourse-tasks
 - name: smb-volume-release
 
 run:
@@ -10,4 +11,4 @@ run:
     - "-ExecutionPolicy"
     - "ByPass"
     - "-File"
-    - "smb-volume-release/scripts/ci/smbdriver-unit.ps1"
+    - "smb-volume-release-concourse-tasks/scripts/ci/smbdriver-unit.ps1"

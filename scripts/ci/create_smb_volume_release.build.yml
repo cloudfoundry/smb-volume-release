@@ -4,6 +4,7 @@ platform: linux
 rootfs_uri: docker:///cloudfoundry/diego-pipeline
 
 inputs:
+  - name: smb-volume-release-concourse-tasks
   - name: smb-volume-release
   - name: smb-volume-version
 
@@ -13,4 +14,4 @@ outputs:
 params: []
 
 run:
-  path: smb-volume-release/scripts/ci/create_smb_volume_release
+  path: smb-volume-release-concourse-tasks/scripts/ci/create_smb_volume_release
