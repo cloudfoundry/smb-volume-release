@@ -9,7 +9,7 @@ image_resource:
 
 inputs:
   - name: smb-volume-release
-  - name: vars-store         # OPTIONAL - if a directory with a deployment-vars.yml file is provided here, then CF_PASSWORD and BROKER_PASSWORD may be omitted below
+  - name: director-state
   - name: persi-ci
 
 params:
