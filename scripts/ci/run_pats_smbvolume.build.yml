@@ -8,6 +8,7 @@ image_resource:
     tag: v5.16.0
 
 inputs:
+  - name: smb-volume-release-concourse-tasks
   - name: smb-volume-release
   - name: director-state
   - name: persi-ci
@@ -32,4 +33,4 @@ params:
   TEST_WINDOWS_CELL:
 
 run:
-  path: smb-volume-release/scripts/ci/run_pats_withsetup
+  path: smb-volume-release-concourse-tasks/scripts/ci/run_pats_withsetup
