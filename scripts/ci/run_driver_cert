@@ -15,7 +15,7 @@ apt-get -y install cifs-utils realpath
 
 smbtestserver_ip=$(bosh -d cf instances|grep smbtestserver|awk '{print $4}')
 
-pushd smb-volume-release
+pushd smb-volume-release-concourse-tasks
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH
 
