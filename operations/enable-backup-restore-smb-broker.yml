@@ -2,7 +2,7 @@
 - type: replace
   path: /instance_groups/name=backup-restore/jobs/-
   value:
-    name: smbbroker-bbr
+    name: azurefilebroker-bbr
     release: smb-volume
     properties:
       smbbroker:
