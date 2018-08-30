@@ -1,0 +1,15 @@
+---
+- type: replace
+  path: /instance_groups/name=backup-restore/jobs/-
+  value:
+    name: smbbroker-bbr
+    release: smb-volume
+    properties:
+      smbbroker:
+        db_driver: mysql
+        db_username: azurefile-broker
+        db_password: ((azurefile-broker-database-password))
+        db_hostname: sql-db.service.cf.internal
+        db_port: 3306
+        db_name: azurefile-broker
+        release_level_backup: true
