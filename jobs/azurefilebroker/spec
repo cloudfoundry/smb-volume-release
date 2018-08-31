@@ -3,6 +3,7 @@ name: azurefilebroker
 
 templates:
   ctl.erb: bin/azurefilebroker_ctl
+  db_ca.crt.erb: db_ca.crt
 
 packages:
 - golang-smbvolume

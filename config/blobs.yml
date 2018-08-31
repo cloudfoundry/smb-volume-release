@@ -6,10 +6,6 @@ automake-1.15.tar.gz:
   size: 2244206
   object_id: c36c457b-640d-4f34-73dd-da239db8d2fd
   sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
-cf-cli_6.23.1_linux_x86-64.tgz:
-  size: 6692717
-  object_id: ccf31958-4079-4125-5171-caff6f5cfe70
-  sha: a195e99cae5ab17b453b0a0747508c8f3eee5cae
 cifs-utils-6.7.tar.bz2:
   size: 363647
   object_id: f76fd32c-1c75-4c28-49fd-48ba34a43204

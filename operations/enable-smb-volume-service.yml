@@ -81,13 +81,7 @@
   value:
     name: smb-volume
     version: latest
-- type: replace
-  path: /releases/name=broker-registrar?
-  value:
-    name: broker-registrar
-    sha1: d44d9af8fd06ecf6d50004c9bfd5516a6e482201
-    url: https://bosh.io/d/github.com/cloudfoundry-community/broker-registrar-boshrelease?v=3.4.0
-    version: 3.4.0
+
 - type: replace
   path: /releases/name=cf-cli?
   value:

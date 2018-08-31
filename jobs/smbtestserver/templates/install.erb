@@ -11,7 +11,7 @@ if [ "$(pidof -s smbd)" != "" ]; then
 fi
 
 id -u <%= p("username") %> &>/dev/null || useradd <%= p("username") %> --group vcap
-smbpasswd -a <%= p("username") %><<EOF
+smbpasswd -a <%= p("username") %> -s <<EOF
 <%= p("password") %>
 <%= p("password") %>
 EOF
