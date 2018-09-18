@@ -32,12 +32,26 @@ packages:
 #  label: My fabulous appplication      # Package name for use in human-readable labels in OpsManager
   enable_global_access_to_plans: true
   pre_deploy: |
+    echo "Cleaning up obsoleted resources"
     cf delete-org -f azure-file-broker-org
     cf delete-quota -f azure-file-broker-org-quota
+    echo "Detecting existing database service instance"
+    if cf services | grep "smb-volume-service-db"; then
+      echo "Found existing service instance, skipping"
+    else
+      echo "No database service instance found, creating new service instance\n$EXISTING_SERVICE"
+      if [ "$DBSERVICENAME" ]; then
+        cf create-service $DBSERVICENAME $DBPLANNAME smb-volume-service-db
+      else
+        cf create-user-provided-service smb-volume-service-db
+      fi
+    fi
   manifest:
     path: resources/azurefilebroker.zip
     buildpack: binary_buildpack
     instances: 1
+    services:
+      - smb-volume-service-db
     env:
       ENVIRONMENT: (( .properties.environment_selector.preexisting_option.environment.value || .properties.environment_selector.azure_option.environment.value || '' ))
       TENANTID: (( .properties.environment_selector.azure_option.tenantid.value || '' ))
@@ -219,7 +233,7 @@ forms:
         label: MySQL
     - name: dbcacert
       label: Database CACert
-      description: Content of CA Cert to verify SSL connection
+      description: Content of CA Cert to verify SSL connection, used when the database is using a self-signed certificate
       type: string
       configurable: true
       optional: true
@@ -242,7 +256,12 @@ forms:
         property_blueprints:
           - name: dbservicename
             label: Cloud Foundry Service Name
-            description: Name for database service binded to the broker app in env VCAP_SERVICES where we should find database credentials. For example "azure-sqldb" or "azure-mysqldb"
+            description: Name for database service. For example "azure-sqldb" or "azure-mysqldb"
+            type: string
+            configurable: true
+          - name: dbplanname
+            label: Cloud Foundry Service Plan
+            description: Plan for database service created for the broker app. For example "basic50" or "StandardS1"
             type: string
             configurable: true
       - name: database_option
