@@ -36,7 +36,10 @@ case $1 in
 
     exec chpst -u root:root /var/vcap/packages/smbdriver/bin/smbdriver \
       --listenPort=<%= p("listen_port") %> \
-      --transport="tcp" \
+      --transport="tcp-json" \
+      <% if p("enable_unique_volume_ids") %> \
+      --uniqueVolumeIds \
+      <% end %> \
       --debugAddr="<%= p("debug_addr") %>" \
       --driversPath="<%= p("driver_path") %>" \
       --mountDir="<%= p("cell_mount_path") %>" \

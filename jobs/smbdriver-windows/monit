@@ -7,7 +7,10 @@
       "executable": "C:\\var\\vcap\\packages\\smbdriver-windows\\smbdriver.exe",
       "args": [
         "--listenPort", "<%= p("listen_port") %>",
-        "--transport", "tcp",
+        "--transport", "tcp-json",
+        <% if p("enable_unique_volume_ids") %>
+        "--uniqueVolumeIds",
+        <% end %>
         "--adminPort", "<%= p("admin_port") %>",
         "--driversPath", "<%= p("driver_path") %>",
         "--mountDir", "<%= p("cell_mount_path") %>",
