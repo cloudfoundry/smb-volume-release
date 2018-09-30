@@ -336,9 +336,9 @@ forms:
 # for any of your packages above, with services provided by other
 # products.
 #
-# requires_product_versions:
-# - name: p-mysql
-#   version: '~> 1.7'
+requires_product_versions:
+- name: cf
+  version: '~> 2.0'
 
 # Customize upgrade parameters if the defaults don't meet your needs.
 #
