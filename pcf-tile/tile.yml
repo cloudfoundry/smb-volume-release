@@ -26,7 +26,7 @@ allow_paid_service_plans: true
 packages:
 - name: azurefilebrokerreleases
   type: bosh-release
-  path: resources/smb-volume.dev.1.tgz
+  path: resources/smb-volume-release-0.1.12.tgz
 - name: azurefilebroker
   type: app-broker
 #  label: My fabulous appplication      # Package name for use in human-readable labels in OpsManager
@@ -52,6 +52,14 @@ packages:
     instances: 1
     services:
       - smb-volume-service-db
+    command: |
+      if [ "$DBCACERT" ]; then
+        export DBCACERTPATH="$HOME/cert"
+        echo "$DBCACERT" >> $HOME/cert
+      else
+        export DBCACERTPATH=""
+      fi
+      bin/azurefilebroker --logLevel="$LOGLEVEL" --listenAddr="0.0.0.0:$PORT" --serviceName="$SERVICENAME" --serviceID="azurefilebroker" --environment="$ENVIRONMENT" --defaultOptions="$DEFAULTOPTIONS" --dbDriver="$DBDRIVERNAME" --dbCACertPath="$DBCACERTPATH" --hostNameInCertificate="$HOSTNAMEINCERTIFICATE" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --tenantID="$TENANTID" --clientID="$CLIENTID" --clientSecret="$CLIENTSECRET" --defaultSubscriptionID="$DEFAULTSUBSCRIPTIONID" --defaultResourceGroupName="$DEFAULTRESOURCEGROUPNAME" --defaultLocation="$DEFAULTLOCATION" --allowCreateStorageAccount="$ALLOWCREATESTORAGEACCOUNT" --allowCreateFileShare="$ALLOWCREATEFILESHARE" --allowDeleteStorageAccount="$ALLOWDELETESTORAGEACCOUNT" --allowDeleteFileShare="$ALLOWDELETEFILESHARE"
     env:
       ENVIRONMENT: (( .properties.environment_selector.preexisting_option.environment.value || .properties.environment_selector.azure_option.environment.value || '' ))
       TENANTID: (( .properties.environment_selector.azure_option.tenantid.value || '' ))
@@ -68,8 +76,8 @@ packages:
       DBHOST: (( .properties.database_selector.database_option.dbhost.value || '' ))
       DBPORT: (( .properties.database_selector.database_option.dbport.value || '' ))
       DBNAME: (( .properties.database_selector.database_option.dbname.value || '' ))
-      DBUSERNAME: (( .properties.database_selector.database_option.dbusername.value || '' ))
-      DBPASSWORD: (( .properties.database_selector.database_option.dbpassword.value || '' ))
+      DB_USERNAME: (( .properties.database_selector.database_option.dbusername.value || '' ))
+      DB_PASSWORD: (( .properties.database_selector.database_option.dbpassword.value || '' ))
 
 # Uncomment this section if you want to display forms with configurable
 # properties in Ops Manager. These properties will be passed to your
@@ -345,7 +353,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: smb-volume
-          version: '0.1.11+dev.1'
+          version: '0.1.12'
       addons:
         - name: voldrivers
           include:
