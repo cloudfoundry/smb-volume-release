@@ -7,5 +7,8 @@ inputs:
 - name: smb-volume-release-concourse-tasks
 - name: smb-volume-release
 
+params:
+  SUBMODULE_NAME:
+
 run:
-  path: smb-volume-release-concourse-tasks/scripts/ci/azurefilebroker-unit.sh
+  path: smb-volume-release-concourse-tasks/scripts/ci/run-submodule-unit.sh
