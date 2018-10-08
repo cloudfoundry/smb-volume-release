@@ -1,0 +1,89 @@
+---
+name: smbbrokerpush
+
+templates:
+  deploy.sh.erb: bin/run
+  manifest.yml.erb: manifest.yml
+  Procfile.erb: Procfile
+  credhub.json.erb: credhub.json
+  services.json.erb: config/services.json
+  start.sh.erb: start.sh
+
+packages:
+  - smbbroker
+  - golang-smbvolume
+
+consumes:
+  - name: database
+    type: database
+    optional: true
+
+properties:
+  domain:
+    description: 'Cloud Foundry system domain'
+  app_domain:
+    description: 'domain used to host the broker app'
+  cf.client_id:
+    description: 'ID of the CF client'
+  cf.client_secret:
+    description: 'Secret of the CF client'
+  cf.dial_timeout:
+    description: 'CF CLI connection dial timeout'
+    default: 5
+  organization:
+    description: 'organization that hosts the app'
+  space:
+    description: 'space that hosts the app'
+  memory_in_mb:
+    description: 'amount of memory allocated to the broker app'
+    default: 256
+  username:
+    description: 'service broker username'
+  password:
+    description: 'service broker password'
+  credhub.url:
+    default: ""
+    description: "CredHub URL when using CredHub to store broker state"
+  credhub.uaa_client_id:
+    default: ""
+    description: "UAA client ID when using CredHub to store broker state"
+  credhub.uaa_client_secret:
+    default: ""
+    description: "UAA client secret when using CredHub to store broker state"
+  credhub.store_id:
+    default: "smbbroker"
+    description: "Store ID used to namespace instance details and bindings in store"
+  credhub.create_security_group:
+    description: 'true if the errand should create a security group to allow traffic to any ip on ports 8443,8844'
+    default: true
+  syslog_url:
+    description: 'external log service URL'
+  error_on_misconfiguration:
+    description: 'throw error on service misconfiguration during deployment'
+    default: true
+  skip_cert_verify:
+    description: 'true if the cf api uses test certs that should not be verified'
+    default: false
+  register_broker:
+    description: 'true if the errand should register the service broker after pushing it to cf'
+    default: true
+  app_name:
+    description: 'application name to use when pushing the broker to cloud foundry and setting the route'
+    default: smbbroker
+  broker_name:
+    description: 'name of the service broker registered in CF'
+    default: smbbroker
+  services:
+    description: "List of services and plans supported by broker"
+    default:
+    - id: "9db9cca4-8fd5-4b96-a4c7-0a48f47c3bad"
+      name: "smb"
+      description: "Existing SMB shares (see: https://code.cloudfoundry.org/smb-volume-release/)"
+      bindable: true
+      plan_updatable: false
+      tags: ["smb"]
+      requires: ["volume_mount"]
+      plans:
+      - id: 0da18102-48dc-46d0-98b3-7a4ff6dc9c54
+        name: "Existing"
+        description: "A preexisting share"

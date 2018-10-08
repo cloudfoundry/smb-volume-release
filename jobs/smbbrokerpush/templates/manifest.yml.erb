@@ -1,0 +1,7 @@
+---
+buildpack: binary_buildpack
+domain: "<%= p('app_domain') %>"
+memory: "<%= p('memory_in_mb') %>M"
+env:
+  USERNAME: "<%= p('username') %>"
+  PASSWORD: "<%= p('password') %>"
