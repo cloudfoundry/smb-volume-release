@@ -57,6 +57,7 @@
         username: smb-broker
         password: ((smb-broker-password))
         skip_cert_verify: true
+        syslog_url: ""
       release: smb-volume
     - name: cf-cli-6-linux
       release: cf-cli
