@@ -15,22 +15,21 @@ inputs:
 
 params:
   CF_USERNAME: replace-me
-  CF_PASSWORD:
   CF_API_ENDPOINT: replace-me
   APPS_DOMAIN: replace-me
   APPLICATION_PATH: replace-me
   NAME_PREFIX: smbvolume
   SERVICE_NAME: replace-me
   PLAN_NAME: replace-me
-  CREATE_CONFIG: replace-me
-  BIND_CONFIG: replace-me
-  BROKER_URL:
-  BROKER_USER:
-  BROKER_PASSWORD:
-  BROKER_PASSWORD_KEY: azurefile-broker-password
-  TEST_MULTI_CELL:
-  TEST_MOUNT_OPTIONS:
-  TEST_WINDOWS_CELL:
+  BROKER_URL: replace-me
+  BROKER_USER: replace-me
+  BROKER_PASSWORD_KEY: smb-broker-password
+  SMB_REMOTE_PATH: replace-me
+  SMB_USERNAME: replace-me
+  SMB_PASSWORD: replace-me
+  TEST_MULTI_CELL: replace-me
+  TEST_MOUNT_OPTIONS: replace-me
+  TEST_WINDOWS_CELL: replace-me
 
 run:
   path: smb-volume-release-concourse-tasks/scripts/ci/run_pats_withsetup
