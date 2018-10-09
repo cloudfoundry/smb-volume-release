@@ -21,9 +21,6 @@ params:
   NAME_PREFIX: smbvolume
   SERVICE_NAME: replace-me
   PLAN_NAME: replace-me
-  BROKER_URL: replace-me
-  BROKER_USER: replace-me
-  BROKER_PASSWORD_KEY: smb-broker-password
   SMB_REMOTE_PATH: replace-me
   SMB_USERNAME: replace-me
   SMB_PASSWORD: replace-me

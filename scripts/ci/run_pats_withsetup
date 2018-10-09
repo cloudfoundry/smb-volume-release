@@ -27,8 +27,6 @@ check_param APPS_DOMAIN
 check_param APPLICATION_PATH
 check_param SERVICE_NAME
 check_param PLAN_NAME
-check_param BROKER_URL
-check_param BROKER_USER
 check_param SMB_REMOTE_PATH
 check_param SMB_USERNAME
 check_param SMB_PASSWORD
@@ -41,16 +39,12 @@ if [ -z "$APPLICATION_PATH" ]; then
     exit 1
 fi
 
-# CF_PASSWORD and BROKER_PASSWORD are retrieved from credhub
+# CF_PASSWORD is retrieved from credhub
 ${root_path}/persi-ci/scripts/ci/bbl_get_bosh_env
 source bosh-env/set-env.sh
 
 bosh_manifest_password_variable_name=cf_admin_password
 CF_PASSWORD=`credhub find -j -n ${bosh_manifest_password_variable_name} | jq -r .credentials[].name | xargs credhub get -j -n | jq -r .value`
-
-
-bosh_manifest_password_variable_name=$BROKER_PASSWORD_KEY
-BROKER_PASSWORD=`credhub find -j -n ${bosh_manifest_password_variable_name} | jq -r .credentials[].name | xargs credhub get -j -n | jq -r .value`
 
 go get github.com/onsi/ginkgo/ginkgo
 
@@ -69,8 +63,5 @@ ${scripts_path}/run-pats \
   ${APPS_DOMAIN} \
   ${SERVICE_NAME} \
   ${PLAN_NAME} \
-  ${BROKER_URL} \
-  ${BROKER_USER} \
-  ${BROKER_PASSWORD} \
   ${CREATE_CONFIG} \
   ${BIND_CONFIG}
