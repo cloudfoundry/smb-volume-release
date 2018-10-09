@@ -132,3 +132,6 @@
 [submodule "src/code.cloudfoundry.org/existingvolumebroker"]
 	path = src/code.cloudfoundry.org/existingvolumebroker
 	url = https://github.com/cloudfoundry/existingvolumebroker
+[submodule "src/github.com/zbiljic/go-filelock"]
+	path = src/github.com/zbiljic/go-filelock
+	url = https://github.com/zbiljic/go-filelock
