@@ -10,9 +10,8 @@ usage () {
     exit 1
 }
 
-if [[ "$#" -le 8 ]]
-    then
-        usage
+if [[ "$#" -lt 6 ]]; then
+    usage
 fi
 
 pushd `dirname $0`
