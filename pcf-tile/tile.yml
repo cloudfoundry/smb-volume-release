@@ -36,14 +36,16 @@ packages:
     cf delete-org -f azure-file-broker-org
     cf delete-quota -f azure-file-broker-org-quota
     echo "Detecting existing database service instance"
-    if cf services | grep "smb-volume-service-db"; then
+    cf services
+    cf services | grep $DATABASE_INSTANCE_NAME
+    if [ $? -eq 0 ]; then
       echo "Found existing service instance, skipping"
     else
-      echo "No database service instance found, creating new service instance\n$EXISTING_SERVICE"
+      echo "No database service instance found, creating new service instance"
       if [ "$DBSERVICENAME" ]; then
-        cf create-service $DBSERVICENAME $DBPLANNAME smb-volume-service-db
+        cf create-service $DBSERVICENAME $DBPLANNAME $DATABASE_INSTANCE_NAME
       else
-        cf create-user-provided-service smb-volume-service-db
+        cf create-user-provided-service $DATABASE_INSTANCE_NAME
       fi
     fi
   manifest:
@@ -51,7 +53,7 @@ packages:
     buildpack: binary_buildpack
     instances: 1
     services:
-      - smb-volume-service-db
+      - (( .properties.database_instance_name ))
     command: |
       if [ "$DBCACERT" ]; then
         export DBCACERTPATH="$HOME/cert"
@@ -114,6 +116,12 @@ forms:
       type: string
       configurable: false
       default: smbvolume
+    - name: database_instance_name
+      type: string
+      label: Database instance name for service broker
+      description: Name for the database instance used by service broker
+      configurable: false
+      default: smb-volume-service-db
     - name: loglevel
       label: LogLevel
       description: Log level of the broker
