@@ -1,0 +1,78 @@
+name: smb-volume
+version: 0.2.0
+commit_hash: ecfba10
+uncommitted_changes: false
+jobs:
+- name: azurefilebroker
+  version: 6d86d6bee82e56b89d9b113e364dd650fcb5f3cf
+  fingerprint: 6d86d6bee82e56b89d9b113e364dd650fcb5f3cf
+  sha1: e64cfe65ce25501e55b581bc42c1c3c82993966e
+- name: azurefilebroker-bbr
+  version: 62061d1f820db019a436d5bd4243cf230e5e320e
+  fingerprint: 62061d1f820db019a436d5bd4243cf230e5e320e
+  sha1: e1eb2a5b846939f2aba5ef61de25d0d0d25296ce
+- name: azurefilebrokerpush
+  version: 0f9a32aa5ea1741cb91fc1997280b3db27d01587
+  fingerprint: 0f9a32aa5ea1741cb91fc1997280b3db27d01587
+  sha1: f7b9b7c901f05f350448c23c16255cae41fefc2a
+- name: smbbrokerpush
+  version: 1ee98626d724e901cd79f8ef96004add1be4f1b4
+  fingerprint: 1ee98626d724e901cd79f8ef96004add1be4f1b4
+  sha1: d1534da9637a079ee12cdf6bbfd332ab3034d245
+- name: smbdriver
+  version: 2683c06f99ae829d956c19fc7a7a0b3ee0d71e1b
+  fingerprint: 2683c06f99ae829d956c19fc7a7a0b3ee0d71e1b
+  sha1: 73df2f7fa5a728f81f24e67311dd758354098b76
+- name: smbdriver-windows
+  version: 8365a31338dec9891a45d42df0e48851c3e5002a
+  fingerprint: 8365a31338dec9891a45d42df0e48851c3e5002a
+  sha1: 81340f2bf7ec14681960b42e72db74803cf949dc
+- name: smbtestserver
+  version: eeb4dea6e85f7d7732b96f8bb461bbe91deb5fc2
+  fingerprint: eeb4dea6e85f7d7732b96f8bb461bbe91deb5fc2
+  sha1: bf44d928c1d676c4083a90900310e110e05cc4ce
+packages:
+- name: azurefilebroker
+  version: 9a06f34a3ec814482551b5bdebdf80f9ca11ab23
+  fingerprint: 9a06f34a3ec814482551b5bdebdf80f9ca11ab23
+  sha1: 5d142b58519194286c6fec328e6f9fc0e99344e6
+  dependencies:
+  - golang-smbvolume
+- name: cifs-utils
+  version: 3d3eb4fc06efe1b5459716a94870204db78ffb45
+  fingerprint: 3d3eb4fc06efe1b5459716a94870204db78ffb45
+  sha1: f88442aff798e5fe646b59b2add30f408bcd0b42
+  dependencies: []
+- name: golang-smbvolume
+  version: 729484f84b0d98fd19b0a41d1e3b4b44e6d7f7af
+  fingerprint: 729484f84b0d98fd19b0a41d1e3b4b44e6d7f7af
+  sha1: b2001a1f80e3b659d9b9d6c31d227d258f82c7d7
+  dependencies: []
+- name: golang-smbvolume-windows
+  version: 414725c52d8dba070aae253f193331693ceb9ab4
+  fingerprint: 414725c52d8dba070aae253f193331693ceb9ab4
+  sha1: d2c0eade33f46ee20d9c5932e8f764bf8503d320
+  dependencies: []
+- name: smbbroker
+  version: 8ea0396ca824e70b03437e6f9beccee53bfe9850
+  fingerprint: 8ea0396ca824e70b03437e6f9beccee53bfe9850
+  sha1: 649efea626a80bab080da56023566904f0a55f28
+  dependencies:
+  - golang-smbvolume
+- name: smbdriver
+  version: e3a7a644d4ce9e7d1fe156123e22e0400c984d6f
+  fingerprint: e3a7a644d4ce9e7d1fe156123e22e0400c984d6f
+  sha1: 61be9741be31be9e98198332cdd6f03fc69eb103
+  dependencies:
+  - golang-smbvolume
+  - cifs-utils
+- name: smbdriver-windows
+  version: 79751a561d3c031db7fb5da9f4e25f98b28a56db
+  fingerprint: 79751a561d3c031db7fb5da9f4e25f98b28a56db
+  sha1: 946a69e33f1a7cf1bde5aeee512350ed7de38116
+  dependencies:
+  - golang-smbvolume-windows
+license:
+  version: 8f62aa0fdf086c433f2392cda5a1072cc569a103
+  fingerprint: 8f62aa0fdf086c433f2392cda5a1072cc569a103
+  sha1: caadc306246d752784647c30a0b34c19d69d8ca4
