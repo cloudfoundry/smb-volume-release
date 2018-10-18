@@ -116,6 +116,9 @@ properties:
   log_level:
     description: "(optional) - azurefilebroker log level"
     default: "info"
+  log_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"
   register_broker:
     description: 'true if the errand should register the service broker after pushing it to cf'
     default: true

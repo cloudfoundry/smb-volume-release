@@ -26,6 +26,9 @@ properties:
   log_level:
     description: "smbdriver_windows log level"
     default: "info"
+  log_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"
   disable:
     description: "disable smbdriver_windows"
     default: false

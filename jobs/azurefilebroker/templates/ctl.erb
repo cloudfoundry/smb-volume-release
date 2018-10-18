@@ -51,6 +51,7 @@ case $1 in
       --allowDeleteStorageAccount="<%= p("allow_delete_storage_account") %>" \
       --allowDeleteFileShare="<%= p("allow_delete_file_share") %>" \
       --logLevel="<%= p("log_level") %>" \
+      --logFormat="<%= p("log_format") %>" \
       >> $LOG_DIR/azurefilebroker.stdout.log \
       2>> $LOG_DIR/azurefilebroker.stderr.log
 

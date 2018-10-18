@@ -87,3 +87,9 @@ properties:
       - id: 0da18102-48dc-46d0-98b3-7a4ff6dc9c54
         name: "Existing"
         description: "A preexisting share"
+  log_level:
+    description: "smbbroker log level"
+    default: "info"
+  log_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"
