@@ -42,6 +42,8 @@ packages:
       echo "Found existing service instance, skipping"
     else
       echo "No database service instance found, creating new service instance"
+      export DBSERVICENAME=`echo $DATABASE_SELECTOR | grep -Po '"dbservicename":*"\K[^"]*'`
+      export DBPLANNAME=`echo $DATABASE_SELECTOR | grep -Po '"dbplanname":*"\K[^"]*'`
       if [ "$DBSERVICENAME" ]; then
         cf create-service $DBSERVICENAME $DBPLANNAME $DATABASE_INSTANCE_NAME
       else
@@ -62,7 +64,7 @@ packages:
     buildpack: binary_buildpack
     instances: 1
     services:
-      - (( .properties.database_instance_name ))
+      - (( .properties.database_instance_name.value ))
     command: |
       if [ "$DBCACERT" ]; then
         export DBCACERTPATH="$HOME/cert"
