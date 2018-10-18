@@ -37,7 +37,7 @@ packages:
     cf delete-quota -f azure-file-broker-org-quota
     echo "Detecting existing database service instance"
     cf services
-    cf services | grep $DATABASE_INSTANCE_NAME
+    cf services | grep "^$DATABASE_INSTANCE_NAME\b"
     if [ $? -eq 0 ]; then
       echo "Found existing service instance, skipping"
     else
@@ -47,6 +47,15 @@ packages:
       else
         cf create-user-provided-service $DATABASE_INSTANCE_NAME
       fi
+      echo -n "Waiting for service creation"
+      cf services | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create in progress"
+      while [ $? -eq 0 ]
+      do
+        sleep 10s
+        echo -n "."
+        cf services | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create in progress"
+      done
+      echo " done."
     fi
   manifest:
     path: resources/azurefilebroker.zip
@@ -207,6 +216,7 @@ forms:
             description: The default location to use for creating storage accounts
             type: string
             configurable: true
+            default: eastus
             optional: true
           - name: allowcreatestorageaccount
             label: Allow Create Storage Account
