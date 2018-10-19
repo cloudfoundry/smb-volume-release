@@ -15,7 +15,7 @@
         "--driversPath", "<%= p("driver_path") %>",
         "--mountDir", "<%= p("cell_mount_path") %>",
         "--logLevel", "<%= p("log_level") %>",
-        "--logFormat", "<%= p("log_format") %>",
+        "--timeFormat", "<%= p("log_time_format") %>",
         "--mountFlagAllowed", "<%= p("allowed_in_mount") %>",
         "--mountFlagDefault", "<%= p("default_in_mount") %>"]
     }
