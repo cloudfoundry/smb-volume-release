@@ -23,6 +23,10 @@ properties:
     description: 'Cloud Foundry system domain'
   app_domain:
     description: 'domain used to host the broker app'
+  cf.admin_user:
+    description: 'username of the CF admin user'
+  cf.admin_password:
+    description: 'password of the CF admin user'
   cf.client_id:
     description: 'ID of the CF client'
   cf.client_secret:
