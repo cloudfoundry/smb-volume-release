@@ -6,6 +6,12 @@ RUN_DIR=/var/vcap/sys/run/azurefilebroker
 LOG_DIR=/var/vcap/sys/log/azurefilebroker
 PIDFILE=$RUN_DIR/azurefilebroker.pid
 
+SCRIPT=$(basename $0)
+mkdir -p /var/vcap/sys/log/monit
+
+exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
+exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
+
 case $1 in
 
   start)
@@ -14,11 +20,6 @@ case $1 in
 
     mkdir -p $LOG_DIR
     chown -R vcap:vcap $LOG_DIR
-
-    export GOMAXPROCS=$(nproc)
-
-    # Work around for go DNS bug (fix slated for v1.7)
-    export GODEBUG=netdns=cgo
 
     echo $$ > $PIDFILE
 
