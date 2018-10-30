@@ -8,10 +8,8 @@ if ((Get-Item $BOSH_INSTALL_TARGET).LinkType -ne "") {
   $BOSH_INSTALL_TARGET = (Get-Item $BOSH_INSTALL_TARGET).Target
 }
 
-$env:GOROOT="C:\var\vcap\packages\golang-smbvolume-windows\go"
 $env:GOPATH="${BOSH_INSTALL_TARGET}"
-$env:PATH="${env:GOROOT}\bin;${env:PATH}"
-
+C:\var\vcap\packages\golang-1-windows\bosh\compile.ps1
 $ld_pkg_path="code.cloudfoundry.org/smbdriver/cmd/smbdriver"
 
 # Create GOPATH
