@@ -2,7 +2,7 @@
 name: smbbroker
 
 dependencies:
-- golang-smbvolume
+- golang-1-linux
 
 files:
   - code.cloudfoundry.org/smbbroker/Procfile

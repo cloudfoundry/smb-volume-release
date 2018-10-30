@@ -2,7 +2,7 @@
 name: smbdriver-windows
 
 dependencies:
-- golang-smbvolume-windows
+- golang-1-windows
 
 files:
   - exiter.ps1

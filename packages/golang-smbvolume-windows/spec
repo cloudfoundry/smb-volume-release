@@ -1,6 +1,0 @@
----
-name: golang-smbvolume-windows
-
-files:
-  - go1.11.windows-amd64.zip
-  - exiter.ps1

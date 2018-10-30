@@ -2,7 +2,7 @@
 name: smbdriver
 
 dependencies:
-- golang-smbvolume
+- golang-1-linux
 - cifs-utils
 
 files:
