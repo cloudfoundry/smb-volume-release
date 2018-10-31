@@ -19,9 +19,6 @@ files:
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
-  - code.cloudfoundry.org/nfsdriver/*.go # gosub
-  - code.cloudfoundry.org/nfsdriver/mountchecker/*.go # gosub
-  - code.cloudfoundry.org/nfsdriver/oshelper/*.go # gosub
   - code.cloudfoundry.org/smbdriver/*.go # gosub
   - code.cloudfoundry.org/smbdriver/cmd/smbdriver/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/*.go # gosub
@@ -30,6 +27,9 @@ files:
   - code.cloudfoundry.org/voldriver/*.go # gosub
   - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
   - code.cloudfoundry.org/voldriver/invoker/*.go # gosub
+  - code.cloudfoundry.org/volumedriver/*.go # gosub
+  - code.cloudfoundry.org/volumedriver/mountchecker/*.go # gosub
+  - code.cloudfoundry.org/volumedriver/oshelper/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
