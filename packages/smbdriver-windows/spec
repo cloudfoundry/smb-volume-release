@@ -11,6 +11,9 @@ files:
   - code.cloudfoundry.org/cfhttp/unix_transport/*.go # gosub
   - code.cloudfoundry.org/clock/*.go # gosub
   - code.cloudfoundry.org/debugserver/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/driverhttp/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/invoker/*.go # gosub
   - code.cloudfoundry.org/goshims/bufioshim/*.go # gosub
   - code.cloudfoundry.org/goshims/execshim/*.go # gosub
   - code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
@@ -27,9 +30,6 @@ files:
   - code.cloudfoundry.org/smbdriver/driveradmin/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminhttp/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminlocal/*.go # gosub
-  - code.cloudfoundry.org/voldriver/*.go # gosub
-  - code.cloudfoundry.org/voldriver/driverhttp/*.go # gosub
-  - code.cloudfoundry.org/voldriver/invoker/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
