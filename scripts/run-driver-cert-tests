@@ -33,7 +33,7 @@ go build -o "$SMB_RELEASE_DIR/tmp/smbdriver" "cmd/smbdriver/main.go"
 
 go get -t code.cloudfoundry.org/volume_driver_cert
 
-killall -9 smbdriver || true
+pkill smbdriver || true
 
 mountDir=${SMB_RELEASE_DIR}/tmp/mountdir
 mkdir -p ${mountDir}
@@ -47,6 +47,6 @@ pushd $SMB_RELEASE_DIR
     ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert
 popd
 
-killall -9 smbdriver || true
+pkill smbdriver || true
 
 rm -f $SMB_RELEASE_DIR/tmp/nfsv3driver
