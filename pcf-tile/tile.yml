@@ -37,27 +37,28 @@ packages:
     cf delete-quota -f azure-file-broker-org-quota
     echo "Detecting existing database service instance"
     cf services
-    cf services | grep "^$DATABASE_INSTANCE_NAME\b"
+    echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b"
     if [ $? -eq 0 ]; then
       echo "Found existing service instance, skipping"
     else
       echo "No database service instance found, creating new service instance"
-      export DBSERVICENAME=`echo $DATABASE_SELECTOR | grep -Po '"dbservicename":*"\K[^"]*'`
-      export DBPLANNAME=`echo $DATABASE_SELECTOR | grep -Po '"dbplanname":*"\K[^"]*'`
+      export DBSERVICENAME=$(echo $DATABASE_SELECTOR | grep -Po '"dbservicename":*"\K[^"]*')
+      export DBPLANNAME=$(echo $DATABASE_SELECTOR | grep -Po '"dbplanname":*"\K[^"]*')
+      export DBPARAMETER=$(echo $DATABASE_SELECTOR | grep -Po '"dbparameter":"\K((.*?)[^\\])["]' | sed 's/.$//' | sed 's/\\"/"/g')
       if [ "$DBSERVICENAME" ]; then
-        cf create-service $DBSERVICENAME $DBPLANNAME $DATABASE_INSTANCE_NAME
+        cf create-service $DBSERVICENAME $DBPLANNAME $DATABASE_INSTANCE_NAME -c $DBPARAMETER
       else
         cf create-user-provided-service $DATABASE_INSTANCE_NAME
       fi
-      echo -n "Waiting for service creation"
-      cf services | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create in progress"
-      while [ $? -eq 0 ]
-      do
+      echo -n "Waiting for database service instance creation"
+      while true; do
         sleep 10s
-        echo -n "."
-        cf services | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create in progress"
+        cf services
+        echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create succeeded"
+        if [ $? -eq 0 ]; then
+          break
+        fi
       done
-      echo " done."
     fi
   manifest:
     path: resources/azurefilebroker.zip
@@ -292,6 +293,12 @@ forms:
             description: Plan for database service created for the broker app. For example "basic50" or "StandardS1"
             type: string
             configurable: true
+          - name: dbparameter
+            label: Service Creation Parameters
+            description: Parameters used to create database service instance with service broker. Make sure you input correct JSON format object without spaces. For example, you should set this field to {"sqlServerParameters":{"connectionPolicy":"Proxy"}} if you're using SQL database provided by Azure, which sets database connection mode to "Proxy".
+            type: string
+            configurable: true
+            default: "{}"
       - name: database_option
         select_value: Existing External Database
         property_blueprints:
