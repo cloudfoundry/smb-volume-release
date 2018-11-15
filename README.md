@@ -31,10 +31,10 @@ The test server provides an easy test target with which you can try out volume m
 
 2. Now redeploy your cf-deployment while including the smb ops file:
     ```bash
-    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o /operations/experimental/enable-smb-volume-service.yml
+    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o operations/experimental/enable-smb-volume-service.yml
     ```
     
-**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o /operations/experimental/enable-smb-volume-service.yml` option.
+**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o operations/experimental/enable-smb-volume-service.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to mount or create SMB volumes.  Unless you have explicitly defined a variable for your broker password, BOSH will generate one for you.
 
@@ -49,8 +49,8 @@ The easiest way to deploy the test server is to include the `enable-smb-test-ser
 $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml \
   -v smb-username=smbuser \
   -v smb-password=something-secret \
-  -o /operations/experimental/enable-smb-volume-service.yml \
-  -o ../smb-volume-release/operations/enable-smb-test-server.yml
+  -o operations/experimental/enable-smb-volume-service.yml \
+  -o operations/test/enable-smb-test-server.yml
 ```
 
 **NOTE**: *This test SMB server only works with Ubuntu stemcells.*
