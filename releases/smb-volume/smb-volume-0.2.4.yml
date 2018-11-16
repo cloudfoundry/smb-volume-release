@@ -1,0 +1,84 @@
+name: smb-volume
+version: 0.2.4
+commit_hash: 775e04c
+uncommitted_changes: false
+jobs:
+- name: azurefilebroker
+  version: 2d94fbae3507ae270d5f4504e12f7beabfaa8f0bf267fda4e66d66988bbd2659
+  fingerprint: 2d94fbae3507ae270d5f4504e12f7beabfaa8f0bf267fda4e66d66988bbd2659
+  sha1: sha256:1b34a8bc26ddf19ecc144fe1322cb138a106db6f8b5b93328073ad62f26e18c2
+- name: azurefilebroker-bbr
+  version: 27cd84af95a4f2c2e98ce656b9033c36a8efefdf67798ab48c8f9ed9b1071ecc
+  fingerprint: 27cd84af95a4f2c2e98ce656b9033c36a8efefdf67798ab48c8f9ed9b1071ecc
+  sha1: sha256:9a2eacf2a9bd1e03e050d27c55f146f96adf5040d73c2004bfc743de1b7b7d7b
+- name: azurefilebrokerpush
+  version: b5af3bb636dc257563d6f5577501829a30591c1bb3e1724744505adedf0dbe6d
+  fingerprint: b5af3bb636dc257563d6f5577501829a30591c1bb3e1724744505adedf0dbe6d
+  sha1: sha256:47ff18b88ddc9c657f13721d3aa7a05d1bf5b7b6190f9a4a25526acd7355538a
+- name: smbbrokerpush
+  version: a5f3d5b303d730f79e5297d7d5d82d523ebae66b4bbff212fa075cc3eab2e25f
+  fingerprint: a5f3d5b303d730f79e5297d7d5d82d523ebae66b4bbff212fa075cc3eab2e25f
+  sha1: sha256:75549eb1f4676dd0624c8f58656bddd743a6874e6118bae0d6d8564c73fd8de3
+- name: smbdriver
+  version: 67606c331f5e8e72cb28f5086f65968dac5fb2725b34514a50da5dc931ed047c
+  fingerprint: 67606c331f5e8e72cb28f5086f65968dac5fb2725b34514a50da5dc931ed047c
+  sha1: sha256:7fe8cd5f8debccdbe48989e64765ba3543725c7cfc1af985bfe6c1a2dd9ee8bb
+- name: smbdriver-windows
+  version: c5f43b00d7e7d15bcb460fdf4bcf5ce908bf9644fab78ba64c40154cbd087bc0
+  fingerprint: c5f43b00d7e7d15bcb460fdf4bcf5ce908bf9644fab78ba64c40154cbd087bc0
+  sha1: sha256:15ad0241516f52a4091e1efdd36f0cdfad692d14023be7b6c59114a7c809dd12
+- name: smbtestserver
+  version: cf1bd4bf6d84ecff17a9163de36b42dbedcb34ddbc767c89b953cf66017612d8
+  fingerprint: cf1bd4bf6d84ecff17a9163de36b42dbedcb34ddbc767c89b953cf66017612d8
+  sha1: sha256:3c17e1c4a679352ce4ca26b7846973c379442fe033eec11b66797c260ca6fa07
+packages:
+- name: azurefilebroker
+  version: 88fb2be4cdd4a4f51655f5d677f3d9cedfcb7fa50448f40ad69f1c5cb39c9078
+  fingerprint: 88fb2be4cdd4a4f51655f5d677f3d9cedfcb7fa50448f40ad69f1c5cb39c9078
+  sha1: sha256:45ece8d38aaaf044473f24958bcab20e6dee2d057e710c8e331d0c3b2b5896ac
+  dependencies:
+  - golang-1-linux
+- name: cifs-utils
+  version: 2b5f90c43280309ef547f546893b29386d66c4b4ac3387a6e65aad6c696bade5
+  fingerprint: 2b5f90c43280309ef547f546893b29386d66c4b4ac3387a6e65aad6c696bade5
+  sha1: sha256:7954d61cb56d8725ab1364afe8bad85f695190b6597d0edea067d5fa5f64d04a
+  dependencies:
+  - python-2.7
+- name: golang-1-linux
+  version: 864e21e6d4f474b33b5d810004e2382cd5c64972
+  fingerprint: 864e21e6d4f474b33b5d810004e2382cd5c64972
+  sha1: 5e52b62c0c036ddc9701cc92e16ce808f958ae2d
+  dependencies: []
+- name: golang-1-windows
+  version: feb0de65f16dad009b76d1f2fa062bea00da3c70
+  fingerprint: feb0de65f16dad009b76d1f2fa062bea00da3c70
+  sha1: aef86259df3671eecc764d4dd6f9279f159e7806
+  dependencies: []
+- name: python-2.7
+  version: 7063c9f4e43bf49374c2f6cc6c2f74a5467f2298
+  fingerprint: 7063c9f4e43bf49374c2f6cc6c2f74a5467f2298
+  sha1: bd130315766a7641dbd20aa328d16f084cc17965
+  dependencies: []
+- name: smbbroker
+  version: e7655a39b8e6ab958c6547cbdb80274d1fac1c6c46df2994c2826e9dd192fc9b
+  fingerprint: e7655a39b8e6ab958c6547cbdb80274d1fac1c6c46df2994c2826e9dd192fc9b
+  sha1: sha256:c614470a6b836001e7f2c81f57966a44195f37afca2b238723c7a2f83c232b5d
+  dependencies:
+  - golang-1-linux
+- name: smbdriver
+  version: d8f7dee1c85a0ef2fbf3182fa6dd0904869a2311d317d46c00e3739cec694223
+  fingerprint: d8f7dee1c85a0ef2fbf3182fa6dd0904869a2311d317d46c00e3739cec694223
+  sha1: sha256:f737edd83e57ed0a7803dcdea1addc8acb04c2daf42a2642329b3f50498196f6
+  dependencies:
+  - golang-1-linux
+  - cifs-utils
+- name: smbdriver-windows
+  version: b3c573b88a3b8c84baa7b4be4dac7d09210da11c8f79c2d8e79d99811e7e85e7
+  fingerprint: b3c573b88a3b8c84baa7b4be4dac7d09210da11c8f79c2d8e79d99811e7e85e7
+  sha1: sha256:1933c51de19ad5a7efd427aa2871b79daddad65807f46757fdbf88ee71614890
+  dependencies:
+  - golang-1-windows
+license:
+  version: 0aecd8025f98a0dadc759cfc567f4480da0e472173a8f766a348ab599ac1b3b1
+  fingerprint: 0aecd8025f98a0dadc759cfc567f4480da0e472173a8f766a348ab599ac1b3b1
+  sha1: sha256:861e4f1ff1f87970c9790f658586b3f7258da41e1af15a0b781c7c1edfade60a
