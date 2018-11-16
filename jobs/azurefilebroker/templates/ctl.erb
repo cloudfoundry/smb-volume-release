@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 RUN_DIR=/var/vcap/sys/run/azurefilebroker
 LOG_DIR=/var/vcap/sys/log/azurefilebroker
@@ -13,7 +13,6 @@ exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
 exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
 
 case $1 in
-
   start)
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
@@ -55,7 +54,6 @@ case $1 in
       --timeFormat="<%= p("log_time_format") %>" \
       >> $LOG_DIR/azurefilebroker.stdout.log \
       2>> $LOG_DIR/azurefilebroker.stderr.log
-
     ;;
 
   stop)
@@ -67,8 +65,6 @@ case $1 in
 
   *)
     echo "Usage: azurefilebroker_ctl {start|stop}"
-
     ;;
-
 esac
 
