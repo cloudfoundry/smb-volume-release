@@ -46,7 +46,7 @@ function create_credhub_security_group() {
 }
 
 function create_manifest() {
-  cat $MANIFEST
+  cat $MANIFEST | sed 's/PASSWORD: "[^"]*"/PASSWORD: ****/g'
   cp -f $MANIFEST /var/vcap/packages/smbbroker/manifest.yml
   cp -f $PROCFILE /var/vcap/packages/smbbroker/Procfile
   cp -f $STARTUP_SCRIPT /var/vcap/packages/smbbroker/start.sh
