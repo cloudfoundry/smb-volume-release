@@ -32,6 +32,7 @@ packages:
 #  label: My fabulous appplication      # Package name for use in human-readable labels in OpsManager
   enable_global_access_to_plans: true
   pre_deploy: |
+    E_CREATION_FAILED=99
     echo "Cleaning up obsoleted resources"
     cf delete-org -f azure-file-broker-org
     cf delete-quota -f azure-file-broker-org-quota
@@ -57,6 +58,10 @@ packages:
         echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create succeeded"
         if [ $? -eq 0 ]; then
           break
+        fi
+        echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create failed"
+        if [ $? -eq 0 ]; then
+          exit $E_CREATION_FAILED
         fi
       done
     fi
