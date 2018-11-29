@@ -300,7 +300,7 @@ forms:
             configurable: true
           - name: dbparameter
             label: Service Creation Parameters
-            description: Parameters used to create database service instance with service broker. Make sure you input correct JSON format object without spaces. For example, you should set this field to {"sqlServerParameters":{"connectionPolicy":"Proxy"}} if you're using SQL database provided by Azure, which sets database connection mode to "Proxy".
+            description: Parameters used to create database service instance with service broker. Make sure you input correct JSON format object without spaces. For example, you should set this field to {"sqlServerParameters":{"connectionPolicy":"Proxy"}} if you're using SQL database provided by Meta Azure Service Broker, which sets database connection mode to "Proxy".
             type: string
             configurable: true
             default: "{}"
