@@ -78,9 +78,16 @@ packages:
       else
         export DBCACERTPATH=""
       fi
+      if [ "$ENVIRONMENT_SELECTED" = "Preexisting SMB Share" ]; then
+        export ENVIRONMENT=$ENVIRONMENT_PREEXISTING
+      else
+        export ENVIRONMENT=$ENVIRONMENT_AZUREFILESHARE
+      fi
       bin/azurefilebroker --logLevel="$LOGLEVEL" --listenAddr="0.0.0.0:$PORT" --serviceName="$SERVICENAME" --serviceID="azurefilebroker" --environment="$ENVIRONMENT" --defaultOptions="$DEFAULTOPTIONS" --dbDriver="$DBDRIVERNAME" --dbCACertPath="$DBCACERTPATH" --hostNameInCertificate="$HOSTNAMEINCERTIFICATE" --cfServiceName="$DBSERVICENAME" --dbHostname="$DBHOST" --dbPort="$DBPORT" --dbName="$DBNAME" --tenantID="$TENANTID" --clientID="$CLIENTID" --clientSecret="$CLIENTSECRET" --defaultSubscriptionID="$DEFAULTSUBSCRIPTIONID" --defaultResourceGroupName="$DEFAULTRESOURCEGROUPNAME" --defaultLocation="$DEFAULTLOCATION" --allowCreateStorageAccount="$ALLOWCREATESTORAGEACCOUNT" --allowCreateFileShare="$ALLOWCREATEFILESHARE" --allowDeleteStorageAccount="$ALLOWDELETESTORAGEACCOUNT" --allowDeleteFileShare="$ALLOWDELETEFILESHARE"
     env:
-      ENVIRONMENT: (( .properties.environment_selector.preexisting_option.environment.value || .properties.environment_selector.azure_option.environment.value || '' ))
+      ENVIRONMENT_SELECTED: (( .properties.environment_selector.value || '' ))
+      ENVIRONMENT_PREEXISTING: (( .properties.environment_selector.preexisting_option.environment.value || '' ))
+      ENVIRONMENT_AZUREFILESHARE: (( .properties.environment_selector.azure_option.environment.value || '' ))
       TENANTID: (( .properties.environment_selector.azure_option.tenantid.value || '' ))
       CLIENTID: (( .properties.environment_selector.azure_option.clientid.value || '' ))
       CLIENTSECRET: (( .properties.environment_selector.azure_option.clientsecret.value || '' ))
@@ -168,7 +175,8 @@ forms:
           - name: environment
             label: Environment
             type: dropdown_select
-            configurable: false
+            configurable: true
+            default: Preexisting
             freeze_on_deploy: true
             options:
               - name: Preexisting
