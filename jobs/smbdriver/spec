@@ -5,6 +5,11 @@ templates:
   install.erb: bin/pre-start
   ctl.erb: bin/smbdriver_ctl
   drain.erb: bin/drain
+  ca.crt.erb: config/certs/ca.crt
+  client.crt.erb: config/certs/client.crt
+  client.key.erb: config/certs/client.key
+  server.crt.erb: config/certs/server.crt
+  server.key.erb: config/certs/server.key
 
 packages:
 - cifs-utils
@@ -46,3 +51,41 @@ properties:
   enable_unique_volume_ids:
     description: "opt-in to unique volume IDs"
     default: true
+  tls.ca_cert:
+    description: "PEM encoded CA certificate. If not provided, driver will not accept TLS connections"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  tls.server_cert:
+    description: "PEM encoded server certificate"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  tls.server_key:
+    description: "PEM encoded server private key"
+    default: ""
+    example: "|
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----"
+  tls.client_cert:
+    description: "PEM encoded client certificate"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  tls.client_key:
+    description: "PEM encoded client private key"
+    default: ""
+    example: "|
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----"
+  ssl.insecure_skip_verify:
+    description: "When connecting over SSL, skip verification of server IP addresses in the certificate"
+    default: false

@@ -2,6 +2,8 @@
 
 set -e
 
+CLIENT_CERTS_DIR=<%= p('driver_path') %>/certs/smbdriver
+SERVER_CERTS_DIR=/var/vcap/jobs/smbdriver/config/certs
 RUN_DIR=/var/vcap/sys/run/smbdriver
 LOG_DIR=/var/vcap/sys/log/smbdriver
 PIDFILE=$RUN_DIR/smbdriver.pid
@@ -33,10 +35,24 @@ case $1 in
 
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
     export PATH=/usr/local/bin:$PATH
+    
+    ENABLE_INSECURE_SKIP_VERIFY=""
+    <% if p("ssl.insecure_skip_verify") %>
+    ENABLE_INSECURE_SKIP_VERIFY="--insecureSkipVerify"
+    <% end %>
 
     exec chpst -u root:root /var/vcap/packages/smbdriver/bin/smbdriver \
       --listenPort=<%= p("listen_port") %> \
       --transport="tcp-json" \
+      <% if p("tls.ca_cert") != '' %>\
+      --requireSSL \
+      --certFile="${SERVER_CERTS_DIR}/server.crt" \
+      --keyFile="${SERVER_CERTS_DIR}/server.key" \
+      --caFile="${CLIENT_CERTS_DIR}/ca.crt" \
+      --clientCertFile="${CLIENT_CERTS_DIR}/client.crt" \
+      --clientKeyFile="${CLIENT_CERTS_DIR}/client.key" \
+      ${ENABLE_INSECURE_SKIP_VERIFY} \
+      <% end %>\
       <% if p("enable_unique_volume_ids") %> \
       --uniqueVolumeIds \
       <% end %> \
