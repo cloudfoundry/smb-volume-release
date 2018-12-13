@@ -55,13 +55,9 @@ packages:
       while true; do
         sleep 10s
         cf services
-        echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create succeeded"
+        echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b" | grep -E "create succeeded|create failed|user-provided"
         if [ $? -eq 0 ]; then
           break
-        fi
-        echo "$output" | grep "^$DATABASE_INSTANCE_NAME\b" | grep "create failed"
-        if [ $? -eq 0 ]; then
-          exit $E_CREATION_FAILED
         fi
       done
     fi
