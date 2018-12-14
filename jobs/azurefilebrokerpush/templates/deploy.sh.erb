@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 export PATH="/var/vcap/packages/cf-cli-6-linux/bin:$PATH"
-export CF_HOME=/var/vcap/data/azurefilebrokerpush/
+export CF_HOME=/var/vcap/data/azurefilebrokerpush_$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)/
 export CF_DIAL_TIMEOUT=<%= p('cf_dial_timeout') %>
 
 SCHEME=https
@@ -23,11 +23,11 @@ USERNAME="<%= p('username') %>"
 PASSWORD="<%= p('password') %>"
 APP_URL=$SCHEME://$APP_NAME.$DOMAIN
 
-mkdir -p $CF_HOME
-
 DEPLOYMENT_STATUS=0
 
 function authenticate_and_target() {
+  cf logout
+  mkdir -p $CF_HOME
   cf api $API_ENDPOINT <% if p('skip_cert_verify') %>--skip-ssl-validation<% end %>
   cf auth $ADMIN_USER "$ADMIN_PASSWORD"
   cf create-org $ORG
@@ -120,6 +120,11 @@ function register_service() {
   cf create-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL || cf update-service-broker $SERVICE_BROKER_NAME $USERNAME $PASSWORD $APP_URL
 }
 
+function clean_up() {
+  cf logout
+  rm -rf $CF_HOME
+}
+
 function print_deployment_status() {
   if [[ $DEPLOYMENT_STATUS != 0 ]]; then
     echo "Deployment failed!"
@@ -144,4 +149,5 @@ create_logging_service
 <% if p('register_broker') %>
   register_service
 <% end %>
+clean_up
 print_deployment_status
