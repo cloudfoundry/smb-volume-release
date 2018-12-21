@@ -1,10 +1,17 @@
-param([String]$username, [String]$password, [String]$remotePath)
+param([String]$username, [String]$password, [String]$remotePath, [String]$localPath)
 
 $ErrorActionPreference = "Stop";
 trap { $host.SetShouldExit(1) }
 
+# mount the remote SMB share globally on the host
 $secpasswd = ConvertTo-SecureString $password -AsPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential ($username, $secpasswd)
 
 New-SmbGlobalMapping -RemotePath $remotePath -Credential $cred
+
+# create a symbolic link for the container
+$cdir = Split-Path $localPath -Leaf
+$pdir = Split-Path $localPath -Parent
+New-Item -itemtype symboliclink -path $pdir -name $cdir -value $remotePath -Force
+
 Exit 0
