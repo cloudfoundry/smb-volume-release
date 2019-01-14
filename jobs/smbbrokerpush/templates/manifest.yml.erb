@@ -1,8 +1,10 @@
 ---
 applications:
 - name: "<%= p('app_name') %>"
-  buildpack: binary_buildpack
-  domain: "<%= p('app_domain') %>"
+  buildpacks:
+  - binary_buildpack
+  routes:
+  - "<%= p('app_name') + '.' + p('app_domain') %>"
   memory: "<%= p('memory_in_mb') %>M"
   env:
     USERNAME: "<%= p('username') %>"
