@@ -2,8 +2,8 @@
 
 set -e -x
 
-scripts_path=./$(dirname $0)
-eval $($scripts_path/get_paths.sh)
+scripts_path="./$(dirname "$0")"
+eval "$("$scripts_path/get_paths.sh")"
 
 listen_port=8589
 listen_address=0.0.0.0:${listen_port}
@@ -12,7 +12,7 @@ driver_address=http://${listen_address}
 mkdir -p ~/voldriver_plugins
 drivers_path=$(realpath ~/voldriver_plugins)
 
-mkdir -p $SMB_RELEASE_DIR/tmp
+mkdir -p "$SMB_RELEASE_DIR/tmp"
 
 echo "{
   \"volman_driver_path\": \"~/voldriver_plugins\",
@@ -20,9 +20,9 @@ echo "{
   \"driver_name\": \"smbdriver\",
   \"create_config\": {
     \"Name\": \"smb-volume-name\",
-    \"Opts\": {\"source\":\"${SOURCE}\",\"uid\":\"2000\",\"gid\":\"2000\",\"username\":\"${username}\",\"password\":\"${password}\"}
+    \"Opts\": {\"source\":\"${SOURCE}\",\"uid\":\"2000\",\"gid\":\"2000\",\"username\":\"${USERNAME}\",\"password\":\"${PASSWORD}\"}
   }
-} "  > $SMB_RELEASE_DIR/tmp/fixture.json
+} " > "$SMB_RELEASE_DIR/tmp/fixture.json"
 
 export FIXTURE_FILENAME="$SMB_RELEASE_DIR/tmp/fixture.json"
 
@@ -35,18 +35,18 @@ go get -t code.cloudfoundry.org/volume_driver_cert
 
 pkill smbdriver || true
 
-mountDir=${SMB_RELEASE_DIR}/tmp/mountdir
-mkdir -p ${mountDir}
+mountDir="${SMB_RELEASE_DIR}/tmp/mountdir"
+mkdir -p "${mountDir}"
 
-$SMB_RELEASE_DIR/tmp/smbdriver -listenPort="${listen_port}" -transport="tcp" -driversPath="${drivers_path}" \
-      --mountDir=${mountDir}  \
+"$SMB_RELEASE_DIR/tmp/smbdriver" -listenPort="${listen_port}" -transport="tcp" -driversPath="${drivers_path}" \
+      --mountDir="${mountDir}" \
       --mountFlagAllowed="username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec" \
       --mountFlagDefault="uid:2000,gid:2000" &
 
-pushd $SMB_RELEASE_DIR
+pushd "$SMB_RELEASE_DIR"
     ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert
 popd
 
 pkill smbdriver || true
 
-rm -f $SMB_RELEASE_DIR/tmp/nfsv3driver
+rm -rf "$SMB_RELEASE_DIR/tmp"

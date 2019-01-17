@@ -13,8 +13,9 @@ inputs:
   - name: persi-ci
 
 params:
-  username:
-  password:
+  SOURCE:
+  USERNAME:
+  PASSWORD:
   BBL_IAAS: aws
   BBL_AWS_REGION:
   BBL_AWS_ACCESS_KEY_ID:

@@ -13,15 +13,12 @@ source bosh-env/set-env.sh
 apt-get update
 apt-get -y install cifs-utils realpath
 
-smbtestserver_ip=$(bosh -d cf instances | grep -w smbtestserver | awk '{print $4}')
-
 pushd smb-volume-release
     export GOROOT=/usr/local/go
     export PATH=$GOROOT/bin:$PATH
 
     export GOPATH=$PWD
     export PATH=$PWD/bin:$PATH
-    export SOURCE=//${smbtestserver_ip}/vol1
 
     go get github.com/onsi/ginkgo/ginkgo
     go get github.com/onsi/gomega
