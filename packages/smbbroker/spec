@@ -34,6 +34,7 @@ files:
   - code.cloudfoundry.org/existingvolumebroker/*.go # gosub
   - code.cloudfoundry.org/existingvolumebroker/utils/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/mysqlshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
