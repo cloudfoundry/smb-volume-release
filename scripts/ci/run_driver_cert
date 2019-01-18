@@ -14,14 +14,57 @@ apt-get update
 apt-get -y install cifs-utils realpath
 
 pushd smb-volume-release
-    export GOROOT=/usr/local/go
-    export PATH=$GOROOT/bin:$PATH
+  export GOROOT=/usr/local/go
+  export PATH="${GOROOT}/bin:${PATH}"
 
-    export GOPATH=$PWD
-    export PATH=$PWD/bin:$PATH
+  export GOPATH="${PWD}"
+  export PATH="${PWD}/bin:${PATH}"
 
-    go get github.com/onsi/ginkgo/ginkgo
-    go get github.com/onsi/gomega
+  export SMB_RELEASE_DIR="${PWD}"
 
-    ./scripts/run-driver-cert-tests -race
+  go get github.com/onsi/ginkgo/ginkgo
+  go get github.com/onsi/gomega
+
+  listen_port=8589
+  listen_address="0.0.0.0:${listen_port}"
+  driver_address="http://${listen_address}"
+
+  mkdir -p ~/voldriver_plugins
+  drivers_path="$(realpath ~/voldriver_plugins)"
+
+  mkdir -p "${SMB_RELEASE_DIR}/tmp"
+
+  export FIXTURE_FILENAME="${SMB_RELEASE_DIR}/tmp/fixture.json"
+
+  echo "{
+    \"volman_driver_path\": \"~/voldriver_plugins\",
+    \"driver_address\": \"${driver_address}\",
+    \"driver_name\": \"smbdriver\",
+    \"create_config\": {
+      \"Name\": \"smb-volume-name\",
+      \"Opts\": {\"source\":\"${SMB_REMOTE_PATH}\",\"uid\":\"2000\",\"gid\":\"2000\",\"username\":\"${SMB_USERNAME}\",\"password\":\"${SMB_PASSWORD}\"}
+    }
+  } " > "${FIXTURE_FILENAME}"
+
+  pushd src/code.cloudfoundry.org/smbdriver
+    go build -o "${SMB_RELEASE_DIR}/tmp/smbdriver" "cmd/smbdriver/main.go"
+  popd
+
+  go get -t code.cloudfoundry.org/volume_driver_cert
+
+  pkill smbdriver || true
+
+  mountDir="${SMB_RELEASE_DIR}/tmp/mountdir"
+  mkdir -p "${mountDir}"
+
+  "${SMB_RELEASE_DIR}/tmp/smbdriver" -listenPort="${listen_port}" -transport="tcp" -driversPath="${drivers_path}" \
+        --mountDir="${mountDir}" \
+        --mountFlagAllowed="username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec" \
+        --mountFlagDefault="uid:2000,gid:2000" &
+
+  ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert -race
+
+  pkill smbdriver || true
+
+  rm -rf "${SMB_RELEASE_DIR}/tmp"
 popd
