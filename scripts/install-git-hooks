@@ -1,18 +1,57 @@
 #!/bin/bash
 
+install_pre_commit() {
+  if [ ! -f $1 ]; then
+    echo "#!/bin/bash" > $1
+    chmod +x $1
+  fi
+
+  if grep -q 'git-hooks/pre-commit' $1; then
+    echo "pre-commit already installed."
+  else
+    echo >> $1
+    echo './git-hooks/pre-commit' >> $1
+    echo "pre-commit installed."
+  fi
+}
+
+# smb-volume-release hooks
 RELEASE=$(cd $(dirname $0)/.. && pwd)
 PRE_COMMIT=${RELEASE}/.git/hooks/pre-commit
+install_pre_commit ${PRE_COMMIT}
 
+#service-broker-store hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/service-broker-store/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
 
-if [ ! -f ${PRE_COMMIT} ]; then
-  echo "#!/bin/bash" > ${PRE_COMMIT}
-  chmod +x ${PRE_COMMIT}
-fi
+#volumedriver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/volumedriver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
 
-if grep -q 'git-hooks/pre-commit' ${PRE_COMMIT}; then
-  echo "pre-commit already installed."
-else
-  echo >> ${PRE_COMMIT}
-  echo './git-hooks/pre-commit' >> ${PRE_COMMIT}
-  echo "pre-commit installed."
-fi
+#dockerdriver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/dockerdriver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
+
+#smbdriver hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/smbdriver/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
+
+#smbbroker hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/smbbroker/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}
+
+#existingvolumebroker hooks
+HOOKS_DIR=${RELEASE}/.git/modules/src/code.cloudfoundry.org/existingvolumebroker/hooks
+PRE_COMMIT=${HOOKS_DIR}/pre-commit
+mkdir -p ${HOOKS_DIR}
+install_pre_commit ${PRE_COMMIT}

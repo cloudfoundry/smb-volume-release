@@ -1,24 +1,24 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
 RUN_DIR=/var/vcap/sys/run/azurefilebroker
 LOG_DIR=/var/vcap/sys/log/azurefilebroker
 PIDFILE=$RUN_DIR/azurefilebroker.pid
 
-case $1 in
+SCRIPT=$(basename $0)
+mkdir -p /var/vcap/sys/log/monit
 
+exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
+exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
+
+case $1 in
   start)
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
 
     mkdir -p $LOG_DIR
     chown -R vcap:vcap $LOG_DIR
-
-    export GOMAXPROCS=$(nproc)
-
-    # Work around for go DNS bug (fix slated for v1.7)
-    export GODEBUG=netdns=cgo
 
     echo $$ > $PIDFILE
 
@@ -51,9 +51,9 @@ case $1 in
       --allowDeleteStorageAccount="<%= p("allow_delete_storage_account") %>" \
       --allowDeleteFileShare="<%= p("allow_delete_file_share") %>" \
       --logLevel="<%= p("log_level") %>" \
+      --timeFormat="<%= p("log_time_format") %>" \
       >> $LOG_DIR/azurefilebroker.stdout.log \
       2>> $LOG_DIR/azurefilebroker.stderr.log
-
     ;;
 
   stop)
@@ -65,8 +65,6 @@ case $1 in
 
   *)
     echo "Usage: azurefilebroker_ctl {start|stop}"
-
     ;;
-
 esac
 

@@ -6,7 +6,6 @@ templates:
   db_ca.crt.erb: db_ca.crt
 
 packages:
-- golang-smbvolume
 - azurefilebroker
 
 properties:
@@ -89,4 +88,6 @@ properties:
   log_level:
     description: "azurefilebroker log level"
     default: "info"
-
+  log_time_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"

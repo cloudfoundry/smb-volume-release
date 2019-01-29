@@ -5,6 +5,11 @@ templates:
   install.erb: bin/pre-start
   ctl.erb: bin/smbdriver_ctl
   drain.erb: bin/drain
+  ca.crt.erb: config/certs/ca.crt
+  client.crt.erb: config/certs/client.crt
+  client.key.erb: config/certs/client.key
+  server.crt.erb: config/certs/server.crt
+  server.key.erb: config/certs/server.key
 
 packages:
 - cifs-utils
@@ -29,6 +34,9 @@ properties:
   log_level:
     description: "smbdriver log level"
     default: "info"
+  log_time_format:
+    description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+    default: "rfc3339"
   disable:
     description: "disable smbdriver"
     default: false
@@ -40,4 +48,44 @@ properties:
     description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
     example: "uid:2000,gid:2000,vers:3.0"
     default: "uid:2000,gid:2000"
-
+  enable_unique_volume_ids:
+    description: "opt-in to unique volume IDs"
+    default: true
+  tls.ca_cert:
+    description: "PEM encoded CA certificate. If not provided, driver will not accept TLS connections"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  tls.server_cert:
+    description: "PEM encoded server certificate"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  tls.server_key:
+    description: "PEM encoded server private key"
+    default: ""
+    example: "|
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----"
+  tls.client_cert:
+    description: "PEM encoded client certificate"
+    default: ""
+    example: "|
+      -----BEGIN CERTIFICATE-----
+      ...
+      -----END CERTIFICATE-----"
+  tls.client_key:
+    description: "PEM encoded client private key"
+    default: ""
+    example: "|
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----"
+  ssl.insecure_skip_verify:
+    description: "When connecting over SSL, skip verification of server IP addresses in the certificate"
+    default: false

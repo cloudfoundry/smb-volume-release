@@ -1,6 +1,15 @@
 #!/bin/bash
 
-set -e -x
+set -e
+
+function copy_client_certs_to_spec_dir() {
+  local cert_dir="<%= p('driver_path') %>/certs/smbdriver"
+
+  mkdir -p ${cert_dir}
+  cp -p /var/vcap/jobs/smbdriver/config/certs/ca.crt ${cert_dir}
+  cp -p /var/vcap/jobs/smbdriver/config/certs/client.crt ${cert_dir}
+  cp -p /var/vcap/jobs/smbdriver/config/certs/client.key ${cert_dir}
+}
 
 echo "Installing mount.cifs"
 pushd /var/vcap/packages/cifs-utils/
@@ -8,4 +17,8 @@ pushd /var/vcap/packages/cifs-utils/
 popd
 
 echo "Installed mount.cifs"
+
+echo "Copying client certs to data directory..."
+copy_client_certs_to_spec_dir
+
 exit 0

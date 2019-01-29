@@ -1,0 +1,7 @@
+bin/smbbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
+              --credhubURL="<%= p('credhub.url') %>" \
+              --uaaClientID="<%= p('credhub.uaa_client_id') %>" \
+              --uaaClientSecret="<%= p('credhub.uaa_client_secret') %>" \
+              --storeID="<%= p('credhub.store_id') %>" \
+              --logLevel="<%= p('log_level') %>" \
+              --timeFormat="<%= p('log_time_format') %>"

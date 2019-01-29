@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: relintdockerhubpushbot/cf-deployment-concourse-tasks
+    tag: v5.16.0
+
+inputs:
+- name: smb-volume-release-concourse-tasks
+
+outputs:
+- name: bind-create-config
+
+params:
+  SMB_REMOTE_PATH: replace-me
+  SMB_USERNAME: replace-me
+  SMB_PASSWORD: replace-me
+
+run:
+  path: smb-volume-release-concourse-tasks/scripts/ci/generate_bind_create_config.sh

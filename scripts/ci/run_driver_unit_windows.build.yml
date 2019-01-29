@@ -1,0 +1,14 @@
+---
+platform: windows
+
+inputs:
+  - name: smb-volume-release-concourse-tasks
+  - name: smb-volume-release
+
+run:
+  path: powershell
+  args:
+    - "-ExecutionPolicy"
+    - "ByPass"
+    - "-File"
+    - "smb-volume-release-concourse-tasks/scripts/ci/run_driver_unit_windows.ps1"

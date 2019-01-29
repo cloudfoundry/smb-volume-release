@@ -2,13 +2,14 @@
 
 This is a bosh release that packages:
 - an [smbdriver](https://github.com/cloudfoundry/smbdriver) 
-- an [azurefilebroker](https://github.com/cloudfoundry/azurefilebroker) 
-- a test SMB server
-- BOSH back & restore jobs for the broker's database
+- an [smbbroker](https://github.com/cloudfoundry/smbbroker) for preexisting SMB shares
+- an [azurefilebroker](https://github.com/cloudfoundry/azurefilebroker) for Azure storage accounts
+- BOSH backup & restore jobs for the azurefilebroker's database
+- a test SMB server that provides a preexisting share to test against
 
 The broker and driver pair allows you:
-- to provision Azure storage accounts and bind Azure file shares to your applications for shared file access.
 - to provision preexisting shares and bind the shares to your applications for share file access.
+- to provision Azure storage accounts and bind Azure file shares to your applications for shared file access.
 
 The test server provides an easy test target with which you can try out volume mounts of preexisting shares.
 
@@ -17,57 +18,6 @@ The test server provides an easy test target with which you can try out volume m
 ## Pre-requisites
 
 1. Install Cloud Foundry, or start from an existing CF deployment.  If you are starting from scratch, the article [Overview of Deploying Cloud Foundry](https://docs.cloudfoundry.org/deploying/index.html) provides detailed instructions.
-
-1. Install [GO](https://golang.org/dl/):
-
-    ```bash
-    mkdir ~/workspace ~/go
-    cd ~/workspace
-    wget https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz
-    sudo tar -C /usr/local -xzf go1.9.linux-amd64.tar.gz
-    echo 'export GOPATH=$HOME/go' >> ~/.bashrc
-    echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' >> ~/.bashrc
-    exec $SHELL
-    ```
-
-1. Install [direnv](https://github.com/direnv/direnv#from-source):
-
-    ```bash
-    mkdir -p $GOPATH/src/github.com/direnv
-    git clone https://github.com/direnv/direnv.git $GOPATH/src/github.com/direnv/direnv
-    pushd $GOPATH/src/github.com/direnv/direnv
-        make
-        sudo make install
-    popd
-    echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
-    exec $SHELL
-    ```
-
-## Create and Upload this Release
-
-1. Clone smb-volume-release (master branch) from git:
-
-    ```bash
-    $ cd ~/workspace
-    $ git clone https://github.com/cloudfoundry/smb-volume-release.git
-    $ cd ~/workspace/smb-volume-release
-    $ direnv allow .
-    $ git checkout master
-    $ ./scripts/update
-    ```
-
-1. Bosh create the release
-
-    ```bash
-    $ bosh -n create-release --force
-    ```
-
-1. Bosh upload the release
-
-    ```bash
-    # BOSH CLI v2
-    $ bosh -n -e <YOUR BOSH DEPLOYMENT NAME> upload-release
-    ```
 
 ## Redeploy Cloud Foundry with smb enabled
 
@@ -81,15 +31,13 @@ The test server provides an easy test target with which you can try out volume m
 
 2. Now redeploy your cf-deployment while including the smb ops file:
     ```bash
-    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o ../smb-volume-release/operations/deploy-smb-broker-and-install-driver.yml
+    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o operations/experimental/enable-smb-volume-service.yml
     ```
     
-**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o ../smb-volume-release/operations/deploy-smb-broker-and-install-driver.yml` option.
+**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud Foundry initially, with the addition of a `-o operations/experimental/enable-smb-volume-service.yml` option.
 
-Your CF deployment will now have a running service broker and volume drivers, ready to mount or create SMB volumes.  Unless you have explicitly defined a variable for your broker password, BOSH will generate one for you.  You can find the password for use in broker registration via the `bosh interpolate` command:
-```bash
-bosh int deployment-vars.yml --path /smb-broker-password
-```
+Your CF deployment will now have a running service broker and volume drivers, ready to mount or create SMB volumes.  Unless you have explicitly defined a variable for your broker password, BOSH will generate one for you.
+
 # Testing or Using this Release
 
 ## Deploying the Test SMB Server (Optional)
@@ -101,23 +49,28 @@ The easiest way to deploy the test server is to include the `enable-smb-test-ser
 $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml \
   -v smb-username=smbuser \
   -v smb-password=something-secret \
-  -o ../smb-volume-release/operations/deploy-smb-broker-and-install-driver.yml \
-  -o ../smb-volume-release/operations/enable-smb-test-server.yml
+  -o operations/experimental/enable-smb-volume-service.yml \
+  -o operations/test/enable-smb-test-server.yml
 ```
 
 **NOTE**: *This test SMB server only works with Ubuntu stemcells.*
 
-## Register azurefilebroker
+## Register smbbroker
 
-* Register the broker and grant access to its service with the following command:
+* Deploy and register the broker and grant access to its service with the following command:
 
     ```bash
-    $ cf create-service-broker azurefilebroker <BROKER_USERNAME> <BROKER_PASSWORD> http://azurefile-broker.YOUR.DOMAIN.com
-    $ cf enable-service-access smbvolume
+    $ bosh -e my-env -d cf run-errand smb-broker-registrar
+    $ cf enable-service-access smb
     ```
-    **Note**:
-     
-     - if you deployed the service broker using the operations file from this release, your username will be `admin` and the password will be generated by bosh and discoverable with `bosh interpolate` as described above.
+
+## Testing and General Usage with smbbroker
+
+You can refer to the [Cloud Foundry docs](https://docs.cloudfoundry.org/devguide/services/using-vol-services.html#smb) for testing and general usage information.
+
+## Testing with azurefilebroker
+
+We don't currently provide ops files in this release that include the azurefilebrokerpush errand, but you can make one fairly easily, or refer to an older version of this release.  Once you have the azure file broker installed, you can use the instructions below to create an azure file service.
 
 ## Create an SMB volume service with an existing storage account on Azure
 
@@ -142,113 +95,12 @@ $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml \
     - Please see more details about parameters [here](./docs/broker-development.md#parameters-for-provision).
     - The Azure file share only can be bound to your application in Linux when they are in the same location.
 
-## Create an SMB volume service with a preexisting share
+## Follow the cf docs to deploy and test a sample app
 
-1. type the following:
-
-    ```bash
-    $ cf create-service smbvolume Existing myVolume -c '{"share":"//smbtestserver.service.cf.internal/vol2"}'
-    $ cf services
-    ```
-
-    **NOTE**:
-    *The format of the share is `//server/folder` or `\\\\server\\folder`.*
-
-## Deploy the pora test app, first by pushing the source code to CloudFoundry
-
-1. type the following:
-
-    ```bash
-    $ git clone https://github.com/cloudfoundry/persi-acceptance-tests.git
-    $ cd persi-acceptance-tests/assets/pora
-    $ cf push pora --no-start
-    ```
-
-1. Bind the service to your app supplying the correct Azure file share. Broker will create it if it does not exist by default.
-
-    ```bash
-    $ cf bind-service pora myVolume -c '{"share": "one"}'
-    ```
-
-1. Bind the service to your app supplying the correct credentials for preexisting shares.
-
-    ```bash
-    $ cf bind-service pora myVolume -c '{"username":"smbuser","password":"something-secret"}'
-    ```
-
-    **NOTE**:
-
-    - Please see more details about parameters [here](./docs/broker-development.md#parameters-for-bind).
-    - If you are using an Azure file share as the preexisting share, you need to specify `"vers": "3.0"` in the parameters.
-    - **mount**: By default, volumes are mounted into the application container in an arbitrarily named folder under `/var/vcap/data`.  If you prefer to mount your directory to some specific path where your application expects it, you can control the container mount path by specifying the `mount` option.  The resulting bind command would look something like
-        ``` cf bind-service pora myVolume -c '{"share", "one", "mount":"/var/path"}' ```
-
-1. Start the application
-
-    ```bash
-    $ cf start pora
-    ```
-
-## Test the app to make sure that it can access your SMB volume
-
-1. to check if the app is running, `curl http://pora.YOUR.DOMAIN.com` should return the instance index for your app
-1. to check if the app can access the shared volume `curl http://pora.YOUR.DOMAIN.com/write` writes a file to the share and then reads it back out again.
-
-# BBR Support
-If you are using [Bosh Backup and Restore](https://docs.cloudfoundry.org/bbr/) (BBR) to keep backups of your Cloud Foundry deployment, consider including the [enable-azurefile-broker-backup.yml](https://github.com/cloudfoundry/smb-volume-release/blob/master/operations/enable-azurefile-broker-backup.yml) operations file from this repository when you redeploy Cloud Foundry.  This file will install the requiste backup and restore scripts for service broker metadata on the backup/restore VM.
+Test instructions are [here](https://docs.cloudfoundry.org/devguide/services/using-vol-services.html#smb-sample)
+# BBR Support for azurefilebroker
+The smbbroker uses credhub as a backing store, and as a result, does not require separate scripts for backup and restore, since credhub itself will get backed up by BBR.
+For azurefilebroker, if you are using [Bosh Backup and Restore](https://docs.cloudfoundry.org/bbr/) (BBR) to keep backups of your Cloud Foundry deployment, consider including the [enable-azurefile-broker-backup.yml](https://github.com/cloudfoundry/smb-volume-release/blob/master/operations/enable-azurefile-broker-backup.yml) operations file from this repository when you redeploy Cloud Foundry.  This file will install the requiste backup and restore scripts for service broker metadata on the backup/restore VM.
 
 # Troubleshooting
 If you have trouble getting this release to operate properly, try consulting the [Volume Services Troubleshooting Page](https://github.com/cloudfoundry-incubator/volman/blob/master/TROUBLESHOOTING.md)
-
-# Deploying the service broker with `cf push` 
-
-You may wish to run the service broker in Cloud Foundry using `cf push` instead of bosh deploying it.  That has the benefit of using
-one less virtual machine.  To do that, you will first need to modify the `deploy-smb-broker-and-install-driver.yml` operations file to 
-remove the service broker, and then push the broker instead using the steps below.
-
-When the service broker is `cf push`ed, you can bind it to a MSSql or MySql database service instance.
-
-**NOTE**
-*It is not supported to bind to Azure SQL with an old meta-azure-service-broker before `v1.5.1` because the variable names do not match. You must specify variables in the manifest.*
-
-If you want to use an Azure SQL service to store data for the service broker,
-  - If you are using `meta-azure-service-broker` to [provision a new databse with a new server](https://github.com/Azure/meta-azure-service-broker/blob/master/docs/azure-sql-db.md#create-a-datbase-on-a-new-server), you can set `connectionPolicy` to `proxy` in configuration parameters.
-  - Otherwise you need to change the policy from "default" to "proxy" after creating your SQL server by following below steps:
-
-    1. Open PowerShell in administrator privilege and install AzureRM module.
-
-        ```powershell
-        Install-Module AzureRM
-        Import-Module AzureRM
-        ```
-
-    1. Download [reconfig-mssql-policy.ps1](./scripts/reconfig-mssql-policy.ps1) and run it to change the policy of your Azure SQL server.
-
-        ```powershell
-        Set-ExecutionPolicy Unrestricted -Scope CurrentUser
-        ./reconfig-mssql-policy.ps1
-        ```
-
-Once you have a database service instance available in the space where you will push your service broker application, follow the following steps:
-
-- `./script/build-broker`
-- Edit `manifest.yml` to set up all required parameters. `manifest.yml` and `Procfile` will work together to start the broker.
-    - With a database directly: `DBCACERT`, `HOSTNAMEINCERTIFICATE`, `DBUSERNAME`, `DBPASSWORD`, `DBHOST`, `DBPORT` and `DBNAME` in `manifest.yml` need to be set up.
-
-    ```bash
-    cf push azurefilebroker
-    ```
-
-    - With a Cloud Foundry database service instance: `DBCACERT`, `HOSTNAMEINCERTIFICATE` and `DBSERVICENAME` needs to be set up.
-
-    ```bash
-    cf push azurefilebroker --no-start
-    cf bind-service azurefilebroker <sql service instance name>
-    cf start azurefilebroker
-    ```
-
-    **NOTE**:
-
-    - When `environment` is `Preexisting`, only one plan `Existing` is supported; For others, both two plans `Existing` and `AzureFileShare` are supported.
-    - Please see more details about broker's configurations [here](./docs/broker-development.md#configurations-of-azurefilebroker).
-
