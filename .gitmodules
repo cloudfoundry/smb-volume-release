@@ -132,3 +132,9 @@
 	path = src/code.cloudfoundry.org/dockerdriver
 	url = https://github.com/cloudfoundry/dockerdriver
 	branch = master
+[submodule "src/github.com/pkg/errors"]
+	path = src/github.com/pkg/errors
+	url = https://github.com/pkg/errors
+[submodule "src/code.cloudfoundry.org/volume-mount-options"]
+	path = src/code.cloudfoundry.org/volume-mount-options
+	url = https://github.com/cloudfoundry/volume-mount-options
