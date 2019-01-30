@@ -12,6 +12,7 @@ dev_releases/**/*
 config/private.yml
 config/dev.yml
 releases/smb-volume/*.tgz
+pcf-tile/resources/*.tgz
 pcf-tile/resources/*.zip
 pcf-tile/product/*
 pcf-tile/release/*
@@ -25,3 +26,6 @@ src/github.com/vito/gosub
 src/github.com/codegangsta/cli
 
 src/github.com/tools/godep
+
+# IDEs
+.vs
