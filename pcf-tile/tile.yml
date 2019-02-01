@@ -126,7 +126,7 @@ forms:
       default: 1.0.0
     - name: enable_global_access_to_plans
       label: Enable Global access to all Services and Plans
-      description: Open up access to all service plans across all orgs and spaces. If set to false, administrators must use the "enable-service-access" command to allow access
+      description: Open up access to all service plans across all orgs and spaces. If set to false, administrators must use the `enable-service-access` command to allow access
       type: boolean
       configurable: true
       default: true
@@ -277,7 +277,7 @@ forms:
       optional: true
     - name: hostnameincertificate
       label: Host Name in Certificate 
-      description: For Azure SQL service or Azure MySQL service, you need to specify one of below values to enable TLS encryption. For your certificate, you need to specify the Common Name (CN) in the server certificate.AzureCloud:"*.database.windows.net", AzureUSGovernment:"*.database.usgovcloudapi.net", AzureChinaCloud:"*.database.chinacloudapi.cn", AzureGermanCloud:"*.database.cloudapi.de"
+      description: For Azure SQL service or Azure MySQL service, you need to specify one of below values to enable TLS encryption. For your certificate, you need to specify the Common Name (CN) in the server certificate.AzureCloud:`*.database.windows.net`, AzureUSGovernment:`*.database.usgovcloudapi.net`, AzureChinaCloud:`*.database.chinacloudapi.cn`, AzureGermanCloud:`*.database.cloudapi.de`
       type: string
       configurable: true
       optional: true
