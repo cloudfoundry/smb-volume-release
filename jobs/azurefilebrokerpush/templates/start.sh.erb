@@ -9,6 +9,7 @@
 
 bin/azurefilebroker \
   --logLevel="<%= p('log_level') %>" \
+  --timeFormat="<%= p('log_time_format') %>" \
   --listenAddr="0.0.0.0:$PORT" \
   --serviceName="<%= p('service_name') %>" \
   --serviceID="<%= p('service_id') %>" \

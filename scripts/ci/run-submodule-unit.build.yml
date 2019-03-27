@@ -1,0 +1,14 @@
+---
+platform: linux
+
+rootfs_uri: docker:///cloudfoundry/inigo-ci
+
+inputs:
+- name: smb-volume-release-concourse-tasks
+- name: smb-volume-release
+
+params:
+  SUBMODULE_NAME:
+
+run:
+  path: smb-volume-release-concourse-tasks/scripts/ci/run-submodule-unit.sh

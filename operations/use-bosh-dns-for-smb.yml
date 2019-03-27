@@ -1,5 +1,0 @@
----
-- type: replace
-  path: /addons/name=bosh-dns/jobs/name=bosh-dns/properties/aliases/smbtestserver.service.cf.internal?
-  value:
-    - "*.smbtestserver.default.cf.bosh"

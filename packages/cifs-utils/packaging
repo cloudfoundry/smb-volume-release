@@ -1,5 +1,7 @@
 set -e
 
+source /var/vcap/packages/python-2.7/bosh/compile.env
+
 temp_path=${PWD}/temp
 mkdir $temp_path
 

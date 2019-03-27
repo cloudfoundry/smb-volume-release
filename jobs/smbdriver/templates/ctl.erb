@@ -1,13 +1,20 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
+CLIENT_CERTS_DIR=<%= p('driver_path') %>/certs/smbdriver
+SERVER_CERTS_DIR=/var/vcap/jobs/smbdriver/config/certs
 RUN_DIR=/var/vcap/sys/run/smbdriver
 LOG_DIR=/var/vcap/sys/log/smbdriver
 PIDFILE=$RUN_DIR/smbdriver.pid
 
-case $1 in
+SCRIPT=$(basename $0)
+mkdir -p /var/vcap/sys/log/monit
 
+exec 1>> /var/vcap/sys/log/monit/${SCRIPT}.log
+exec 2>> /var/vcap/sys/log/monit/${SCRIPT}.err.log
+
+case $1 in
   start)
     mkdir -p $RUN_DIR
     chown -R vcap:vcap $RUN_DIR
@@ -21,11 +28,6 @@ case $1 in
     mkdir -p "<%= p("cell_mount_path") %>"
     chown -R vcap:vcap "<%= p("cell_mount_path") %>"
 
-    export GOMAXPROCS=$(nproc)
-
-    # Work around for GOLANG 1.5.3 DNS bug
-    export GODEBUG=netdns=cgo
-
     echo $$ > $PIDFILE
 
     # Allowed number of open file descriptors
@@ -33,19 +35,36 @@ case $1 in
 
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
     export PATH=/usr/local/bin:$PATH
+    
+    ENABLE_INSECURE_SKIP_VERIFY=""
+    <% if p("ssl.insecure_skip_verify") %>
+    ENABLE_INSECURE_SKIP_VERIFY="--insecureSkipVerify"
+    <% end %>
 
     exec chpst -u root:root /var/vcap/packages/smbdriver/bin/smbdriver \
       --listenPort=<%= p("listen_port") %> \
-      --transport="tcp" \
+      --transport="tcp-json" \
+      <% if p("tls.ca_cert") != '' %>\
+      --requireSSL \
+      --certFile="${SERVER_CERTS_DIR}/server.crt" \
+      --keyFile="${SERVER_CERTS_DIR}/server.key" \
+      --caFile="${CLIENT_CERTS_DIR}/ca.crt" \
+      --clientCertFile="${CLIENT_CERTS_DIR}/client.crt" \
+      --clientKeyFile="${CLIENT_CERTS_DIR}/client.key" \
+      ${ENABLE_INSECURE_SKIP_VERIFY} \
+      <% end %>\
+      <% if p("enable_unique_volume_ids") %> \
+      --uniqueVolumeIds \
+      <% end %> \
       --debugAddr="<%= p("debug_addr") %>" \
       --driversPath="<%= p("driver_path") %>" \
       --mountDir="<%= p("cell_mount_path") %>" \
       --logLevel="<%= p("log_level") %>" \
+      --timeFormat="<%= p("log_time_format") %>" \
       --mountFlagAllowed="<%= p("allowed_in_mount") %>" \
       --mountFlagDefault="<%= p("default_in_mount") %>" \
       >> $LOG_DIR/smbdriver.stdout.log \
       2>> $LOG_DIR/smbdriver.stderr.log
-
     ;;
 
   stop)
@@ -57,8 +76,6 @@ case $1 in
 
   *)
     echo "Usage: smbdriver_ctl {start|stop}"
-
     ;;
-
 esac
 

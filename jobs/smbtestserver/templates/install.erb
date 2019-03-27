@@ -1,23 +1,28 @@
 #!/bin/bash
 
-set -e -x
+set -e
 
-echo "Installing smb server"
+echo "Installing smb server..."
+(
+flock -x 200
 apt-get update
 apt-get install -y samba
+) 200>/var/vcap/data/dpkg.lock
 
 if [ "$(pidof -s smbd)" != "" ]; then
   service smbd stop
 fi
 
+echo "Creating SMB user..."
 id -u <%= p("username") %> &>/dev/null || useradd <%= p("username") %> --group vcap
-smbpasswd -a <%= p("username") %><<EOF
+smbpasswd -a <%= p("username") %> -s <<EOF
 <%= p("password") %>
 <%= p("password") %>
 EOF
 
-for i in `seq 1 3`;
+for i in $(seq 1 3);
   do
+    echo "Configuring vol${i} share..."
     mkdir -p <%= p("export_root_path") %>/export/vol${i}
     chmod 775 <%= p("export_root_path") %>/export/vol${i}
     chown root:vcap <%= p("export_root_path") %>/export/vol${i}
