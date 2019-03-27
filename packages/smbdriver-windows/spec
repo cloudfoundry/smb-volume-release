@@ -30,10 +30,12 @@ files:
   - code.cloudfoundry.org/smbdriver/driveradmin/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminhttp/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminlocal/*.go # gosub
+  - code.cloudfoundry.org/volume-mount-options/*.go # gosub
+  - code.cloudfoundry.org/volume-mount-options/utils/*.go # gosub
   - github.com/bmizerany/pat/*.go # gosub
+  - github.com/pkg/errors/*.go # gosub
   - github.com/tedsuo/ifrit/*.go # gosub
   - github.com/tedsuo/ifrit/grouper/*.go # gosub
   - github.com/tedsuo/ifrit/http_server/*.go # gosub
   - github.com/tedsuo/ifrit/sigmon/*.go # gosub
   - github.com/tedsuo/rata/*.go # gosub
-  - exiter.ps1

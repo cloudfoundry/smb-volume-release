@@ -18,8 +18,8 @@ pcf-tile/product/*
 pcf-tile/release/*
 
 ## goPath system specifics
-pkg
-bin/
+/pkg
+/bin/
 
 # gosub and friends
 src/github.com/vito/gosub

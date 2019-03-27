@@ -3,8 +3,11 @@
 set -e
 
 echo "Installing smb server..."
+(
+flock -x 200
 apt-get update
 apt-get install -y samba
+) 200>/var/vcap/data/dpkg.lock
 
 if [ "$(pidof -s smbd)" != "" ]; then
   service smbd stop
