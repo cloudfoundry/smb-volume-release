@@ -1,5 +1,5 @@
 ---
-name: smbbrokerpush
+name: smbbrokerpush-bbr
 
 templates:
   metadata.sh.erb: bin/bbr/metadata
