@@ -43,5 +43,5 @@ if [[ -x /var/vcap/jobs/smbbrokerpush/bin/run ]]; then
 else
     echo "\"smbbrokerpush\" errand not found: starting app"
     cf start $APP_NAME
-    echo "\"smbbrokerpush\" errand found: finished"
+    echo "\"smbbrokerpush\" errand not found: finished"
 fi
