@@ -16,7 +16,7 @@ exec 1>> $LOGFILE
 exec 2>> $LOGFILE
 
 evacuate() {
-  curl --fail --silent http://127.0.0.1:$ADMIN_PORT/evacuate >/dev/null 2>&1
+  curl --fail --max-time 600 --silent http://127.0.0.1:$ADMIN_PORT/evacuate >/dev/null 2>&1
 }
 
 heartbeat() {
@@ -57,7 +57,13 @@ done
 
 echo "$(date): rep is done..evacuating smbdriver"
 
-if evacuate; then
+set +e
+evacuate
+evacuate_exit_code=$?
+set -e
+
+
+if [ $evacuate_exit_code -eq 0 ]; then
   for i in {1..60}; do
     if heartbeat; then
       echo "$(date): waiting"
@@ -69,6 +75,10 @@ if evacuate; then
 
   kill -9 $pid || true
   rm -rf $PIDFILE || true
+elif [ $evacuate_exit_code -eq 28 ]; then
+   echo "$(date): Drain timed out"
+   kill -9 $pid || true
+   rm -rf $PIDFILE || true
 else
   exit 1
 fi
