@@ -34,10 +34,6 @@
 	path = src/github.com/bmizerany/pat
 	url = https://github.com/bmizerany/pat
         branch = master
-[submodule "src/github.com/codegangsta/cli"]
-        path = src/github.com/codegangsta/cli
-        url = https://github.com/codegangsta/cli
-        branch = master
 [submodule "src/github.com/gorilla/mux"]
 	path = src/github.com/gorilla/mux
 	url = https://github.com/gorilla/mux
@@ -90,9 +86,6 @@
 [submodule "src/golang.org/x/text"]
 	path = src/golang.org/x/text
 	url = https://go.googlesource.com/text
-[submodule "src/github.com/nu7hatch/gouuid"]
-	path = src/github.com/nu7hatch/gouuid
-	url = https://github.com/nu7hatch/gouuid
 [submodule "src/code.cloudfoundry.org/azurefilebroker"]
 	path = src/code.cloudfoundry.org/azurefilebroker
 	url = https://github.com/cloudfoundry/azurefilebroker
