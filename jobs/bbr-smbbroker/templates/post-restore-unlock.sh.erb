@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+set -x
+
+PATH="/var/vcap/packages/cf-cli-6-linux/bin:${PATH}"
+
+API_ENDPOINT=https://api.<%= link('smbbrokerpush').p('domain') %>
+ORG=<%= link('smbbrokerpush').p('organization') %>
+SPACE=<%= link('smbbrokerpush').p('space') %>
+APP_NAME=<%= link('smbbrokerpush').p('app_name') %>
+
+function cf_auth_and_target() {
+	echo "Authenticate and target..."
+
+	cf api $API_ENDPOINT <% if link('smbbrokerpush').p('skip_cert_verify') %>--skip-ssl-validation<% end %>
+
+	set +x
+    <% link('smbbrokerpush').if_p('cf.client_id', 'cf.client_secret') do |client_id, client_secret| %>
+        cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
+    <% end.else do %>
+        cf auth "<%= link('smbbrokerpush').p('cf.admin_user') %>" "<%= link('smbbrokerpush').p('cf.admin_password') %>"
+    <% end %>
+	set -x
+	echo -e  "********************\n"
+
+	if ! cf target -o $ORG -s $SPACE ; then
+	    echo "org '${ORG}' with space '${SPACE}' not found; exiting"
+	    exit 0
+	fi
+
+	if ! cf app $APP_NAME ; then
+	    echo "'${APP_NAME}' app not deployed; exiting"
+	    exit 0
+	fi
+}
+
+cf_auth_and_target
+
+if [[ -x /var/vcap/jobs/smbbrokerpush/bin/run ]]; then
+    echo "\"smbbrokerpush\" errand found: running"
+    /var/vcap/jobs/smbbrokerpush/bin/run
+    echo "\"smbbrokerpush\" errand found: finished"
+else
+    echo "\"smbbrokerpush\" errand not found: starting app"
+    cf start $APP_NAME
+    echo "\"smbbrokerpush\" errand not found: finished"
+fi

@@ -1,0 +1,10 @@
+---
+name: bbr-smbbroker
+
+templates:
+  metadata.sh.erb: bin/bbr/metadata
+  post-restore-unlock.sh.erb: bin/bbr/post-restore-unlock
+
+consumes:
+  - name: smbbrokerpush
+    type: smbbrokerpush

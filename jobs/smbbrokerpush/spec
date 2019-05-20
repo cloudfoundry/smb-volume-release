@@ -17,6 +17,20 @@ consumes:
     type: database
     optional: true
 
+provides:
+  - name: smbbrokerpush
+    type: smbbrokerpush
+    properties:
+    - domain
+    - cf.admin_user
+    - cf.admin_password
+    - cf.client_id
+    - cf.client_secret
+    - organization
+    - space
+    - skip_cert_verify
+    - app_name
+
 properties:
   domain:
     description: 'Cloud Foundry system domain'
