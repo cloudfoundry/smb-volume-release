@@ -12,4 +12,4 @@ CREATE_CONFIG=${PWD}/bind-create-config/create-config.json
 BIND_CONFIG=${PWD}/bind-create-config/bind-config.json
 
 echo "{\"share\":\"$SMB_REMOTE_PATH\"}" > "${CREATE_CONFIG}"
-echo "{\"username\":\"$SMB_USERNAME\",\"password\":\"$SMB_PASSWORD\"}" > "${BIND_CONFIG}"
+echo \["{\"username\":\"$SMB_USERNAME\",\"password\":\"$SMB_PASSWORD\"}"\] > "${BIND_CONFIG}"
