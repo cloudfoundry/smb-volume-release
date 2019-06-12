@@ -1,4 +1,6 @@
 #!/bin/bash
+<% if p("disable") %>
+<% else %>
 
 set -e
 
@@ -22,3 +24,4 @@ echo "Copying client certs to data directory..."
 copy_client_certs_to_spec_dir
 
 exit 0
+<% end %>
