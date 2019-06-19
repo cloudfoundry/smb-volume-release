@@ -20,6 +20,7 @@ files:
   - code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
   - code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
+  - code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/smbdriver/*.go # gosub
@@ -27,6 +28,7 @@ files:
   - code.cloudfoundry.org/smbdriver/driveradmin/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminhttp/*.go # gosub
   - code.cloudfoundry.org/smbdriver/driveradmin/driveradminlocal/*.go # gosub
+  - code.cloudfoundry.org/tlsconfig/*.go # gosub
   - code.cloudfoundry.org/volume-mount-options/*.go # gosub
   - code.cloudfoundry.org/volume-mount-options/utils/*.go # gosub
   - code.cloudfoundry.org/volumedriver/*.go # gosub
