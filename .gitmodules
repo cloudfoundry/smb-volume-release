@@ -131,3 +131,6 @@
 [submodule "src/code.cloudfoundry.org/volume-mount-options"]
 	path = src/code.cloudfoundry.org/volume-mount-options
 	url = https://github.com/cloudfoundry/volume-mount-options
+[submodule "src/code.cloudfoundry.org/tlsconfig"]
+	path = src/code.cloudfoundry.org/tlsconfig
+	url = https://github.com/cloudfoundry/tlsconfig.git
