@@ -30,13 +30,14 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 
 		It("should not install packages or run rpcbind", func() {
+			exitCodeIndicatingThatFileDoesNotExist := 1
+
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "stat /sbin/mount.cifs")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
-			Eventually(session).Should(gexec.Exit(1), string(session.Out.Contents()))
+			Eventually(session).Should(gexec.Exit(exitCodeIndicatingThatFileDoesNotExist), string(session.Out.Contents()))
 
 			Expect(findProcessState("smbdriver")).To(Equal(""))
 		})
 	})
 })
-
