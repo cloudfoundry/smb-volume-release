@@ -26,7 +26,7 @@ case $1 in
     chmod 777 /var/vcap/data/voldrivers
 
     mkdir -p "<%= p("cell_mount_path") %>"
-    chown -R vcap:vcap "<%= p("cell_mount_path") %>"
+    chown vcap:vcap "<%= p("cell_mount_path") %>"
 
     echo $$ > $PIDFILE
 
