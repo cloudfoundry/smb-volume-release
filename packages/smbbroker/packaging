@@ -1,14 +1,11 @@
 set -e
 
-mkdir -p ${BOSH_INSTALL_TARGET}/src
-cp -a . ${BOSH_INSTALL_TARGET}/src
-export GOPATH=$BOSH_INSTALL_TARGET
+source /var/vcap/packages/golang-1-linux/bosh/compile.env
 
-export GOROOT=$(readlink -nf /var/vcap/packages/golang-1-linux)
-export PATH=$GOROOT/bin:$PATH
-go install code.cloudfoundry.org/smbbroker
+mkdir ../src && cp -a * ../src/ && mv ../src ./src
+mkdir $BOSH_INSTALL_TARGET/bin
 
-cp code.cloudfoundry.org/smbbroker/Procfile ${BOSH_INSTALL_TARGET}
+go build -o $BOSH_INSTALL_TARGET/bin/smbbroker src/code.cloudfoundry.org/smbbroker/*.go
 
-# clean up source artifacts
-rm -rf ${BOSH_INSTALL_TARGET}/src ${BOSH_INSTALL_TARGET}/pkg
+cp ./src/code.cloudfoundry.org/smbbroker/Procfile ${BOSH_INSTALL_TARGET}
+
