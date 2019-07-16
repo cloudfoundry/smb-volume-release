@@ -1,5 +1,0 @@
-check process azurefilebroker
-  with pidfile /var/vcap/sys/run/azurefilebroker/azurefilebroker.pid
-  start program "/var/vcap/jobs/azurefilebroker/bin/azurefilebroker_ctl start"
-  stop program "/var/vcap/jobs/azurefilebroker/bin/azurefilebroker_ctl stop"
-  group vcap

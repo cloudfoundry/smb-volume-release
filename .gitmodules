@@ -42,18 +42,6 @@
 	path = src/github.com/go-sql-driver/mysql
 	url = https://github.com/go-sql-driver/mysql
         branch = master
-[submodule "src/github.com/Azure/azure-sdk-for-go"]
-	path = src/github.com/Azure/azure-sdk-for-go
-	url = https://github.com/Azure/azure-sdk-for-go
-	branch = master
-[submodule "src/github.com/Azure/go-autorest"]
-	path = src/github.com/Azure/go-autorest
-	url = https://github.com/Azure/go-autorest
-	branch = master
-[submodule "src/github.com/denisenkom/go-mssqldb"]
-	path = src/github.com/denisenkom/go-mssqldb
-	url = https://github.com/denisenkom/go-mssqldb
-	branch = master
 [submodule "src/github.com/dgrijalva/jwt-go"]
 	path = src/github.com/dgrijalva/jwt-go
 	url = https://github.com/dgrijalva/jwt-go
@@ -86,10 +74,6 @@
 [submodule "src/golang.org/x/text"]
 	path = src/golang.org/x/text
 	url = https://go.googlesource.com/text
-[submodule "src/code.cloudfoundry.org/azurefilebroker"]
-	path = src/code.cloudfoundry.org/azurefilebroker
-	url = https://github.com/cloudfoundry/azurefilebroker
-	branch = master
 [submodule "src/code.cloudfoundry.org/smbdriver"]
 	path = src/code.cloudfoundry.org/smbdriver
 	url = https://github.com/cloudfoundry/smbdriver
