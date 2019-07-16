@@ -42,14 +42,6 @@
 	path = src/github.com/go-sql-driver/mysql
 	url = https://github.com/go-sql-driver/mysql
         branch = master
-[submodule "src/github.com/dgrijalva/jwt-go"]
-	path = src/github.com/dgrijalva/jwt-go
-	url = https://github.com/dgrijalva/jwt-go
-	branch = master
-[submodule "src/github.com/satori/uuid"]
-	path = src/github.com/satori/uuid
-	url = https://github.com/satori/uuid
-	branch = master
 [submodule "src/golang.org/x/crypto"]
 	path = src/golang.org/x/crypto
 	url = https://go.googlesource.com/crypto
@@ -57,10 +49,6 @@
 [submodule "src/golang.org/x/net"]
 	path = src/golang.org/x/net
 	url = https://go.googlesource.com/net
-	branch = master
-[submodule "src/gopkg.in/resty.v0"]
-	path = src/gopkg.in/resty.v0
-	url = https://gopkg.in/resty.v0
 	branch = master
 [submodule "src/github.com/onsi/ginkgo"]
 	path = src/github.com/onsi/ginkgo
@@ -117,4 +105,4 @@
 	url = https://github.com/cloudfoundry/volume-mount-options
 [submodule "src/code.cloudfoundry.org/tlsconfig"]
 	path = src/code.cloudfoundry.org/tlsconfig
-	url = https://github.com/cloudfoundry/tlsconfig.git
+	url = https://github.com/cloudfoundry/tlsconfig
