@@ -50,7 +50,7 @@ pushd smb-volume-release
     go build -o "${SMB_RELEASE_DIR}/tmp/smbdriver" "cmd/smbdriver/main.go"
   popd
 
-  go get -t code.cloudfoundry.org/volume_driver_cert
+  go get -t code.cloudfoundry.org/docker-driver-integration-tests
 
   pkill smbdriver || true
 
@@ -62,7 +62,7 @@ pushd smb-volume-release
         --mountFlagAllowed="username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec" \
         --mountFlagDefault="uid:2000,gid:2000" &
 
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/volume_driver_cert -race
+  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker-driver-integration-tests -race
 
   pkill smbdriver || true
 

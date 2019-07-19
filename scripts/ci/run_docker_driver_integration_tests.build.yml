@@ -23,4 +23,4 @@ params:
   BBL_AWS_SECRET_ACCESS_KEY:
 
 run:
-  path: smb-volume-release-concourse-tasks/scripts/ci/run_driver_cert
+  path: smb-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests
