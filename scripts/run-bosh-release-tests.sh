@@ -3,6 +3,7 @@
 docker run \
 -t \
 -i \
+-e DEV=true \
 --privileged \
 -v /Users/pivotal/workspace/smb-volume-release/:/smb-volume-release \
 --workdir=/ \

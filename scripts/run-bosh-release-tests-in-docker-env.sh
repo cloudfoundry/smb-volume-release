@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+#!/bin/bash -ex
 
 start-bosh
 
@@ -6,6 +6,11 @@ export DOCKER_TMP_DIR=$(find /tmp/ -name "tmp.*")
 export DOCKER_HOST=$(ps aux | grep dockerd | grep -o '\-\-host tcp.*4243' | awk '{print $2}')
 
 eval "$(cat /tmp/local-bosh/director/env)"
+
+COMMAND_TO_RUN='ginkgo -nodes 1 -v .'
+if [[ -n "$DEV" ]]; then
+    COMMAND_TO_RUN='bash'
+fi
 
 docker \
 --tls \
@@ -24,4 +29,4 @@ docker \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env SMB_VOLUME_RELEASE_PATH=/smb-volume-release \
 cfpersi/bosh-release-tests \
-ginkgo -nodes 1 -v .
+$COMMAND_TO_RUN
