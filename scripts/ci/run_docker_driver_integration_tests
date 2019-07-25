@@ -42,7 +42,7 @@ pushd smb-volume-release
     \"driver_name\": \"smbdriver\",
     \"create_config\": {
       \"Name\": \"smb-volume-name\",
-      \"Opts\": {\"source\":\"${SMB_REMOTE_PATH}\",\"uid\":\"2000\",\"gid\":\"2000\",\"username\":\"${SMB_USERNAME}\",\"password\":\"${SMB_PASSWORD}\"}
+      \"Opts\": {\"source\":\"${SMB_REMOTE_PATH}\",\"username\":\"${SMB_USERNAME}\",\"password\":\"${SMB_PASSWORD}\"}
     }
   } " > "${FIXTURE_FILENAME}"
 
@@ -50,7 +50,7 @@ pushd smb-volume-release
     go build -o "${SMB_RELEASE_DIR}/tmp/smbdriver" "cmd/smbdriver/main.go"
   popd
 
-  go get -t code.cloudfoundry.org/docker-driver-integration-tests
+  go get -t code.cloudfoundry.org/docker_driver_integration_tests
 
   pkill smbdriver || true
 
@@ -59,10 +59,10 @@ pushd smb-volume-release
 
   "${SMB_RELEASE_DIR}/tmp/smbdriver" -listenPort="${listen_port}" -transport="tcp" -driversPath="${drivers_path}" \
         --mountDir="${mountDir}" \
-        --mountFlagAllowed="username,password,uid,gid,file_mode,dir_mode,readonly,domain,vers,sec" \
-        --mountFlagDefault="uid:2000,gid:2000" &
+        --mountFlagAllowed="username,password,file_mode,dir_mode,readonly,domain,vers,sec" \
+        --mountFlagDefault="" &
 
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker-driver-integration-tests -race
+  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests -race
 
   pkill smbdriver || true
 
