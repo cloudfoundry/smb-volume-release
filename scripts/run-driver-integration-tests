@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e -x
+
+export SMB_REMOTE_PATH=$(lpass show --note pipeline-secrets | grep 'smb_cert_remote_path' | awk '{print $2}')
+export SMB_USERNAME=$(lpass show --note pipeline-secrets | grep 'smb_cert_username' | awk '{print $2}')
+export SMB_PASSWORD=$(lpass show --note pipeline-secrets | grep 'smb_cert_password' | awk '{print $2}')
+export BBL_STATE_DIR='bbl-state-gcp-gorgophone'
+export BBL_IAAS='gcp'
+
+fly -t persi \
+execute \
+-c ~/workspace/smb-volume-release/scripts/ci/run_docker_driver_integration_tests.build.yml \
+-i smb-volume-release-concourse-tasks=/Users/pivotal/workspace/smb-volume-release \
+-i smb-volume-release=/Users/pivotal/workspace/smb-volume-release \
+-i director-state=/Users/pivotal/workspace/gorgophone-env \
+-i persi-ci=/Users/pivotal/workspace/persi-ci \
+-p
