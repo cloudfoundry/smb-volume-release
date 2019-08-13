@@ -9,5 +9,5 @@ pushd src/code.cloudfoundry.org/smbdriver > /dev/null
   pushd cmd/smbdriver > /dev/null
     go get -t .
   popd > /dev/null
-  ginkgo -r -keepGoing -p -trace -randomizeAllSpecs -progress "$@"
+  ginkgo -r -keepGoing -nodes 1 -trace -randomizeAllSpecs -progress "$@"
 popd > /dev/null
