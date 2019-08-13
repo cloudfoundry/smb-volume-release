@@ -59,6 +59,45 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 	})
 
+	Context("smbdriver drain", func() {
+		It("should successfully drain", func() {
+			By("bosh stopping the smbdriver")
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "smbdriver")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+		})
+
+		Context("when smbdriver is not reachable", func() {
+			BeforeEach(func() {
+				By("drain cannot reach the smbdriver")
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "smbdriver", "-c", "sudo iptables -t filter -A OUTPUT -p tcp --dport 8590  -j DROP")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+
+			AfterEach(func() {
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "smbdriver", "-c", "sudo iptables -t filter -D OUTPUT -p tcp --dport 8590  -j DROP")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+
+				cmd = exec.Command("bosh", "-d", "bosh_release_test", "start", "-n", "smbdriver")
+				session, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+
+			It("should successfully drain", func() {
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "smbdriver")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+		})
+	})
+
 	Context("when smbdriver is disabled", func() {
 
 		BeforeEach(func() {

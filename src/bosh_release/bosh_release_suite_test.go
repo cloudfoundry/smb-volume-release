@@ -48,6 +48,11 @@ func deploy(opsfiles ...string) {
 	session, err := gexec.Start(boshDeployCmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session, 60*time.Minute).Should(gexec.Exit(0))
+
+	disableHealthCheck := exec.Command("bosh", "update-resurrection", "off")
+	session, err = gexec.Start(disableHealthCheck, GinkgoWriter, GinkgoWriter)
+	Expect(err).NotTo(HaveOccurred())
+	Eventually(session, 60*time.Minute).Should(gexec.Exit(0))
 }
 
 func hasStemcell() bool {
