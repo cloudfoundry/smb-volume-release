@@ -7,9 +7,6 @@ function finish {
 }
 trap finish EXIT
 
-source persi-ci/scripts/ci/bbl_get_bosh_env
-source bosh-env/set-env.sh
-
 apt-get update
 apt-get -y install cifs-utils realpath
 

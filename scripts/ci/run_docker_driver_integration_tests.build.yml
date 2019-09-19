@@ -10,7 +10,6 @@ inputs:
   - name: smb-volume-release-concourse-tasks
   - name: smb-volume-release
   - name: director-state
-  - name: persi-ci
 
 params:
   SMB_REMOTE_PATH:
