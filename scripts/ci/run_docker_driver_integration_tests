@@ -59,7 +59,7 @@ pushd smb-volume-release
         --mountFlagAllowed="username,password,file_mode,dir_mode,readonly,domain,vers,sec" \
         --mountFlagDefault="" &
 
-  ginkgo -v -keepGoing src/code.cloudfoundry.org/docker_driver_integration_tests -race
+  ginkgo -v -keepGoing "src/code.cloudfoundry.org/${TEST_PACKAGE}" -race
 
   pkill smbdriver || true
 

@@ -20,6 +20,7 @@ params:
   BBL_AWS_REGION:
   BBL_AWS_ACCESS_KEY_ID:
   BBL_AWS_SECRET_ACCESS_KEY:
+  TEST_PACKAGE: docker_driver_integration_tests
 
 run:
   path: smb-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests
