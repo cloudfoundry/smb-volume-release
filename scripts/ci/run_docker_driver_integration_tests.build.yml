@@ -3,13 +3,14 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: relintdockerhubpushbot/cf-deployment-concourse-tasks
-    tag: v5.2.0
+    repository: bosh/main-bosh-docker
+    privileged: true
 
 inputs:
   - name: smb-volume-release-concourse-tasks
   - name: smb-volume-release
   - name: director-state
+  - name: docker_driver_integration_tests
 
 params:
   SMB_REMOTE_PATH:

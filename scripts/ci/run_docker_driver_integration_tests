@@ -2,10 +2,23 @@
 
 set -x -e
 
-function finish {
-  pkill ssh || true
-}
-trap finish EXIT
+sed -i 's/main $@//' /usr/local/bin/start-bosh
+source /usr/local/bin/start-bosh
+export certs_dir=$(mktemp -d)
+export OUTER_CONTAINER_IP=$(ruby -rsocket -e 'puts Socket.ip_address_list
+                          .reject { |addr| !addr.ip? || addr.ipv4_loopback? || addr.ipv6? }
+                          .map { |addr| addr.ip_address }')
+
+export DOCKER_HOST="tcp://${OUTER_CONTAINER_IP}:4243"
+
+start_docker "${certs_dir}"
+
+docker --tlsverify --tlscacert=${certs_dir}/ca.pem --tlscert=${certs_dir}/cert.pem --tlskey=${certs_dir}/key.pem \
+            run -it -p 139:139 -p 445:445 -d dperson/samba -p \
+            -u "example1;badpass" \
+            -s "example1;/example1;no;no;no;example1" \
+            -p \
+            -S
 
 apt-get update
 apt-get -y install cifs-utils realpath
@@ -47,7 +60,8 @@ pushd smb-volume-release
     go build -o "${SMB_RELEASE_DIR}/tmp/smbdriver" "cmd/smbdriver/main.go"
   popd
 
-  go get -t code.cloudfoundry.org/docker_driver_integration_tests
+  mkdir -p src/code.cloudfoundry.org/docker_driver_integration_tests
+  cp -R ../docker_driver_integration_tests/* src/code.cloudfoundry.org/docker_driver_integration_tests
 
   pkill smbdriver || true
 
