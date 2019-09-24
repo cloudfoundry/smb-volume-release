@@ -9,18 +9,12 @@ image_resource:
 inputs:
   - name: smb-volume-release-concourse-tasks
   - name: smb-volume-release
-  - name: director-state
   - name: docker_driver_integration_tests
 
 params:
   SMB_REMOTE_PATH:
   SMB_USERNAME:
   SMB_PASSWORD:
-  BBL_IAAS:
-  BBL_STATE_DIR:
-  BBL_AWS_REGION:
-  BBL_AWS_ACCESS_KEY_ID:
-  BBL_AWS_SECRET_ACCESS_KEY:
   TEST_PACKAGE: docker_driver_integration_tests
 
 run:
