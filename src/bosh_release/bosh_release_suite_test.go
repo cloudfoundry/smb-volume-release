@@ -19,8 +19,14 @@ func TestBoshReleaseTest(t *testing.T) {
 	RunSpecs(t, "BoshReleaseTest Suite")
 }
 
+var repBuildPackagePath string
+
 var _ = BeforeSuite(func() {
 	SetDefaultEventuallyTimeout(10 * time.Minute)
+
+	var err error
+	repBuildPackagePath, err = gexec.BuildIn("/smb-volume-release", "bosh_release/assets/rep")
+	Expect(err).ShouldNot(HaveOccurred())
 
 	if !hasStemcell() {
 		uploadStemcell()
