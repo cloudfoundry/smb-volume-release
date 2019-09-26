@@ -17,6 +17,13 @@ var _ = Describe("BoshReleaseTest", func() {
 		session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 		Expect(err).NotTo(HaveOccurred())
 		Eventually(session, 16*time.Minute).Should(gexec.Exit(0), string(session.Out.Contents()))
+
+		stubSleep()
+	})
+
+
+	AfterEach(func() {
+		unstubSleep()
 	})
 
 	It("should have a smbdriver process running", func() {
@@ -168,3 +175,18 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 	})
 })
+
+
+func unstubSleep() {
+	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo rm -f /usr/bin/sleep")
+	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+	Expect(err).NotTo(HaveOccurred())
+	Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+}
+
+func stubSleep() {
+	cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo touch /usr/bin/sleep && sudo chmod +x /usr/bin/sleep")
+	session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+	Expect(err).NotTo(HaveOccurred())
+	Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+}
