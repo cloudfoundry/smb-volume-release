@@ -142,12 +142,13 @@ var _ = Describe("BoshReleaseTest", func() {
 				})
 			})
 
-			It("should timeout and successfully drain", func() {
+			It("should timeout and fail drain", func() {
 				By("stopping smbdriver")
 				cmd := exec.Command("bosh", "-d", "bosh_release_test", "stop", "-n", "smbdriver")
 				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 				Expect(err).NotTo(HaveOccurred())
-				Eventually(session, 16*time.Minute).Should(gexec.Exit(0), string(session.Out.Contents()))
+				Eventually(session.Out, 16*time.Minute).Should(gbytes.Say("drain scripts failed. Failed Jobs: smbdriver"))
+				Eventually(session, 16*time.Minute).Should(gexec.Exit(1), string(session.Out.Contents()))
 			})
 		})
 	})
