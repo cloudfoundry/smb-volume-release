@@ -63,19 +63,13 @@ pushd smb-volume-release
   mkdir -p src/code.cloudfoundry.org/docker_driver_integration_tests
   cp -R ../docker_driver_integration_tests/* src/code.cloudfoundry.org/docker_driver_integration_tests
 
-  pkill smbdriver || true
-
   mountDir="${SMB_RELEASE_DIR}/tmp/mountdir"
   mkdir -p "${mountDir}"
 
-  "${SMB_RELEASE_DIR}/tmp/smbdriver" -listenPort="${listen_port}" -transport="tcp" -driversPath="${drivers_path}" \
-        --mountDir="${mountDir}" \
-        --mountFlagAllowed="username,password,file_mode,dir_mode,readonly,domain,vers,sec" \
-        --mountFlagDefault="" &
+  export DRIVER_CMD="${SMB_RELEASE_DIR}/tmp/smbdriver"
+  export DRIVER_OPTS="-listenPort="${listen_port}",-transport="tcp",-driversPath="${drivers_path}",--mountDir="${mountDir}""
 
   ginkgo -v -keepGoing "src/code.cloudfoundry.org/${TEST_PACKAGE}" -race
-
-  pkill smbdriver || true
 
   rm -rf "${SMB_RELEASE_DIR}/tmp"
 popd

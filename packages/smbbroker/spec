@@ -38,6 +38,7 @@ files:
   - code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/goshims/sqlshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/lager/internal/truncate/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/*.go # gosub
   - code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims/*.go # gosub

@@ -23,6 +23,7 @@ files:
   - code.cloudfoundry.org/goshims/syscallshim/*.go # gosub
   - code.cloudfoundry.org/goshims/timeshim/*.go # gosub
   - code.cloudfoundry.org/lager/*.go # gosub
+  - code.cloudfoundry.org/lager/internal/truncate/*.go # gosub
   - code.cloudfoundry.org/lager/lagerflags/*.go # gosub
   - code.cloudfoundry.org/smbdriver/*.go # gosub
   - code.cloudfoundry.org/smbdriver/cmd/smbdriver/*.go # gosub
