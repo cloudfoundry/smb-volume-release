@@ -13,10 +13,14 @@ export DOCKER_HOST="tcp://${OUTER_CONTAINER_IP}:4243"
 
 start_docker "${certs_dir}"
 
+SMB_REMOTE_PATH="//localhost/example1"
+SMB_USERNAME="example1"
+SMB_PASSWORD="badpass"
+
 docker --tlsverify --tlscacert=${certs_dir}/ca.pem --tlscert=${certs_dir}/cert.pem --tlskey=${certs_dir}/key.pem \
             run -it -p 139:139 -p 445:445 -d dperson/samba -p \
-            -u "example1;badpass" \
-            -s "example1;/example1;no;no;no;example1" \
+            -u "$SMB_USERNAME;$SMB_PASSWORD" \
+            -s "$SMB_USERNAME;/$SMB_USERNAME;no;no;no;$SMB_USERNAME" \
             -p \
             -S
 

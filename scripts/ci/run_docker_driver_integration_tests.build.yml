@@ -12,9 +12,6 @@ inputs:
   - name: docker_driver_integration_tests
 
 params:
-  SMB_REMOTE_PATH:
-  SMB_USERNAME:
-  SMB_PASSWORD:
   TEST_PACKAGE: docker_driver_integration_tests
 
 run:
