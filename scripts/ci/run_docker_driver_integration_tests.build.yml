@@ -13,6 +13,7 @@ inputs:
 
 params:
   TEST_PACKAGE: docker_driver_integration_tests
+  BINDINGS_FILE: bindings.json
 
 run:
   path: smb-volume-release-concourse-tasks/scripts/ci/run_docker_driver_integration_tests
