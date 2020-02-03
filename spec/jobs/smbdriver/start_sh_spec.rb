@@ -38,8 +38,8 @@ describe 'smbdriver job' do
         expect(tpl_output).to include("--mountDir=\"/some/cell/mount/path\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
         expect(tpl_output).to include("--timeFormat=\"some-log-level-format\"")
-        expect(tpl_output).to include("--mountFlagAllowed=\"some,options\"")
-        expect(tpl_output).to include("--mountFlagDefault=\"some,default,options\"")
+        expect(tpl_output).to include("--mountFlagAllowed=""")
+        expect(tpl_output).to include("--mountFlagDefault=""")
         expect(tpl_output).to include("--uniqueVolumeIds")
         expect(tpl_output).to include("--requireSSL")
         expect(tpl_output).to include("/server.crt")
@@ -103,20 +103,6 @@ describe 'smbdriver job' do
         expect(tpl_output).to include("/client.crt")
         expect(tpl_output).to include("/client.key")
         expect(tpl_output).not_to include("--insecureSkipVerify")
-      end
-    end
-
-    context 'when configured to not use unique volume ids' do
-      let(:manifest_properties) do
-        {
-            "enable_unique_volume_ids" => false
-        }
-      end
-
-      it 'renders successfully' do
-        tpl_output = template.render(manifest_properties)
-
-        expect(tpl_output).not_to include("--uniqueVolumeIds")
       end
     end
   end

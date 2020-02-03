@@ -53,16 +53,14 @@ case $1 in
       --clientKeyFile="${CLIENT_CERTS_DIR}/client.key" \
       ${ENABLE_INSECURE_SKIP_VERIFY} \
       <% end %>\
-      <% if p("enable_unique_volume_ids") %> \
       --uniqueVolumeIds \
-      <% end %> \
       --debugAddr="<%= p("debug_addr") %>" \
       --driversPath="<%= p("driver_path") %>" \
       --mountDir="<%= p("cell_mount_path") %>" \
       --logLevel="<%= p("log_level") %>" \
       --timeFormat="<%= p("log_time_format") %>" \
-      --mountFlagAllowed="<%= p("allowed_in_mount") %>" \
-      --mountFlagDefault="<%= p("default_in_mount") %>" \
+      --mountFlagAllowed="" \
+      --mountFlagDefault="" \
       >> $LOG_DIR/smbdriver.stdout.log \
       2>> $LOG_DIR/smbdriver.stderr.log
     ;;

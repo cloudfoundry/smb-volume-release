@@ -40,17 +40,6 @@ properties:
   disable:
     description: "disable smbdriver"
     default: false
-  allowed_in_mount:
-    description: "Comma separated list of white-listed options that may be accepted in the mount_config options."
-    example: "username,password,file_mode,dir_mode,readonly,domain,vers,sec"
-    default: ""
-  default_in_mount:
-    description: "Comma separated list default values for options that may be configured in the mount_config options, formatted as 'option:default'. If an option is not specified in the volume mount, or the option is not white-listed, then the specified default value will be used instead."
-    example: "vers:3.0"
-    default: ""
-  enable_unique_volume_ids:
-    description: "opt-in to unique volume IDs"
-    default: true
   tls.ca_cert:
     description: "PEM encoded CA certificate. If not provided, driver will not accept TLS connections"
     default: ""
