@@ -29,4 +29,4 @@ docker \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env SMB_VOLUME_RELEASE_PATH=/smb-volume-release \
 cfpersi/bosh-release-tests \
-$COMMAND_TO_RUN
+    bash -c "echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
