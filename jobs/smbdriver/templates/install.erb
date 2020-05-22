@@ -13,14 +13,14 @@ function copy_client_certs_to_spec_dir() {
   cp -p /var/vcap/jobs/smbdriver/config/certs/client.key ${cert_dir}
 }
 
-echo "Installing mount.cifs"
+echo "$(date +%Y-%m-%dT%H:%M:%S.%NZ): Installing mount.cifs"
 pushd /var/vcap/packages/cifs-utils/
   cp mount.cifs /sbin/
 popd
 
-echo "Installed mount.cifs"
+echo "$(date +%Y-%m-%dT%H:%M:%S.%NZ): Installed mount.cifs"
 
-echo "Copying client certs to data directory..."
+echo "$(date +%Y-%m-%dT%H:%M:%S.%NZ): Copying client certs to data directory..."
 copy_client_certs_to_spec_dir
 
 exit 0
