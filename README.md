@@ -9,7 +9,6 @@ The broker and driver pair allows you:
 - to provision preexisting shares and bind the shares to your applications for share file access.
 
 The test server provides an easy test target with which you can try out volume mounts of preexisting shares.
-
 # Deploying to Cloud Foundry
 
 ## Pre-requisites
