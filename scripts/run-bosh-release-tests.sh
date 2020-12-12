@@ -7,5 +7,5 @@ docker run \
 --privileged \
 -v /Users/pivotal/workspace/smb-volume-release/:/smb-volume-release \
 --workdir=/ \
-bosh/main-bosh-docker \
+harbor-repo.vmware.com/dockerhub-proxy-cache/bosh/main-bosh-docker \
 /smb-volume-release/scripts/run-bosh-release-tests-in-docker-env.sh
