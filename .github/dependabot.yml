@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+# Do we want to autoupdate submodules in /src ?
+# Do we want to autoupdate go-modules in /src ?
+# Do we want to autoupdate /dockerfiles ?
