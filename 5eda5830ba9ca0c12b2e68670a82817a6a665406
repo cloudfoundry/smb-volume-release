@@ -1,0 +1,7 @@
+{
+  "pr": "21",
+  "repository": "cloudfoundry/smb-volume-release",
+  "base_branch": "master",
+  "head_branch": "dependabot/bundler/rspec-3.10.0",
+  "branch_tip": "5eda5830ba9ca0c12b2e68670a82817a6a665406"
+}
