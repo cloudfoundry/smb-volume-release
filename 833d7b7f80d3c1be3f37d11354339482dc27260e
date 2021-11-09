@@ -1,0 +1,7 @@
+{
+  "pr": "26",
+  "repository": "cloudfoundry/smb-volume-release",
+  "base_branch": "master",
+  "head_branch": "dependabot/submodules/src/code.cloudfoundry.org/smbbroker-3a84f6a",
+  "branch_tip": "833d7b7f80d3c1be3f37d11354339482dc27260e"
+}
