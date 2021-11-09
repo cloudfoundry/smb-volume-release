@@ -1,0 +1,7 @@
+{
+  "pr": "22",
+  "repository": "cloudfoundry/smb-volume-release",
+  "base_branch": "master",
+  "head_branch": "dependabot/bundler/bosh-template-2.2.1",
+  "branch_tip": "5959c66413fcea3d8baada586241ceac4e76aad4"
+}
