@@ -1,0 +1,7 @@
+{
+  "pr": "29",
+  "repository": "cloudfoundry/smb-volume-release",
+  "base_branch": "master",
+  "head_branch": "dependabot/submodules/src/code.cloudfoundry.org/smbdriver-3c4b5c8",
+  "branch_tip": "e088bc3c76a213c8fcb5429bd23f7a2f77e81a95"
+}
