@@ -14,9 +14,9 @@ pushd autoconf-2.69
   export PATH=${PATH}:${temp_path}/bin
 popd
 
-tar xf automake-1.15.tar.gz
+tar xf automake-1.15.1.tar.gz
 
-pushd automake-1.15
+pushd automake-1.15.1
   ./configure --prefix=${temp_path}
   make
   make install
