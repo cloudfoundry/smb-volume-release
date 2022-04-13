@@ -176,6 +176,15 @@ var _ = Describe("BoshReleaseTest", func() {
 			Expect(findProcessState("smbdriver")).To(Equal(""))
 		})
 	})
+
+        Context("when deploying keyutils is installed alongside", func() {
+                It("should install keyutils package automatically", func() {
+                        cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "keyctl --version")
+                        session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+                        Expect(err).NotTo(HaveOccurred())
+                        Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+                })
+        })
 })
 
 
