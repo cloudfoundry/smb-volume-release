@@ -2,10 +2,10 @@ autoconf-2.69.tar.gz:
   size: 1927468
   object_id: f26ccc89-cac6-4ab2-42c6-394b6d8911af
   sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
-automake-1.15.tar.gz:
-  size: 2244206
-  object_id: c36c457b-640d-4f34-73dd-da239db8d2fd
-  sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
+automake-1.15.1.tar.gz:
+  size: 2265200
+  object_id: ef2c1232-3fe8-4362-528e-9214402b3177
+  sha: sha256:988e32527abe052307d21c8ca000aa238b914df363a617e38f4fb89f5abf6260
 cifs-utils-6.7.tar.bz2:
   size: 363647
   object_id: f76fd32c-1c75-4c28-49fd-48ba34a43204
@@ -18,6 +18,14 @@ pkg-config-0.29.2.tar.gz:
   size: 2016830
   object_id: 17b48507-5868-4826-43ba-14ee1c063907
   sha: 76e501663b29cb7580245720edfb6106164fad2b
+smb-debs/bionic/keyutils_1.5.9-9.2ubuntu2_amd64.deb:
+  size: 47896
+  object_id: 60348910-cf0a-4ffd-4315-09991abc13dd
+  sha: sha256:223a7160b6e2680d2b1f43abb067e0ccc08906bb2c5448ad4b3065f38309bbb5
+smb-debs/jammy/keyutils_1.6.1-2ubuntu3_amd64.deb:
+  size: 50410
+  object_id: b79af1d3-827b-4dfa-6957-291ec83be991
+  sha: sha256:39da334791f57894fa13f680470e048383074b6c02aeb58e206033c5a3d0e925
 talloc-2.1.9.tar.gz:
   size: 440335
   object_id: b65fd9d0-6fb6-4d66-68af-e11fc2d8efd2

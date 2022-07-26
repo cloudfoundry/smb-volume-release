@@ -176,6 +176,15 @@ var _ = Describe("BoshReleaseTest", func() {
 			Expect(findProcessState("smbdriver")).To(Equal(""))
 		})
 	})
+
+        When("deploying on a newer stemcell than xenial", func() {
+                It("should install keyutils package automatically", func() {
+                        cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "if [ \"$(lsb_release -c | cut -f 2)\" != \"xenial\" ] ; then keyctl --version ; fi")
+                        session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+                        Expect(err).NotTo(HaveOccurred())
+                        Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+                })
+        })
 })
 
 
