@@ -49,7 +49,7 @@ popd
 tar jxf cifs-utils-6.7.tar.bz2
 
 pushd cifs-utils-6.7
-  autoreconf -i
+  autoreconf -i -I "${temp_path}/share/aclocal"
   ./configure --prefix=${temp_path}
   make CPPFLAGS="-I${temp_path}/include"
   cp mount.cifs ${BOSH_INSTALL_TARGET}
