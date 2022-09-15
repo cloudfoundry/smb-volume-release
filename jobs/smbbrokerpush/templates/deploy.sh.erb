@@ -30,8 +30,10 @@ function authenticate_and_target() {
   mkdir -p $CF_HOME
   cf api $API_ENDPOINT <% if p('skip_cert_verify') %>--skip-ssl-validation<% end %>
   <% if_p('cf.client_id', 'cf.client_secret') do |client_id, client_secret| %>
+    echo "Found a client ID. Authenticating cf as <%= client_id %>"
     cf auth "<%= client_id %>" "<%= client_secret %>" --client-credentials
   <% end.else do %>
+    echo "No client ID found. Authenticating cf as <%= p('cf.admin_user') %>"
     cf auth "<%= p('cf.admin_user') %>" "<%= p('cf.admin_password') %>"
   <% end %>
   cf create-org $ORG
