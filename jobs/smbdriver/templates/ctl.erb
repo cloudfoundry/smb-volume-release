@@ -46,6 +46,7 @@ case $1 in
     exec chpst -u root:root /var/vcap/packages/smbdriver/bin/smbdriver \
       --listenPort=<%= p("listen_port") %> \
       --transport="tcp-json" \
+      --forceNoserverino=<%= p("force_noserverino") %> \
       <% if p("tls.ca_cert") != '' %>\
       --requireSSL \
       --certFile="${SERVER_CERTS_DIR}/server.crt" \
