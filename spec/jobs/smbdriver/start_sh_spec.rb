@@ -26,6 +26,7 @@ describe 'smbdriver job' do
             "ssl" => {
                 "insecure_skip_verify" => true
             },
+            "force_noserverino" => true,
         }
       end
 
@@ -45,6 +46,7 @@ describe 'smbdriver job' do
         expect(tpl_output).to include("/client.crt")
         expect(tpl_output).to include("/client.key")
         expect(tpl_output).to include("--insecureSkipVerify")
+        expect(tpl_output).to include("--forceNoserverino=true")
       end
     end
 
@@ -100,6 +102,15 @@ describe 'smbdriver job' do
         expect(tpl_output).to include("/client.crt")
         expect(tpl_output).to include("/client.key")
         expect(tpl_output).not_to include("--insecureSkipVerify")
+      end
+    end
+
+    context 'when not configured with force_noserverino' do
+      let(:manifest_properties) {}
+
+      it 'defaults force_noserverino to false' do
+        tpl_output = template.render(manifest_properties)
+        expect(tpl_output).to include("--forceNoserverino=false")
       end
     end
   end
