@@ -1,0 +1,69 @@
+name: smb-volume
+version: 3.1.10
+commit_hash: 8eb2e6e
+uncommitted_changes: false
+jobs:
+- name: bbr-smbbroker
+  version: 083ce8ceb829e59ef97cd6c27611112613bec154c8d3ab45e71a19b1f48707c5
+  fingerprint: 083ce8ceb829e59ef97cd6c27611112613bec154c8d3ab45e71a19b1f48707c5
+  sha1: sha256:d0be0d0e6a26e8c7b678bc02241e8637dbe3ba47b6f1a07c657abb86f163e0cc
+  packages: []
+- name: smbbrokerpush
+  version: 4bbd2d3fdee8ae3487e93d2ff15148fb4aa91baff1d61b657d4077fab8914f0a
+  fingerprint: 4bbd2d3fdee8ae3487e93d2ff15148fb4aa91baff1d61b657d4077fab8914f0a
+  sha1: sha256:7c32c29aad8bc8dd52c4a9367a0c7f17b9b61bf5ccd65322165df0412e743831
+  packages:
+  - smbbroker
+- name: smbdriver
+  version: 7b5ecc80245f2e70a886f8455592c3e48ac743bf671ccc66276fa92d25e62834
+  fingerprint: 7b5ecc80245f2e70a886f8455592c3e48ac743bf671ccc66276fa92d25e62834
+  sha1: sha256:33a448df2eeff3c3afb3b62bd16a796805919db3797db4a5a256bdbd2e960339
+  packages:
+  - cifs-utils
+  - smbdriver
+  - smb-debs
+- name: smbtestserver
+  version: 87dbe6527ed3fdd97f10b250114247eb4b412108505e4a176237b4b5db1803c5
+  fingerprint: 87dbe6527ed3fdd97f10b250114247eb4b412108505e4a176237b4b5db1803c5
+  sha1: sha256:47bde4e6267a1fbd91acf7c405db0d906dc47282b48fdc5e3ab0a683e2ed7db2
+  packages: []
+packages:
+- name: cifs-utils
+  version: 613b4d7aa2a9ff0926e40a00f95a6fca46ac6033c24e5b6b882d694fd0dca577
+  fingerprint: 613b4d7aa2a9ff0926e40a00f95a6fca46ac6033c24e5b6b882d694fd0dca577
+  sha1: sha256:1f92782e129a080ab50485a0dbdc0f346c3efed9e661848528543d0498762fe7
+  dependencies:
+  - python-2.7
+- name: golang-1-linux
+  version: 2336380dbf01a44020813425f92be34685ce118bf4767406c461771cfef14fc9
+  fingerprint: 2336380dbf01a44020813425f92be34685ce118bf4767406c461771cfef14fc9
+  sha1: sha256:c440fd7aa6d179a6891f765c46f69fa2b6cbadd8da3b019a4fb27fc9001a4f1f
+  dependencies: []
+- name: python-2.7
+  version: 7063c9f4e43bf49374c2f6cc6c2f74a5467f2298
+  fingerprint: 7063c9f4e43bf49374c2f6cc6c2f74a5467f2298
+  sha1: bd130315766a7641dbd20aa328d16f084cc17965
+  dependencies: []
+- name: smb-debs
+  version: 5f8b442faeaea68d606e2eee197cc878dca956e7b9244c4280020513cc9a6a7b
+  fingerprint: 5f8b442faeaea68d606e2eee197cc878dca956e7b9244c4280020513cc9a6a7b
+  sha1: sha256:58269a1043bff0a24bf3c4ab4a4deb1f33a901b1485494f0cbded14b18161298
+  dependencies: []
+- name: smbbroker
+  version: 65e636765c5c17832f6704e8efda3f259e5e163c074960f102621f0e65383fdf
+  fingerprint: 65e636765c5c17832f6704e8efda3f259e5e163c074960f102621f0e65383fdf
+  sha1: sha256:e941039af7d76f039fd3caaa4c0a05215514ae3fbe12cf61595bccc1be86d027
+  dependencies:
+  - golang-1-linux
+- name: smbdriver
+  version: dd3dab1d76c86bf96bf340c00609dc5d7ae0135861c3deec80379f7d3d0bc3a4
+  fingerprint: dd3dab1d76c86bf96bf340c00609dc5d7ae0135861c3deec80379f7d3d0bc3a4
+  sha1: sha256:875eae2aa908f729480d89fc40a2fcaa79a7b1526e16d01edb961c6f3f2847f4
+  dependencies:
+  - golang-1-linux
+  - cifs-utils
+  - smb-debs
+license:
+  version: 0aecd8025f98a0dadc759cfc567f4480da0e472173a8f766a348ab599ac1b3b1
+  fingerprint: 0aecd8025f98a0dadc759cfc567f4480da0e472173a8f766a348ab599ac1b3b1
+  sha1: sha256:861e4f1ff1f87970c9790f658586b3f7258da41e1af15a0b781c7c1edfade60a
