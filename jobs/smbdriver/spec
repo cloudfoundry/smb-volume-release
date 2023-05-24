@@ -2,8 +2,8 @@
 name: smbdriver
 
 templates:
-  install.erb: bin/pre-start
-  ctl.erb: bin/smbdriver_ctl
+  pre-start.erb: bin/pre-start
+  smbdriver_ctl.erb: bin/smbdriver_ctl
   drain.erb: bin/drain
   ca.crt.erb: config/certs/ca.crt
   client.crt.erb: config/certs/client.crt
