@@ -67,6 +67,8 @@ wait_for_apps_to_be_evacuated
 
 echo "rep is done..evacuating smbdriver"
 
+rm -f "<%= p("driver_path") %>"/smbdriver.json
+
 set +e
 evacuate
 evacuate_exit_code=$?

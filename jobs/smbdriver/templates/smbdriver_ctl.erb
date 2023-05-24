@@ -70,6 +70,7 @@ case $1 in
       kill -9 `cat $PIDFILE` || true
       rm -f $PIDFILE
     fi
+    rm -f "<%= p("driver_path") %>"/smbdriver.json
     ;;
 
   *)
