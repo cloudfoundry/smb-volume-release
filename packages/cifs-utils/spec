@@ -1,13 +1,13 @@
 ---
 name: cifs-utils
 
-dependencies:
-- python-2.7
+dependencies: []
 
 files:
-  - autoconf-2.69.tar.gz
-  - automake-1.15.1.tar.gz
-  - libtool-2.4.6.tar.gz
-  - talloc-2.1.9.tar.gz
-  - pkg-config-0.29.2.tar.gz
-  - cifs-utils-6.7.tar.bz2
+  - autoconf-*.tar.gz
+  - automake-*.tar.xz
+  - libtool-*.tar.xz
+  - talloc-*.tar.gz
+  - xenial-talloc-*.tar.gz
+  - pkg-config-*.tar.gz
+  - cifs-utils-*.tar.bz2
