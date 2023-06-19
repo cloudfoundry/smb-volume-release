@@ -1,54 +1,57 @@
 set -e
 
-source /var/vcap/packages/python-2.7/bosh/compile.env
-
 temp_path=${PWD}/temp
-mkdir $temp_path
+mkdir -p $temp_path
 
-tar xf autoconf-2.69.tar.gz
+tar xf autoconf-*.tar.gz
 
-pushd autoconf-2.69
+pushd autoconf-*/
   ./configure --prefix=${temp_path}
   make
   make install
   export PATH=${PATH}:${temp_path}/bin
 popd
 
-tar xf automake-1.15.1.tar.gz
+tar xf automake-*.tar.xz
 
-pushd automake-1.15.1
+pushd automake-*/
   ./configure --prefix=${temp_path}
   make
   make install
 popd
 
-tar xf libtool-2.4.6.tar.gz
+tar xf libtool*.tar.xz
 
-pushd libtool-2.4.6
+pushd libtool-*/
   ./configure --prefix=${temp_path}
   make
   make install
 popd
 
-tar xf talloc-2.1.9.tar.gz
+tar xf talloc*.tar.gz
 
-pushd talloc-2.1.9
-  ./configure --prefix=${temp_path}
+pushd talloc*/
+  set +e
+  if cat /etc/os-release | grep xenial; then
+    ./configure --prefix=${temp_path} --disable-python
+  else
+    ./configure --prefix=${temp_path}
+  fi
   make
   make install
 popd
 
-tar xf pkg-config-0.29.2.tar.gz
+tar xf pkg-config*.tar.gz
 
-pushd pkg-config-0.29.2
+pushd pkg-config*/
   ./configure --prefix=${temp_path} --with-internal-glib
   make
   make install
 popd
 
-tar jxf cifs-utils-6.7.tar.bz2
+tar jxf cifs-utils*.tar.bz2
 
-pushd cifs-utils-6.7
+pushd cifs-utils*/
   autoreconf -i -I "${temp_path}/share/aclocal"
   ./configure --prefix=${temp_path}
   make CPPFLAGS="-I${temp_path}/include"
