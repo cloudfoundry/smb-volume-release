@@ -34,3 +34,7 @@ xenial-talloc-2.2.0.tar.gz:
   size: 633467
   object_id: c2d6a601-cce3-4c3f-7996-964de701834b
   sha: sha256:5c6f6a45ef96b3fd0b28942673a68d0c6af5dcca9d676a2e4d57ce7e86c22ebc
+xenial-talloc-2.3.1.tar.gz:
+  size: 638878
+  object_id: edaea656-655c-4259-764b-f33cc309d25d
+  sha: sha256:ef4822d2fdafd2be8e0cabc3ec3c806ae29b8268e932c5e9a4cd5585f37f9f77
