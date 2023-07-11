@@ -31,5 +31,5 @@ run \
 --env BOSH_CLIENT_SECRET=${BOSH_CLIENT_SECRET} \
 --env BOSH_CA_CERT=${BOSH_CA_CERT} \
 --env SMB_VOLUME_RELEASE_PATH=/smb-volume-release \
-cfpersi/bosh-release-tests \
+${DOCKER_IMAGE:-cfpersi/bosh-release-tests} \
     bash -c "echo '**** from the bash shell, run ginkgo -nodes 1 -r -v .' && $COMMAND_TO_RUN"
