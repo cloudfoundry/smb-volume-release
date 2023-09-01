@@ -130,6 +130,11 @@ var _ = Describe("BoshReleaseTest", func() {
 					cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "rep")
 					_, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 					Expect(err).NotTo(HaveOccurred())
+					// there's a race condition in CI where the stop is executed before the above ssh was able to be setup and start the process. This should fix it.
+					cmd = exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "until pgrep -x rep; do sleep 1; done")
+					_, err = gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+					Expect(err).NotTo(HaveOccurred())
+					time.Sleep(10 * time.Second)
 				})
 			})
 
