@@ -3,13 +3,14 @@ package bosh_release_test
 import (
 	"encoding/json"
 	"fmt"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
-	"github.com/onsi/gomega/gexec"
 	"os"
 	"os/exec"
 	"time"
+
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
 
 	"testing"
 )
@@ -20,12 +21,15 @@ func TestBoshReleaseTest(t *testing.T) {
 }
 
 var repBuildPackagePath string
-
+var release_path string
+var stemcell_path string
 var _ = BeforeSuite(func() {
 	SetDefaultEventuallyTimeout(10 * time.Minute)
 
+	release_path = os.Getenv("RELEASE_PATH")
+
 	var err error
-	repBuildPackagePath, err = gexec.BuildIn("/smb-volume-release", "bosh_release/assets/rep")
+	repBuildPackagePath, err = gexec.BuildIn(release_path, "bosh_release/assets/rep")
 	Expect(err).ShouldNot(HaveOccurred())
 
 	if !hasStemcell() {
@@ -36,12 +40,12 @@ var _ = BeforeSuite(func() {
 })
 
 func deploy(opsfiles ...string) {
-	deployCmd := []string {"deploy",
+	deployCmd := []string{"deploy",
 		"-n",
 		"-d",
 		"bosh_release_test",
 		"./smbdriver-manifest.yml",
-		"-v", fmt.Sprintf("path_to_smb_volume_release=%s", os.Getenv("SMB_VOLUME_RELEASE_PATH")),
+		"-v", fmt.Sprintf("path_to_smb_volume_release=%s", release_path),
 	}
 
 	updatedDeployCmd := make([]string, len(deployCmd))
@@ -73,12 +77,13 @@ func hasStemcell() bool {
 }
 
 func uploadStemcell() {
-	boshUsCmd := exec.Command("bosh", "upload-stemcell", "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent")
+
+	stemcell_path = os.Getenv("STEMCELL_PATH")
+	boshUsCmd := exec.Command("bosh", "upload-stemcell", stemcell_path)
 	session, err := gexec.Start(boshUsCmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
 	Eventually(session, 20*time.Minute).Should(gexec.Exit(0))
 }
-
 
 func findProcessState(processName string) string {
 
@@ -120,7 +125,6 @@ type BoshInstancesOutput struct {
 	Blocks interface{} `json:"Blocks"`
 	Lines  []string    `json:"Lines"`
 }
-
 
 type BoshStemcellsOutput struct {
 	Tables []struct {
