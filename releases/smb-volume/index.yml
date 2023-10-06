@@ -107,6 +107,8 @@ builds:
     version: 3.1.33
   cc384ef0-54ec-45c9-7b2d-f9ea453763c1:
     version: 0.2.6
+  cc70b1fa-1c41-4d79-6379-fc6b8057cabb:
+    version: 3.1.36
   d20dfcc0-3270-44af-60a6-ed2f2340436e:
     version: 0.1.11
   d32ee716-e2da-4079-5379-1192e40acb34:
