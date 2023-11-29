@@ -181,12 +181,22 @@ var _ = Describe("BoshReleaseTest", func() {
 		})
 	})
 
-	When("deploying on a newer stemcell than xenial", func() {
-		It("should install keyutils package automatically", func() {
-			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "if [ \"$(lsb_release -c | cut -f 2)\" != \"xenial\" ] ; then keyctl --version ; fi")
+	When("deploying on any stemcell", func() {
+		When("LD_LIBRARY_PATH is set", func() {
+			It("will successfully execute keyctl", func() {
+				cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "LD_LIBRARY_PATH=/var/vcap/packages/keyutils/keyutils/ /var/vcap/packages/keyutils/keyutils/keyctl --version")
+				session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+				Expect(err).NotTo(HaveOccurred())
+				Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			})
+		})
+	})
+	When("LD_LIBRARY_PATH is NOT set", func() {
+		It("will fail with an error about a missing shared library", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "/var/vcap/packages/keyutils/keyutils/keyctl --version")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
-			Expect(err).NotTo(HaveOccurred())
-			Eventually(session).Should(gexec.Exit(0), string(session.Out.Contents()))
+			Eventually(session, time.Minute).Should(gbytes.Say("/var/vcap/packages/keyutils/keyutils/keyctl: /lib/x86_64-linux-gnu/libkeyutils.so.1: version `KEYUTILS_1.10' not found (required by /var/vcap/packages/keyutils/keyutils/keyctl"))
+			Expect(err).To(HaveOccurred())
 		})
 	})
 })
