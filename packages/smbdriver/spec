@@ -4,7 +4,7 @@ name: smbdriver
 dependencies:
 - golang-1-linux
 - cifs-utils
-- smb-debs
+- keyutils
 
 files:
   - code.cloudfoundry.org/smbdriver/**

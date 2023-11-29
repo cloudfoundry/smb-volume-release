@@ -14,7 +14,7 @@ templates:
 packages:
 - cifs-utils
 - smbdriver
-- smb-debs
+- keyutils
 
 properties:
   listen_port:

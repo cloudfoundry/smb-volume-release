@@ -10,6 +10,9 @@ cifs-utils-7.0.tar.bz2:
   size: 418638
   object_id: 96fdc4b7-9cb6-44cf-59db-acc3421c943e
   sha: sha256:0defaab85bd3ea46ffc45ab41fb0d0ad54d05ae2cfaa7e503de86d4f12bc8161
+keyutils-1.6.2.tar.gz:
+  size: 137099
+  sha: sha256:5ed9dbf82bf2fdc5f7027d45cf31bd4650b9a40d0ebf82512e9e6d4e02fd4779
 libtool-2.4.7.tar.xz:
   size: 1016040
   object_id: f690ea15-7d1f-443c-756d-92a776c3ff29
@@ -18,14 +21,6 @@ pkg-config-0.29.2.tar.gz:
   size: 2016830
   object_id: 17b48507-5868-4826-43ba-14ee1c063907
   sha: 76e501663b29cb7580245720edfb6106164fad2b
-smb-debs/bionic/keyutils_1.5.9-9.2ubuntu2_amd64.deb:
-  size: 47896
-  object_id: 60348910-cf0a-4ffd-4315-09991abc13dd
-  sha: sha256:223a7160b6e2680d2b1f43abb067e0ccc08906bb2c5448ad4b3065f38309bbb5
-smb-debs/jammy/keyutils_1.6.1-2ubuntu3_amd64.deb:
-  size: 50410
-  object_id: b79af1d3-827b-4dfa-6957-291ec83be991
-  sha: sha256:39da334791f57894fa13f680470e048383074b6c02aeb58e206033c5a3d0e925
 talloc-2.4.0.tar.gz:
   size: 676054
   object_id: 77e6aa10-7d55-4cba-4bbd-3fa139abf965
