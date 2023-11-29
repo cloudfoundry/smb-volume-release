@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+pushd ${BOSH_COMPILE_TARGET}
+  tar -xzf ${BOSH_COMPILE_TARGET}/keyutils*.tar.gz
+  pushd keyutils-*/
+    make
+  popd
+  rm ${BOSH_COMPILE_TARGET}/keyutils*.tar.gz
+  cp -r keyutils-* ${BOSH_INSTALL_TARGET}/keyutils
+popd

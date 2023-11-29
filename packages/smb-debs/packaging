@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-
-cp -ra ${BOSH_COMPILE_TARGET}/smb-debs/* ${BOSH_INSTALL_TARGET}/
