@@ -195,7 +195,7 @@ var _ = Describe("BoshReleaseTest", func() {
 		It("will fail with an error about a missing shared library", func() {
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "/var/vcap/packages/keyutils/keyutils/keyctl --version")
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
-			Eventually(session, time.Minute).Should(gbytes.Say("/var/vcap/packages/keyutils/keyutils/keyctl: /lib/x86_64-linux-gnu/libkeyutils.so.1: version `KEYUTILS_1.10' not found (required by /var/vcap/packages/keyutils/keyutils/keyctl"))
+			Eventually(session, time.Minute).Should(gbytes.Say("/var/vcap/packages/keyutils/keyutils/keyctl: /lib/x86_64-linux-gnu/libkeyutils.so.1: version `KEYUTILS_1.10' not found"))
 			Expect(err).To(HaveOccurred())
 		})
 	})
