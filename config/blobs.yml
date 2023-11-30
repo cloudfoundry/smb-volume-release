@@ -10,10 +10,10 @@ cifs-utils-7.0.tar.bz2:
   size: 418638
   object_id: 96fdc4b7-9cb6-44cf-59db-acc3421c943e
   sha: sha256:0defaab85bd3ea46ffc45ab41fb0d0ad54d05ae2cfaa7e503de86d4f12bc8161
-keyutils-1.6.2.tar.gz:
-  size: 137099
-  object_id: b3d14b22-adc0-4a66-49c4-cee9103d83d0
-  sha: sha256:5ed9dbf82bf2fdc5f7027d45cf31bd4650b9a40d0ebf82512e9e6d4e02fd4779
+keyutils-1.6.3.tar.gz:
+  size: 753599
+  object_id: f0f4ab30-4153-4b18-6d85-705bf9ec197d
+  sha: sha256:19d627905a4f81da319faa429b42c1000edfda0858b35890c484d91b8af3bd39
 libtool-2.4.7.tar.xz:
   size: 1016040
   object_id: f690ea15-7d1f-443c-756d-92a776c3ff29
