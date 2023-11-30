@@ -1,3 +1,7 @@
+/keyutils-1.6.3.tgz:
+  size: 757461
+  object_id: c46aab8a-1e6a-449b-752a-43c4d2fa0dab
+  sha: sha256:c9825b242b2ab3f51521cfe772e2789803db23cccacd588238678757c438ae84
 autoconf-2.71.tar.gz:
   size: 2003781
   object_id: 882068c3-d129-49a8-4e04-64b9e856fd59
@@ -10,10 +14,6 @@ cifs-utils-7.0.tar.bz2:
   size: 418638
   object_id: 96fdc4b7-9cb6-44cf-59db-acc3421c943e
   sha: sha256:0defaab85bd3ea46ffc45ab41fb0d0ad54d05ae2cfaa7e503de86d4f12bc8161
-keyutils-1.6.2.tar.gz:
-  size: 137099
-  object_id: b3d14b22-adc0-4a66-49c4-cee9103d83d0
-  sha: sha256:5ed9dbf82bf2fdc5f7027d45cf31bd4650b9a40d0ebf82512e9e6d4e02fd4779
 libtool-2.4.7.tar.xz:
   size: 1016040
   object_id: f690ea15-7d1f-443c-756d-92a776c3ff29
