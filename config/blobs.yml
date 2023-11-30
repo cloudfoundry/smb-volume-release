@@ -1,7 +1,7 @@
-/keyutils-1.6.3.tgz:
-  size: 757461
-  object_id: c46aab8a-1e6a-449b-752a-43c4d2fa0dab
-  sha: sha256:c9825b242b2ab3f51521cfe772e2789803db23cccacd588238678757c438ae84
+/keyutils-1.6.3.tar.gz:
+  size: 755775
+  object_id: b3c40a2e-dcef-4ab4-53a5-83914f01944a
+  sha: sha256:9a2adaf769aaf1f2458835a3a4a89a8721e46fc352818f4c029cce3f9d501cc0
 autoconf-2.71.tar.gz:
   size: 2003781
   object_id: 882068c3-d129-49a8-4e04-64b9e856fd59
