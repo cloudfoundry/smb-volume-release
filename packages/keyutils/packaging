@@ -2,10 +2,10 @@
 
 set -e
 pushd ${BOSH_COMPILE_TARGET}
-  tar -xzf ${BOSH_COMPILE_TARGET}/keyutils*.tar.gz
-  pushd keyutils-*/
+  mkdir -p ./keyutils-build
+  tar -xzf ${BOSH_COMPILE_TARGET}/keyutils*.tar.gz -C keyutils-build
+  pushd keyutils-build/
     make
   popd
-  rm ${BOSH_COMPILE_TARGET}/keyutils*.tar.gz
-  cp -r keyutils-* ${BOSH_INSTALL_TARGET}/keyutils
+  cp -r keyutils-build ${BOSH_INSTALL_TARGET}/keyutils
 popd
