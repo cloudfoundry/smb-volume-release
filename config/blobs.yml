@@ -28,7 +28,7 @@ talloc-2.4.0.tar.gz:
   sha: sha256:6df36862c42466ef88f360444513870ef46934f9016c84383cc4008a7d0c46ba
 talloc-2.4.1.tar.gz:
   size: 679160
-  object_id: 629777b3-b47d-48e6-4dc5-08a9458ff11d
+  object_id: 4081d9d4-9fad-4248-542b-3ab122128fd5
   sha: sha256:410a547f08557007be0e88194f218868358edc0ab98c98ba8c167930db3d33f9
 xenial-talloc-2.3.1.tar.gz:
   size: 638878
