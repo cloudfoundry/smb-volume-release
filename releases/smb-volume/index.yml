@@ -51,6 +51,8 @@ builds:
     version: 3.1.39
   6bb24d45-794e-4595-4148-504054b6af02:
     version: 3.1.44
+  6db12ec4-684e-474a-43bf-33d082ccfd48:
+    version: 3.1.45
   6deb49af-04ea-426c-64ab-0b9927c44c29:
     version: 3.1.35
   74ae5675-9e06-442a-75ab-b4ab2101be4f:
