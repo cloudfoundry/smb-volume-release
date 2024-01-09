@@ -6,6 +6,7 @@ describe 'smbdriver job' do
   let(:job) {release.job('smbdriver')}
 
   describe 'start.sh' do
+
     let(:template) {job.template('bin/smbdriver_ctl')}
 
     context 'when fully configured' do
@@ -27,6 +28,7 @@ describe 'smbdriver job' do
                 "insecure_skip_verify" => true
             },
             "force_noserverino" => true,
+            "force_nodfs" => true,
         }
       end
 
@@ -47,6 +49,7 @@ describe 'smbdriver job' do
         expect(tpl_output).to include("/client.key")
         expect(tpl_output).to include("--insecureSkipVerify")
         expect(tpl_output).to include("--forceNoserverino=true")
+        expect(tpl_output).to include("--forceNoDfs=true")
       end
     end
 
@@ -111,6 +114,15 @@ describe 'smbdriver job' do
       it 'defaults force_noserverino to false' do
         tpl_output = template.render(manifest_properties)
         expect(tpl_output).to include("--forceNoserverino=false")
+      end
+    end
+
+    context 'when not configured with force_nodfs' do
+      let(:manifest_properties) {}
+
+      it 'defaults force_nodfs to false' do
+        tpl_output = template.render(manifest_properties)
+        expect(tpl_output).to include("--forceNoDfs=false")
       end
     end
   end
