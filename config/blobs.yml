@@ -1,7 +1,7 @@
-autoconf-2.71.tar.gz:
-  size: 2003781
-  object_id: 882068c3-d129-49a8-4e04-64b9e856fd59
-  sha: sha256:431075ad0bf529ef13cb41e9042c542381103e80015686222b8a9d4abef42a1c
+autoconf-2.72.tar.gz:
+  size: 2143794
+  object_id: dc4212d5-5725-4f1b-7a6d-f28302fe2352
+  sha: sha256:afb181a76e1ee72832f6581c0eddf8df032b83e2e0239ef79ebedc4467d92d6e
 automake-1.16.5.tar.xz:
   size: 1601740
   object_id: 8fea41d7-fa88-49fd-40bf-b8997408f54e
