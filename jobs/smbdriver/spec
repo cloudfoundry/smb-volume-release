@@ -79,6 +79,9 @@ properties:
   ssl.insecure_skip_verify:
     description: "When connecting over SSL, skip verification of server IP addresses in the certificate"
     default: false
+  force_nodfs:
+    description: "Force all SMB mounts to use the 'nodfs' mount option. Added to address jammy > v1.199 kernel regression around handling DFS."
+    default: false
   force_noserverino:
     description: "Force all SMB mounts to use the 'noserverino' mount option. Added to address 'stale file handle' errors after a xenial-to-jammy upgrade."
     default: false

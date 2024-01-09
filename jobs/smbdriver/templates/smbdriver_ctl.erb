@@ -47,6 +47,7 @@ case $1 in
       --listenPort=<%= p("listen_port") %> \
       --transport="tcp-json" \
       --forceNoserverino=<%= p("force_noserverino") %> \
+      --forceNoDfs=<%= p("force_nodfs") %> \
       <% if p("tls.ca_cert") != '' %>\
       --requireSSL \
       --certFile="${SERVER_CERTS_DIR}/server.crt" \
