@@ -4,7 +4,7 @@ RUN cd smb-volume-release && bosh create-release --tarball /tmp/release.tgz
 RUN version=$(cat /tmp/release.tgz | tar -Oxz packages/golang-1-linux.tgz | tar z --list | grep -ohE "go[0-9]\.[0-9]{1,2}\.[0-9]{1,2}") && echo $version > /tmp/golang_version
 RUN ginkgo_version=$(cd smb-volume-release/src/bosh_release/ && go list -f "{{.Version}}" -m github.com/onsi/ginkgo > /tmp/ginkgo_version)
 
-FROM ubuntu
+FROM harbor-repo.vmware.com/dockerhub-proxy-cache/ubuntu
 
 RUN apt-get update && apt-get install -y git gcc curl wget make
 
