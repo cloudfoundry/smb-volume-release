@@ -23,6 +23,12 @@ function main() {
     pushd /var/vcap/packages/cifs-utils/
       cp mount.cifs /sbin/
     popd
+    pushd /var/vcap/packages/keyutils/keyutils
+      cp key.dns_resolver /sbin/
+      cp request-key /sbin/
+      cp request-key.conf /etc
+      mkdir -p /etc/request-key.d
+    popd
 
     echo "Installed mount.cifs"
 
