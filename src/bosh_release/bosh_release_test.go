@@ -32,6 +32,69 @@ var _ = Describe("BoshReleaseTest", func() {
 		Expect(state).To(Equal("running"))
 	})
 
+	It("copies over required files from /var/vcap/packages/... to /sbin and /etc in pre-start of smbdriver", func() {
+		// As of 2024-03-13 this release was compiling key utils from source and it
+		// assumed that having the compiled binaries available on PATH is enough
+		// for the mount commands to succeed. Unfortunately this is not the case.
+		// Some binaries that are compiled with the keyutils source code need to be
+		// made available in /sbin.
+
+		// These binaries are: - key.dns_resolver - request-key
+
+		// When a mount is executed against an SMB share that is exposed within a
+		// windows DFS namespace additional calls to these binaries are executed
+		// via https://linux.die.net/man/8/cifs.upcall.
+
+		// Apparently cifs.upcall requires request-key to be present in /sbin as
+		// opposed to being available on PATH.
+
+		// Additionally for request-key to work, it seems that the config folder
+
+		// - `/etc/request-key.d` needs to exists and the default config -
+		// `/etc/request-key.conf` needs to exist and be populated.
+
+		// These paths and files were taken from the install section of the
+		// Makefile shipped with the keyutils src:
+
+		// Lines 215-220
+
+		// https://kernel.googlesource.com/pub/scm/linux/kernel/git/dhowells/keyutils/+/refs/tags/v1.6.3/Makefile
+
+		By("checking that /sbin/request-key exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /sbin/request-key")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+
+		By("checking that /sbin/mount.cifs exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /sbin/mount.cifs")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+		By("checking that /sbin/key.dns_resolver exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /sbin/key.dns_resolver")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+		By("checking that /etc/request-key.conf exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /etc/request-key.conf")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+
+		By("checking that /etc/request-key.d/ exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /etc/request-key.d/")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+
+	})
+
 	Context("Monit restart", func() {
 		JustBeforeEach(func() {
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "restart", "smbdriver", "-n")
