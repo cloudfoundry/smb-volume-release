@@ -32,6 +32,42 @@ var _ = Describe("BoshReleaseTest", func() {
 		Expect(state).To(Equal("running"))
 	})
 
+	It("copies over required files from /var/vcap/packages/... to /sbin and /etc in pre-start of smbdriver", func() {
+		By("checking that /sbin/request-key exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /sbin/request-key")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+
+		By("checking that /sbin/mount.cifs exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /sbin/mount.cifs")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+		By("checking that /sbin/key.dns_resolver exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /sbin/key.dns_resolver")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+		By("checking that /etc/request-key.conf exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /etc/request-key.conf")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+
+		By("checking that /etc/request-key.d/ exists", func() {
+			cmd := exec.Command("bosh", "-d", "bosh_release_test", "ssh", "-c", "sudo ls /etc/request-key.d/")
+			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
+			Expect(err).NotTo(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+		})
+
+	})
+
 	Context("Monit restart", func() {
 		JustBeforeEach(func() {
 			cmd := exec.Command("bosh", "-d", "bosh_release_test", "restart", "smbdriver", "-n")
