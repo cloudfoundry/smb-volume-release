@@ -7,5 +7,5 @@ docker run \
 --privileged \
 -v /Users/pivotal/workspace/smb-volume-release/:/smb-volume-release \
 --workdir=/ \
-bosh/main-bosh-docker \
+bosh/docker-cpi \
 /smb-volume-release/scripts/run-bosh-release-tests-in-docker-env.sh
