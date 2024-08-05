@@ -1,0 +1,1 @@
+web: bin/smbbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="$SERVICES_CONFIG" --logLevel="$LOGLEVEL" --allowedOptions="$ALLOWED_OPTIONS" --credhubURL="$CREDHUB_URL" --uaaClientID="$CREDHUB_CLIENT_ID" --uaaClientSecret="$CREDHUB_CLIENT_SECRET" --storeID="$CREDHUB_STORE_ID"

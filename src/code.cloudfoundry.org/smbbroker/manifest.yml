@@ -1,0 +1,16 @@
+---
+applications:
+- name: smbbroker
+  buildpacks: [ binary_buildpack ]
+  env:
+    SERVICENAME: smb # Service name to publish in the marketplace
+    USERNAME: smb-broker
+    LOGLEVEL: info # error, warn, info, debug
+
+    SERVICES_CONFIG: default_services.json
+
+    ALLOWED_OPTIONS: "uid,gid,file_mode,dir_mode,ro,source,mount,domain,username,password,sec"
+
+    CREDHUB_URL: https://credhub.service.cf.internal:8844
+    CREDHUB_CLIENT_ID: smb-broker-credhub-client
+    CREDHUB_STORE_ID: smbbroker

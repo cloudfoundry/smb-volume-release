@@ -1,4 +1,0 @@
-- path: /instance_groups/name=smbdriver/jobs/name=smbdriver/properties?
-  type: replace
-  value:
-    disable: true
