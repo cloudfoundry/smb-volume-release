@@ -1,0 +1,14 @@
+[{
+  "id": "9db9cca4-8fd5-4b96-a4c7-0a48f47c3bad",
+  "name": "smb",
+  "description": "Existing SMB shares (see: https://code.cloudfoundry.org/smb-volume-release/)",
+  "bindable": true,
+  "plan_updateable": false,
+  "tags": ["smb"],
+  "plans": [{
+    "id":"0da18102-48dc-46d0-98b3-7a4ff6dc9c54",
+    "name": "Existing",
+    "description": "A preexisting share"
+  }],
+  "requires": ["volume_mount"]
+}]
