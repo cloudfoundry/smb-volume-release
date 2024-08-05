@@ -1,8 +1,0 @@
-[submodule "src/code.cloudfoundry.org/smbdriver"]
-	path = src/code.cloudfoundry.org/smbdriver
-	url = https://github.com/cloudfoundry/smbdriver
-	branch = master
-[submodule "src/code.cloudfoundry.org/smbbroker"]
-	path = src/code.cloudfoundry.org/smbbroker
-	url = https://github.com/cloudfoundry/smbbroker
-	branch = master
