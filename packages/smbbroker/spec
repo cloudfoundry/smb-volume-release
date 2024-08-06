@@ -7,6 +7,9 @@ dependencies:
 files:
   - code.cloudfoundry.org/smbbroker/go.mod
   - code.cloudfoundry.org/smbbroker/go.sum
+  - code.cloudfoundry.org/smbbroker/Procfile
+  - code.cloudfoundry.org/smbbroker/manifest.yml
+  - code.cloudfoundry.org/smbbroker/default_services.json
   - code.cloudfoundry.org/smbbroker/vendor/modules.txt
   - code.cloudfoundry.org/smbbroker/vendor/code.cloudfoundry.org/clock/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/code.cloudfoundry.org/credhub-cli/credhub/*.go # gosub
@@ -51,9 +54,11 @@ files:
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/bcrypt/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/blowfish/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/chacha20/*.go # gosub
+  - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/chacha20/*.s # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/curve25519/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/internal/alias/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/internal/poly1305/*.go # gosub
+  - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/internal/poly1305/*.s # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/ssh/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/crypto/ssh/internal/bcrypt_pbkdf/*.go # gosub
   - code.cloudfoundry.org/smbbroker/vendor/golang.org/x/net/context/*.go # gosub
