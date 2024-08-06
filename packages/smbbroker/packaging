@@ -1,11 +1,13 @@
 set -e
 
-source /var/vcap/packages/golang-1-linux/bosh/compile.env
+mkdir -p ${BOSH_INSTALL_TARGET}/src
+mv * ${BOSH_INSTALL_TARGET}/src
+mv ${BOSH_INSTALL_TARGET}/src .
 
-mkdir ../src && cp -a * ../src/ && mv ../src ./src
-mkdir $BOSH_INSTALL_TARGET/bin
+source /var/vcap/packages/golang-*-linux/bosh/compile.env
+export GOBIN=${BOSH_INSTALL_TARGET}/bin
 
 pushd src/code.cloudfoundry.org/smbbroker
-    CGO_ENABLED=0 go build -mod=vendor -o $BOSH_INSTALL_TARGET/bin/smbbroker *.go
+    CGO_ENABLED=0 go install .
     cp ./Procfile ${BOSH_INSTALL_TARGET}
 popd

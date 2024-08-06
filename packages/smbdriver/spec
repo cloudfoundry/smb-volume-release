@@ -2,10 +2,12 @@
 name: smbdriver
 
 dependencies:
-- golang-1-linux
+- golang-1.22-linux
 - cifs-utils
 - keyutils
 
 files:
-  - code.cloudfoundry.org/smbdriver/**
-  - code.cloudfoundry.org/smbdriver/vendor/**
+  - code.cloudfoundry.org/smbdriver/go.mod
+  - code.cloudfoundry.org/smbdriver/go.sum
+  - code.cloudfoundry.org/smbdriver/vendor/modules.txt
+  - cmd/smbdriver/*.go # gosub
