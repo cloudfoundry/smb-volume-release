@@ -274,7 +274,7 @@ func validateMfsymlinks(key string, val string) error {
 }
 
 func validateVersion(key string, val string) error {
-	validVersions := []string{"1.0", "2.0", "2.1", "3.0"}
+	validVersions := []string{"1.0", "2.0", "2.1", "3.0", "3.1.1"}
 
 	if key != "version" {
 		return nil
