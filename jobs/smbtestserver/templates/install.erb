@@ -20,9 +20,14 @@ smbpasswd -a <%= p("username") %> -s <<EOF
 <%= p("password") %>
 EOF
 
-sed -in '1h; 1!H; ${ g; s/#start-vol-config.*end-vol-config//p}' /etc/samba/smb.conf
+sed -i 's/log file\s=.*$/log file = \/var\/vcap\/sys\/log\/smbtestserver\/smbtestserver\.stdout\.log/' /etc/samba/smb.conf
 
-echo "#start-vol-config" >> /etc/samba/smb.conf
+if [[ $(grep start-vol-config /etc/samba/smb.conf) ]]; then
+ sed -n '1h; 1!H; ${ g; s/#start-vol-config.*end-vol-config//p}' /etc/samba/smb.conf > /tmp/smb.conf
+else
+ cp /etc/samba/smb.conf /tmp/smb.conf
+fi
+echo '#start-vol-config' >> /tmp/smb.conf
 for i in $(seq 1 3);
   do
     echo "Configuring vol${i} share..."
@@ -30,7 +35,7 @@ for i in $(seq 1 3);
     chmod 775 <%= p("export_root_path") %>/export/vol${i}
     chown root:vcap <%= p("export_root_path") %>/export/vol${i}
 
-  cat << EOF >> /etc/samba/smb.conf
+  cat << EOF >> /tmp/smb.conf
 [vol${i}]
    path = <%= p("export_root_path") %>/export/vol${i}
    hosts allow = <%= p("export_cidr") %>
@@ -41,7 +46,9 @@ for i in $(seq 1 3);
    create mask = 0755
 EOF
 done
-echo "#end-vol-config" >> /etc/samba/smb.conf
+echo '#end-vol-config' >> /tmp/smb.conf
+
+mv /tmp/smb.conf /etc/samba/smb.conf
 
 echo "Installed smb server"
 exit 0
