@@ -20,6 +20,9 @@ smbpasswd -a <%= p("username") %> -s <<EOF
 <%= p("password") %>
 EOF
 
+sed -in '1h; 1!H; ${ g; s/#start-vol-config.*end-vol-config//p}' /etc/samba/smb.conf
+
+echo "#start-vol-config" >> /etc/samba/smb.conf
 for i in $(seq 1 3);
   do
     echo "Configuring vol${i} share..."
@@ -38,6 +41,7 @@ for i in $(seq 1 3);
    create mask = 0755
 EOF
 done
+echo "#end-vol-config" >> /etc/samba/smb.conf
 
 echo "Installed smb server"
 exit 0
