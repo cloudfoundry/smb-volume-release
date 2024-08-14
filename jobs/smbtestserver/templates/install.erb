@@ -22,7 +22,7 @@ EOF
 
 sed -i 's/log file\s=.*$/log file = \/var\/vcap\/sys\/log\/smbtestserver\/smbtestserver\.stdout\.log/' /etc/samba/smb.conf
 
-if [[ $(grep start-vol-config /etc/samba/smb.conf) ]]; then
+if [[ $(grep start-vol-config /etc/samba/smb.conf) ]]; then 
  sed -n '1h; 1!H; ${ g; s/#start-vol-config.*end-vol-config//p}' /etc/samba/smb.conf > /tmp/smb.conf
 else
  cp /etc/samba/smb.conf /tmp/smb.conf
