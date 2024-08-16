@@ -2,10 +2,6 @@ autoconf-2.72.tar.gz:
   size: 2143794
   object_id: dc4212d5-5725-4f1b-7a6d-f28302fe2352
   sha: sha256:afb181a76e1ee72832f6581c0eddf8df032b83e2e0239ef79ebedc4467d92d6e
-automake-1.16.5.tar.xz:
-  size: 1601740
-  object_id: 8fea41d7-fa88-49fd-40bf-b8997408f54e
-  sha: sha256:f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469
 cifs-utils-7.0.tar.bz2:
   size: 418638
   object_id: 96fdc4b7-9cb6-44cf-59db-acc3421c943e
@@ -14,10 +10,6 @@ keyutils-1.6.3.tar.gz:
   size: 753599
   object_id: f0f4ab30-4153-4b18-6d85-705bf9ec197d
   sha: sha256:19d627905a4f81da319faa429b42c1000edfda0858b35890c484d91b8af3bd39
-libtool-2.4.7.tar.xz:
-  size: 1016040
-  object_id: f690ea15-7d1f-443c-756d-92a776c3ff29
-  sha: sha256:4f7f217f057ce655ff22559ad221a0fd8ef84ad1fc5fcb6990cecc333aa1635d
 pkg-config-0.29.2.tar.gz:
   size: 2016830
   object_id: 17b48507-5868-4826-43ba-14ee1c063907
@@ -26,7 +18,3 @@ talloc-2.4.2.tar.gz:
   size: 679750
   object_id: c0648370-92fa-4be0-73e3-b5c6489e2c72
   sha: sha256:85ecf9e465e20f98f9950a52e9a411e14320bc555fa257d87697b7e7a9b1d8a6
-xenial-talloc-2.3.1.tar.gz:
-  size: 638878
-  object_id: edaea656-655c-4259-764b-f33cc309d25d
-  sha: sha256:ef4822d2fdafd2be8e0cabc3ec3c806ae29b8268e932c5e9a4cd5585f37f9f77

@@ -5,9 +5,8 @@ dependencies: []
 
 files:
   - autoconf-*.tar.gz
-  - automake-*.tar.xz
-  - libtool-*.tar.xz
+  - automake-*.tar.gz
+  - libtool-*.tar.gz
   - talloc-*.tar.gz
-  - xenial-talloc-*.tar.gz
   - pkg-config-*.tar.gz
   - cifs-utils-*.tar.bz2

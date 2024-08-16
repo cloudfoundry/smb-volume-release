@@ -12,7 +12,7 @@ pushd autoconf-*/
   export PATH=${PATH}:${temp_path}/bin
 popd
 
-tar xf automake-*.tar.xz
+tar xf automake-*.tar.gz
 
 pushd automake-*/
   ./configure --prefix=${temp_path}
@@ -20,7 +20,7 @@ pushd automake-*/
   make install
 popd
 
-tar xf libtool*.tar.xz
+tar xf libtool*.tar.gz
 
 pushd libtool-*/
   ./configure --prefix=${temp_path}
@@ -32,11 +32,7 @@ tar xf talloc*.tar.gz
 
 pushd talloc*/
   set +e
-  if cat /etc/os-release | grep xenial; then
-    ./configure --prefix=${temp_path} --disable-python
-  else
-    ./configure --prefix=${temp_path}
-  fi
+  ./configure --prefix=${temp_path}
   make
   make install
 popd
