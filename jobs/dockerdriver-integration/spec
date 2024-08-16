@@ -1,0 +1,21 @@
+---
+name: dockerdriver-integration
+
+templates:
+  pre-start.erb: bin/pre-start
+  run.erb: bin/run
+  config.json.erb: config/config.json
+
+packages:
+- cifs-utils
+- dockerdriver-integration
+- smbdriver
+
+consumes:
+- name: smbtestserver
+  type: credentials
+
+properties:
+  smb_remote_path:
+    description: Address for SMB Remote Path 
+    default: //smbtestserver.service.cf.internal/vol1

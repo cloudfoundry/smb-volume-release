@@ -1,5 +1,5 @@
 ---
-name: dockerdriver
+name: dockerdriver-integration
 
 dependencies:
 - golang-1.22-linux
@@ -14,6 +14,8 @@ files:
   - code.cloudfoundry.org/dockerdriver/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/driverhttp/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/integration/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/integration/compatibility/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/integration/lazy_unmount/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/code.cloudfoundry.org/lager/v3/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/code.cloudfoundry.org/lager/v3/internal/truncate/*.go # gosub
@@ -23,14 +25,26 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/bmizerany/pat/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/go-logr/logr/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/go-logr/logr/funcr/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/go-task/slim-sprig/v3/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/internal/diff/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/internal/flags/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/internal/function/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/internal/value/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/pprof/profile/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/config/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/formatter/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/build/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/command/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/generators/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/internal/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/labels/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/outline/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/run/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/unfocus/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/ginkgo/watch/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/internal/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/internal/global/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/internal/interrupt_handler/*.go # gosub
@@ -78,4 +92,6 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/text/language/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/text/runes/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/text/transform/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/tools/cover/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/tools/go/ast/inspector/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/gopkg.in/yaml.v3/*.go # gosub

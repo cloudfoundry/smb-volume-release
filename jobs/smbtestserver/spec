@@ -7,6 +7,13 @@ templates:
 
 packages: []
 
+provides:
+- name: smbtestserver
+  type: credentials
+  properties:
+  - username
+  - password
+
 properties:
  export_cidr:
     description: "cidr range to use for smb exports"
