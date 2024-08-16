@@ -1,0 +1,26 @@
+[global]
+server min protocol = NT1
+
+workgroup = WORKGROUP
+server string = %h server (Samba, Ubuntu)
+panic action = /usr/share/samba/panic-action %d
+server role = standalone server
+obey pam restrictions = yes
+unix password sync = yes
+passwd program = /usr/bin/passwd %u
+passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+pam password change = yes
+map to guest = bad user
+
+log file = /var/vcap/sys/log/smbtestserver/smbtestserver.stdout.log
+log level = 1
+logging = file
+
+[vol]
+path = <%= p("export_root_path") %>/export/vol
+   hosts allow = <%= p("export_cidr") %>
+   valid users = @vcap
+   browseable = no
+   guest ok = no
+   read only = no
+   create mask = 0755

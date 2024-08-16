@@ -2,7 +2,8 @@
 name: smbtestserver
 
 templates:
-  install.erb: bin/pre-start
+  smb.conf.erb: config/smb.conf
+  pre-start.erb: bin/pre-start
   ctl.erb: bin/smbtestserver_ctl
 
 packages: []
