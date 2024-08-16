@@ -4,6 +4,18 @@ expires_at: never
 tags: [smb-volume-release]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Deploying to CloudFoundry](#deploying-to-cloudfoundry)
+    * [Pre-requisites](#pre-requisites)
+    * [Redeploy Cloud Foundry with SMB enabled](#redeploy-cloud-foundry-with-smb-enabled)
+* [Testing or Using this Release](#testing-or-using-this-release)
+    * [Deploying the Test SMB Server (Optional)](#deploying-the-test-smb-server-optional)
+    * [Register smbbroker](#register-smbbroker)
+    * [Testing and General Usage with smbbroker](#testing-and-general-usage-with-smbbroker)
+    * [Follow the cf docs to deploy and test a sample app](#follow-the-cf-docs-to-deploy-and-test-a-sample-app)
+
+<!-- vim-markdown-toc -->
 # Deploying to CloudFoundry
 
 ## Pre-requisites
@@ -25,11 +37,12 @@ tags: [smb-volume-release]
 2. Now redeploy your cf-deployment while including the smb ops file:
     
    ```bash
-    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o operations/experimental/enable-smb-volume-service.yml
+    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml -o operations/enable-smb-volume-service.yml
     ```
     
-**Note:** the above command is an example, but your deployment command should match the one you used to deploy Cloud 
-Foundry initially, with the addition of a `-o operations/experimental/enable-smb-volume-service.yml` option.
+> [!NOTE]
+> The above command is an example, but your deployment command should match the one you used to deploy Cloud 
+Foundry initially, with the addition of a `-o operations/enable-smb-volume-service.yml` option.
 
 Your CF deployment will now have a running service broker and volume drivers, ready to mount or create SMB volumes.  
 Unless you have explicitly defined a variable for your broker password, BOSH will generate one for you.
@@ -47,18 +60,16 @@ Cloud Foundry, also specifying `smb-username` and `smb-password` variables:
    $ bosh -e my-env -d cf deploy cf.yml -v deployment-vars.yml \
      -v smb-username=smbuser \
      -v smb-password=something-secret \
-     -o operations/experimental/enable-smb-volume-service.yml \
+     -o operations/enable-smb-volume-service.yml \
      -o operations/test/enable-smb-test-server.yml
    ```
-
-**NOTE**: *This test SMB server only works with Ubuntu stemcells.*
 
 ## Register smbbroker
 
 * Deploy and register the broker and grant access to its service with the following command:
 
     ```bash
-    $ bosh -e my-env -d cf run-errand smb-broker-registrar
+    $ bosh -e my-env -d cf run-errand smbbrokerpush
     $ cf enable-service-access smb
     ```
 
