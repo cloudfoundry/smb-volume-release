@@ -66,8 +66,6 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/gomega/types/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/openzipkin/zipkin-go/idgenerator/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/openzipkin/zipkin-go/model/*.go # gosub
-  - code.cloudfoundry.org/dockerdriver/vendor/github.com/tedsuo/ifrit/*.go # gosub
-  - code.cloudfoundry.org/dockerdriver/vendor/github.com/tedsuo/ifrit/ginkgomon_v2/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/tedsuo/rata/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/context/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/html/*.go # gosub
