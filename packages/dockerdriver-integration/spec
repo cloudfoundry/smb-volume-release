@@ -32,6 +32,7 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/internal/function/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/go-cmp/cmp/internal/value/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/pprof/profile/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/github.com/google/uuid/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/config/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/onsi/ginkgo/v2/formatter/*.go # gosub
@@ -67,6 +68,8 @@ files:
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/openzipkin/zipkin-go/idgenerator/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/openzipkin/zipkin-go/model/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/github.com/tedsuo/rata/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/exp/constraints/*.go # gosub
+  - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/exp/slices/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/context/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/html/*.go # gosub
   - code.cloudfoundry.org/dockerdriver/vendor/golang.org/x/net/html/atom/*.go # gosub
