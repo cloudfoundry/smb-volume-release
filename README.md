@@ -9,7 +9,7 @@ for [CF Deployment](https://github.com/cloudfoundry/cf-deployment).
 
 # Docs
 
--   [Configuring Parameters](./docs/01-configuring.md)
+-   [Overview and Configuring](./docs/01-configuring.md)
 -   [Deploying to
     CloudFoundry](./docs/02-deploying-smb-volume-service.md)
 
