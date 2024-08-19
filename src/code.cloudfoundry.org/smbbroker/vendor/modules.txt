@@ -1,7 +1,7 @@
 # code.cloudfoundry.org/clock v1.3.0
 ## explicit; go 1.20
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20240812130505-c0c303594018
+# code.cloudfoundry.org/credhub-cli v0.0.0-20240819130425-9b9cc2447389
 ## explicit; go 1.21.6
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
