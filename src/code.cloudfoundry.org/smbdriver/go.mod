@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	code.cloudfoundry.org/debugserver v0.2.0
-	code.cloudfoundry.org/dockerdriver v0.1.0
+	code.cloudfoundry.org/dockerdriver v0.2.0
 	code.cloudfoundry.org/goshims v0.39.0
 	code.cloudfoundry.org/lager/v3 v3.1.0
 	code.cloudfoundry.org/tlsconfig v0.1.0

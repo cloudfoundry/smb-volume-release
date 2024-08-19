@@ -8,7 +8,7 @@ code.cloudfoundry.org/clock
 # code.cloudfoundry.org/debugserver v0.2.0
 ## explicit; go 1.19
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.1.0
+# code.cloudfoundry.org/dockerdriver v0.2.0
 ## explicit; go 1.21
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
