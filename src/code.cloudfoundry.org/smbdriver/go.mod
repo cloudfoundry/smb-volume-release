@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	code.cloudfoundry.org/debugserver v0.2.0
-	code.cloudfoundry.org/dockerdriver v0.0.0-20240620154825-441e44b5dbb3
+	code.cloudfoundry.org/dockerdriver v0.1.0
 	code.cloudfoundry.org/goshims v0.39.0
 	code.cloudfoundry.org/lager/v3 v3.1.0
 	code.cloudfoundry.org/tlsconfig v0.1.0
@@ -21,7 +21,6 @@ require (
 	code.cloudfoundry.org/cfhttp/v2 v2.2.0 // indirect
 	code.cloudfoundry.org/clock v1.3.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
-	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
