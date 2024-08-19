@@ -12,7 +12,7 @@ pushd autoconf-*/
   export PATH=${PATH}:${temp_path}/bin
 popd
 
-tar xf automake-*.tar.gz
+tar xf automake/automake-*.tar.gz
 
 pushd automake-*/
   ./configure --prefix=${temp_path}
@@ -20,7 +20,7 @@ pushd automake-*/
   make install
 popd
 
-tar xf libtool*.tar.gz
+tar xf libtool/libtool*.tar.gz
 
 pushd libtool-*/
   ./configure --prefix=${temp_path}
