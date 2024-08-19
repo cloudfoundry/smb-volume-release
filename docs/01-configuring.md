@@ -14,7 +14,7 @@ This feature adds two new concepts to CF: Volume Mounts on Service Brokers (SMBB
 For more information on CF Volume Services, [please refer to this introductory document](https://docs.google.com/document/d/1YtPMY9EjxlgJPa4SVVwIinfid_fshCF48xRhzyoZhrQ/edit?usp=sharing).
 
 
-## Configuring Parameters
+## Parameters for smbdriver
 All parameters must start with `--`.
 
 - listenPort: Port to serve volume management functions. Listen address is always `127.0.0.1`. Default value is `8589`.
