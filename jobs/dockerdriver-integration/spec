@@ -18,4 +18,4 @@ consumes:
 properties:
   smb_remote_path:
     description: Address for SMB Remote Path 
-    default: //smbtestserver.service.cf.internal/vol1
+    default: //smbtestserver.service.cf.internal/vol
