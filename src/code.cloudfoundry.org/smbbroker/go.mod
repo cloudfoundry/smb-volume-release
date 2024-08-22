@@ -3,17 +3,17 @@ module code.cloudfoundry.org/smbbroker
 go 1.22.6
 
 require (
-	code.cloudfoundry.org/clock v1.3.0
-	code.cloudfoundry.org/debugserver v0.2.0
+	code.cloudfoundry.org/clock v1.4.0
+	code.cloudfoundry.org/debugserver v0.3.0
 	code.cloudfoundry.org/existingvolumebroker v0.140.0
 	code.cloudfoundry.org/goshims v0.39.0
-	code.cloudfoundry.org/lager/v3 v3.1.0
+	code.cloudfoundry.org/lager/v3 v3.2.0
 	code.cloudfoundry.org/service-broker-store v0.87.0
 	code.cloudfoundry.org/volume-mount-options v0.95.0
 	github.com/google/gofuzz v1.2.0
 	github.com/onsi/ginkgo/v2 v2.20.1
 	github.com/onsi/gomega v1.34.1
-	github.com/pivotal-cf/brokerapi/v11 v11.0.6
+	github.com/pivotal-cf/brokerapi/v11 v11.0.7
 	github.com/tedsuo/ifrit v0.0.0-20230516164442-7862c310ad26
 )
 
@@ -30,7 +30,7 @@ require (
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
 	golang.org/x/crypto v0.26.0 // indirect
-	golang.org/x/exp v0.0.0-20240808152545-0cdaa3abc0fa // indirect
+	golang.org/x/exp v0.0.0-20240822175202-778ce7bba035 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/sys v0.24.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
