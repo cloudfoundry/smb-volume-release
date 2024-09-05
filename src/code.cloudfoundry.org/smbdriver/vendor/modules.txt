@@ -1,8 +1,8 @@
-# code.cloudfoundry.org/cfhttp/v2 v2.8.0
+# code.cloudfoundry.org/cfhttp/v2 v2.10.0
 ## explicit; go 1.22
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.10.0
+# code.cloudfoundry.org/clock v1.11.0
 ## explicit; go 1.22
 code.cloudfoundry.org/clock
 # code.cloudfoundry.org/debugserver v0.10.0
@@ -29,7 +29,7 @@ code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerctx
 code.cloudfoundry.org/lager/v3/lagerflags
 code.cloudfoundry.org/lager/v3/lagertest
-# code.cloudfoundry.org/tlsconfig v0.3.0
+# code.cloudfoundry.org/tlsconfig v0.4.0
 ## explicit; go 1.22
 code.cloudfoundry.org/tlsconfig
 # code.cloudfoundry.org/volume-mount-options v0.96.0
@@ -124,7 +124,7 @@ github.com/tedsuo/rata
 golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.28.0
+# golang.org/x/net v0.29.0
 ## explicit; go 1.18
 golang.org/x/net/context
 golang.org/x/net/html
