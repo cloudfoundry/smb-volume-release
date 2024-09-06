@@ -594,10 +594,10 @@ cloud.google.com/go/workflows v1.9.0/go.mod h1:ZGkj1aFIOd9c8Gerkjjq7OW7I5+l6cSvT
 cloud.google.com/go/workflows v1.10.0/go.mod h1:fZ8LmRmZQWacon9UCX1r/g/DfAXx5VcPALq2CxzdePw=
 code.cloudfoundry.org/clock v1.11.0 h1:ZIg1APjFlsUKgtYq2i1uLr5URtBn8cmNivMPtKiHUik=
 code.cloudfoundry.org/clock v1.11.0/go.mod h1:lFz6ZwiQlPasKyy8L6P0pdFYVEkMhCbjPOuZXmv1dhs=
-code.cloudfoundry.org/credhub-cli v0.0.0-20240902130721-726266af5f6a h1:JhPRP9WMq2aaSD573uPpgWTERoPVHwIDUE3/tCJDsIY=
-code.cloudfoundry.org/credhub-cli v0.0.0-20240902130721-726266af5f6a/go.mod h1:zFetpGhBJoTRcHXrTxUCp7IKHKWXLZ2+YG43RYkyyXA=
-code.cloudfoundry.org/debugserver v0.10.0 h1:RVeapjPQc2lgfu3IGq/MduP0i8RLSNVrHzFOO+Yx/vk=
-code.cloudfoundry.org/debugserver v0.10.0/go.mod h1:qCnPai9gjPntiTVWixRq6xV3I/sn2rJovZNE9uKlamk=
+code.cloudfoundry.org/credhub-cli v0.0.0-20240906130858-907ed5401334 h1:9MApTv2lrO8y1j/0oRNFqxTTONJIa745apbZyApYJas=
+code.cloudfoundry.org/credhub-cli v0.0.0-20240906130858-907ed5401334/go.mod h1:rx2L3EjkNNKb5H1BBcq7t+779LYAD929mzvcIfTya1A=
+code.cloudfoundry.org/debugserver v0.11.0 h1:WLrlkz8ZMjp/88zgmGg3q+UVyHV8foCP/yPiV65J6o0=
+code.cloudfoundry.org/debugserver v0.11.0/go.mod h1:h8M238FnqKxyPfDmNwPjwx1c4gro59vj9jF/sNYX7vQ=
 code.cloudfoundry.org/existingvolumebroker v0.140.0 h1:wmDF1rnQAG/IMLqaZZ74fMFusKziXMRZOrsOpWmXYhs=
 code.cloudfoundry.org/existingvolumebroker v0.140.0/go.mod h1:b+9zqAOdZr6qjN9GhsTEEYKraoVEVQDBkVxy/KujLTU=
 code.cloudfoundry.org/goshims v0.39.0 h1:HdfcLqdRpTyYqqrm6tF0ouIWppK/JshPdb/nEUdfAf4=
