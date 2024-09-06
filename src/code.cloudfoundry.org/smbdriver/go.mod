@@ -3,7 +3,7 @@ module code.cloudfoundry.org/smbdriver
 go 1.22.6
 
 require (
-	code.cloudfoundry.org/debugserver v0.10.0
+	code.cloudfoundry.org/debugserver v0.11.0
 	code.cloudfoundry.org/dockerdriver v0.9.0
 	code.cloudfoundry.org/goshims v0.39.0
 	code.cloudfoundry.org/lager/v3 v3.3.0
