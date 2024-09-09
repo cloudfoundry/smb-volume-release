@@ -3,11 +3,11 @@ module code.cloudfoundry.org/smbbroker
 go 1.22.6
 
 require (
-	code.cloudfoundry.org/clock v1.11.0
-	code.cloudfoundry.org/debugserver v0.11.0
+	code.cloudfoundry.org/clock v1.12.0
+	code.cloudfoundry.org/debugserver v0.12.0
 	code.cloudfoundry.org/existingvolumebroker v0.140.0
 	code.cloudfoundry.org/goshims v0.39.0
-	code.cloudfoundry.org/lager/v3 v3.3.0
+	code.cloudfoundry.org/lager/v3 v3.5.0
 	code.cloudfoundry.org/service-broker-store v0.87.0
 	code.cloudfoundry.org/volume-mount-options v0.96.0
 	github.com/google/gofuzz v1.2.0
@@ -33,7 +33,7 @@ require (
 	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
-	golang.org/x/tools v0.24.0 // indirect
+	golang.org/x/tools v0.25.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

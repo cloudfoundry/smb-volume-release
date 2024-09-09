@@ -1,5 +1,5 @@
-# code.cloudfoundry.org/clock v1.11.0
-## explicit; go 1.22
+# code.cloudfoundry.org/clock v1.12.0
+## explicit; go 1.22.0
 code.cloudfoundry.org/clock
 # code.cloudfoundry.org/credhub-cli v0.0.0-20240906130858-907ed5401334
 ## explicit; go 1.22.0
@@ -11,8 +11,8 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.11.0
-## explicit; go 1.22
+# code.cloudfoundry.org/debugserver v0.12.0
+## explicit; go 1.22.0
 code.cloudfoundry.org/debugserver
 # code.cloudfoundry.org/existingvolumebroker v0.140.0
 ## explicit; go 1.22.3
@@ -21,8 +21,8 @@ code.cloudfoundry.org/existingvolumebroker/utils
 # code.cloudfoundry.org/goshims v0.39.0
 ## explicit; go 1.20
 code.cloudfoundry.org/goshims/osshim
-# code.cloudfoundry.org/lager/v3 v3.3.0
-## explicit; go 1.20
+# code.cloudfoundry.org/lager/v3 v3.5.0
+## explicit; go 1.22.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
@@ -169,8 +169,8 @@ golang.org/x/text/internal/utf8internal
 golang.org/x/text/language
 golang.org/x/text/runes
 golang.org/x/text/transform
-# golang.org/x/tools v0.24.0
-## explicit; go 1.19
+# golang.org/x/tools v0.25.0
+## explicit; go 1.22.0
 golang.org/x/tools/cover
 golang.org/x/tools/go/ast/inspector
 # google.golang.org/protobuf v1.34.2
