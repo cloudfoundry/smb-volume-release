@@ -21,8 +21,8 @@ information on how to contribute.
 
 # Working Group Charter
 
-This repository is maintained by [Service
-Management](https://github.com/cloudfoundry/community/blob/main/toc/working-groups/service-management.md)
+This repository is maintained by [App Runtime
+Platform](https://github.com/cloudfoundry/community/blob/main/toc/working-groups/app-runtime-platform.md)
 under `Volume Services` area.
 
 > \[!IMPORTANT\]
