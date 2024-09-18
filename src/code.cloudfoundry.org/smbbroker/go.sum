@@ -594,10 +594,10 @@ cloud.google.com/go/workflows v1.9.0/go.mod h1:ZGkj1aFIOd9c8Gerkjjq7OW7I5+l6cSvT
 cloud.google.com/go/workflows v1.10.0/go.mod h1:fZ8LmRmZQWacon9UCX1r/g/DfAXx5VcPALq2CxzdePw=
 code.cloudfoundry.org/clock v1.13.0 h1:cXtygQ9nD+uVtzjamX9puLvdkvgJsBpCgxlRPqP5Wh4=
 code.cloudfoundry.org/clock v1.13.0/go.mod h1:vRE++3mqcB+fAoY4Dd9ru2Tp+6tmGqdGrp6qP92QKwE=
-code.cloudfoundry.org/credhub-cli v0.0.0-20240909193755-fd43d7668e9f h1:aCNT/XuMN+NiWfifRdpQercHpRzCXo4tvwJLGKSLRCo=
-code.cloudfoundry.org/credhub-cli v0.0.0-20240909193755-fd43d7668e9f/go.mod h1:mez81fBucWp3Zq7RSPuxq/xtG5LrirK11aiCZzlufKI=
-code.cloudfoundry.org/debugserver v0.13.0 h1:/oO94WoY9uBSS0eW2dPeXKip8o6Khft0iXFSjPvN/n0=
-code.cloudfoundry.org/debugserver v0.13.0/go.mod h1:KZG48l9il4172PhG0iamrb7/q4qTT84IhZQp2tQ9WFY=
+code.cloudfoundry.org/credhub-cli v0.0.0-20240916130534-17db04838e07 h1:G958dzGkZbLkXYkuo3n2VaQo6k5ogwp/y7r6jbOk4/w=
+code.cloudfoundry.org/credhub-cli v0.0.0-20240916130534-17db04838e07/go.mod h1:4Jvr+Cdfg7IRVGH3HQz4AGPHzm1Jz/oMpEOn6TC0GhE=
+code.cloudfoundry.org/debugserver v0.14.0 h1:z3UmCRl1IccFVnap//JhpOABRLMp5l1oBkMDwCxQkUg=
+code.cloudfoundry.org/debugserver v0.14.0/go.mod h1:u8Z57/qAvoOwFXx0roffLTk9WTdtu/3uFiE24JAxsTg=
 code.cloudfoundry.org/existingvolumebroker v0.142.0 h1:poytR4yKe0wrzaqnnc7YhxC8g2jmQ4xuv+GXxZ7m/aI=
 code.cloudfoundry.org/existingvolumebroker v0.142.0/go.mod h1:rXhlP+Z8S4FqLXLViZAK3lrSTd1fdOtNBvAyGj13S1c=
 code.cloudfoundry.org/goshims v0.39.0 h1:HdfcLqdRpTyYqqrm6tF0ouIWppK/JshPdb/nEUdfAf4=
@@ -638,8 +638,8 @@ github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMn
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee h1:88ruSYvCUKX2YcF2CMYVTmPGITvNdRbzaBRk2c/iMds=
 github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee/go.mod h1:72EEm1oq5oXqGfu9XGtaRPWEcAFYd/P10cMNln0QhA8=
-github.com/cloudfoundry/socks5-proxy v0.2.123 h1:8+4eWzz6Z+Ao1M1cOxeGBjPFqgzCr2MKyNV8SBEkTuU=
-github.com/cloudfoundry/socks5-proxy v0.2.123/go.mod h1:Wu7EyUFshLHy8e0bI/1HLIKAGt9LxWoqLcK3Dd+w7EQ=
+github.com/cloudfoundry/socks5-proxy v0.2.124 h1:lg8ZlqMC7W4u5yVlB91+P6/qWPF168WDTomULeZVpck=
+github.com/cloudfoundry/socks5-proxy v0.2.124/go.mod h1:EsINZ1fC6k9D46I/AAopu8I8+gt7BBH0w0g21UA5aeQ=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cncf/udpa/go v0.0.0-20200629203442-efcf912fb354/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
@@ -893,8 +893,8 @@ github.com/phpdave11/gofpdf v1.4.2/go.mod h1:zpO6xFn9yxo3YLyMvW8HcKWVdbNqgIfOOp2
 github.com/phpdave11/gofpdi v1.0.12/go.mod h1:vBmVV0Do6hSBHC8uKUQ71JGW+ZGQq74llk/7bXwjDoI=
 github.com/phpdave11/gofpdi v1.0.13/go.mod h1:vBmVV0Do6hSBHC8uKUQ71JGW+ZGQq74llk/7bXwjDoI=
 github.com/pierrec/lz4/v4 v4.1.15/go.mod h1:gZWDp/Ze/IJXGXf23ltt2EXimqmTUXEy0GFuRQyBid4=
-github.com/pivotal-cf/brokerapi/v11 v11.0.8 h1:EVo8A5psC9G1VbDBAepnkRwTALuHTvDDXW/+x7CIUsc=
-github.com/pivotal-cf/brokerapi/v11 v11.0.8/go.mod h1:yKcdj6g0Mq6jp+uSxrzaOJZCF9vEtp+0i+t0FoDr9b8=
+github.com/pivotal-cf/brokerapi/v11 v11.0.9 h1:WpaMj8gYzTDw2aFnJbNUMuF6oiZu4RExiWKrJPa/90o=
+github.com/pivotal-cf/brokerapi/v11 v11.0.9/go.mod h1:0kruRDTWokXuSul53amfiizBKX3Px9rNAo4oZCdhjrE=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
