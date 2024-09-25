@@ -2,7 +2,7 @@
 name: smbbroker
 
 dependencies:
-- golang-1.22-linux
+- golang-1.23-linux
 
 files:
   - code.cloudfoundry.org/smbbroker/go.mod
