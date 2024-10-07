@@ -11,7 +11,6 @@ import (
 
 	"code.cloudfoundry.org/dockerdriver"
 	"code.cloudfoundry.org/dockerdriver/driverhttp"
-	"code.cloudfoundry.org/goshims/ioutilshim/ioutil_fake"
 	"code.cloudfoundry.org/goshims/osshim/os_fake"
 	"code.cloudfoundry.org/lager/v3/lagertest"
 	"code.cloudfoundry.org/smbdriver"
@@ -32,7 +31,6 @@ var _ = Describe("SmbMounter", func() {
 
 		fakeInvoker      *invokerfakes.FakeInvoker
 		fakeInvokeResult *invokerfakes.FakeInvokeResult
-		fakeIoutil       *ioutil_fake.FakeIoutil
 		fakeOs           *os_fake.FakeOs
 
 		subject volumedriver.Mounter
@@ -58,13 +56,12 @@ var _ = Describe("SmbMounter", func() {
 
 		fakeInvokeResult.WaitReturns(nil)
 		fakeInvokeResult.WaitForReturns(nil)
-		fakeIoutil = &ioutil_fake.FakeIoutil{}
 		fakeOs = &os_fake.FakeOs{}
 
 		configMask, err := smbdriver.NewSmbVolumeMountMask()
 		Expect(err).NotTo(HaveOccurred())
 
-		subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, fakeIoutil, configMask, false, false)
+		subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false)
 	})
 
 	Context("#Mount", func() {
@@ -99,7 +96,7 @@ var _ = Describe("SmbMounter", func() {
 					configMask, err := smbdriver.NewSmbVolumeMountMask()
 					Expect(err).NotTo(HaveOccurred())
 
-					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, fakeIoutil, configMask, false, false)
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false)
 				})
 
 				DescribeTable("when passed smb versions", func(version string, containsVers bool) {
@@ -214,7 +211,7 @@ var _ = Describe("SmbMounter", func() {
 					configMask, err := smbdriver.NewSmbVolumeMountMask()
 					Expect(err).NotTo(HaveOccurred())
 
-					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, fakeIoutil, configMask, false, true)
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, true)
 					Expect(subject.Mount(env, "source", "target", opts)).To(Succeed())
 
 					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
@@ -248,7 +245,7 @@ var _ = Describe("SmbMounter", func() {
 					configMask, err := smbdriver.NewSmbVolumeMountMask()
 					Expect(err).NotTo(HaveOccurred())
 
-					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, fakeIoutil, configMask, true, false)
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, true, false)
 					Expect(subject.Mount(env, "source", "target", opts)).To(Succeed())
 
 					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
@@ -289,7 +286,7 @@ var _ = Describe("SmbMounter", func() {
 				)
 				Expect(err2).NotTo(HaveOccurred())
 
-				subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, fakeIoutil, configMask, false, false)
+				subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false)
 			})
 
 			Context("when a required option is missing", func() {
@@ -420,14 +417,14 @@ var _ = Describe("SmbMounter", func() {
 		})
 
 		Context("when stuff is in the directory", func() {
-			var fakeStuff *ioutil_fake.FakeFileInfo
+			var fakeStuff *os_fake.FakeDirEntry
 
 			BeforeEach(func() {
-				fakeStuff = &ioutil_fake.FakeFileInfo{}
+				fakeStuff = &os_fake.FakeDirEntry{}
 				fakeStuff.NameReturns("guidy-guid-guid")
 				fakeStuff.IsDirReturns(true)
 
-				fakeIoutil.ReadDirReturns([]os.FileInfo{fakeStuff}, nil)
+				fakeOs.ReadDirReturns([]os.DirEntry{fakeStuff}, nil)
 			})
 
 			It("should attempt to unmount the directory", func() {
@@ -444,14 +441,14 @@ var _ = Describe("SmbMounter", func() {
 			})
 
 			Context("with multiple directories", func() {
-				var fakeStuff2 *ioutil_fake.FakeFileInfo
+				var fakeStuff2 *os_fake.FakeDirEntry
 
 				BeforeEach(func() {
-					fakeStuff2 = &ioutil_fake.FakeFileInfo{}
+					fakeStuff2 = &os_fake.FakeDirEntry{}
 					fakeStuff2.NameReturns("guidy-guid-guid2")
 					fakeStuff2.IsDirReturns(true)
 
-					fakeIoutil.ReadDirReturns([]os.FileInfo{fakeStuff, fakeStuff2}, nil)
+					fakeOs.ReadDirReturns([]os.DirEntry{fakeStuff, fakeStuff2}, nil)
 				})
 				It("should attempt to unmount each directory", func() {
 					Expect(fakeInvoker.InvokeCallCount()).To(Equal(2))
