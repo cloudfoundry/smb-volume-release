@@ -12,7 +12,6 @@ import (
 
 	"code.cloudfoundry.org/dockerdriver"
 	"code.cloudfoundry.org/dockerdriver/driverhttp"
-	"code.cloudfoundry.org/goshims/ioutilshim"
 	"code.cloudfoundry.org/goshims/osshim"
 	"code.cloudfoundry.org/lager/v3"
 	vmo "code.cloudfoundry.org/volume-mount-options"
@@ -23,14 +22,13 @@ import (
 type smbMounter struct {
 	invoker          invoker.Invoker
 	osutil           osshim.Os
-	ioutil           ioutilshim.Ioutil
 	configMask       vmo.MountOptsMask
 	forceNoserverino bool
 	forceNoDfs       bool
 }
 
-func NewSmbMounter(invoker invoker.Invoker, osutil osshim.Os, ioutil ioutilshim.Ioutil, configMask vmo.MountOptsMask, forceNoserverino, forceNoDfs bool) volumedriver.Mounter {
-	return &smbMounter{invoker: invoker, osutil: osutil, ioutil: ioutil, configMask: configMask, forceNoserverino: forceNoserverino, forceNoDfs: forceNoDfs}
+func NewSmbMounter(invoker invoker.Invoker, osutil osshim.Os, configMask vmo.MountOptsMask, forceNoserverino, forceNoDfs bool) volumedriver.Mounter {
+	return &smbMounter{invoker: invoker, osutil: osutil, configMask: configMask, forceNoserverino: forceNoserverino, forceNoDfs: forceNoDfs}
 }
 
 func (m *smbMounter) Mount(env dockerdriver.Env, source string, target string, opts map[string]interface{}) error {
@@ -117,15 +115,15 @@ func (m *smbMounter) Purge(env dockerdriver.Env, path string) {
 	logger.Info("start")
 	defer logger.Info("end")
 
-	fileInfos, err := m.ioutil.ReadDir(path)
+	dirEntries, err := m.osutil.ReadDir(path)
 	if err != nil {
 		logger.Error("purge-readdir-failed", err, lager.Data{"path": path})
 		return
 	}
 
-	for _, fileInfo := range fileInfos {
-		if fileInfo.IsDir() {
-			mountDir := filepath.Join(path, fileInfo.Name())
+	for _, dirEntry := range dirEntries {
+		if dirEntry.IsDir() {
+			mountDir := filepath.Join(path, dirEntry.Name())
 
 			err = m.invoker.Invoke(env, "umount", []string{"-l", "-f", mountDir}).Wait()
 			if err != nil {

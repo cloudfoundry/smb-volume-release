@@ -12,7 +12,6 @@ import (
 	"code.cloudfoundry.org/dockerdriver/driverhttp"
 	"code.cloudfoundry.org/goshims/bufioshim"
 	"code.cloudfoundry.org/goshims/filepathshim"
-	"code.cloudfoundry.org/goshims/ioutilshim"
 	"code.cloudfoundry.org/goshims/osshim"
 	"code.cloudfoundry.org/goshims/timeshim"
 	"code.cloudfoundry.org/lager/v3"
@@ -154,7 +153,6 @@ func main() {
 	mounter := smbdriver.NewSmbMounter(
 		invoker.NewProcessGroupInvoker(),
 		&osshim.OsShim{},
-		&ioutilshim.IoutilShim{},
 		configMask,
 		*forceNoserverino,
 		*forceNoDfs,
@@ -164,7 +162,6 @@ func main() {
 		logger,
 		&osshim.OsShim{},
 		&filepathshim.FilepathShim{},
-		&ioutilshim.IoutilShim{},
 		&timeshim.TimeShim{},
 		mountchecker.NewChecker(&bufioshim.BufioShim{}, &osshim.OsShim{}),
 		*mountDir,
