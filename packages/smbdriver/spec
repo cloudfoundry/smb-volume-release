@@ -19,7 +19,6 @@ files:
   - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/goshims/bufioshim/*.go # gosub
   - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/goshims/filepathshim/*.go # gosub
   - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/goshims/http_wrap/*.go # gosub
-  - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/goshims/ioutilshim/*.go # gosub
   - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/goshims/osshim/*.go # gosub
   - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/goshims/timeshim/*.go # gosub
   - code.cloudfoundry.org/smbdriver/vendor/code.cloudfoundry.org/lager/v3/*.go # gosub
