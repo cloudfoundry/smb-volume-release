@@ -1,11 +1,11 @@
-# code.cloudfoundry.org/cfhttp/v2 v2.38.0
+# code.cloudfoundry.org/cfhttp/v2 v2.39.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.31.0
+# code.cloudfoundry.org/clock v1.32.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20250317130919-6d4d60c755af
+# code.cloudfoundry.org/credhub-cli v0.0.0-20250324130423-abc61188c383
 ## explicit; go 1.23.0
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -15,44 +15,44 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.42.0
+# code.cloudfoundry.org/debugserver v0.43.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.42.0
+# code.cloudfoundry.org/dockerdriver v0.43.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
-# code.cloudfoundry.org/existingvolumebroker v0.169.0
+# code.cloudfoundry.org/existingvolumebroker v0.170.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.65.0
+# code.cloudfoundry.org/goshims v0.66.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/filepathshim
 code.cloudfoundry.org/goshims/http_wrap
 code.cloudfoundry.org/goshims/osshim
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.30.0
+# code.cloudfoundry.org/lager/v3 v3.31.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.116.0
+# code.cloudfoundry.org/service-broker-store v0.117.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
 # code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c => ../smbdriver
 ## explicit; go 1.23.0
 code.cloudfoundry.org/smbdriver
-# code.cloudfoundry.org/tlsconfig v0.21.0
+# code.cloudfoundry.org/tlsconfig v0.22.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/tlsconfig
-# code.cloudfoundry.org/volume-mount-options v0.120.0
+# code.cloudfoundry.org/volume-mount-options v0.121.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.123.0
+# code.cloudfoundry.org/volumedriver v0.124.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
@@ -64,7 +64,7 @@ github.com/bmizerany/pat
 # github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.146
+# github.com/cloudfoundry/socks5-proxy v0.2.147
 ## explicit; go 1.23.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-chi/chi/v5 v5.2.1
@@ -169,7 +169,7 @@ golang.org/x/crypto/internal/alias
 golang.org/x/crypto/internal/poly1305
 golang.org/x/crypto/ssh
 golang.org/x/crypto/ssh/internal/bcrypt_pbkdf
-# golang.org/x/net v0.37.0
+# golang.org/x/net v0.38.0
 ## explicit; go 1.23.0
 golang.org/x/net/context
 golang.org/x/net/html
@@ -205,8 +205,8 @@ golang.org/x/text/transform
 golang.org/x/tools/cover
 golang.org/x/tools/go/ast/inspector
 golang.org/x/tools/internal/astutil/edge
-# google.golang.org/protobuf v1.36.5
-## explicit; go 1.21
+# google.golang.org/protobuf v1.36.6
+## explicit; go 1.22
 google.golang.org/protobuf/encoding/prototext
 google.golang.org/protobuf/encoding/protowire
 google.golang.org/protobuf/internal/descfmt
