@@ -17,7 +17,6 @@ describe 'smbdriver job' do
             "driver_path" => "/some/driver/path",
             "cell_mount_path" => "/some/cell/mount/path",
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-level-format",
             "allowed_in_mount" => "some,options",
             "default_in_mount" => "some,default,options",
             "enable_unique_volume_ids" => true,
@@ -40,7 +39,6 @@ describe 'smbdriver job' do
         expect(tpl_output).to include("--driversPath=\"/some/driver/path\"")
         expect(tpl_output).to include("--mountDir=\"/some/cell/mount/path\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
-        expect(tpl_output).to include("--timeFormat=\"some-log-level-format\"")
         expect(tpl_output).to include("--requireSSL")
         expect(tpl_output).to include("/server.crt")
         expect(tpl_output).to include("/server.key")
@@ -61,7 +59,6 @@ describe 'smbdriver job' do
             "driver_path" => "/some/driver/path",
             "cell_mount_path" => "/some/cell/mount/path",
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-level-format",
             "allowed_in_mount" => "some,options",
             "default_in_mount" => "some,default,options",
             "enable_unique_volume_ids" => true,

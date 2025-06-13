@@ -22,7 +22,6 @@ describe 'smbbrokerpush job' do
                 "store_id" => "some-store-id",
             },
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-time-format",
         }
       end
 
@@ -49,7 +48,6 @@ describe 'smbbrokerpush job' do
                 "store_id" => "some-store-id",
             },
             "log_level" => "some-log-level",
-            "log_time_format" => "some-log-time-format",
         }
       end
 
@@ -63,7 +61,6 @@ describe 'smbbrokerpush job' do
         expect(tpl_output).not_to include("--uaaClientSecret=\"client-secret\"")
         expect(tpl_output).to include("--storeID=\"some-store-id\"")
         expect(tpl_output).to include("--logLevel=\"some-log-level\"")
-        expect(tpl_output).to include("--timeFormat=\"some-log-time-format\"")
       end
     end
 
