@@ -2,4 +2,4 @@ bin/smbbroker --listenAddr="0.0.0.0:$PORT" --servicesConfig="./services.json" \
               --credhubURL="<%= p('credhub.url') %>" \
               --storeID="<%= p('credhub.store_id') %>" \
               --logLevel="<%= p('log_level') %>" \
-              --timeFormat="<%= p('log_time_format') %>"
+              --timeFormat=rfc3339
