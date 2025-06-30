@@ -26,7 +26,7 @@ require (
 	code.cloudfoundry.org/cfhttp/v2 v2.47.0 // indirect
 	code.cloudfoundry.org/credhub-cli v0.0.0-20250616130814-79ad10d5e505 // indirect
 	code.cloudfoundry.org/dockerdriver v0.53.0 // indirect
-	code.cloudfoundry.org/tlsconfig v0.29.0 // indirect
+	code.cloudfoundry.org/tlsconfig v0.30.0 // indirect
 	code.cloudfoundry.org/volumedriver v0.127.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
@@ -35,7 +35,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/pprof v0.0.0-20250607225305-033d6d78b36a // indirect
+	github.com/google/pprof v0.0.0-20250629210550-e611ec304b22 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
