@@ -29,6 +29,8 @@ builds:
     version: 3.1.56
   1c85bbee-5043-4e14-6135-071e6a868bf2:
     version: 3.1.42
+  1f550f4e-36f6-4030-42d3-fa030509e338:
+    version: 3.30.0
   25dfaa3a-b0df-4b7b-6029-0d8d774314e1:
     version: 3.1.29
   2778dffa-d288-40d0-50bf-41f8f946990a:
