@@ -7,12 +7,12 @@ toolchain go1.23.6
 replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
-	code.cloudfoundry.org/clock v1.42.0
-	code.cloudfoundry.org/debugserver v0.59.0
-	code.cloudfoundry.org/existingvolumebroker v0.177.0
+	code.cloudfoundry.org/clock v1.43.0
+	code.cloudfoundry.org/debugserver v0.60.0
+	code.cloudfoundry.org/existingvolumebroker v0.178.0
 	code.cloudfoundry.org/goshims v0.72.0
-	code.cloudfoundry.org/lager/v3 v3.41.0
-	code.cloudfoundry.org/service-broker-store v0.124.0
+	code.cloudfoundry.org/lager/v3 v3.42.0
+	code.cloudfoundry.org/service-broker-store v0.125.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
 	code.cloudfoundry.org/volume-mount-options v0.127.0
 	github.com/google/gofuzz v1.2.0
@@ -23,11 +23,11 @@ require (
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.49.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.50.0 // indirect
 	code.cloudfoundry.org/credhub-cli v0.0.0-20250722200452-0eb58899fb2b // indirect
-	code.cloudfoundry.org/dockerdriver v0.57.0 // indirect
+	code.cloudfoundry.org/dockerdriver v0.58.0 // indirect
 	code.cloudfoundry.org/tlsconfig v0.31.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.131.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.132.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
 	github.com/cloudfoundry/socks5-proxy v0.2.156 // indirect
