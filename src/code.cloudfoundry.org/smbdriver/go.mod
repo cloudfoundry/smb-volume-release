@@ -5,13 +5,13 @@ go 1.23.0
 toolchain go1.23.6
 
 require (
-	code.cloudfoundry.org/debugserver v0.61.0
-	code.cloudfoundry.org/dockerdriver v0.59.0
+	code.cloudfoundry.org/debugserver v0.62.0
+	code.cloudfoundry.org/dockerdriver v0.60.0
 	code.cloudfoundry.org/goshims v0.73.0
-	code.cloudfoundry.org/lager/v3 v3.42.0
-	code.cloudfoundry.org/tlsconfig v0.32.0
+	code.cloudfoundry.org/lager/v3 v3.43.0
+	code.cloudfoundry.org/tlsconfig v0.33.0
 	code.cloudfoundry.org/volume-mount-options v0.128.0
-	code.cloudfoundry.org/volumedriver v0.133.0
+	code.cloudfoundry.org/volumedriver v0.134.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.23.4
 	github.com/onsi/gomega v1.38.0
@@ -20,7 +20,7 @@ require (
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.50.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.51.0 // indirect
 	code.cloudfoundry.org/clock v1.43.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
