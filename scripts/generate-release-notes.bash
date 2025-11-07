@@ -16,19 +16,14 @@ local_start_ref=$(get_start_ref_from_range "${version_range}")
 # ex. local_end_ref="v0.344.0"
 local_end_ref=$(get_end_ref_from_range "${version_range}")
 
-get_non_bot_commits "${local_start_ref}" "${local_end_ref}"
+display_non_bot_commits "${local_start_ref}" "${local_end_ref}"
 
 START_REF_DOCKER_DRIVER=$(git rev-parse "${local_start_ref}:src/code.cloudfoundry.org/dockerdriver")
 END_REF_DOCKER_DRIVER=$(git rev-parse "${local_end_ref}:src/code.cloudfoundry.org/dockerdriver")
 pushd src/code.cloudfoundry.org/dockerdriver > /dev/null
   display_go_mod_diff "${START_REF_DOCKER_DRIVER}" "${END_REF_DOCKER_DRIVER}" go.mod "dockerdriver"
-  echo ""
 popd > /dev/null
 
 display_go_mod_diff "${local_start_ref}" "${local_end_ref}" src/code.cloudfoundry.org/smbbroker/go.mod "smbbroker"
-echo ""
-
 display_go_mod_diff "${local_start_ref}" "${local_end_ref}" src/code.cloudfoundry.org/smbdriver/go.mod "smbdriver"
-echo ""
-
 display_blob_change_info "${local_start_ref}" "${local_end_ref}" config/blobs.yml
