@@ -6,13 +6,13 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/clock v1.53.0
-	code.cloudfoundry.org/debugserver v0.73.0
-	code.cloudfoundry.org/existingvolumebroker v0.191.0
-	code.cloudfoundry.org/goshims v0.83.0
+	code.cloudfoundry.org/debugserver v0.74.0
+	code.cloudfoundry.org/existingvolumebroker v0.192.0
+	code.cloudfoundry.org/goshims v0.84.0
 	code.cloudfoundry.org/lager/v3 v3.53.0
-	code.cloudfoundry.org/service-broker-store v0.138.0
+	code.cloudfoundry.org/service-broker-store v0.139.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
-	code.cloudfoundry.org/volume-mount-options v0.138.0
+	code.cloudfoundry.org/volume-mount-options v0.139.0
 	github.com/google/gofuzz v1.2.0
 	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
@@ -22,10 +22,10 @@ require (
 
 require (
 	code.cloudfoundry.org/cfhttp/v2 v2.61.0 // indirect
-	code.cloudfoundry.org/credhub-cli v0.0.0-20251027231142-f720bbd35b00 // indirect
-	code.cloudfoundry.org/dockerdriver v0.61.0 // indirect
-	code.cloudfoundry.org/tlsconfig v0.37.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.145.0 // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20251107200559-e43c817e01a3 // indirect
+	code.cloudfoundry.org/dockerdriver v0.62.0 // indirect
+	code.cloudfoundry.org/tlsconfig v0.38.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.146.0 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
@@ -43,8 +43,8 @@ require (
 	golang.org/x/crypto v0.43.0 // indirect
 	golang.org/x/mod v0.29.0 // indirect
 	golang.org/x/net v0.46.0 // indirect
-	golang.org/x/sync v0.17.0 // indirect
-	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/sync v0.18.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
