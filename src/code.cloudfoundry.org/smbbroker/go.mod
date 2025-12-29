@@ -6,8 +6,8 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/clock v1.56.0
-	code.cloudfoundry.org/debugserver v0.78.0
-	code.cloudfoundry.org/existingvolumebroker v0.197.0
+	code.cloudfoundry.org/debugserver v0.79.0
+	code.cloudfoundry.org/existingvolumebroker v0.198.0
 	code.cloudfoundry.org/goshims v0.86.0
 	code.cloudfoundry.org/lager/v3 v3.56.0
 	code.cloudfoundry.org/service-broker-store v0.144.0
@@ -23,9 +23,9 @@ require (
 require (
 	code.cloudfoundry.org/cfhttp/v2 v2.64.0 // indirect
 	code.cloudfoundry.org/credhub-cli v0.0.0-20251215140710-93274ab0250e // indirect
-	code.cloudfoundry.org/dockerdriver v0.67.0 // indirect
+	code.cloudfoundry.org/dockerdriver v0.68.0 // indirect
 	code.cloudfoundry.org/tlsconfig v0.42.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.151.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.152.0 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
