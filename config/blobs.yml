@@ -30,7 +30,7 @@ talloc-2.4.2.tar.gz:
   size: 679750
   object_id: c0648370-92fa-4be0-73e3-b5c6489e2c72
   sha: sha256:85ecf9e465e20f98f9950a52e9a411e14320bc555fa257d87697b7e7a9b1d8a6
-talloc/talloc-2.4.3.tar.gz:
-  size: 684092
-  object_id: fb96995c-9334-4d9e-6dd7-d5a72428c15b
-  sha: sha256:dc46c40b9f46bb34dd97fe41f548b0e8b247b77a918576733c528e83abd854dd
+talloc/talloc-2.4.4.tar.gz:
+  size: 684541
+  object_id: 168583e8-cca6-442a-4a98-fbf8b55b5e0c
+  sha: sha256:55e47994018c13743485544e7206780ffbb3c8495e704a99636503e6e77abf59
