@@ -6,35 +6,35 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/clock v1.59.0
-	code.cloudfoundry.org/debugserver v0.82.0
+	code.cloudfoundry.org/debugserver v0.83.0
 	code.cloudfoundry.org/existingvolumebroker v0.201.0
-	code.cloudfoundry.org/goshims v0.88.0
+	code.cloudfoundry.org/goshims v0.89.0
 	code.cloudfoundry.org/lager/v3 v3.59.0
 	code.cloudfoundry.org/service-broker-store v0.145.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
-	code.cloudfoundry.org/volume-mount-options v0.143.0
+	code.cloudfoundry.org/volume-mount-options v0.144.0
 	github.com/google/gofuzz v1.2.0
-	github.com/onsi/ginkgo/v2 v2.27.5
-	github.com/onsi/gomega v1.39.0
+	github.com/onsi/ginkgo/v2 v2.28.1
+	github.com/onsi/gomega v1.39.1
 	github.com/pivotal-cf/brokerapi/v11 v11.0.16
 	github.com/tedsuo/ifrit v0.0.0-20230516164442-7862c310ad26
 )
 
 require (
 	code.cloudfoundry.org/cfhttp/v2 v2.67.0 // indirect
-	code.cloudfoundry.org/credhub-cli v0.0.0-20260120220531-8a8e945863b2 // indirect
-	code.cloudfoundry.org/dockerdriver v0.71.0 // indirect
-	code.cloudfoundry.org/tlsconfig v0.43.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.156.0 // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20260126140202-2a7d9013060a // indirect
+	code.cloudfoundry.org/dockerdriver v0.72.0 // indirect
+	code.cloudfoundry.org/tlsconfig v0.44.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.157.0 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.165 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.166 // indirect
 	github.com/go-chi/chi/v5 v5.2.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/pprof v0.0.0-20260115054156-294ebfa9ad83 // indirect
+	github.com/google/pprof v0.0.0-20260202012954-cb029daf43ef // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-version v1.8.0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
