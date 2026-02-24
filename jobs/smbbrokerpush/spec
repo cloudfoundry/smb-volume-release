@@ -30,6 +30,7 @@ provides:
     - space
     - skip_cert_verify
     - app_name
+    - cli_path
 
 properties:
   domain:
@@ -90,6 +91,9 @@ properties:
   broker_name:
     description: 'name of the service broker registered in CF'
     default: smbbroker
+  cli_path:
+    description: 'Path where the cf cli binary is stored'
+    default: "/var/vcap/packages/cf-cli-8-linux/bin"
   services:
     description: "List of services and plans supported by broker"
     default:

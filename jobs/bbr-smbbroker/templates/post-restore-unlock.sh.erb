@@ -3,7 +3,7 @@
 set -euo pipefail
 set -x
 
-PATH="/var/vcap/packages/cf-cli-8-linux/bin:${PATH}"
+PATH="<%= link('smbbrokerpush').p('cli_path') %>:${PATH}"
 
 API_ENDPOINT=https://api.<%= link('smbbrokerpush').p('domain') %>
 ORG=<%= link('smbbrokerpush').p('organization') %>
