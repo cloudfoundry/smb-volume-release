@@ -2,6 +2,10 @@ autoconf-2.72.tar.gz:
   size: 2143794
   object_id: dc4212d5-5725-4f1b-7a6d-f28302fe2352
   sha: sha256:afb181a76e1ee72832f6581c0eddf8df032b83e2e0239ef79ebedc4467d92d6e
+autoconf/autoconf-2.73.tar.gz:
+  size: 2183815
+  object_id: ed4659b3-a293-4cf6-7292-ca98034ae2a7
+  sha: sha256:259ddfa3bddc799cfb81489cc0f17dfdf1bd6d1505dda53c0f45ff60d6a4f9a7
 automake/automake-1.18.1.tar.gz:
   size: 2376062
   object_id: aced26cc-2e67-42bf-6575-e872c8c1c1e3
