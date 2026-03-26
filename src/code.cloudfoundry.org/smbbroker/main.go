@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"code.cloudfoundry.org/brokerapi/v13"
 	"code.cloudfoundry.org/clock"
 	"code.cloudfoundry.org/debugserver"
 	"code.cloudfoundry.org/existingvolumebroker"
@@ -21,7 +22,6 @@ import (
 	"code.cloudfoundry.org/service-broker-store/brokerstore"
 	vmo "code.cloudfoundry.org/volume-mount-options"
 	vmou "code.cloudfoundry.org/volume-mount-options/utils"
-	"github.com/pivotal-cf/brokerapi/v11"
 	"github.com/tedsuo/ifrit"
 	"github.com/tedsuo/ifrit/grouper"
 	"github.com/tedsuo/ifrit/http_server"
