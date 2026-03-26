@@ -9,7 +9,7 @@ code.cloudfoundry.org/brokerapi/v13/internal/blog
 code.cloudfoundry.org/brokerapi/v13/internal/middleware
 code.cloudfoundry.org/brokerapi/v13/middlewares
 code.cloudfoundry.org/brokerapi/v13/utils
-# code.cloudfoundry.org/cfhttp/v2 v2.71.0
+# code.cloudfoundry.org/cfhttp/v2 v2.72.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
@@ -26,10 +26,10 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.88.0
+# code.cloudfoundry.org/debugserver v0.90.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.79.0
+# code.cloudfoundry.org/dockerdriver v0.81.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
@@ -56,14 +56,14 @@ code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
 # code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c => ../smbdriver
 ## explicit; go 1.25.0
 code.cloudfoundry.org/smbdriver
-# code.cloudfoundry.org/tlsconfig v0.47.0
+# code.cloudfoundry.org/tlsconfig v0.49.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/tlsconfig
 # code.cloudfoundry.org/volume-mount-options v0.149.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.163.0
+# code.cloudfoundry.org/volumedriver v0.164.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
