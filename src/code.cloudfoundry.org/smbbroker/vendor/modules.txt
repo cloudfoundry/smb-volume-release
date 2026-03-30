@@ -49,7 +49,7 @@ code.cloudfoundry.org/goshims/timeshim
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.147.0
+# code.cloudfoundry.org/service-broker-store v0.148.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
@@ -63,7 +63,7 @@ code.cloudfoundry.org/tlsconfig
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.164.0
+# code.cloudfoundry.org/volumedriver v0.165.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap

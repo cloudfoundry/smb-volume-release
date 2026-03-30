@@ -11,7 +11,7 @@ require (
 	code.cloudfoundry.org/existingvolumebroker v0.209.0
 	code.cloudfoundry.org/goshims v0.95.0
 	code.cloudfoundry.org/lager/v3 v3.64.0
-	code.cloudfoundry.org/service-broker-store v0.147.0
+	code.cloudfoundry.org/service-broker-store v0.148.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
 	code.cloudfoundry.org/volume-mount-options v0.149.0
 	github.com/google/gofuzz v1.2.0
@@ -25,7 +25,7 @@ require (
 	code.cloudfoundry.org/credhub-cli v0.0.0-20260323130242-4632577e239e // indirect
 	code.cloudfoundry.org/dockerdriver v0.81.0 // indirect
 	code.cloudfoundry.org/tlsconfig v0.49.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.164.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.165.0 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
