@@ -340,6 +340,29 @@ var _ = Describe("SmbMounter", func() {
 				Expect(err.Error()).To(ContainSubstring("Missing mandatory options: password"))
 			})
 		})
+
+		Context("when mount option values contain invalid characters", func() {
+			It("should reject values containing comma", func() {
+				opts["domain"] = "CORP,credentials=/etc/passwd"
+				err = subject.Mount(env, "source", "target", opts)
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(ContainSubstring("contains invalid character ','"))
+			})
+
+			It("should reject values containing equals", func() {
+				opts["sec"] = "ntlm=sign"
+				err = subject.Mount(env, "source", "target", opts)
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(ContainSubstring("contains invalid character '='"))
+			})
+
+			It("should allow legitimate values without special characters", func() {
+				opts["domain"] = "CORP"
+				opts["vers"] = "2.1"
+				err = subject.Mount(env, "source", "target", opts)
+				Expect(err).NotTo(HaveOccurred())
+			})
+		})
 	})
 
 	Context("#Unmount", func() {

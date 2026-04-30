@@ -146,12 +146,23 @@ var AllowedMountOptions = []string{"mfsymlinks", "username", "password", "file_m
 func NewSmbVolumeMountMask() (vmo.MountOptsMask, error) {
 	defaultMap := map[string]interface{}{}
 
+	valueValidator := vmo.UserOptsValidationFunc(func(key, value string) error {
+		if strings.Contains(value, ",") {
+			return fmt.Errorf("mount option '%s' contains invalid character ','", key)
+		}
+		if strings.Contains(value, "=") {
+			return fmt.Errorf("mount option '%s' contains invalid character '='", key)
+		}
+		return nil
+	})
+
 	return vmo.NewMountOptsMask(
 		AllowedMountOptions,
 		defaultMap,
 		map[string]string{"readonly": "ro", "version": "vers"},
 		[]string{"source", "mount"},
 		[]string{"username", "password"},
+		valueValidator,
 	)
 
 }
