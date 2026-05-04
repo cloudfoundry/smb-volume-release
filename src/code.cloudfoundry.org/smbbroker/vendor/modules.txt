@@ -33,11 +33,11 @@ code.cloudfoundry.org/debugserver
 ## explicit; go 1.25.0
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
-# code.cloudfoundry.org/existingvolumebroker v0.213.0
+# code.cloudfoundry.org/existingvolumebroker v0.214.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
-# code.cloudfoundry.org/goshims v0.97.0
+# code.cloudfoundry.org/goshims v0.98.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/goshims/bufioshim
 code.cloudfoundry.org/goshims/filepathshim
@@ -49,7 +49,7 @@ code.cloudfoundry.org/goshims/timeshim
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.152.0
+# code.cloudfoundry.org/service-broker-store v0.153.0
 ## explicit; go 1.25.7
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
@@ -59,11 +59,11 @@ code.cloudfoundry.org/smbdriver
 # code.cloudfoundry.org/tlsconfig v0.52.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/tlsconfig
-# code.cloudfoundry.org/volume-mount-options v0.151.0
+# code.cloudfoundry.org/volume-mount-options v0.152.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.170.0
+# code.cloudfoundry.org/volumedriver v0.171.0
 ## explicit; go 1.25.0
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
@@ -78,7 +78,7 @@ github.com/bmizerany/pat
 # github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.173
+# github.com/cloudfoundry/socks5-proxy v0.2.174
 ## explicit; go 1.25.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-logr/logr v1.4.3
