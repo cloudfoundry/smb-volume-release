@@ -5,11 +5,11 @@ go 1.25.0
 require (
 	code.cloudfoundry.org/debugserver v0.94.0
 	code.cloudfoundry.org/dockerdriver v0.86.0
-	code.cloudfoundry.org/goshims v0.97.0
+	code.cloudfoundry.org/goshims v0.98.0
 	code.cloudfoundry.org/lager/v3 v3.67.0
 	code.cloudfoundry.org/tlsconfig v0.52.0
-	code.cloudfoundry.org/volume-mount-options v0.151.0
-	code.cloudfoundry.org/volumedriver v0.170.0
+	code.cloudfoundry.org/volume-mount-options v0.152.0
+	code.cloudfoundry.org/volumedriver v0.171.0
 	github.com/maxbrunsfeld/counterfeiter/v6 v6.9.0
 	github.com/onsi/ginkgo/v2 v2.28.3
 	github.com/onsi/gomega v1.40.0
