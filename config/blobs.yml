@@ -14,10 +14,10 @@ cifs-utils-7.0.tar.bz2:
   size: 418638
   object_id: 96fdc4b7-9cb6-44cf-59db-acc3421c943e
   sha: sha256:0defaab85bd3ea46ffc45ab41fb0d0ad54d05ae2cfaa7e503de86d4f12bc8161
-cifs-utils/cifs-utils-7.5.tar.bz2:
-  size: 423849
-  object_id: da16163f-d07c-4b06-68c6-ac29c217b241
-  sha: sha256:7face85e3d2d5eb5e7adbd181adee6759097f135b10d6fb30be8e070af7e7054
+cifs-utils/cifs-utils-7.6.tar.bz2:
+  size: 236411
+  object_id: 57d24dc8-3213-4d22-5619-7a6f49f2c554
+  sha: sha256:7db875ff2868e5fa4e445ada0bd23ea70b9161b96188c7e276321e061ed51dd6
 keyutils-1.6.3.tar.gz:
   size: 753599
   object_id: f0f4ab30-4153-4b18-6d85-705bf9ec197d
