@@ -6,30 +6,30 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/brokerapi/v13 v13.0.25
-	code.cloudfoundry.org/clock v1.82.0
-	code.cloudfoundry.org/debugserver v0.109.0
+	code.cloudfoundry.org/clock v1.83.0
+	code.cloudfoundry.org/debugserver v0.110.0
 	code.cloudfoundry.org/existingvolumebroker v0.228.0
 	code.cloudfoundry.org/goshims v0.109.0
-	code.cloudfoundry.org/lager/v3 v3.81.0
+	code.cloudfoundry.org/lager/v3 v3.82.0
 	code.cloudfoundry.org/service-broker-store v0.167.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
 	code.cloudfoundry.org/volume-mount-options v0.161.0
 	github.com/google/gofuzz v1.2.0
-	github.com/onsi/ginkgo/v2 v2.32.0
+	github.com/onsi/ginkgo/v2 v2.32.1
 	github.com/onsi/gomega v1.42.1
-	github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
+	github.com/tedsuo/ifrit v0.0.0-20260813155221-94822c932811
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.89.0 // indirect
-	code.cloudfoundry.org/credhub-cli v0.0.0-20260803130145-c9a3a9772abe // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.90.0 // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20260810130209-30d25c5528ee // indirect
 	code.cloudfoundry.org/dockerdriver v0.101.0 // indirect
 	code.cloudfoundry.org/tlsconfig v0.64.0 // indirect
 	code.cloudfoundry.org/volumedriver v0.184.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.184 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.185 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
@@ -39,12 +39,13 @@ require (
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
 	github.com/tedsuo/rata v1.0.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
-	golang.org/x/crypto v0.54.0 // indirect
-	golang.org/x/mod v0.38.0 // indirect
-	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/crypto v0.55.0 // indirect
+	golang.org/x/mod v0.40.0 // indirect
+	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.40.0 // indirect
-	golang.org/x/tools v0.48.0 // indirect
-	google.golang.org/protobuf v1.36.11 // indirect
+	golang.org/x/text v0.41.0 // indirect
+	golang.org/x/tools v0.49.0 // indirect
+	google.golang.org/protobuf v1.36.12 // indirect
+	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 )
