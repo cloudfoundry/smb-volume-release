@@ -2,6 +2,9 @@ module code.cloudfoundry.org/smbbroker
 
 go 1.25.8
 
+// pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
+replace github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
+
 replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
@@ -17,7 +20,7 @@ require (
 	github.com/google/gofuzz v1.2.0
 	github.com/onsi/ginkgo/v2 v2.32.1
 	github.com/onsi/gomega v1.42.1
-	github.com/tedsuo/ifrit v0.0.0-20260813155221-94822c932811
+	github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
 )
 
 require (
