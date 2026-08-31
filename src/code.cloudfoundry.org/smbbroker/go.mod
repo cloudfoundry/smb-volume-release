@@ -9,34 +9,34 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/brokerapi/v13 v13.0.25
-	code.cloudfoundry.org/clock v1.84.0
-	code.cloudfoundry.org/debugserver v0.111.0
+	code.cloudfoundry.org/clock v1.85.0
+	code.cloudfoundry.org/debugserver v0.112.0
 	code.cloudfoundry.org/existingvolumebroker v0.228.0
 	code.cloudfoundry.org/goshims v0.110.0
-	code.cloudfoundry.org/lager/v3 v3.82.0
+	code.cloudfoundry.org/lager/v3 v3.84.0
 	code.cloudfoundry.org/service-broker-store v0.167.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
 	code.cloudfoundry.org/volume-mount-options v0.164.0
 	github.com/google/gofuzz v1.2.0
 	github.com/onsi/ginkgo/v2 v2.32.1
-	github.com/onsi/gomega v1.42.1
+	github.com/onsi/gomega v1.43.0
 	github.com/tedsuo/ifrit v0.0.0-20260813155221-94822c932811
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.91.0 // indirect
-	code.cloudfoundry.org/credhub-cli v0.0.0-20260817130202-803f4962b541 // indirect
-	code.cloudfoundry.org/dockerdriver v0.103.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.92.0 // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20260824191323-ca2ae25cb1f8 // indirect
+	code.cloudfoundry.org/dockerdriver v0.104.0 // indirect
 	code.cloudfoundry.org/tlsconfig v0.65.0 // indirect
 	code.cloudfoundry.org/volumedriver v0.184.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.185 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.186 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/pprof v0.0.0-20260802141513-ef3492d7dac3 // indirect
+	github.com/google/pprof v0.0.0-20260830191439-4932ad3515ea // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-version v1.9.0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
