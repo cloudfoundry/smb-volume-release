@@ -5,6 +5,7 @@ package smbdriver
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"path/filepath"
 	"strings"
@@ -25,10 +26,11 @@ type smbMounter struct {
 	configMask       vmo.MountOptsMask
 	forceNoserverino bool
 	forceNoDfs       bool
+	allowSmb1        bool
 }
 
-func NewSmbMounter(invoker invoker.Invoker, osutil osshim.Os, configMask vmo.MountOptsMask, forceNoserverino, forceNoDfs bool) volumedriver.Mounter {
-	return &smbMounter{invoker: invoker, osutil: osutil, configMask: configMask, forceNoserverino: forceNoserverino, forceNoDfs: forceNoDfs}
+func NewSmbMounter(invoker invoker.Invoker, osutil osshim.Os, configMask vmo.MountOptsMask, forceNoserverino, forceNoDfs, allowSmb1 bool) volumedriver.Mounter {
+	return &smbMounter{invoker: invoker, osutil: osutil, configMask: configMask, forceNoserverino: forceNoserverino, forceNoDfs: forceNoDfs, allowSmb1: allowSmb1}
 }
 
 func (m *smbMounter) Mount(env dockerdriver.Env, source string, target string, opts map[string]interface{}) error {
@@ -46,9 +48,20 @@ func (m *smbMounter) Mount(env dockerdriver.Env, source string, target string, o
 		return safeError(err)
 	}
 
+	if vers, ok := mountOpts["vers"]; ok && fmt.Sprintf("%v", vers) == "1.0" {
+		logger.Info("smb1-dialect-requested", lager.Data{
+			"given_source": source,
+			"given_target": target,
+			"allow_smb1":   m.allowSmb1,
+		})
+		if !m.allowSmb1 {
+			return safeError(errors.New("SMB1 (vers=1.0) is not permitted by this deployment"))
+		}
+	}
+
 	mountFlags, mountEnvVars := ToKernelMountOptionFlagsAndEnvVars(mountOpts)
 
-	mountFlags = fmt.Sprintf("%s,uid=2000,gid=2000", mountFlags)
+	mountFlags = fmt.Sprintf("%s,uid=2000,gid=2000,nosuid,nodev", mountFlags)
 
 	if m.forceNoserverino {
 		mountFlags = fmt.Sprintf("%s,noserverino", mountFlags)
@@ -141,7 +154,7 @@ func (m *smbMounter) Purge(env dockerdriver.Env, path string) {
 	}
 }
 
-var AllowedMountOptions = []string{"mfsymlinks", "username", "password", "file_mode", "dir_mode", "ro", "domain", "vers", "sec", "version", "noserverino", "forceuid", "noforceuid", "forcegid", "noforcegid", "nodfs"}
+var AllowedMountOptions = []string{"mfsymlinks", "username", "password", "file_mode", "dir_mode", "ro", "domain", "vers", "sec", "version", "noserverino", "forceuid", "forcegid", "nodfs"}
 
 func NewSmbVolumeMountMask() (vmo.MountOptsMask, error) {
 	defaultMap := map[string]interface{}{}

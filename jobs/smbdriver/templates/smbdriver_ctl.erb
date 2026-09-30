@@ -48,6 +48,7 @@ case $1 in
       --transport="tcp-json" \
       --forceNoserverino=<%= p("force_noserverino") %> \
       --forceNoDfs=<%= p("force_nodfs") %> \
+      --allowSmb1=<%= p("allow_smb1") %> \
       <% if p("tls.ca_cert") != '' %>\
       --requireSSL \
       --certFile="${SERVER_CERTS_DIR}/server.crt" \

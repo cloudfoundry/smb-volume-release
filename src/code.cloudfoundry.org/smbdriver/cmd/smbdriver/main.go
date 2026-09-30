@@ -136,6 +136,19 @@ var forceNoDfs = flag.Bool(
 	"Force all smb mounts to use the 'nodfs' mount flag, regardless of what the service binding asks for",
 )
 
+// The allowSmb1 flag was added on 2026-09-30.
+//
+// SMB1 (vers=1.0) is a deprecated, insecure dialect: it lacks the SMB 3.x
+// signing/encryption guarantees, and combined with a tenant-controlled SMB
+// server it can be used to defeat client-side uid/gid mapping. Defaulting to
+// true preserves existing behavior on upgrade; operators can flip this to
+// false once they've confirmed no tenant bindings still require SMB1.
+var allowSmb1 = flag.Bool(
+	"allowSmb1",
+	true,
+	"Allow SMB mounts to negotiate the deprecated SMB1 (vers=1.0) dialect. Set to false to reject SMB1 mounts.",
+)
+
 const listenAddress = "127.0.0.1"
 
 func main() {
@@ -156,6 +169,7 @@ func main() {
 		configMask,
 		*forceNoserverino,
 		*forceNoDfs,
+		*allowSmb1,
 	)
 
 	client := volumedriver.NewVolumeDriver(
