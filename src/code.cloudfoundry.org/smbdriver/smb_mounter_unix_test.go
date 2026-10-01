@@ -83,6 +83,8 @@ var _ = Describe("SmbMounter", func() {
 				Expect(strings.Join(args, " ")).To(ContainSubstring("target"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("uid=2000"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("gid=2000"))
+				Expect(strings.Join(args, " ")).To(ContainSubstring("nosuid"))
+				Expect(strings.Join(args, " ")).To(ContainSubstring("nodev"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("vers=2.0"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("mfsymlinks"))
 			})
@@ -262,6 +264,8 @@ var _ = Describe("SmbMounter", func() {
 					Expect(err).NotTo(HaveOccurred())
 					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
 					Expect(strings.Join(args, " ")).To(ContainSubstring("vers=1.0"))
+					Expect(strings.Join(args, " ")).To(ContainSubstring("nosuid"))
+					Expect(strings.Join(args, " ")).To(ContainSubstring("nodev"))
 					Expect(logger.Buffer()).To(gbytes.Say("smb1-dialect-requested"))
 				})
 			})
@@ -319,6 +323,32 @@ var _ = Describe("SmbMounter", func() {
 					Expect(mountErr).NotTo(HaveOccurred())
 					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
 					Expect(strings.Join(args, " ")).To(ContainSubstring("vers=3.0"))
+				})
+			})
+
+			Context("when the client passes noforceuid", func() {
+				BeforeEach(func() {
+					opts["noforceuid"] = "true"
+				})
+
+				It("should reject the mount without invoking mount", func() {
+					Expect(err).To(HaveOccurred())
+					Expect(err.Error()).To(ContainSubstring("Not allowed options"))
+					Expect(err.Error()).To(ContainSubstring("noforceuid"))
+					Expect(fakeInvoker.InvokeCallCount()).To(Equal(0))
+				})
+			})
+
+			Context("when the client passes noforcegid", func() {
+				BeforeEach(func() {
+					opts["noforcegid"] = "true"
+				})
+
+				It("should reject the mount without invoking mount", func() {
+					Expect(err).To(HaveOccurred())
+					Expect(err.Error()).To(ContainSubstring("Not allowed options"))
+					Expect(err.Error()).To(ContainSubstring("noforcegid"))
+					Expect(fakeInvoker.InvokeCallCount()).To(Equal(0))
 				})
 			})
 		})

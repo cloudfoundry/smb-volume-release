@@ -48,7 +48,7 @@ func (m *smbMounter) Mount(env dockerdriver.Env, source string, target string, o
 		return safeError(err)
 	}
 
-	if vers, ok := mountOpts["vers"]; ok && fmt.Sprintf("%v", vers) == "1.0" {
+	if vers, ok := mountOpts["vers"]; ok && vers.(string) == "1.0" {
 		logger.Info("smb1-dialect-requested", lager.Data{
 			"given_source": source,
 			"given_target": target,
