@@ -61,7 +61,7 @@ var _ = Describe("SmbMounter", func() {
 		configMask, err := smbdriver.NewSmbVolumeMountMask()
 		Expect(err).NotTo(HaveOccurred())
 
-		subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false)
+		subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false, true)
 	})
 
 	Context("#Mount", func() {
@@ -83,6 +83,8 @@ var _ = Describe("SmbMounter", func() {
 				Expect(strings.Join(args, " ")).To(ContainSubstring("target"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("uid=2000"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("gid=2000"))
+				Expect(strings.Join(args, " ")).To(ContainSubstring("nosuid"))
+				Expect(strings.Join(args, " ")).To(ContainSubstring("nodev"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("vers=2.0"))
 				Expect(strings.Join(args, " ")).To(ContainSubstring("mfsymlinks"))
 			})
@@ -96,7 +98,7 @@ var _ = Describe("SmbMounter", func() {
 					configMask, err := smbdriver.NewSmbVolumeMountMask()
 					Expect(err).NotTo(HaveOccurred())
 
-					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false)
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false, true)
 				})
 
 				DescribeTable("when passed smb versions", func(version string, containsVers bool) {
@@ -211,7 +213,7 @@ var _ = Describe("SmbMounter", func() {
 					configMask, err := smbdriver.NewSmbVolumeMountMask()
 					Expect(err).NotTo(HaveOccurred())
 
-					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, true)
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, true, true)
 					Expect(subject.Mount(env, "source", "target", opts)).To(Succeed())
 
 					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
@@ -245,11 +247,108 @@ var _ = Describe("SmbMounter", func() {
 					configMask, err := smbdriver.NewSmbVolumeMountMask()
 					Expect(err).NotTo(HaveOccurred())
 
-					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, true, false)
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, true, false, true)
 					Expect(subject.Mount(env, "source", "target", opts)).To(Succeed())
 
 					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
 					Expect(strings.Join(args, " ")).To(ContainSubstring("noserverino"))
+				})
+			})
+
+			Context("when the client requests SMB1 (vers=1.0) and allowSmb1 is true (default)", func() {
+				BeforeEach(func() {
+					opts["version"] = "1.0"
+				})
+
+				It("should allow the mount and log a warning", func() {
+					Expect(err).NotTo(HaveOccurred())
+					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
+					Expect(strings.Join(args, " ")).To(ContainSubstring("vers=1.0"))
+					Expect(strings.Join(args, " ")).To(ContainSubstring("nosuid"))
+					Expect(strings.Join(args, " ")).To(ContainSubstring("nodev"))
+					Expect(logger.Buffer()).To(gbytes.Say("smb1-dialect-requested"))
+				})
+			})
+
+			Context("when the client requests SMB1 (vers=1.0) and allowSmb1 is false", func() {
+				BeforeEach(func() {
+					opts["version"] = "1.0"
+				})
+
+				It("should reject the mount without invoking mount", func() {
+					fakeInvoker = &invokerfakes.FakeInvoker{}
+					fakeInvoker.InvokeReturns(fakeInvokeResult)
+					configMask, err := smbdriver.NewSmbVolumeMountMask()
+					Expect(err).NotTo(HaveOccurred())
+
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false, false)
+					mountErr := subject.Mount(env, "source", "target", opts)
+
+					Expect(mountErr).To(HaveOccurred())
+					Expect(mountErr.Error()).To(ContainSubstring("SMB1"))
+					Expect(fakeInvoker.InvokeCallCount()).To(Equal(0))
+				})
+
+				It("should still reject the mount when the version is supplied via the 'vers' alias key", func() {
+					delete(opts, "version")
+					opts["vers"] = "1.0"
+
+					fakeInvoker = &invokerfakes.FakeInvoker{}
+					fakeInvoker.InvokeReturns(fakeInvokeResult)
+					configMask, err := smbdriver.NewSmbVolumeMountMask()
+					Expect(err).NotTo(HaveOccurred())
+
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false, false)
+					mountErr := subject.Mount(env, "source", "target", opts)
+
+					Expect(mountErr).To(HaveOccurred())
+					Expect(mountErr.Error()).To(ContainSubstring("SMB1"))
+				})
+			})
+
+			Context("when the client requests a non-SMB1 version and allowSmb1 is false", func() {
+				BeforeEach(func() {
+					opts["version"] = "3.0"
+				})
+
+				It("should not be affected and should succeed", func() {
+					fakeInvoker = &invokerfakes.FakeInvoker{}
+					fakeInvoker.InvokeReturns(fakeInvokeResult)
+					configMask, err := smbdriver.NewSmbVolumeMountMask()
+					Expect(err).NotTo(HaveOccurred())
+
+					subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false, false)
+					mountErr := subject.Mount(env, "source", "target", opts)
+
+					Expect(mountErr).NotTo(HaveOccurred())
+					_, _, args, _ := fakeInvoker.InvokeArgsForCall(0)
+					Expect(strings.Join(args, " ")).To(ContainSubstring("vers=3.0"))
+				})
+			})
+
+			Context("when the client passes noforceuid", func() {
+				BeforeEach(func() {
+					opts["noforceuid"] = "true"
+				})
+
+				It("should reject the mount without invoking mount", func() {
+					Expect(err).To(HaveOccurred())
+					Expect(err.Error()).To(ContainSubstring("Not allowed options"))
+					Expect(err.Error()).To(ContainSubstring("noforceuid"))
+					Expect(fakeInvoker.InvokeCallCount()).To(Equal(0))
+				})
+			})
+
+			Context("when the client passes noforcegid", func() {
+				BeforeEach(func() {
+					opts["noforcegid"] = "true"
+				})
+
+				It("should reject the mount without invoking mount", func() {
+					Expect(err).To(HaveOccurred())
+					Expect(err.Error()).To(ContainSubstring("Not allowed options"))
+					Expect(err.Error()).To(ContainSubstring("noforcegid"))
+					Expect(fakeInvoker.InvokeCallCount()).To(Equal(0))
 				})
 			})
 		})
@@ -286,7 +385,7 @@ var _ = Describe("SmbMounter", func() {
 				)
 				Expect(err2).NotTo(HaveOccurred())
 
-				subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false)
+				subject = smbdriver.NewSmbMounter(fakeInvoker, fakeOs, configMask, false, false, true)
 			})
 
 			Context("when a required option is missing", func() {

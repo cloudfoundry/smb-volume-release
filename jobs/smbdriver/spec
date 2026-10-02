@@ -82,3 +82,6 @@ properties:
   force_noserverino:
     description: "Force all SMB mounts to use the 'noserverino' mount option. Added to address 'stale file handle' errors after a xenial-to-jammy upgrade."
     default: false
+  allow_smb1:
+    description: "Allow SMB mounts to negotiate the deprecated, insecure SMB1 (vers=1.0) dialect. Set to false to reject SMB1 mounts at the driver, regardless of what the service binding asks for. Defaults to true to preserve existing behavior on upgrade."
+    default: true
