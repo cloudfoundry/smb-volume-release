@@ -152,8 +152,22 @@ func NewSmbVolumeMountMask() (vmo.MountOptsMask, error) {
 		map[string]string{"readonly": "ro", "version": "vers"},
 		[]string{"source", "mount"},
 		[]string{"username", "password"},
+		vmo.UserOptsValidationFunc(validateNoCommaInValue),
 	)
 
+}
+
+// username and password are passed to mount via environment variables, so
+// they may legitimately contain commas. Every other value ends up in the
+// comma-delimited -o string, where a comma would inject additional options.
+func validateNoCommaInValue(key, val string) error {
+	if k := strings.ToLower(key); k == "username" || k == "password" {
+		return nil
+	}
+	if strings.Contains(val, ",") {
+		return fmt.Errorf("%s: value must not contain a comma", key)
+	}
+	return nil
 }
 
 func safeError(e error) error {

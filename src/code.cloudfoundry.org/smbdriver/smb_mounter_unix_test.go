@@ -87,6 +87,28 @@ var _ = Describe("SmbMounter", func() {
 				Expect(strings.Join(args, " ")).To(ContainSubstring("mfsymlinks"))
 			})
 
+			Context("when an option value contains a comma", func() {
+				DescribeTable("rejects the mount without invoking mount", func(key string) {
+					callsBefore := fakeInvoker.InvokeCallCount()
+					opts[key] = "CORP,suid,dev"
+					err = subject.Mount(env, "source", "target", opts)
+					Expect(err).To(HaveOccurred())
+					Expect(err.Error()).To(ContainSubstring("must not contain a comma"))
+					Expect(fakeInvoker.InvokeCallCount()).To(Equal(callsBefore))
+				},
+					Entry("domain", "domain"),
+					Entry("sec", "sec"),
+					Entry("file_mode", "file_mode"),
+					Entry("dir_mode", "dir_mode"),
+				)
+
+				It("still allows commas in the password", func() {
+					opts["password"] = "pass,word"
+					err = subject.Mount(env, "source", "target", opts)
+					Expect(err).NotTo(HaveOccurred())
+				})
+			})
+
 			Context("smb versions", func() {
 				JustBeforeEach(func() {
 					fakeInvoker = &invokerfakes.FakeInvoker{}
