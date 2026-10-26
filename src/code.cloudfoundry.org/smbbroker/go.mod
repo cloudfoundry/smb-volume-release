@@ -1,6 +1,6 @@
 module code.cloudfoundry.org/smbbroker
 
-go 1.26.0
+go 1.26.10
 
 // pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
 replace github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
@@ -9,12 +9,12 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/brokerapi/v13 v13.0.25
-	code.cloudfoundry.org/clock v1.92.0
-	code.cloudfoundry.org/debugserver v0.119.0
-	code.cloudfoundry.org/existingvolumebroker v0.239.0
+	code.cloudfoundry.org/clock v1.93.0
+	code.cloudfoundry.org/debugserver v0.120.0
+	code.cloudfoundry.org/existingvolumebroker v0.240.0
 	code.cloudfoundry.org/goshims v0.118.0
-	code.cloudfoundry.org/lager/v3 v3.91.0
-	code.cloudfoundry.org/service-broker-store v0.178.0
+	code.cloudfoundry.org/lager/v3 v3.92.0
+	code.cloudfoundry.org/service-broker-store v0.179.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
 	code.cloudfoundry.org/volume-mount-options v0.172.0
 	github.com/google/gofuzz v1.2.0
@@ -24,15 +24,15 @@ require (
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.99.0 // indirect
-	code.cloudfoundry.org/credhub-cli v0.0.0-20261012130316-50bbb19ba9c5 // indirect
-	code.cloudfoundry.org/dockerdriver v0.111.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.100.0 // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20261022212229-5e9bff1f7abf // indirect
+	code.cloudfoundry.org/dockerdriver v0.112.0 // indirect
 	code.cloudfoundry.org/tlsconfig v0.69.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.195.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.196.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.192 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.193 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect

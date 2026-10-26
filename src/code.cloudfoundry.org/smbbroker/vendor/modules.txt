@@ -9,14 +9,14 @@ code.cloudfoundry.org/brokerapi/v13/internal/blog
 code.cloudfoundry.org/brokerapi/v13/internal/middleware
 code.cloudfoundry.org/brokerapi/v13/middlewares
 code.cloudfoundry.org/brokerapi/v13/utils
-# code.cloudfoundry.org/cfhttp/v2 v2.99.0
+# code.cloudfoundry.org/cfhttp/v2 v2.100.0
 ## explicit; go 1.26.0
 code.cloudfoundry.org/cfhttp/v2
 code.cloudfoundry.org/cfhttp/v2/handlers
-# code.cloudfoundry.org/clock v1.92.0
+# code.cloudfoundry.org/clock v1.93.0
 ## explicit; go 1.26.0
 code.cloudfoundry.org/clock
-# code.cloudfoundry.org/credhub-cli v0.0.0-20261012130316-50bbb19ba9c5
+# code.cloudfoundry.org/credhub-cli v0.0.0-20261022212229-5e9bff1f7abf
 ## explicit; go 1.26.0
 code.cloudfoundry.org/credhub-cli/credhub
 code.cloudfoundry.org/credhub-cli/credhub/auth
@@ -26,15 +26,15 @@ code.cloudfoundry.org/credhub-cli/credhub/credentials/generate
 code.cloudfoundry.org/credhub-cli/credhub/credentials/values
 code.cloudfoundry.org/credhub-cli/credhub/permissions
 code.cloudfoundry.org/credhub-cli/credhub/server
-# code.cloudfoundry.org/debugserver v0.119.0
+# code.cloudfoundry.org/debugserver v0.120.0
 ## explicit; go 1.26.0
 code.cloudfoundry.org/debugserver
-# code.cloudfoundry.org/dockerdriver v0.111.0
+# code.cloudfoundry.org/dockerdriver v0.112.0
 ## explicit; go 1.26.0
 code.cloudfoundry.org/dockerdriver
 code.cloudfoundry.org/dockerdriver/driverhttp
-# code.cloudfoundry.org/existingvolumebroker v0.239.0
-## explicit; go 1.26.0
+# code.cloudfoundry.org/existingvolumebroker v0.240.0
+## explicit; go 1.26.10
 code.cloudfoundry.org/existingvolumebroker
 code.cloudfoundry.org/existingvolumebroker/utils
 # code.cloudfoundry.org/goshims v0.118.0
@@ -44,13 +44,13 @@ code.cloudfoundry.org/goshims/filepathshim
 code.cloudfoundry.org/goshims/http_wrap
 code.cloudfoundry.org/goshims/osshim
 code.cloudfoundry.org/goshims/timeshim
-# code.cloudfoundry.org/lager/v3 v3.91.0
+# code.cloudfoundry.org/lager/v3 v3.92.0
 ## explicit; go 1.26.0
 code.cloudfoundry.org/lager/v3
 code.cloudfoundry.org/lager/v3/internal/truncate
 code.cloudfoundry.org/lager/v3/lagerflags
-# code.cloudfoundry.org/service-broker-store v0.178.0
-## explicit; go 1.26.0
+# code.cloudfoundry.org/service-broker-store v0.179.0
+## explicit; go 1.26.10
 code.cloudfoundry.org/service-broker-store/brokerstore
 code.cloudfoundry.org/service-broker-store/brokerstore/credhub_shims
 # code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c => ../smbdriver
@@ -63,7 +63,7 @@ code.cloudfoundry.org/tlsconfig
 ## explicit; go 1.26.0
 code.cloudfoundry.org/volume-mount-options
 code.cloudfoundry.org/volume-mount-options/utils
-# code.cloudfoundry.org/volumedriver v0.195.0
+# code.cloudfoundry.org/volumedriver v0.196.0
 ## explicit; go 1.26.0
 code.cloudfoundry.org/volumedriver
 code.cloudfoundry.org/volumedriver/internal/syncmap
@@ -78,8 +78,8 @@ github.com/bmizerany/pat
 # github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.192
-## explicit; go 1.26.0
+# github.com/cloudfoundry/socks5-proxy v0.2.193
+## explicit; go 1.26.10
 github.com/cloudfoundry/socks5-proxy
 # github.com/go-logr/logr v1.4.4
 ## explicit; go 1.18
