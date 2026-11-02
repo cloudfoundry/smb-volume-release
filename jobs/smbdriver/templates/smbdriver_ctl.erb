@@ -28,7 +28,17 @@ case $1 in
     chmod 777 /var/vcap/data/voldrivers
 
     mkdir -p "<%= p("cell_mount_path") %>"
-    chown vcap:vcap "<%= p("cell_mount_path") %>"
+    # Pin the directory with cd, verify the pinned directory is the real path (not a symlink),
+    # then chown/chmod "." so a symlink swapped in afterwards cannot redirect them.
+    (
+      cd "<%= p("cell_mount_path") %>"
+      if [ "$(pwd -P)" != "$(cd "$(dirname "<%= p("cell_mount_path") %>")" && pwd -P)/$(basename "<%= p("cell_mount_path") %>")" ]; then
+        echo "cell_mount_path <%= p("cell_mount_path") %> must not be a symlink" >&2
+        exit 1
+      fi
+      chown root:root .
+      chmod 0755 .
+    )
 
     echo $$ > $PIDFILE
 
