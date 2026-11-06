@@ -2,9 +2,6 @@ module code.cloudfoundry.org/smbbroker
 
 go 1.27.3
 
-// pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
-replace github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
-
 replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (

@@ -35,6 +35,3 @@ require (
 	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/tools v0.52.0 // indirect
 )
-
-// pin ifrit until https://github.com/tedsuo/ifrit/pull/48 is merged
-replace github.com/tedsuo/ifrit => github.com/tedsuo/ifrit v0.0.0-20260418191334-846868129986
