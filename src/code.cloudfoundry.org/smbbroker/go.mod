@@ -9,34 +9,34 @@ replace code.cloudfoundry.org/smbdriver => ../smbdriver
 
 require (
 	code.cloudfoundry.org/brokerapi/v13 v13.0.25
-	code.cloudfoundry.org/clock v1.94.0
-	code.cloudfoundry.org/debugserver v0.121.0
-	code.cloudfoundry.org/existingvolumebroker v0.241.0
-	code.cloudfoundry.org/goshims v0.119.0
-	code.cloudfoundry.org/lager/v3 v3.93.0
-	code.cloudfoundry.org/service-broker-store v0.180.0
+	code.cloudfoundry.org/clock v1.95.0
+	code.cloudfoundry.org/debugserver v0.122.0
+	code.cloudfoundry.org/existingvolumebroker v0.242.0
+	code.cloudfoundry.org/goshims v0.120.0
+	code.cloudfoundry.org/lager/v3 v3.94.0
+	code.cloudfoundry.org/service-broker-store v0.181.0
 	code.cloudfoundry.org/smbdriver v0.0.0-20240819143446-ac4a9e63e92c
-	code.cloudfoundry.org/volume-mount-options v0.173.0
+	code.cloudfoundry.org/volume-mount-options v0.174.0
 	github.com/google/gofuzz v1.2.0
-	github.com/onsi/ginkgo/v2 v2.33.1
+	github.com/onsi/ginkgo/v2 v2.34.0
 	github.com/onsi/gomega v1.44.0
 	github.com/tedsuo/ifrit v0.0.0-20260908181113-dd353a7daa27
 )
 
 require (
-	code.cloudfoundry.org/cfhttp/v2 v2.101.0 // indirect
-	code.cloudfoundry.org/credhub-cli v0.0.0-20261026130105-f79293e36002 // indirect
-	code.cloudfoundry.org/dockerdriver v0.113.0 // indirect
-	code.cloudfoundry.org/tlsconfig v0.70.0 // indirect
-	code.cloudfoundry.org/volumedriver v0.198.0 // indirect
+	code.cloudfoundry.org/cfhttp/v2 v2.102.0 // indirect
+	code.cloudfoundry.org/credhub-cli v0.0.0-20261102140143-ec715de56bf2 // indirect
+	code.cloudfoundry.org/dockerdriver v0.114.0 // indirect
+	code.cloudfoundry.org/tlsconfig v0.71.0 // indirect
+	code.cloudfoundry.org/volumedriver v0.199.0 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/bmizerany/pat v0.0.0-20210406213842-e4b6760bdd6f // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.194 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.195 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-task/slim-sprig/v3 v3.0.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/pprof v0.0.0-20261026192309-dbd0ed30aa88 // indirect
+	github.com/google/pprof v0.0.0-20261105003125-4bf881d7fb0b // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-version v1.9.0 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
